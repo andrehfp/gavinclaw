@@ -1,0 +1,432 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lista de Mercado</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+            min-height: 100vh;
+            color: #fff;
+            padding: 20px;
+        }
+        
+        .container {
+            max-width: 500px;
+            margin: 0 auto;
+        }
+        
+        .header-nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+        
+        h1 {
+            font-size: 1.5em;
+            margin: 0;
+        }
+        
+        h1 span {
+            color: #00d4aa;
+        }
+        
+        .ofertas-btn {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            background: linear-gradient(135deg, #ff6b6b 0%, #ee5a5a 100%);
+            color: #fff;
+            padding: 10px 15px;
+            border-radius: 25px;
+            text-decoration: none;
+            font-weight: bold;
+            font-size: 14px;
+            position: relative;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+        
+        .ofertas-btn:hover {
+            transform: scale(1.05);
+            box-shadow: 0 4px 15px rgba(255,107,107,0.4);
+        }
+        
+        .ofertas-btn .pulse {
+            position: absolute;
+            top: -2px;
+            right: -2px;
+            width: 12px;
+            height: 12px;
+            background: #00d4aa;
+            border-radius: 50%;
+            animation: pulse 2s infinite;
+        }
+        
+        .ofertas-btn.no-ofertas .pulse {
+            display: none;
+        }
+        
+        @keyframes pulse {
+            0% { transform: scale(1); opacity: 1; }
+            50% { transform: scale(1.3); opacity: 0.7; }
+            100% { transform: scale(1); opacity: 1; }
+        }
+        
+        .add-form {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+        
+        .add-form input {
+            flex: 1;
+            padding: 15px;
+            border: none;
+            border-radius: 10px;
+            font-size: 16px;
+            background: rgba(255,255,255,0.1);
+            color: #fff;
+        }
+        
+        .add-form input::placeholder {
+            color: rgba(255,255,255,0.5);
+        }
+        
+        .add-form button {
+            padding: 15px 25px;
+            border: none;
+            border-radius: 10px;
+            background: #00d4aa;
+            color: #1a1a2e;
+            font-size: 18px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: transform 0.2s;
+        }
+        
+        .add-form button:hover {
+            transform: scale(1.05);
+        }
+        
+        .list {
+            background: rgba(255,255,255,0.05);
+            border-radius: 15px;
+            padding: 10px;
+        }
+        
+        .list-item {
+            display: flex;
+            align-items: center;
+            padding: 15px;
+            background: rgba(255,255,255,0.05);
+            border-radius: 10px;
+            margin-bottom: 8px;
+            transition: all 0.3s;
+        }
+        
+        .list-item:hover {
+            background: rgba(255,255,255,0.1);
+        }
+        
+        .list-item.checked {
+            opacity: 0.5;
+        }
+        
+        .list-item.checked .item-text {
+            text-decoration: line-through;
+        }
+        
+        .checkbox {
+            width: 24px;
+            height: 24px;
+            border: 2px solid #00d4aa;
+            border-radius: 6px;
+            margin-right: 15px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.2s;
+        }
+        
+        .checkbox.checked {
+            background: #00d4aa;
+        }
+        
+        .checkbox.checked::after {
+            content: '✓';
+            color: #1a1a2e;
+            font-weight: bold;
+        }
+        
+        .item-text {
+            flex: 1;
+            font-size: 16px;
+        }
+        
+        .delete-btn {
+            background: none;
+            border: none;
+            color: #ff6b6b;
+            font-size: 20px;
+            cursor: pointer;
+            padding: 5px 10px;
+            opacity: 0.5;
+            transition: opacity 0.2s;
+        }
+        
+        .delete-btn:hover {
+            opacity: 1;
+        }
+        
+        .empty {
+            text-align: center;
+            padding: 40px;
+            color: rgba(255,255,255,0.5);
+        }
+        
+        .actions {
+            display: flex;
+            gap: 10px;
+            margin-top: 20px;
+        }
+        
+        .actions button {
+            flex: 1;
+            padding: 12px;
+            border: none;
+            border-radius: 10px;
+            font-size: 14px;
+            cursor: pointer;
+            transition: transform 0.2s;
+        }
+        
+        .clear-checked {
+            background: rgba(255,107,107,0.2);
+            color: #ff6b6b;
+        }
+        
+        .copy-list {
+            background: rgba(0,212,170,0.2);
+            color: #00d4aa;
+        }
+        
+        .sync-info {
+            text-align: center;
+            margin-top: 20px;
+            font-size: 12px;
+            color: rgba(255,255,255,0.4);
+        }
+        
+        .toast {
+            position: fixed;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: #00d4aa;
+            color: #1a1a2e;
+            padding: 12px 24px;
+            border-radius: 10px;
+            font-weight: bold;
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+        
+        .toast.show {
+            opacity: 1;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header-nav">
+            <h1>🛒 Lista de <span>Mercado</span></h1>
+            <a href="/ofertas" class="ofertas-btn" id="ofertasBtn">
+                <span class="pulse"></span>
+                🎯 Ofertas
+            </a>
+        </div>
+        
+        <div class="add-form">
+            <input type="text" id="newItem" placeholder="Adicionar item..." autofocus>
+            <button onclick="addItem()">+</button>
+        </div>
+        
+        <div class="list" id="list"></div>
+        
+        <div class="actions">
+            <button class="clear-checked" onclick="clearChecked()">🗑️ Limpar comprados</button>
+            <button class="copy-list" onclick="copyList()">📋 Copiar lista</button>
+        </div>
+        
+        <div class="sync-info">
+            Sincronizado com Gavin via Telegram
+        </div>
+    </div>
+    
+    <div class="toast" id="toast"></div>
+    
+    <script>
+        const STORAGE_KEY = 'lista-mercado';
+        const API_URL = '/api/lista';
+        
+        function loadList() {
+            const saved = localStorage.getItem(STORAGE_KEY);
+            return saved ? JSON.parse(saved) : [];
+        }
+        
+        function saveList(list) {
+            localStorage.setItem(STORAGE_KEY, JSON.stringify(list));
+            renderList();
+            syncToServer(list);
+        }
+        
+        async function syncToServer(list) {
+            try {
+                await fetch(API_URL, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ itens: list })
+                });
+            } catch (e) {
+                console.log('Sync offline, dados salvos localmente');
+            }
+        }
+        
+        async function syncFromServer() {
+            try {
+                const resp = await fetch(API_URL);
+                const data = await resp.json();
+                if (data.itens && data.itens.length > 0) {
+                    localStorage.setItem(STORAGE_KEY, JSON.stringify(data.itens));
+                    renderList();
+                }
+            } catch (e) {
+                console.log('Servidor offline, usando dados locais');
+            }
+        }
+        
+        function renderList() {
+            const list = loadList();
+            const container = document.getElementById('list');
+            
+            if (list.length === 0) {
+                container.innerHTML = '<div class="empty">Lista vazia<br>Adicione itens acima</div>';
+                return;
+            }
+            
+            // Sort: unchecked first
+            list.sort((a, b) => a.checked - b.checked);
+            
+            container.innerHTML = list.map((item, index) => `
+                <div class="list-item ${item.checked ? 'checked' : ''}" data-index="${index}">
+                    <div class="checkbox ${item.checked ? 'checked' : ''}" onclick="toggleItem(${index})"></div>
+                    <span class="item-text">${escapeHtml(item.text)}</span>
+                    <button class="delete-btn" onclick="deleteItem(${index})">×</button>
+                </div>
+            `).join('');
+        }
+        
+        function escapeHtml(text) {
+            const div = document.createElement('div');
+            div.textContent = text;
+            return div.innerHTML;
+        }
+        
+        function addItem() {
+            const input = document.getElementById('newItem');
+            const text = input.value.trim();
+            
+            if (!text) return;
+            
+            const list = loadList();
+            list.unshift({ text, checked: false, addedAt: Date.now() });
+            saveList(list);
+            
+            input.value = '';
+            input.focus();
+            
+            showToast('Item adicionado!');
+        }
+        
+        function toggleItem(index) {
+            const list = loadList();
+            list[index].checked = !list[index].checked;
+            saveList(list);
+        }
+        
+        function deleteItem(index) {
+            const list = loadList();
+            list.splice(index, 1);
+            saveList(list);
+        }
+        
+        function clearChecked() {
+            const list = loadList().filter(item => !item.checked);
+            saveList(list);
+            showToast('Itens comprados removidos!');
+        }
+        
+        function copyList() {
+            const list = loadList().filter(item => !item.checked);
+            const text = list.map(item => `• ${item.text}`).join('\n');
+            
+            if (!text) {
+                showToast('Lista vazia!');
+                return;
+            }
+            
+            navigator.clipboard.writeText(text).then(() => {
+                showToast('Lista copiada!');
+            });
+        }
+        
+        function showToast(message) {
+            const toast = document.getElementById('toast');
+            toast.textContent = message;
+            toast.classList.add('show');
+            setTimeout(() => toast.classList.remove('show'), 2000);
+        }
+        
+        // Enter key to add
+        document.getElementById('newItem').addEventListener('keypress', (e) => {
+            if (e.key === 'Enter') addItem();
+        });
+        
+        // Check ofertas
+        async function checkOfertas() {
+            try {
+                const resp = await fetch('/api/ofertas');
+                const data = await resp.json();
+                const btn = document.getElementById('ofertasBtn');
+                
+                const total = Object.values(data.ofertas || {})
+                    .reduce((sum, arr) => sum + (arr?.length || 0), 0);
+                
+                if (total > 0) {
+                    btn.innerHTML = `<span class="pulse"></span>🎯 ${total} Ofertas`;
+                } else {
+                    btn.classList.add('no-ofertas');
+                    btn.innerHTML = '🎯 Ofertas';
+                }
+            } catch (e) {
+                console.log('Erro ao verificar ofertas');
+            }
+        }
+        
+        // Initial render and sync
+        syncFromServer();
+        renderList();
+        checkOfertas();
+    </script>
+</body>
+</html>

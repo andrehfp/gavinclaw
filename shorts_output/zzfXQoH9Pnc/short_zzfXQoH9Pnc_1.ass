@@ -1,0 +1,55 @@
+[Script Info]
+Title: Viral Captions
+ScriptType: v4.00+
+PlayResX: 1080
+PlayResY: 1920
+WrapStyle: 0
+
+[V4+ Styles]
+Format: Name, Fontname, Fontsize, PrimaryColour, SecondaryColour, OutlineColour, BackColour, Bold, Italic, Underline, StrikeOut, ScaleX, ScaleY, Spacing, Angle, BorderStyle, Outline, Shadow, Alignment, MarginL, MarginR, MarginV, Encoding
+Style: Viral,Arial,72,&H00FFFFFF,&H000000FF,&H00000000,&H80000000,1,0,0,0,100,100,0,0,1,4,2,5,50,50,400,1
+
+[Events]
+Format: Layer, Start, End, Style, Name, MarginL, MarginR, MarginV, Effect, Text
+Dialogue: 0,0:00:00.00,0:00:00.55,Viral,,0,0,0,,{\fad(80,80)\t(0,80,\fscx105\fscy105)\t(80,160,\fscx100\fscy100)}OPEN CALL, ALGUMA
+Dialogue: 0,0:00:00.55,0:00:01.41,Viral,,0,0,0,,{\fad(80,80)\t(0,80,\fscx105\fscy105)\t(80,160,\fscx100\fscy100)}COISA ASSIM. ISSO
+Dialogue: 0,0:00:01.41,0:00:02.03,Viral,,0,0,0,,{\fad(80,80)\t(0,80,\fscx105\fscy105)\t(80,160,\fscx100\fscy100)}É OUTRA HISTÓRIA.
+Dialogue: 0,0:00:02.53,0:00:03.08,Viral,,0,0,0,,{\fad(80,80)\t(0,80,\fscx105\fscy105)\t(80,160,\fscx100\fscy100)}ISSO AQUI É
+Dialogue: 0,0:00:03.08,0:00:03.64,Viral,,0,0,0,,{\fad(80,80)\t(0,80,\fscx105\fscy105)\t(80,160,\fscx100\fscy100)}PARA VOCÊ TER
+Dialogue: 0,0:00:03.64,0:00:04.19,Viral,,0,0,0,,{\fad(80,80)\t(0,80,\fscx105\fscy105)\t(80,160,\fscx100\fscy100)}UM PROJETO, UM
+Dialogue: 0,0:00:04.19,0:00:04.75,Viral,,0,0,0,,{\fad(80,80)\t(0,80,\fscx105\fscy105)\t(80,160,\fscx100\fscy100)}SITE QUE VOCÊ
+Dialogue: 0,0:00:04.75,0:00:05.31,Viral,,0,0,0,,{\fad(80,80)\t(0,80,\fscx105\fscy105)\t(80,160,\fscx100\fscy100)}QUER COLOCAR ONLINE
+Dialogue: 0,0:00:05.31,0:00:06.44,Viral,,0,0,0,,{\fad(80,80)\t(0,80,\fscx105\fscy105)\t(80,160,\fscx100\fscy100)}PRAS PESSOAS ACESSAREM
+Dialogue: 0,0:00:06.44,0:00:07.58,Viral,,0,0,0,,{\fad(80,80)\t(0,80,\fscx105\fscy105)\t(80,160,\fscx100\fscy100)}PRA VOCÊ PODER
+Dialogue: 0,0:00:07.58,0:00:08.71,Viral,,0,0,0,,{\fad(80,80)\t(0,80,\fscx105\fscy105)\t(80,160,\fscx100\fscy100)}DIVULGAR TEU TRABALHO
+Dialogue: 0,0:00:08.71,0:00:09.85,Viral,,0,0,0,,{\fad(80,80)\t(0,80,\fscx105\fscy105)\t(80,160,\fscx100\fscy100)}OU APLICATIVO, BELEZA?
+Dialogue: 0,0:00:11.35,0:00:11.99,Viral,,0,0,0,,{\fad(80,80)\t(0,80,\fscx105\fscy105)\t(80,160,\fscx100\fscy100)}E A GENTE
+Dialogue: 0,0:00:11.99,0:00:12.63,Viral,,0,0,0,,{\fad(80,80)\t(0,80,\fscx105\fscy105)\t(80,160,\fscx100\fscy100)}VAI COLOCAR EM
+Dialogue: 0,0:00:12.63,0:00:13.27,Viral,,0,0,0,,{\fad(80,80)\t(0,80,\fscx105\fscy105)\t(80,160,\fscx100\fscy100)}PRODUÇÃO USANDO A
+Dialogue: 0,0:00:13.27,0:00:13.91,Viral,,0,0,0,,{\fad(80,80)\t(0,80,\fscx105\fscy105)\t(80,160,\fscx100\fscy100)}HOSTINGER, COMO EU
+Dialogue: 0,0:00:13.91,0:00:14.55,Viral,,0,0,0,,{\fad(80,80)\t(0,80,\fscx105\fscy105)\t(80,160,\fscx100\fscy100)}FALEI PRA VOCÊS,
+Dialogue: 0,0:00:14.55,0:00:15.98,Viral,,0,0,0,,{\fad(80,80)\t(0,80,\fscx105\fscy105)\t(80,160,\fscx100\fscy100)}TÁ? A HOSTINGER,
+Dialogue: 0,0:00:15.98,0:00:16.80,Viral,,0,0,0,,{\fad(80,80)\t(0,80,\fscx105\fscy105)\t(80,160,\fscx100\fscy100)}NÓS PODEMOS COMPRAR
+Dialogue: 0,0:00:16.80,0:00:17.62,Viral,,0,0,0,,{\fad(80,80)\t(0,80,\fscx105\fscy105)\t(80,160,\fscx100\fscy100)}VÁRIOS VPS AQUI
+Dialogue: 0,0:00:17.62,0:00:18.44,Viral,,0,0,0,,{\fad(80,80)\t(0,80,\fscx105\fscy105)\t(80,160,\fscx100\fscy100)}E EU VOU
+Dialogue: 0,0:00:18.44,0:00:19.27,Viral,,0,0,0,,{\fad(80,80)\t(0,80,\fscx105\fscy105)\t(80,160,\fscx100\fscy100)}MOSTRAR PRA VOCÊ
+Dialogue: 0,0:00:19.27,0:00:20.09,Viral,,0,0,0,,{\fad(80,80)\t(0,80,\fscx105\fscy105)\t(80,160,\fscx100\fscy100)}PASSO A PASSO
+Dialogue: 0,0:00:20.09,0:00:20.91,Viral,,0,0,0,,{\fad(80,80)\t(0,80,\fscx105\fscy105)\t(80,160,\fscx100\fscy100)}COMO QUE VOCÊ
+Dialogue: 0,0:00:20.91,0:00:21.73,Viral,,0,0,0,,{\fad(80,80)\t(0,80,\fscx105\fscy105)\t(80,160,\fscx100\fscy100)}VAI FAZER ISSO,
+Dialogue: 0,0:00:21.73,0:00:23.10,Viral,,0,0,0,,{\fad(80,80)\t(0,80,\fscx105\fscy105)\t(80,160,\fscx100\fscy100)}TÁ? VOCÊ VAI
+Dialogue: 0,0:00:23.10,0:00:23.89,Viral,,0,0,0,,{\fad(80,80)\t(0,80,\fscx105\fscy105)\t(80,160,\fscx100\fscy100)}CLICAR AQUI NO
+Dialogue: 0,0:00:23.89,0:00:24.69,Viral,,0,0,0,,{\fad(80,80)\t(0,80,\fscx105\fscy105)\t(80,160,\fscx100\fscy100)}LINK DA DESCRIÇÃO,
+Dialogue: 0,0:00:24.69,0:00:25.49,Viral,,0,0,0,,{\fad(80,80)\t(0,80,\fscx105\fscy105)\t(80,160,\fscx100\fscy100)}DEVE SER O
+Dialogue: 0,0:00:25.49,0:00:26.28,Viral,,0,0,0,,{\fad(80,80)\t(0,80,\fscx105\fscy105)\t(80,160,\fscx100\fscy100)}PRIMEIRO LINK QUE
+Dialogue: 0,0:00:26.28,0:00:27.08,Viral,,0,0,0,,{\fad(80,80)\t(0,80,\fscx105\fscy105)\t(80,160,\fscx100\fscy100)}TÁ AQUI EMBAIXO,
+Dialogue: 0,0:00:27.08,0:00:27.88,Viral,,0,0,0,,{\fad(80,80)\t(0,80,\fscx105\fscy105)\t(80,160,\fscx100\fscy100)}QUE TEM O
+Dialogue: 0,0:00:27.88,0:00:28.61,Viral,,0,0,0,,{\fad(80,80)\t(0,80,\fscx105\fscy105)\t(80,160,\fscx100\fscy100)}MEU CÓDIGO. E
+Dialogue: 0,0:00:28.61,0:00:29.23,Viral,,0,0,0,,{\fad(80,80)\t(0,80,\fscx105\fscy105)\t(80,160,\fscx100\fscy100)}COM ESSE CÓDIGO
+Dialogue: 0,0:00:29.23,0:00:29.85,Viral,,0,0,0,,{\fad(80,80)\t(0,80,\fscx105\fscy105)\t(80,160,\fscx100\fscy100)}VOCÊ VAI GANHAR
+Dialogue: 0,0:00:29.85,0:00:30.47,Viral,,0,0,0,,{\fad(80,80)\t(0,80,\fscx105\fscy105)\t(80,160,\fscx100\fscy100)}UM DESCONTO E
+Dialogue: 0,0:00:30.47,0:00:31.09,Viral,,0,0,0,,{\fad(80,80)\t(0,80,\fscx105\fscy105)\t(80,160,\fscx100\fscy100)}VOCÊ VAI PASSAR
+Dialogue: 0,0:00:31.09,0:00:31.71,Viral,,0,0,0,,{\fad(80,80)\t(0,80,\fscx105\fscy105)\t(80,160,\fscx100\fscy100)}POR ESSE PROCESSO
+Dialogue: 0,0:00:31.71,0:00:32.45,Viral,,0,0,0,,{\fad(80,80)\t(0,80,\fscx105\fscy105)\t(80,160,\fscx100\fscy100)}AQUI, TÁ? VOCÊ
+Dialogue: 0,0:00:32.45,0:00:33.42,Viral,,0,0,0,,{\fad(80,80)\t(0,80,\fscx105\fscy105)\t(80,160,\fscx100\fscy100)}VAI COMPRAR UM
+Dialogue: 0,0:00:33.42,0:00:34.38,Viral,,0,0,0,,{\fad(80,80)\t(0,80,\fscx105\fscy105)\t(80,160,\fscx100\fscy100)}NOVO PLANO DE
+Dialogue: 0,0:00:34.38,0:00:35.00,Viral,,0,0,0,,{\fad(80,80)\t(0,80,\fscx105\fscy105)\t(80,160,\fscx100\fscy100)}VPS E

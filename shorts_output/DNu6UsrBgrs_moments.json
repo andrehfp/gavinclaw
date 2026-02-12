@@ -1,0 +1,32 @@
+{
+  "moments": [
+    {
+      "start": 9.6,
+      "end": 44.6,
+      "hook_text": "E olha só como ele é grande: 719 linhas!",
+      "hook_score": 8,
+      "titles": [
+        "Você sabia que um PRD pode ter 719 linhas? 📄",
+        "O que cabe em 719 linhas de um PRD? Descubra!",
+        "O segredo por trás de um PRD gigante! 🔍"
+      ],
+      "description": "Descubra como um PRD pode ser extenso e repleto de detalhes importantes.",
+      "reason": "Esse momento apresenta um número impactante que chama atenção e traz curiosidade sobre o conteúdo do PRD.",
+      "loop_friendly": true
+    },
+    {
+      "start": 21.5,
+      "end": 56.5,
+      "hook_text": "Um PRD contém todos os detalhes que você precisa!",
+      "hook_score": 7,
+      "titles": [
+        "O que é um PRD e por que ele é tão importante? 🤔",
+        "Os segredos que um PRD revela sobre seu projeto!",
+        "Como um PRD pode transformar seu desenvolvimento! 🚀"
+      ],
+      "description": "Entenda a importância de ter todos os detalhes em um PRD e como isso facilita o desenvolvimento.",
+      "reason": "Este momento fornece um resumo conciso e esclarecedor sobre o conteúdo do PRD, atraindo a atenção do público.",
+      "loop_friendly": true
+    }
+  ]
+}

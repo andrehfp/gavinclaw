@@ -1,0 +1,651 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shorts Generator - Minimal</title>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
+        body {
+            font-family: 'DM Sans', sans-serif;
+            background: #fafafa;
+            color: #1a1a1a;
+            min-height: 100vh;
+            line-height: 1.7;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 3rem 2rem;
+        }
+
+        .header {
+            margin-bottom: 4rem;
+        }
+
+        .header h1 {
+            font-size: 2.8rem;
+            font-weight: 700;
+            letter-spacing: -1px;
+            margin-bottom: 0.5rem;
+        }
+
+        .header p {
+            color: #666;
+            font-size: 1.1rem;
+        }
+
+        .original-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.75rem;
+            margin-top: 1.5rem;
+            padding: 1rem 1.5rem;
+            background: #1a1a1a;
+            color: white;
+            text-decoration: none;
+            border-radius: 12px;
+            font-weight: 500;
+            transition: all 0.2s;
+        }
+
+        .original-link:hover {
+            background: #333;
+            transform: translateX(4px);
+        }
+
+        .original-link .arrow {
+            transition: transform 0.2s;
+        }
+
+        .original-link:hover .arrow {
+            transform: translateX(4px);
+        }
+
+        .shorts-list {
+            display: flex;
+            flex-direction: column;
+            gap: 4rem;
+        }
+
+        .short-item {
+            display: grid;
+            grid-template-columns: 280px 1fr;
+            gap: 3rem;
+            padding-bottom: 4rem;
+            border-bottom: 1px solid #e5e5e5;
+        }
+
+        .short-item:last-child {
+            border-bottom: none;
+        }
+
+        .video-col {
+            position: relative;
+        }
+
+        .video-frame {
+            background: #000;
+            border-radius: 16px;
+            overflow: hidden;
+            aspect-ratio: 9/16;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.15);
+        }
+
+        .video-frame video {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+        }
+
+        .short-num {
+            position: absolute;
+            top: -12px;
+            left: -12px;
+            width: 40px;
+            height: 40px;
+            background: #ff3b30;
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            font-size: 1rem;
+            box-shadow: 0 4px 12px rgba(255, 59, 48, 0.4);
+        }
+
+        .content-col {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .content-col h2 {
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 1.5rem;
+            letter-spacing: -0.5px;
+        }
+
+        .description-area {
+            background: white;
+            border: 1px solid #e5e5e5;
+            border-radius: 12px;
+            padding: 1.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .description-area pre {
+            font-family: inherit;
+            font-size: 0.95rem;
+            color: #444;
+            white-space: pre-wrap;
+            line-height: 1.8;
+        }
+
+        .hashtags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .hashtag {
+            background: #f0f0f0;
+            color: #666;
+            padding: 0.4rem 0.8rem;
+            border-radius: 6px;
+            font-size: 0.85rem;
+            font-weight: 500;
+        }
+
+        .copy-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.75rem 1.25rem;
+            background: white;
+            border: 2px solid #1a1a1a;
+            color: #1a1a1a;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: 600;
+            font-size: 0.9rem;
+            transition: all 0.2s;
+            width: fit-content;
+        }
+
+        .copy-btn:hover {
+            background: #1a1a1a;
+            color: white;
+        }
+
+        .copy-btn.copied {
+            background: #34c759;
+            border-color: #34c759;
+            color: white;
+        }
+
+        .footer {
+            margin-top: 4rem;
+            padding-top: 2rem;
+            border-top: 1px solid #e5e5e5;
+            color: #999;
+            font-size: 0.9rem;
+        }
+
+        /* Schedule Card */
+        .schedule-card {
+            background: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 100%);
+            border-radius: 16px;
+            padding: 2rem;
+            margin-bottom: 3rem;
+            color: white;
+        }
+
+        .schedule-header {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .schedule-icon {
+            width: 50px;
+            height: 50px;
+            background: linear-gradient(135deg, #00c853, #00e676);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+        }
+
+        .schedule-header h2 {
+            font-size: 1.3rem;
+            font-weight: 600;
+            margin-bottom: 0.25rem;
+        }
+
+        .schedule-status {
+            font-size: 0.9rem;
+            color: #00e676;
+        }
+
+        .schedule-info {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+            padding: 1rem;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 12px;
+        }
+
+        .schedule-item {
+            display: flex;
+            flex-direction: column;
+            gap: 0.25rem;
+        }
+
+        .schedule-item .label {
+            font-size: 0.8rem;
+            color: rgba(255, 255, 255, 0.6);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .schedule-item .value {
+            font-size: 1rem;
+            font-weight: 600;
+        }
+
+        .schedule-item .value.pending {
+            color: #ffab00;
+        }
+
+        .schedule-actions {
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .approve-btn {
+            flex: 1;
+            min-width: 150px;
+            padding: 0.875rem 1.5rem;
+            background: linear-gradient(135deg, #00c853, #00e676);
+            border: none;
+            border-radius: 10px;
+            color: #1a1a1a;
+            font-weight: 700;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .approve-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(0, 200, 83, 0.3);
+        }
+
+        .reject-btn {
+            padding: 0.875rem 1.5rem;
+            background: transparent;
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            border-radius: 10px;
+            color: rgba(255, 255, 255, 0.7);
+            font-weight: 600;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .reject-btn:hover {
+            border-color: #ff5252;
+            color: #ff5252;
+        }
+
+        @media (max-width: 900px) {
+            .short-item {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+            
+            .video-col {
+                max-width: 300px;
+                margin: 0 auto;
+            }
+
+            .header h1 {
+                font-size: 2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header class="header">
+            <h1>YouTube Shorts</h1>
+            <p>Extraídos automaticamente do vídeo original com IA</p>
+            <a href="https://youtube.com/watch?v=USEber2sx1A" target="_blank" class="original-link">
+                <span>📺</span>
+                <span>Tasks aumentaram em 1000% minha produtividade — @andreprado</span>
+                <span class="arrow">→</span>
+            </a>
+        </header>
+
+        <!-- Agendamento -->
+        <div class="schedule-card">
+            <div class="schedule-header">
+                <div class="schedule-icon">🤖</div>
+                <div>
+                    <h2>Monitoramento Automático</h2>
+                    <p class="schedule-status">Ativo • Verifica a cada 2 horas</p>
+                </div>
+            </div>
+            <div class="schedule-info">
+                <div class="schedule-item">
+                    <span class="label">Canal</span>
+                    <span class="value">@andreprado</span>
+                </div>
+                <div class="schedule-item">
+                    <span class="label">Próxima verificação</span>
+                    <span class="value" id="next-check">~19:00</span>
+                </div>
+                <div class="schedule-item">
+                    <span class="label">Shorts pendentes</span>
+                    <span class="value pending">4 aguardando aprovação</span>
+                </div>
+            </div>
+            <div class="schedule-actions">
+                <button class="approve-btn" onclick="approve()">✓ Aprovar todos</button>
+                <button class="reject-btn" onclick="reject()">✗ Descartar</button>
+            </div>
+        </div>
+
+        <div class="shorts-list">
+            <article class="short-item">
+                <div class="video-col">
+                    <span class="short-num">2</span>
+                    <div class="video-frame">
+                        <video controls preload="metadata"><source src="short_2_final.mp4" type="video/mp4"></video>
+                    </div>
+                </div>
+                <div class="content-col">
+                    <h2>O segredo é criar um PRD antes de codar</h2>
+                    <div class="description-area">
+                        <pre id="d2">Antes de codar, conversa com a IA. 🧠
+
+Cria um PRD (Product Requirements Document) explicando tudo que você quer:
+• Stack
+• DNS
+• Fluxo do usuário
+• Arquitetura
+
+A IA vai transformar isso em planos executáveis.
+
+Resultado? Menos retrabalho, mais velocidade. 🚀
+
+Vídeo completo no canal!</pre>
+                    </div>
+                    <div class="hashtags">
+                        <span class="hashtag">#programacao</span>
+                        <span class="hashtag">#ia</span>
+                        <span class="hashtag">#dicas</span>
+                        <span class="hashtag">#prd</span>
+                    </div>
+                    <button class="copy-btn" onclick="copy('d2', this)">📋 Copiar descrição</button>
+                </div>
+            </article>
+
+            <article class="short-item">
+                <div class="video-col">
+                    <span class="short-num">3</span>
+                    <div class="video-frame">
+                        <video controls preload="metadata"><source src="short_3_final.mp4" type="video/mp4"></video>
+                    </div>
+                </div>
+                <div class="content-col">
+                    <h2>Tasks organizadas em ondas = paralelismo</h2>
+                    <div class="description-area">
+                        <pre id="d3">O segredo pra escalar com IA: ondas de tasks! 🌊
+
+Ao invés de executar tudo sequencial, organizo as tasks assim:
+• Onda 1: tasks independentes (rodam em paralelo)
+• Onda 2: tasks que dependem da onda 1
+• E assim vai...
+
+Resultado: 3 agentes rodando ao mesmo tempo, cada um fazendo sua parte.
+
+Automação de verdade. ⚡</pre>
+                    </div>
+                    <div class="hashtags">
+                        <span class="hashtag">#devtips</span>
+                        <span class="hashtag">#programacao</span>
+                        <span class="hashtag">#automacao</span>
+                    </div>
+                    <button class="copy-btn" onclick="copy('d3', this)">📋 Copiar descrição</button>
+                </div>
+            </article>
+
+            <article class="short-item">
+                <div class="video-col">
+                    <span class="short-num">4</span>
+                    <div class="video-frame">
+                        <video controls preload="metadata"><source src="short_4_final.mp4" type="video/mp4"></video>
+                    </div>
+                </div>
+                <div class="content-col">
+                    <h2>Subagentes trabalhando em paralelo</h2>
+                    <div class="description-area">
+                        <pre id="d4">Subagentes são game changer! 🎮
+
+Olha o que acontece:
+• Agente principal delega tasks
+• Subagentes executam em paralelo
+• Cada um lê o progress.txt e sabe o contexto
+• No final, tudo se integra
+
+A janela de contexto do principal fica limpa.
+Os subagentes fazem o trabalho pesado.
+
+É delegação automatizada. 🤖</pre>
+                    </div>
+                    <div class="hashtags">
+                        <span class="hashtag">#ia</span>
+                        <span class="hashtag">#automacao</span>
+                        <span class="hashtag">#claudecode</span>
+                    </div>
+                    <button class="copy-btn" onclick="copy('d4', this)">📋 Copiar descrição</button>
+                </div>
+            </article>
+
+            <article class="short-item">
+                <div class="video-col">
+                    <span class="short-num">5</span>
+                    <div class="video-frame">
+                        <video controls preload="metadata"><source src="short_5_final.mp4" type="video/mp4"></video>
+                    </div>
+                </div>
+                <div class="content-col">
+                    <h2>O resultado: site completo de primeira!</h2>
+                    <div class="description-area">
+                        <pre id="d5">E o resultado? 🏆
+
+Site completo. De primeira. Funcionando.
+
+• Configurações
+• Temas dinâmicos
+• Tudo integrado
+
+534 testes passando. Tudo commitado.
+
+Isso é o poder de:
+✅ PRD bem feito
+✅ Planos organizados
+✅ Tasks em ondas
+✅ Subagentes paralelos
+
+Do conceito ao deploy, sem dor de cabeça. 💪
+
+Vídeo completo no canal!</pre>
+                    </div>
+                    <div class="hashtags">
+                        <span class="hashtag">#resultado</span>
+                        <span class="hashtag">#programacao</span>
+                        <span class="hashtag">#iaparadevs</span>
+                    </div>
+                    <button class="copy-btn" onclick="copy('d5', this)">📋 Copiar descrição</button>
+                </div>
+            </article>
+
+            <!-- Novos shorts do vídeo XVe0VdCrOS4 -->
+            <article class="short-item" style="border-top: 2px solid #e0e0e0; padding-top: 2rem; margin-top: 2rem;">
+                <div class="video-col">
+                    <span class="short-num">6</span>
+                    <div class="video-frame">
+                        <video controls preload="metadata"><source src="short_XVe0VdCrOS4_1_split.mp4" type="video/mp4"></video>
+                    </div>
+                </div>
+                <div class="content-col">
+                    <h2>Criar app não é mais o diferencial</h2>
+                    <div class="description-area">
+                        <pre id="d6">Criar aplicativo não é mais o diferencial! 🎯
+
+A verdade que ninguém conta:
+• Qualquer um consegue codar hoje
+• A IA facilita ainda mais
+• O que importa é DISTRIBUIÇÃO
+
+Quem tem o canal de distribuição, vence.
+
+#empreendedorismo #saas #distribuicao #startups</pre>
+                    </div>
+                    <div class="hashtags">
+                        <span class="hashtag">#empreendedorismo</span>
+                        <span class="hashtag">#saas</span>
+                        <span class="hashtag">#distribuicao</span>
+                        <span class="hashtag">#startups</span>
+                    </div>
+                    <button class="copy-btn" onclick="copy('d6', this)">📋 Copiar descrição</button>
+                </div>
+            </article>
+
+            <article class="short-item">
+                <div class="video-col">
+                    <span class="short-num">7</span>
+                    <div class="video-frame">
+                        <video controls preload="metadata"><source src="short_XVe0VdCrOS4_2_split.mp4" type="video/mp4"></video>
+                    </div>
+                </div>
+                <div class="content-col">
+                    <h2>Lancei 3 SaaS em menos de 24h</h2>
+                    <div class="description-area">
+                        <pre id="d7">Em menos de 24 horas, lancei TRÊS SaaS! 🚀
+
+Como isso é possível?
+• IA acelera desenvolvimento
+• Ferramentas no-code/low-code
+• Foco no MVP mínimo
+
+O difícil não é criar. É vender.
+
+#saas #indiehacker #mvp #produtividade</pre>
+                    </div>
+                    <div class="hashtags">
+                        <span class="hashtag">#saas</span>
+                        <span class="hashtag">#indiehacker</span>
+                        <span class="hashtag">#mvp</span>
+                        <span class="hashtag">#produtividade</span>
+                    </div>
+                    <button class="copy-btn" onclick="copy('d7', this)">📋 Copiar descrição</button>
+                </div>
+            </article>
+
+            <article class="short-item">
+                <div class="video-col">
+                    <span class="short-num">8</span>
+                    <div class="video-frame">
+                        <video controls preload="metadata"><source src="short_XVe0VdCrOS4_3_split.mp4" type="video/mp4"></video>
+                    </div>
+                </div>
+                <div class="content-col">
+                    <h2>A chave é distribuição, não software</h2>
+                    <div class="description-area">
+                        <pre id="d8">A chave do sucesso NÃO está no software! 🔑
+
+Está na DISTRIBUIÇÃO.
+
+• Teams venceu Slack por causa do Office 365
+• Não era melhor, tinha distribuição
+• Canal > Produto
+
+Pensa nisso antes do próximo projeto.
+
+#negocios #distribuicao #estrategia #tech</pre>
+                    </div>
+                    <div class="hashtags">
+                        <span class="hashtag">#negocios</span>
+                        <span class="hashtag">#distribuicao</span>
+                        <span class="hashtag">#estrategia</span>
+                        <span class="hashtag">#tech</span>
+                    </div>
+                    <button class="copy-btn" onclick="copy('d8', this)">📋 Copiar descrição</button>
+                </div>
+            </article>
+        </div>
+
+        <footer class="footer">
+            <p>Gerado automaticamente por OpenClaw • 2026</p>
+        </footer>
+    </div>
+
+    <script>
+        function copy(id, btn) {
+            const text = document.getElementById(id).textContent;
+            const tags = btn.parentElement.querySelector('.hashtags');
+            const tagsText = Array.from(tags.querySelectorAll('.hashtag')).map(t => t.textContent).join(' ');
+            navigator.clipboard.writeText(text + '\n\n' + tagsText).then(() => {
+                btn.classList.add('copied');
+                btn.innerHTML = '✓ Copiado!';
+                setTimeout(() => { btn.classList.remove('copied'); btn.innerHTML = '📋 Copiar descrição'; }, 2000);
+            });
+        }
+
+        function approve() {
+            if (confirm('Aprovar todos os shorts? O Gavin será notificado.')) {
+                // Send via Telegram deep link
+                const msg = encodeURIComponent('vai, pode publicar os shorts');
+                window.open('https://t.me/OpenClawBot?text=' + msg, '_blank');
+                
+                document.querySelector('.approve-btn').innerHTML = '✓ Aprovado!';
+                document.querySelector('.approve-btn').style.background = '#00c853';
+            }
+        }
+
+        function reject() {
+            const reason = prompt('Motivo (opcional):');
+            const msg = encodeURIComponent('não vai os shorts' + (reason ? ': ' + reason : ''));
+            window.open('https://t.me/OpenClawBot?text=' + msg, '_blank');
+            
+            document.querySelector('.schedule-item .pending').textContent = 'Descartados';
+            document.querySelector('.schedule-item .pending').style.color = '#ff5252';
+        }
+
+        // Update next check time
+        function updateNextCheck() {
+            const now = new Date();
+            const next = new Date(now.getTime() + 2 * 60 * 60 * 1000); // +2h approximation
+            const hours = next.getHours().toString().padStart(2, '0');
+            const mins = next.getMinutes().toString().padStart(2, '0');
+            document.getElementById('next-check').textContent = `~${hours}:${mins}`;
+        }
+        updateNextCheck();
+    </script>
+</body>
+</html>

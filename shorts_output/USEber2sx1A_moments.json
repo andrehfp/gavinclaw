@@ -1,0 +1,46 @@
+{
+  "video_id": "USEber2sx1A",
+  "video_title": "Tasks aumentaram em 1000% minha produtividade",
+  "moments": [
+    {
+      "id": 1,
+      "start": 0,
+      "end": 45,
+      "title": "Como aumentei 1000% minha produtividade com IA",
+      "reason": "Gancho forte no início, apresenta o tema e promete resultado",
+      "hashtags": "#produtividade #ia #claudecode #programacao"
+    },
+    {
+      "id": 2,
+      "start": 120,
+      "end": 180,
+      "title": "O segredo é criar um PRD antes de codar",
+      "reason": "Dica prática sobre planejamento com IA",
+      "hashtags": "#programacao #dicas #prd #desenvolvimento"
+    },
+    {
+      "id": 3,
+      "start": 480,
+      "end": 540,
+      "title": "Tasks organizadas em ondas = paralelismo",
+      "reason": "Conceito técnico explicado de forma clara",
+      "hashtags": "#devtips #programacao #automacao"
+    },
+    {
+      "id": 4,
+      "start": 960,
+      "end": 1020,
+      "title": "Subagentes trabalhando em paralelo",
+      "reason": "Demonstração visual do poder da automação",
+      "hashtags": "#ia #automacao #produtividade"
+    },
+    {
+      "id": 5,
+      "start": 1500,
+      "end": 1560,
+      "title": "O resultado: site completo de primeira!",
+      "reason": "Payoff - mostra o resultado final impressionante",
+      "hashtags": "#resultado #programacao #iaparadevs"
+    }
+  ]
+}

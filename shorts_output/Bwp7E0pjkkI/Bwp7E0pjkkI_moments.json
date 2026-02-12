@@ -1,0 +1,46 @@
+{
+  "moments": [
+    {
+      "start": 0.0,
+      "end": 35.0,
+      "hook_text": "Você sabia que um PRD pode ter 719 linhas?",
+      "hook_score": 9,
+      "titles": [
+        "Quantas linhas tem um PRD? Você vai se surpreender! 📄",
+        "PRD de 719 linhas: o que isso significa?",
+        "Descubra o que um PRD pode fazer com 719 linhas! 🤯"
+      ],
+      "description": "Introdução ao conceito de um PRD e a quantidade surpreendente de linhas que ele pode ter.",
+      "reason": "O hook inicial é intrigante e provoca curiosidade, ideal para capturar a atenção rapidamente.",
+      "loop_friendly": true
+    },
+    {
+      "start": 51.0,
+      "end": 60.04,
+      "hook_text": "Você sabia que ele está executando 40 mil tokens em paralelo?",
+      "hook_score": 8,
+      "titles": [
+        "O que são 40 mil tokens? Descubra agora! 💡",
+        "Executando tarefas em paralelo: a mágica dos tokens!",
+        "Como processar 40 mil tokens de uma vez? 🔥"
+      ],
+      "description": "Exploração do processo de execução de tarefas em paralelo e a quantidade de tokens envolvidos.",
+      "reason": "Esse momento apresenta um fato interessante sobre o processamento em paralelo, que pode capturar a curiosidade do público.",
+      "loop_friendly": false
+    },
+    {
+      "start": 39.3,
+      "end": 60.04,
+      "hook_text": "O que acontece quando ele completa a primeira onda?",
+      "hook_score": 7,
+      "titles": [
+        "Primeira onda completada: e agora? 🤔",
+        "O que vem depois da primeira onda de tarefas?",
+        "Como funcionam as ondas em um PRD? Descubra! 🌊"
+      ],
+      "description": "Discussão sobre o processo de completar a primeira onda e o que isso implica para as próximas etapas.",
+      "reason": "Esse momento apresenta um ponto de virada interessante que pode prendeu a atenção do espectador.",
+      "loop_friendly": true
+    }
+  ]
+}

@@ -1,0 +1,25 @@
+[Script Info]
+Title: Viral Captions
+ScriptType: v4.00+
+PlayResX: 1080
+PlayResY: 1920
+WrapStyle: 0
+
+[V4+ Styles]
+Format: Name, Fontname, Fontsize, PrimaryColour, SecondaryColour, OutlineColour, BackColour, Bold, Italic, Underline, StrikeOut, ScaleX, ScaleY, Spacing, Angle, BorderStyle, Outline, Shadow, Alignment, MarginL, MarginR, MarginV, Encoding
+Style: Viral,Arial,72,&H00FFFFFF,&H000000FF,&H00000000,&H80000000,1,0,0,0,100,100,0,0,1,4,2,5,50,50,400,1
+
+[Events]
+Format: Layer, Start, End, Style, Name, MarginL, MarginR, MarginV, Effect, Text
+Dialogue: 0,0:00:00.00,0:00:00.68,Viral,,0,0,0,,{\fad(80,80)\t(0,80,\fscx105\fscy105)\t(80,160,\fscx100\fscy100)}AGORA A SEGUNDA
+Dialogue: 0,0:00:00.68,0:00:01.69,Viral,,0,0,0,,{\fad(80,80)\t(0,80,\fscx105\fscy105)\t(80,160,\fscx100\fscy100)}ONDA, QUE É
+Dialogue: 0,0:00:01.69,0:00:02.57,Viral,,0,0,0,,{\fad(80,80)\t(0,80,\fscx105\fscy105)\t(80,160,\fscx100\fscy100)}TASK 2 E
+Dialogue: 0,0:00:02.57,0:00:03.24,Viral,,0,0,0,,{\fad(80,80)\t(0,80,\fscx105\fscy105)\t(80,160,\fscx100\fscy100)}A TASK 3
+Dialogue: 0,0:00:03.24,0:00:03.89,Viral,,0,0,0,,{\fad(80,80)\t(0,80,\fscx105\fscy105)\t(80,160,\fscx100\fscy100)}EM PARALELO. ENTÃO
+Dialogue: 0,0:00:03.89,0:00:04.56,Viral,,0,0,0,,{\fad(80,80)\t(0,80,\fscx105\fscy105)\t(80,160,\fscx100\fscy100)}ELE ESTÁ EXECUTANDO
+Dialogue: 0,0:00:04.56,0:00:05.38,Viral,,0,0,0,,{\fad(80,80)\t(0,80,\fscx105\fscy105)\t(80,160,\fscx100\fscy100)}ESSAS DUAS TASKS
+Dialogue: 0,0:00:05.38,0:00:06.93,Viral,,0,0,0,,{\fad(80,80)\t(0,80,\fscx105\fscy105)\t(80,160,\fscx100\fscy100)}EM PARALELO. OLHA
+Dialogue: 0,0:00:06.93,0:00:07.64,Viral,,0,0,0,,{\fad(80,80)\t(0,80,\fscx105\fscy105)\t(80,160,\fscx100\fscy100)}SÓ, 40 MIL
+Dialogue: 0,0:00:07.64,0:00:08.35,Viral,,0,0,0,,{\fad(80,80)\t(0,80,\fscx105\fscy105)\t(80,160,\fscx100\fscy100)}TOKENS NA PRIMEIRA,
+Dialogue: 0,0:00:08.53,0:00:08.82,Viral,,0,0,0,,{\fad(80,80)\t(0,80,\fscx105\fscy105)\t(80,160,\fscx100\fscy100)}37 MIL TOKENS
+Dialogue: 0,0:00:08.82,0:00:09.02,Viral,,0,0,0,,{\fad(80,80)\t(0,80,\fscx105\fscy105)\t(80,160,\fscx100\fscy100)}NA SEGUNDA.

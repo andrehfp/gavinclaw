@@ -1,0 +1,46 @@
+[Script Info]
+Title: Viral Captions
+ScriptType: v4.00+
+PlayResX: 1080
+PlayResY: 1920
+WrapStyle: 0
+
+[V4+ Styles]
+Format: Name, Fontname, Fontsize, PrimaryColour, SecondaryColour, OutlineColour, BackColour, Bold, Italic, Underline, StrikeOut, ScaleX, ScaleY, Spacing, Angle, BorderStyle, Outline, Shadow, Alignment, MarginL, MarginR, MarginV, Encoding
+Style: Viral,Arial,72,&H00FFFFFF,&H000000FF,&H00000000,&H80000000,1,0,0,0,100,100,0,0,1,4,2,5,50,50,400,1
+
+[Events]
+Format: Layer, Start, End, Style, Name, MarginL, MarginR, MarginV, Effect, Text
+Dialogue: 0,0:00:00.00,0:00:00.96,Viral,,0,0,0,,{\fad(80,80)\t(0,80,\fscx105\fscy105)\t(80,160,\fscx100\fscy100)}PRODUÇÃO E OLHA
+Dialogue: 0,0:00:00.96,0:00:02.37,Viral,,0,0,0,,{\fad(80,80)\t(0,80,\fscx105\fscy105)\t(80,160,\fscx100\fscy100)}SÓ QUE LEGAL
+Dialogue: 0,0:00:02.37,0:00:04.12,Viral,,0,0,0,,{\fad(80,80)\t(0,80,\fscx105\fscy105)\t(80,160,\fscx100\fscy100)}EU CRIEI AQUI
+Dialogue: 0,0:00:04.12,0:00:06.88,Viral,,0,0,0,,{\fad(80,80)\t(0,80,\fscx105\fscy105)\t(80,160,\fscx100\fscy100)}DENTRO UM EU
+Dialogue: 0,0:00:06.88,0:00:07.55,Viral,,0,0,0,,{\fad(80,80)\t(0,80,\fscx105\fscy105)\t(80,160,\fscx100\fscy100)}NÃO, NÉ, VAI
+Dialogue: 0,0:00:07.55,0:00:08.37,Viral,,0,0,0,,{\fad(80,80)\t(0,80,\fscx105\fscy105)\t(80,160,\fscx100\fscy100)}EU PEDI PRA
+Dialogue: 0,0:00:08.37,0:00:09.18,Viral,,0,0,0,,{\fad(80,80)\t(0,80,\fscx105\fscy105)\t(80,160,\fscx100\fscy100)}IA CRIAR PRA
+Dialogue: 0,0:00:09.18,0:00:10.42,Viral,,0,0,0,,{\fad(80,80)\t(0,80,\fscx105\fscy105)\t(80,160,\fscx100\fscy100)}MIM UM ESQUEMA
+Dialogue: 0,0:00:10.42,0:00:11.87,Viral,,0,0,0,,{\fad(80,80)\t(0,80,\fscx105\fscy105)\t(80,160,\fscx100\fscy100)}DE DEPLOY, TÁ
+Dialogue: 0,0:00:11.87,0:00:12.43,Viral,,0,0,0,,{\fad(80,80)\t(0,80,\fscx105\fscy105)\t(80,160,\fscx100\fscy100)}TÁ AQUI DO
+Dialogue: 0,0:00:12.43,0:00:13.33,Viral,,0,0,0,,{\fad(80,80)\t(0,80,\fscx105\fscy105)\t(80,160,\fscx100\fscy100)}LADO E ELE
+Dialogue: 0,0:00:13.33,0:00:14.40,Viral,,0,0,0,,{\fad(80,80)\t(0,80,\fscx105\fscy105)\t(80,160,\fscx100\fscy100)}TÁ ME ENSINANDO
+Dialogue: 0,0:00:14.40,0:00:15.48,Viral,,0,0,0,,{\fad(80,80)\t(0,80,\fscx105\fscy105)\t(80,160,\fscx100\fscy100)}COMO FAZER UM
+Dialogue: 0,0:00:15.48,0:00:16.90,Viral,,0,0,0,,{\fad(80,80)\t(0,80,\fscx105\fscy105)\t(80,160,\fscx100\fscy100)}DEPLOY NUMA VPS,
+Dialogue: 0,0:00:16.90,0:00:18.63,Viral,,0,0,0,,{\fad(80,80)\t(0,80,\fscx105\fscy105)\t(80,160,\fscx100\fscy100)}TÁ EU VOU
+Dialogue: 0,0:00:18.63,0:00:19.81,Viral,,0,0,0,,{\fad(80,80)\t(0,80,\fscx105\fscy105)\t(80,160,\fscx100\fscy100)}USAR EU VOU
+Dialogue: 0,0:00:19.81,0:00:20.67,Viral,,0,0,0,,{\fad(80,80)\t(0,80,\fscx105\fscy105)\t(80,160,\fscx100\fscy100)}USAR A HOSTINGER
+Dialogue: 0,0:00:20.67,0:00:21.53,Viral,,0,0,0,,{\fad(80,80)\t(0,80,\fscx105\fscy105)\t(80,160,\fscx100\fscy100)}PRA MOSTRAR PRA
+Dialogue: 0,0:00:21.53,0:00:22.42,Viral,,0,0,0,,{\fad(80,80)\t(0,80,\fscx105\fscy105)\t(80,160,\fscx100\fscy100)}VOCÊ COMO FAZER,
+Dialogue: 0,0:00:22.42,0:00:23.39,Viral,,0,0,0,,{\fad(80,80)\t(0,80,\fscx105\fscy105)\t(80,160,\fscx100\fscy100)}TÁ PRA VOCÊ
+Dialogue: 0,0:00:23.39,0:00:24.40,Viral,,0,0,0,,{\fad(80,80)\t(0,80,\fscx105\fscy105)\t(80,160,\fscx100\fscy100)}TER UM CUPOM
+Dialogue: 0,0:00:24.40,0:00:25.33,Viral,,0,0,0,,{\fad(80,80)\t(0,80,\fscx105\fscy105)\t(80,160,\fscx100\fscy100)}DE DESCONTO ELES
+Dialogue: 0,0:00:25.33,0:00:26.10,Viral,,0,0,0,,{\fad(80,80)\t(0,80,\fscx105\fscy105)\t(80,160,\fscx100\fscy100)}ESTÃO COM DESCONTAÇO
+Dialogue: 0,0:00:26.10,0:00:27.06,Viral,,0,0,0,,{\fad(80,80)\t(0,80,\fscx105\fscy105)\t(80,160,\fscx100\fscy100)}AGORA EM FEVEREIRO,
+Dialogue: 0,0:00:27.06,0:00:28.11,Viral,,0,0,0,,{\fad(80,80)\t(0,80,\fscx105\fscy105)\t(80,160,\fscx100\fscy100)}ENTÃO APROVEITA SE
+Dialogue: 0,0:00:28.11,0:00:29.09,Viral,,0,0,0,,{\fad(80,80)\t(0,80,\fscx105\fscy105)\t(80,160,\fscx100\fscy100)}VOCÊ QUISER COLOCAR
+Dialogue: 0,0:00:29.09,0:00:29.91,Viral,,0,0,0,,{\fad(80,80)\t(0,80,\fscx105\fscy105)\t(80,160,\fscx100\fscy100)}SEUS PROJETOS PRA
+Dialogue: 0,0:00:29.91,0:00:30.74,Viral,,0,0,0,,{\fad(80,80)\t(0,80,\fscx105\fscy105)\t(80,160,\fscx100\fscy100)}RODAR AÍ FINALMENTE
+Dialogue: 0,0:00:30.74,0:00:31.92,Viral,,0,0,0,,{\fad(80,80)\t(0,80,\fscx105\fscy105)\t(80,160,\fscx100\fscy100)}E ELE JÁ
+Dialogue: 0,0:00:31.92,0:00:33.10,Viral,,0,0,0,,{\fad(80,80)\t(0,80,\fscx105\fscy105)\t(80,160,\fscx100\fscy100)}CRIOU PRA MIM
+Dialogue: 0,0:00:33.10,0:00:34.00,Viral,,0,0,0,,{\fad(80,80)\t(0,80,\fscx105\fscy105)\t(80,160,\fscx100\fscy100)}TODO UM PROCESSO
+Dialogue: 0,0:00:34.00,0:00:34.89,Viral,,0,0,0,,{\fad(80,80)\t(0,80,\fscx105\fscy105)\t(80,160,\fscx100\fscy100)}PRA EU VERIFICAR
+Dialogue: 0,0:00:34.89,0:00:35.00,Viral,,0,0,0,,{\fad(80,80)\t(0,80,\fscx105\fscy105)\t(80,160,\fscx100\fscy100)}SE

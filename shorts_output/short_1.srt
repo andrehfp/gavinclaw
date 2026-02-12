@@ -1,0 +1,43 @@
+1
+00:00:00,000 --> 00:00:05,080
+E aí galera, beleza? André aqui. Eu estou testando uma nova funcionalidade do Cloud Code aqui e eu
+
+2
+00:00:05,080 --> 00:00:09,720
+prometo que esse vídeo não vai durar três horas, vai ser bem rápido mesmo, porque eu quero te
+
+3
+00:00:09,720 --> 00:00:13,279
+mostrar o que eu estou fazendo. Então eu estou criando um projeto aqui do zero, ontem eu
+
+4
+00:00:13,279 --> 00:00:18,300
+conversei com um amigo, nós trocamos uma ideia e tal, outra hora falo mais sobre esse projeto, mas é um
+
+5
+00:00:18,300 --> 00:00:24,359
+projeto grande, é um projeto que envolve multi-talents, tem login do meu cliente, tem login do
+
+6
+00:00:24,359 --> 00:00:29,519
+cliente dos meus clientes e assim vai, envolve domínio, envolve criação de páginas dinamicamente,
+
+7
+00:00:29,519 --> 00:00:30,899
+Então é um negócio bem mais complexo, tá?
+
+8
+00:00:31,579 --> 00:00:38,759
+Aí ontem eu passei um tempão discutindo com a IA, óbvio, sobre o que fazer, tá?
+
+9
+00:00:38,960 --> 00:00:39,740
+Como que a gente faria.
+
+10
+00:00:39,820 --> 00:00:41,380
+Olha só, eu já fiz um desenho aqui, tá?
+
+11
+00:00:42,200 --> 00:00:45,000
+E tudo que eu vou falar pra você aqui talvez você já tenha falado, talvez você já tenha ouvido,

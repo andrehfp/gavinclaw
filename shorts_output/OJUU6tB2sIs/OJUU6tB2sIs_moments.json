@@ -1,0 +1,32 @@
+{
+  "moments": [
+    {
+      "start": 11.7,
+      "end": 46.7,
+      "hook_text": "Olha só que legal, ele montou tudo isso aqui de primeira!",
+      "hook_score": 8,
+      "titles": [
+        "Como criar um site incrível em minutos! 🚀",
+        "Veja o que já está funcionando no site da imobiliária!",
+        "Transforme seu site com essas funcionalidades! 💻"
+      ],
+      "description": "Demonstração das funcionalidades do site em construção com foco nas melhorias.",
+      "reason": "Este momento mostra um progresso interessante no desenvolvimento do site, com um hook que promete valor e engajamento.",
+      "loop_friendly": true
+    },
+    {
+      "start": 51.5,
+      "end": 60.04,
+      "hook_text": "Esse aqui é o site da imobiliária, tá?",
+      "hook_score": 7,
+      "titles": [
+        "Dê uma olhada no site da imobiliária! 🏡",
+        "O que você pode fazer em um site imobiliário?",
+        "Descubra as funcionalidades do site ao vivo! 🌐"
+      ],
+      "description": "Visualização do site da imobiliária e suas interações.",
+      "reason": "O hook é direto e leva à curiosidade sobre o funcionamento do site, além de mostrar um produto real.",
+      "loop_friendly": false
+    }
+  ]
+}

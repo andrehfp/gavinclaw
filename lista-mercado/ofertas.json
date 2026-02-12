@@ -1,0 +1,21 @@
+{
+  "data": "12/02/2026",
+  "atualizado": "2026-02-12T08:00:15.362546",
+  "ofertas": {
+    "tozetto": [],
+    "condor": [
+      {
+        "produto": "Shampoo",
+        "preco_oferta": "Ver encarte",
+        "loja": "Condor",
+        "pagina": "2"
+      }
+    ],
+    "muffato": []
+  },
+  "links": {
+    "tozetto": "https://www.tozetto.com.br/ofertas",
+    "condor": "https://www.tiendeo.com.br/Catalogos/1256445",
+    "muffato": "https://www.tiendeo.com.br/Catalogos/1261726"
+  }
+}

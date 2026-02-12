@@ -1,0 +1,46 @@
+{
+  "moments": [
+    {
+      "start": 646.0,
+      "end": 681.0,
+      "hook_text": "Você vai ganhar R$70 por mês em uma VPS super forte como a Hostinger!",
+      "hook_score": 9,
+      "titles": [
+        "Como ter uma VPS poderosa por apenas R$70? 💰",
+        "Descubra a oferta imperdível da Hostinger para VPS!",
+        "VPS super forte por R$70? Veja como! 🚀"
+      ],
+      "description": "Aproveite uma oferta incrível para ter uma VPS robusta por um preço acessível.",
+      "reason": "A promessa de um valor baixo para um serviço poderoso é atraente e gera curiosidade imediata.",
+      "loop_friendly": true
+    },
+    {
+      "start": 94.0,
+      "end": 133.0,
+      "hook_text": "Sabe de uma coisa? Eu não vou escolher a landing page, eu vou deixar as pessoas escolherem!",
+      "hook_score": 8,
+      "titles": [
+        "Como deixar seu público escolher sua landing page? 😲",
+        "Descubra como engajar seu público com escolha de landing page!",
+        "A escolha da landing page vai ser sua! 🗳️"
+      ],
+      "description": "Aprenda a interagir com seu público ao deixá-los escolher sua landing page.",
+      "reason": "Esse momento apresenta uma abordagem interativa que pode gerar curiosidade e engajamento.",
+      "loop_friendly": true
+    },
+    {
+      "start": 505.0,
+      "end": 540.0,
+      "hook_text": "Olha só que legal, eu pedi pra IA criar pra mim um esquema de deploy!",
+      "hook_score": 7,
+      "titles": [
+        "Como a IA pode ajudar no seu deploy? 🤖",
+        "Descubra o poder da IA no gerenciamento de deploy!",
+        "IA + Deploy: A combinação perfeita para o sucesso! 🚀"
+      ],
+      "description": "Veja como a inteligência artificial pode facilitar o processo de deploy dos seus projetos.",
+      "reason": "Apresenta uma solução moderna e intrigante, despertando o interesse pelo uso de IA.",
+      "loop_friendly": false
+    }
+  ]
+}

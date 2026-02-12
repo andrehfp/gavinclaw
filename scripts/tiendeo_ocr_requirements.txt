@@ -1,0 +1,7 @@
+requests
+beautifulsoup4
+Pillow
+opencv-python-headless
+pytesseract
+google-cloud-vision
+numpy

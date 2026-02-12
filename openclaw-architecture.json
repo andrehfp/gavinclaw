@@ -1,0 +1,169 @@
+{
+  "metadata": {
+    "title": "OpenClaw Architecture",
+    "description": "Gateway-based AI assistant with multi-channel messaging and tool execution"
+  },
+  "layout": {
+    "type": "hierarchical",
+    "direction": "top-down",
+    "spacing": { "horizontal": 180, "vertical": 130 }
+  },
+  "components": [
+    {
+      "id": "telegram",
+      "type": "external",
+      "name": "Telegram",
+      "description": "Messaging channel",
+      "layer": 0,
+      "position": 0
+    },
+    {
+      "id": "whatsapp",
+      "type": "external",
+      "name": "WhatsApp",
+      "description": "Messaging channel (Baileys)",
+      "layer": 0,
+      "position": 1
+    },
+    {
+      "id": "discord",
+      "type": "external",
+      "name": "Discord",
+      "description": "Messaging channel",
+      "layer": 0,
+      "position": 2
+    },
+    {
+      "id": "signal",
+      "type": "external",
+      "name": "Signal",
+      "description": "Messaging channel",
+      "layer": 0,
+      "position": 3
+    },
+    {
+      "id": "macos-app",
+      "type": "frontend",
+      "name": "macOS App",
+      "description": "Native client",
+      "layer": 0,
+      "position": 4
+    },
+    {
+      "id": "cli",
+      "type": "frontend",
+      "name": "CLI",
+      "description": "Command-line client",
+      "layer": 0,
+      "position": 5
+    },
+    {
+      "id": "gateway",
+      "type": "gateway",
+      "name": "OpenClaw Gateway",
+      "description": "Core daemon (WebSocket server)",
+      "layer": 1,
+      "position": 2
+    },
+    {
+      "id": "session-manager",
+      "type": "service",
+      "name": "Session Manager",
+      "description": "Manages chat sessions & context",
+      "layer": 2,
+      "position": 1
+    },
+    {
+      "id": "agent-loop",
+      "type": "service",
+      "name": "Agent Loop",
+      "description": "LLM interaction & tool calls",
+      "layer": 2,
+      "position": 2
+    },
+    {
+      "id": "tool-executor",
+      "type": "service",
+      "name": "Tool Executor",
+      "description": "Executes tools (exec, browser, etc)",
+      "layer": 2,
+      "position": 3
+    },
+    {
+      "id": "nodes",
+      "type": "service",
+      "name": "Nodes",
+      "description": "macOS/iOS/Android devices",
+      "layer": 2,
+      "position": 4
+    },
+    {
+      "id": "claude-api",
+      "type": "external",
+      "name": "Claude API",
+      "description": "Anthropic LLM",
+      "layer": 3,
+      "position": 0
+    },
+    {
+      "id": "openai-api",
+      "type": "external",
+      "name": "OpenAI API",
+      "description": "GPT models",
+      "layer": 3,
+      "position": 1
+    },
+    {
+      "id": "gemini-api",
+      "type": "external",
+      "name": "Gemini API",
+      "description": "Google LLM + Imagen",
+      "layer": 3,
+      "position": 2
+    },
+    {
+      "id": "skills",
+      "type": "service",
+      "name": "Skills",
+      "description": "Nano Banana, Excalidraw, etc",
+      "layer": 3,
+      "position": 3
+    },
+    {
+      "id": "workspace",
+      "type": "storage",
+      "name": "Workspace",
+      "description": "Files, memory, config",
+      "layer": 3,
+      "position": 4
+    },
+    {
+      "id": "cron",
+      "type": "queue",
+      "name": "Cron Scheduler",
+      "description": "Heartbeats & scheduled jobs",
+      "layer": 2,
+      "position": 0
+    }
+  ],
+  "connections": [
+    { "from": "telegram", "to": "gateway", "type": "async", "label": "grammY" },
+    { "from": "whatsapp", "to": "gateway", "type": "async", "label": "Baileys" },
+    { "from": "discord", "to": "gateway", "type": "async", "label": "discord.js" },
+    { "from": "signal", "to": "gateway", "type": "async", "label": "signal-cli" },
+    { "from": "macos-app", "to": "gateway", "type": "sync", "label": "WebSocket" },
+    { "from": "cli", "to": "gateway", "type": "sync", "label": "WebSocket" },
+    { "from": "gateway", "to": "session-manager", "type": "sync", "label": "" },
+    { "from": "gateway", "to": "agent-loop", "type": "sync", "label": "" },
+    { "from": "gateway", "to": "tool-executor", "type": "sync", "label": "" },
+    { "from": "gateway", "to": "nodes", "type": "sync", "label": "WebSocket" },
+    { "from": "gateway", "to": "cron", "type": "sync", "label": "" },
+    { "from": "agent-loop", "to": "claude-api", "type": "sync", "label": "HTTP" },
+    { "from": "agent-loop", "to": "openai-api", "type": "sync", "label": "HTTP" },
+    { "from": "agent-loop", "to": "gemini-api", "type": "sync", "label": "HTTP" },
+    { "from": "tool-executor", "to": "skills", "type": "sync", "label": "exec" },
+    { "from": "tool-executor", "to": "workspace", "type": "data", "label": "R/W" },
+    { "from": "session-manager", "to": "workspace", "type": "data", "label": "context" },
+    { "from": "cron", "to": "agent-loop", "type": "async", "label": "trigger" }
+  ]
+}

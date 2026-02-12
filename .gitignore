@@ -1,0 +1,50 @@
+# Secrets - never commit
+.secrets/
+*.pickle
+*.token
+*credentials*.json
+*token*.json
+
+# Environment
+.venv*/
+__pycache__/
+*.pyc
+node_modules/
+
+# Temp
+/tmp/
+*.tmp
+*.log
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Large media & temp images
+*.mp4
+*.mp3
+*.wav
+*.avi
+*.mkv
+*.png
+*.jpg
+*.jpeg
+*.gif
+*.webp
+
+# Embedded repos
+bboox/
+skills/excalidraw-diagram/
+
+# Playwright cache
+.playwright-cli/
+.playwright/
+
+# YouTube shorts pipeline (separate repo)
+scripts/youtube_shorts/
+
+# RLM temp
+/tmp/gavin_rlm/
+
+# Claude skills (external)
+.claude/

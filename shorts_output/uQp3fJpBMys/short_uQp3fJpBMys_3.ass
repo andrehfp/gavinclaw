@@ -1,0 +1,22 @@
+[Script Info]
+Title: Viral Captions
+ScriptType: v4.00+
+PlayResX: 1080
+PlayResY: 1920
+WrapStyle: 0
+
+[V4+ Styles]
+Format: Name, Fontname, Fontsize, PrimaryColour, SecondaryColour, OutlineColour, BackColour, Bold, Italic, Underline, StrikeOut, ScaleX, ScaleY, Spacing, Angle, BorderStyle, Outline, Shadow, Alignment, MarginL, MarginR, MarginV, Encoding
+Style: Viral,Arial,72,&H00FFFFFF,&H000000FF,&H00000000,&H80000000,1,0,0,0,100,100,0,0,1,4,2,5,50,50,400,1
+
+[Events]
+Format: Layer, Start, End, Style, Name, MarginL, MarginR, MarginV, Effect, Text
+Dialogue: 0,0:00:00.00,0:00:01.04,Viral,,0,0,0,,{\fad(80,80)\t(0,80,\fscx105\fscy105)\t(80,160,\fscx100\fscy100)}AÍ AQUI, ENTÃO
+Dialogue: 0,0:00:01.04,0:00:02.13,Viral,,0,0,0,,{\fad(80,80)\t(0,80,\fscx105\fscy105)\t(80,160,\fscx100\fscy100)}PRA CADA PLANEJAMENTO,
+Dialogue: 0,0:00:02.13,0:00:03.21,Viral,,0,0,0,,{\fad(80,80)\t(0,80,\fscx105\fscy105)\t(80,160,\fscx100\fscy100)}POR EXEMPLO, ELE
+Dialogue: 0,0:00:03.21,0:00:04.28,Viral,,0,0,0,,{\fad(80,80)\t(0,80,\fscx105\fscy105)\t(80,160,\fscx100\fscy100)}VAI TER TASK
+Dialogue: 0,0:00:04.28,0:00:05.30,Viral,,0,0,0,,{\fad(80,80)\t(0,80,\fscx105\fscy105)\t(80,160,\fscx100\fscy100)}1, TASK 2,
+Dialogue: 0,0:00:05.30,0:00:06.23,Viral,,0,0,0,,{\fad(80,80)\t(0,80,\fscx105\fscy105)\t(80,160,\fscx100\fscy100)}TASK 3 ENTÃO
+Dialogue: 0,0:00:06.23,0:00:07.00,Viral,,0,0,0,,{\fad(80,80)\t(0,80,\fscx105\fscy105)\t(80,160,\fscx100\fscy100)}TÁ AQUI, Ó
+Dialogue: 0,0:00:07.00,0:00:08.35,Viral,,0,0,0,,{\fad(80,80)\t(0,80,\fscx105\fscy105)\t(80,160,\fscx100\fscy100)}TASK 1, TASK
+Dialogue: 0,0:00:08.35,0:00:09.72,Viral,,0,0,0,,{\fad(80,80)\t(0,80,\fscx105\fscy105)\t(80,160,\fscx100\fscy100)}2, TASK 3

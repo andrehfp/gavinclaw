@@ -1,0 +1,53 @@
+[Script Info]
+Title: Viral Captions
+ScriptType: v4.00+
+PlayResX: 1080
+PlayResY: 1920
+WrapStyle: 0
+
+[V4+ Styles]
+Format: Name, Fontname, Fontsize, PrimaryColour, SecondaryColour, OutlineColour, BackColour, Bold, Italic, Underline, StrikeOut, ScaleX, ScaleY, Spacing, Angle, BorderStyle, Outline, Shadow, Alignment, MarginL, MarginR, MarginV, Encoding
+Style: Viral,Arial,72,&H00FFFFFF,&H000000FF,&H00000000,&H80000000,1,0,0,0,100,100,0,0,1,4,2,5,50,50,400,1
+
+[Events]
+Format: Layer, Start, End, Style, Name, MarginL, MarginR, MarginV, Effect, Text
+Dialogue: 0,0:00:00.00,0:00:00.86,Viral,,0,0,0,,{\fad(80,80)\t(0,80,\fscx105\fscy105)\t(80,160,\fscx100\fscy100)}SÓ, EU TENHO
+Dialogue: 0,0:00:00.86,0:00:01.76,Viral,,0,0,0,,{\fad(80,80)\t(0,80,\fscx105\fscy105)\t(80,160,\fscx100\fscy100)}UM DOMÍNIO QUE
+Dialogue: 0,0:00:01.76,0:00:02.42,Viral,,0,0,0,,{\fad(80,80)\t(0,80,\fscx105\fscy105)\t(80,160,\fscx100\fscy100)}EU NÃO USO
+Dialogue: 0,0:00:02.42,0:00:03.07,Viral,,0,0,0,,{\fad(80,80)\t(0,80,\fscx105\fscy105)\t(80,160,\fscx100\fscy100)}HÁ MUITO TEMPO
+Dialogue: 0,0:00:03.07,0:00:05.97,Viral,,0,0,0,,{\fad(80,80)\t(0,80,\fscx105\fscy105)\t(80,160,\fscx100\fscy100)}CHAMADO TINESAS.COM.BR É
+Dialogue: 0,0:00:05.97,0:00:07.37,Viral,,0,0,0,,{\fad(80,80)\t(0,80,\fscx105\fscy105)\t(80,160,\fscx100\fscy100)}UM DOMÍNIO QUE
+Dialogue: 0,0:00:07.37,0:00:08.14,Viral,,0,0,0,,{\fad(80,80)\t(0,80,\fscx105\fscy105)\t(80,160,\fscx100\fscy100)}EU COMPREI FAZ
+Dialogue: 0,0:00:08.14,0:00:08.90,Viral,,0,0,0,,{\fad(80,80)\t(0,80,\fscx105\fscy105)\t(80,160,\fscx100\fscy100)}UNS 2 OU
+Dialogue: 0,0:00:08.90,0:00:09.70,Viral,,0,0,0,,{\fad(80,80)\t(0,80,\fscx105\fscy105)\t(80,160,\fscx100\fscy100)}3 ANOS SEI
+Dialogue: 0,0:00:09.70,0:00:10.56,Viral,,0,0,0,,{\fad(80,80)\t(0,80,\fscx105\fscy105)\t(80,160,\fscx100\fscy100)}LÁ, E ELE
+Dialogue: 0,0:00:10.56,0:00:11.43,Viral,,0,0,0,,{\fad(80,80)\t(0,80,\fscx105\fscy105)\t(80,160,\fscx100\fscy100)}FICA AQUI NA
+Dialogue: 0,0:00:11.43,0:00:12.09,Viral,,0,0,0,,{\fad(80,80)\t(0,80,\fscx105\fscy105)\t(80,160,\fscx100\fscy100)}GAVETA PARA ALGUM
+Dialogue: 0,0:00:12.09,0:00:12.66,Viral,,0,0,0,,{\fad(80,80)\t(0,80,\fscx105\fscy105)\t(80,160,\fscx100\fscy100)}DIA EU FAZER
+Dialogue: 0,0:00:12.66,0:00:13.23,Viral,,0,0,0,,{\fad(80,80)\t(0,80,\fscx105\fscy105)\t(80,160,\fscx100\fscy100)}ALGUMA COISA COM
+Dialogue: 0,0:00:13.23,0:00:13.94,Viral,,0,0,0,,{\fad(80,80)\t(0,80,\fscx105\fscy105)\t(80,160,\fscx100\fscy100)}ELE E EU
+Dialogue: 0,0:00:13.94,0:00:14.73,Viral,,0,0,0,,{\fad(80,80)\t(0,80,\fscx105\fscy105)\t(80,160,\fscx100\fscy100)}ACHO QUE ESTÁ
+Dialogue: 0,0:00:14.73,0:00:15.52,Viral,,0,0,0,,{\fad(80,80)\t(0,80,\fscx105\fscy105)\t(80,160,\fscx100\fscy100)}NA HORA DE
+Dialogue: 0,0:00:15.52,0:00:16.30,Viral,,0,0,0,,{\fad(80,80)\t(0,80,\fscx105\fscy105)\t(80,160,\fscx100\fscy100)}EU USAR ESSE
+Dialogue: 0,0:00:16.30,0:00:17.09,Viral,,0,0,0,,{\fad(80,80)\t(0,80,\fscx105\fscy105)\t(80,160,\fscx100\fscy100)}DOMÍNIO PARA ALGUMA
+Dialogue: 0,0:00:17.09,0:00:18.14,Viral,,0,0,0,,{\fad(80,80)\t(0,80,\fscx105\fscy105)\t(80,160,\fscx100\fscy100)}COISA. E EU
+Dialogue: 0,0:00:18.14,0:00:19.04,Viral,,0,0,0,,{\fad(80,80)\t(0,80,\fscx105\fscy105)\t(80,160,\fscx100\fscy100)}QUERO USAR ELE
+Dialogue: 0,0:00:19.04,0:00:19.95,Viral,,0,0,0,,{\fad(80,80)\t(0,80,\fscx105\fscy105)\t(80,160,\fscx100\fscy100)}PARA ESTREAR UMA
+Dialogue: 0,0:00:19.95,0:00:20.85,Viral,,0,0,0,,{\fad(80,80)\t(0,80,\fscx105\fscy105)\t(80,160,\fscx100\fscy100)}NEWSLETTER QUE EU
+Dialogue: 0,0:00:20.85,0:00:21.75,Viral,,0,0,0,,{\fad(80,80)\t(0,80,\fscx105\fscy105)\t(80,160,\fscx100\fscy100)}ESTOU PENSANDO EM
+Dialogue: 0,0:00:21.75,0:00:23.02,Viral,,0,0,0,,{\fad(80,80)\t(0,80,\fscx105\fscy105)\t(80,160,\fscx100\fscy100)}FAZER. NÃO VOLTADO
+Dialogue: 0,0:00:23.02,0:00:23.75,Viral,,0,0,0,,{\fad(80,80)\t(0,80,\fscx105\fscy105)\t(80,160,\fscx100\fscy100)}TANTO PARA A
+Dialogue: 0,0:00:23.75,0:00:24.65,Viral,,0,0,0,,{\fad(80,80)\t(0,80,\fscx105\fscy105)\t(80,160,\fscx100\fscy100)}SAAS, NÉ? INFELIZMENTE,
+Dialogue: 0,0:00:24.65,0:00:25.37,Viral,,0,0,0,,{\fad(80,80)\t(0,80,\fscx105\fscy105)\t(80,160,\fscx100\fscy100)}O NOME ESTÁ
+Dialogue: 0,0:00:25.37,0:00:26.10,Viral,,0,0,0,,{\fad(80,80)\t(0,80,\fscx105\fscy105)\t(80,160,\fscx100\fscy100)}EM SAAS E
+Dialogue: 0,0:00:26.10,0:00:27.62,Viral,,0,0,0,,{\fad(80,80)\t(0,80,\fscx105\fscy105)\t(80,160,\fscx100\fscy100)}TAL. MAS É
+Dialogue: 0,0:00:27.62,0:00:28.53,Viral,,0,0,0,,{\fad(80,80)\t(0,80,\fscx105\fscy105)\t(80,160,\fscx100\fscy100)}VOLTADO PARA A
+Dialogue: 0,0:00:28.53,0:00:29.44,Viral,,0,0,0,,{\fad(80,80)\t(0,80,\fscx105\fscy105)\t(80,160,\fscx100\fscy100)}SAAS, MAS TAMBÉM
+Dialogue: 0,0:00:29.44,0:00:30.35,Viral,,0,0,0,,{\fad(80,80)\t(0,80,\fscx105\fscy105)\t(80,160,\fscx100\fscy100)}É VOLTADO PARA
+Dialogue: 0,0:00:30.35,0:00:31.26,Viral,,0,0,0,,{\fad(80,80)\t(0,80,\fscx105\fscy105)\t(80,160,\fscx100\fscy100)}MOSTRAR PARA VOCÊS
+Dialogue: 0,0:00:31.26,0:00:32.53,Viral,,0,0,0,,{\fad(80,80)\t(0,80,\fscx105\fscy105)\t(80,160,\fscx100\fscy100)}A CRIAÇÃO DE
+Dialogue: 0,0:00:32.53,0:00:33.81,Viral,,0,0,0,,{\fad(80,80)\t(0,80,\fscx105\fscy105)\t(80,160,\fscx100\fscy100)}SAAS E SERVIÇOS
+Dialogue: 0,0:00:33.81,0:00:35.08,Viral,,0,0,0,,{\fad(80,80)\t(0,80,\fscx105\fscy105)\t(80,160,\fscx100\fscy100)}E PRODUTOS COM
+Dialogue: 0,0:00:35.08,0:00:38.12,Viral,,0,0,0,,{\fad(80,80)\t(0,80,\fscx105\fscy105)\t(80,160,\fscx100\fscy100)}IA, TÁ? E
+Dialogue: 0,0:00:38.12,0:00:38.93,Viral,,0,0,0,,{\fad(80,80)\t(0,80,\fscx105\fscy105)\t(80,160,\fscx100\fscy100)}VAI SER UMA
+Dialogue: 0,0:00:38.93,0:00:39.00,Viral,,0,0,0,,{\fad(80,80)\t(0,80,\fscx105\fscy105)\t(80,160,\fscx100\fscy100)}NEWSLETTER,

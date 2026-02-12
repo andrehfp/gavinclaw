@@ -1,0 +1,46 @@
+{
+  "moments": [
+    {
+      "start": 253.7,
+      "end": 288.7,
+      "hook_text": "Você precisa entender que tudo é um loop!",
+      "hook_score": 9,
+      "titles": [
+        "A chave para o sucesso em 2026: controle os loops! 🔄",
+        "Por que entender loops é crucial para sua carreira?",
+        "Como os loops vão dominar a tecnologia em 2026?"
+      ],
+      "description": "André destaca a importância de entender loops para o futuro da programação.",
+      "reason": "Esse trecho é impactante pois apresenta uma ideia forte e provocativa sobre a futura habilidade necessária, gerando curiosidade.",
+      "loop_friendly": true
+    },
+    {
+      "start": 67.2,
+      "end": 102.2,
+      "hook_text": "Eu não gosto de seguir processo, mas gosto de criar!",
+      "hook_score": 8,
+      "titles": [
+        "Você também prefere criar do que seguir processos? 🔧",
+        "Por que eu amo criar processos na programação?",
+        "A verdade sobre seguir processos na tecnologia!"
+      ],
+      "description": "André fala sobre sua paixão por criar processos na programação, mesmo sem seguir regras.",
+      "reason": "Esse momento captura a atenção ao falar sobre um dilema comum na programação, gerando identificação e interesse.",
+      "loop_friendly": true
+    },
+    {
+      "start": 2910.3,
+      "end": 2945.3,
+      "hook_text": "Você precisa controlar as LLMs!",
+      "hook_score": 7,
+      "titles": [
+        "O futuro da programação: controle as LLMs!",
+        "Como as LLMs vão mudar sua forma de programar?",
+        "O que você precisa saber sobre controle de LLMs?"
+      ],
+      "description": "André explica como controlar LLMs é uma habilidade essencial para os programadores.",
+      "reason": "Esse momento é relevante e provoca reflexão sobre o futuro da programação, atraindo a atenção do público.",
+      "loop_friendly": true
+    }
+  ]
+}

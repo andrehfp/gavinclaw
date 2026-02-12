@@ -1,0 +1,14 @@
+[Unit]
+Description=Lista de Mercado - Web App
+After=network.target
+
+[Service]
+Type=simple
+User=andreprado
+WorkingDirectory=/home/andreprado/.openclaw/workspace/lista-mercado
+ExecStart=/usr/bin/python3 /home/andreprado/.openclaw/workspace/lista-mercado/server.py
+Restart=always
+RestartSec=5
+
+[Install]
+WantedBy=multi-user.target

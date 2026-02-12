@@ -1,0 +1,15 @@
+{
+  "generated_at": "2026-02-09T20:00:32.775200",
+  "videos": [
+    {
+      "video_id": "OJUU6tB2sIs",
+      "title": "O resultado: site completo de primeira!",
+      "output_dir": "/home/andreprado/.openclaw/workspace/shorts_output/OJUU6tB2sIs",
+      "shorts_count": 2,
+      "shorts": [
+        "/home/andreprado/.openclaw/workspace/shorts_output/OJUU6tB2sIs/short_OJUU6tB2sIs_1_final.mp4",
+        "/home/andreprado/.openclaw/workspace/shorts_output/OJUU6tB2sIs/short_OJUU6tB2sIs_2_final.mp4"
+      ]
+    }
+  ]
+}

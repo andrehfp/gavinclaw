@@ -1,0 +1,104 @@
+1
+00:00:00,159 --> 00:00:02,579
+Versus o Teams da Microsoft
+
+2
+00:00:02,579 --> 00:00:04,480
+E mesmo o Slack sendo o melhor
+
+3
+00:00:04,480 --> 00:00:07,299
+O Teams foi mais usado
+
+4
+00:00:07,299 --> 00:00:09,719
+do que o Slack pelas empresas, tá?
+
+5
+00:00:10,780 --> 00:00:12,980
+A curva dos dois é totalmente diferente.
+
+6
+00:00:13,099 --> 00:00:14,900
+Por quê? Porque a Microsoft, que é dona do Teams,
+
+7
+00:00:15,099 --> 00:00:17,319
+que criou o Teams, já tinha uma distribuição
+
+8
+00:00:17,319 --> 00:00:19,180
+óbvia ali. Já o Slack
+
+9
+00:00:19,180 --> 00:00:20,019
+teve que correr atrás.
+
+10
+00:00:21,140 --> 00:00:23,060
+O Slack é bem melhor de usar do que o Teams,
+
+11
+00:00:23,599 --> 00:00:24,819
+apesar de não ser lá grande coisa,
+
+12
+00:00:25,180 --> 00:00:26,980
+mas a distribuição da Microsoft é muito forte.
+
+13
+00:00:28,639 --> 00:00:30,719
+E agora que eu tenho um processo
+
+14
+00:00:30,719 --> 00:00:32,719
+para criar SaaS rapidamente,
+
+15
+00:00:33,900 --> 00:00:34,979
+eu tenho... até posso colocar
+
+16
+00:00:34,979 --> 00:00:36,620
+aqui embaixo para você o repositório que eu estou usando
+
+17
+00:00:36,620 --> 00:00:38,939
+pra fazer isso. Eu tenho...
+
+18
+00:00:38,939 --> 00:00:40,759
+Deixa eu abrir aqui, ó, no meu GitHub
+
+19
+00:00:40,759 --> 00:00:42,740
+pra você. E, assim,
+
+20
+00:00:42,879 --> 00:00:44,740
+tá bem simples ainda, tá? Não é nada
+
+21
+00:00:44,740 --> 00:00:46,680
+demais, é um
+
+22
+00:00:46,680 --> 00:00:48,139
+negócio super simples, é só isso aqui.
+
+23
+00:00:48,560 --> 00:00:50,759
+É um ponto cloud aqui que eu criei a gente,
+
+24
+00:00:50,879 --> 00:00:52,219
+comando e skills pra você
+
+25
+00:00:52,219 --> 00:00:54,599
+poder desenvolver, tá? Eu tenho algumas
+
+26
+00:00:54,599 --> 00:00:56,379
+skills aqui, como por exemplo, o abacate pay, né?
+

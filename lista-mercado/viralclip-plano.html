@@ -1,0 +1,377 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ViralClip - Plano de Implementação</title>
+    <style>
+        * { box-sizing: border-box; }
+        body { 
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; 
+            max-width: 900px; 
+            margin: 0 auto; 
+            padding: 20px; 
+            line-height: 1.7; 
+            color: #1e293b;
+            background: #f8fafc;
+        }
+        .container {
+            background: white;
+            padding: 40px;
+            border-radius: 16px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+        }
+        h1 { 
+            color: #7c3aed; 
+            border-bottom: 3px solid #7c3aed; 
+            padding-bottom: 15px;
+            margin-bottom: 30px;
+        }
+        h2 { 
+            color: #4f46e5; 
+            margin-top: 40px;
+            padding-top: 20px;
+            border-top: 1px solid #e2e8f0;
+        }
+        h3 { color: #6366f1; }
+        table { 
+            border-collapse: collapse; 
+            width: 100%; 
+            margin: 20px 0;
+            font-size: 14px;
+        }
+        th, td { 
+            border: 1px solid #e2e8f0; 
+            padding: 12px 15px; 
+            text-align: left; 
+        }
+        th { 
+            background: #f1f5f9; 
+            font-weight: 600;
+            color: #475569;
+        }
+        tr:nth-child(even) { background: #f8fafc; }
+        tr:hover { background: #f1f5f9; }
+        code { 
+            background: #f1f5f9; 
+            padding: 3px 8px; 
+            border-radius: 6px; 
+            font-family: 'SF Mono', Monaco, monospace;
+            font-size: 13px;
+        }
+        pre { 
+            background: #1e293b; 
+            color: #e2e8f0; 
+            padding: 20px; 
+            border-radius: 12px; 
+            overflow-x: auto;
+            font-size: 12px;
+            line-height: 1.5;
+        }
+        pre code { background: transparent; color: inherit; padding: 0; }
+        .highlight { 
+            background: #fef3c7; 
+            padding: 20px; 
+            border-radius: 12px; 
+            border-left: 4px solid #f59e0b;
+            margin: 20px 0;
+        }
+        .success { 
+            background: #d1fae5; 
+            border-left-color: #10b981;
+        }
+        .danger {
+            background: #fee2e2;
+            border-left-color: #ef4444;
+        }
+        ul { padding-left: 25px; }
+        li { margin: 8px 0; }
+        .emoji { font-size: 1.2em; }
+        .summary-box {
+            background: linear-gradient(135deg, #7c3aed 0%, #4f46e5 100%);
+            color: white;
+            padding: 25px;
+            border-radius: 12px;
+            margin: 20px 0;
+        }
+        .summary-box h3 { color: white; margin-top: 0; }
+        .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 15px; }
+        .stat { 
+            background: rgba(255,255,255,0.15); 
+            padding: 15px; 
+            border-radius: 8px;
+            text-align: center;
+        }
+        .stat-value { font-size: 24px; font-weight: bold; }
+        .stat-label { font-size: 12px; opacity: 0.9; }
+        .vs-table td:first-child { font-weight: 600; }
+        .check { color: #10b981; }
+        .cross { color: #ef4444; }
+        .competitor-box {
+            background: #fef2f2;
+            border: 1px solid #fecaca;
+            padding: 20px;
+            border-radius: 12px;
+            margin: 20px 0;
+        }
+        .our-box {
+            background: #f0fdf4;
+            border: 1px solid #bbf7d0;
+            padding: 20px;
+            border-radius: 12px;
+            margin: 20px 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🎬 ViralClip - Plano de Implementação Completo</h1>
+        
+        <div class="summary-box">
+            <h3>📋 Sumário Executivo</h3>
+            <p><strong>ViralClip</strong> é uma API de legendagem automática para vídeos curtos (shorts/reels), otimizada para integração com bots e automações.</p>
+            <p><strong>Proposta de valor:</strong> Transforma vídeos em conteúdo viral com legendas estilizadas em segundos, via API simples.</p>
+            <div class="grid">
+                <div class="stat">
+                    <div class="stat-value">~$26</div>
+                    <div class="stat-label">Custo fixo/mês</div>
+                </div>
+                <div class="stat">
+                    <div class="stat-value">$0.002</div>
+                    <div class="stat-label">Por crédito</div>
+                </div>
+                <div class="stat">
+                    <div class="stat-value">90-98%</div>
+                    <div class="stat-label">Margem</div>
+                </div>
+                <div class="stat">
+                    <div class="stat-value">345K</div>
+                    <div class="stat-label">Vídeos/mês (8 workers)</div>
+                </div>
+            </div>
+        </div>
+
+        <h2>🎯 Análise da Concorrência: Opus Clip</h2>
+        
+        <h3>Reviews do Opus Clip (Trustpilot: 4.1/5)</h3>
+        
+        <div class="competitor-box">
+            <h4>😡 Principais Reclamações</h4>
+            <table>
+                <tr><th>Problema</th><th>Frequência</th><th>Citação Real</th></tr>
+                <tr><td>AI ruim pra alguns conteúdos</td><td>Alta</td><td><em>"AI editing is so bad, you can't use any of the clips"</em></td></tr>
+                <tr><td>Créditos não acumulam</td><td>Média</td><td><em>"Wish we could roll over credits"</em></td></tr>
+                <tr><td>Cancelamento difícil</td><td>Média</td><td><em>"Cancellation process is intentionally overcomplicated"</em></td></tr>
+                <tr><td>Não remove cartão</td><td>Média</td><td><em>"Unable to remove my credit card from their system"</em></td></tr>
+                <tr><td>Glitches e lentidão</td><td>Média</td><td><em>"Opus has become wildly unreliable... extended queue times"</em></td></tr>
+                <tr><td>Só funciona no Chrome</td><td>Baixa</td><td><em>"Safari isn't fully supported"</em></td></tr>
+                <tr><td>Podcasts não funcionam</td><td>Baixa</td><td><em>"Failed massively with no usable clips"</em></td></tr>
+            </table>
+            
+            <h4 style="margin-top: 20px;">🚨 Red Flags</h4>
+            <ul>
+                <li><strong>Suspeita de reviews fake</strong> - usuário no Reddit: "reviews are fake (probably by their affiliates)"</li>
+                <li><strong>Qualidade inconsistente</strong> - funciona bem pra alguns, péssimo pra outros</li>
+                <li><strong>Dark patterns</strong> - cancelamento complicado, cartão difícil de remover</li>
+            </ul>
+        </div>
+
+        <div class="our-box">
+            <h4>✅ Nossa Vantagem Competitiva</h4>
+            <table>
+                <tr><th>Dor do Opus</th><th>Solução ViralClip</th></tr>
+                <tr><td>Créditos expiram todo mês</td><td><strong>Créditos acumulam por 3 meses</strong></td></tr>
+                <tr><td>Cancelamento complicado</td><td><strong>1 clique pra cancelar</strong></td></tr>
+                <tr><td>Sem API (só no Business)</td><td><strong>API desde o plano Free</strong></td></tr>
+                <tr><td>UI bugada, glitches</td><td><strong>API-first = sem UI bugada</strong></td></tr>
+                <tr><td>Só funciona no Chrome</td><td><strong>API funciona em qualquer lugar</strong></td></tr>
+                <tr><td>Suporte lento às vezes</td><td><strong>Resposta em 24h garantida</strong></td></tr>
+                <tr><td>Preço por crédito obscuro</td><td><strong>Preço transparente: 1 crédito = 1 minuto</strong></td></tr>
+            </table>
+        </div>
+
+        <h2>💰 Sistema de Créditos</h2>
+        
+        <div class="highlight success">
+            <strong>Modelo Simples:</strong> 1 crédito = 1 minuto de vídeo processado
+        </div>
+
+        <h3>Nosso Custo por Crédito</h3>
+        <table>
+            <tr><th>Componente</th><th>Custo/crédito</th></tr>
+            <tr><td>Groq Whisper (transcrição)</td><td>$0.001</td></tr>
+            <tr><td>Llama 3.3 70B (momentos virais)</td><td>$0.0008</td></tr>
+            <tr><td>Cloudflare R2 (storage)</td><td>$0.0002</td></tr>
+            <tr><th>Total</th><th>~$0.002/crédito</th></tr>
+        </table>
+
+        <h3>Planos</h3>
+        <table>
+            <tr><th>Plano</th><th>Créditos/mês</th><th>Preço</th><th>$/crédito</th><th>Nosso custo</th><th>Margem</th></tr>
+            <tr><td><strong>Free</strong></td><td>10</td><td>$0</td><td>-</td><td>$0.02</td><td>Marketing</td></tr>
+            <tr><td><strong>Pro</strong></td><td>500</td><td>$29</td><td>$0.058</td><td>$1.00</td><td>97%</td></tr>
+            <tr><td><strong>Business</strong></td><td>2,000</td><td>$79</td><td>$0.04</td><td>$4.00</td><td>95%</td></tr>
+            <tr><td><strong>Scale</strong></td><td>10,000</td><td>$199</td><td>$0.02</td><td>$20.00</td><td>90%</td></tr>
+        </table>
+
+        <h3>Créditos Extras (Overage)</h3>
+        <table>
+            <tr><th>Plano</th><th>Preço/crédito extra</th></tr>
+            <tr><td>Pro</td><td>$0.08</td></tr>
+            <tr><td>Business</td><td>$0.05</td></tr>
+            <tr><td>Scale</td><td>$0.03</td></tr>
+        </table>
+
+        <h2>⚔️ Comparativo Direto: ViralClip vs Opus Pro ($29/mês)</h2>
+        <table class="vs-table">
+            <tr><th>Feature</th><th>Opus Pro</th><th>ViralClip Pro</th></tr>
+            <tr><td>Preço</td><td>$29/mês</td><td>$29/mês</td></tr>
+            <tr><td>Créditos inclusos</td><td>~200-300 (estimado)</td><td><strong>500 🎯</strong></td></tr>
+            <tr><td>Créditos acumulam?</td><td class="cross">❌ Expiram</td><td class="check">✅ 3 meses</td></tr>
+            <tr><td>API access</td><td class="cross">❌ Só Business ($custom)</td><td class="check">✅ Incluso</td></tr>
+            <tr><td>Estilos de legenda</td><td>Templates fixos</td><td><strong>5 estilos virais</strong></td></tr>
+            <tr><td>Cancelamento</td><td class="cross">❌ Complicado</td><td class="check">✅ 1 clique</td></tr>
+            <tr><td>Webhooks</td><td class="cross">❌</td><td class="check">✅</td></tr>
+            <tr><td>Overage</td><td>❓ Obscuro</td><td><strong>$0.08/crédito</strong></td></tr>
+            <tr><td>Foco</td><td>UI web, manual</td><td><strong>API-first, automação</strong></td></tr>
+        </table>
+
+        <h2>🏗️ Arquitetura</h2>
+        <pre><code>┌─────────────────────────────────────────────────────────────────┐
+│                         CLIENTES                                 │
+│  ┌──────────┐  ┌──────────┐  ┌──────────┐  ┌──────────┐        │
+│  │ OpenClaw │  │  Zapier  │  │   n8n    │  │   API    │        │
+│  │   Bot    │  │  Flows   │  │ Workflows│  │  Direta  │        │
+│  └────┬─────┘  └────┬─────┘  └────┬─────┘  └────┬─────┘        │
+│       └─────────────┴──────┬──────┴─────────────┘               │
+│                            ▼                                     │
+│  ┌─────────────────────────────────────────────────────────┐    │
+│  │                    LOAD BALANCER                         │    │
+│  │                  (Cloudflare/Nginx)                      │    │
+│  │                   api.viralclip.io                       │    │
+│  └─────────────────────────┬───────────────────────────────┘    │
+└────────────────────────────┼─────────────────────────────────────┘
+                             ▼
+┌─────────────────────────────────────────────────────────────────┐
+│                         VPS PRINCIPAL                            │
+│  ┌──────────────────────────────────────────────────────────┐   │
+│  │                    FastAPI Server (Port 8100)             │   │
+│  │  POST /api/add-captions   │  POST /api/detect-moments    │   │
+│  │  GET  /api/jobs/{id}      │  GET  /health                │   │
+│  └──────────────────────────────────────────────────────────┘   │
+│                             ▼                                    │
+│  ┌────────────────┐    ┌────────────────┐    ┌──────────────┐   │
+│  │  REDIS (Fila)  │ →  │  WORKERS (N)   │ →  │  PostgreSQL  │   │
+│  └────────────────┘    └────────────────┘    └──────────────┘   │
+└─────────────────────────────────────────────────────────────────┘
+                             ▼
+┌─────────────────────────────────────────────────────────────────┐
+│  GROQ (Whisper)  │  CLOUDFLARE R2 (Storage)  │  STRIPE (Pay)   │
+│    $0.001/min    │       $0.015/GB           │    2.9%+$0.30   │
+└─────────────────────────────────────────────────────────────────┘</code></pre>
+
+        <h2>💵 Custos Fixos (Infraestrutura)</h2>
+        <table>
+            <tr><th>Item</th><th>Provedor</th><th>Especificação</th><th>Custo/mês</th></tr>
+            <tr><td>VPS Principal</td><td>Hetzner</td><td>CPX31 (4 vCPU, 8GB RAM, 160GB SSD)</td><td>$15</td></tr>
+            <tr><td>VPS Backup</td><td>Hetzner</td><td>CPX21 (3 vCPU, 4GB RAM, 80GB SSD)</td><td>$9</td></tr>
+            <tr><td>Domínio</td><td>Cloudflare</td><td>viralclip.io</td><td>$1.50</td></tr>
+            <tr><td>SSL</td><td>Cloudflare</td><td>Gratuito</td><td>$0</td></tr>
+            <tr><th colspan="3">Total Fixo</th><th>~$26/mês</th></tr>
+        </table>
+
+        <h2>📈 Projeção de Escala</h2>
+        <table>
+            <tr><th>Cenário</th><th>Receita/mês</th><th>Custo fixo</th><th>Custo var</th><th>Lucro</th><th>Margem</th></tr>
+            <tr><td>5 Pro</td><td>$145</td><td>$26</td><td>$5</td><td><strong>$114</strong></td><td>79%</td></tr>
+            <tr><td>10 Pro</td><td>$290</td><td>$26</td><td>$10</td><td><strong>$254</strong></td><td>88%</td></tr>
+            <tr><td>20 Pro + 5 Business</td><td>$975</td><td>$26</td><td>$40</td><td><strong>$909</strong></td><td>93%</td></tr>
+            <tr><td>50 Pro + 10 Business</td><td>$2,240</td><td>$52*</td><td>$90</td><td><strong>$2,098</strong></td><td>94%</td></tr>
+            <tr><td>1 Scale</td><td>$199</td><td>$26</td><td>$20</td><td><strong>$153</strong></td><td>77%</td></tr>
+        </table>
+        <p><em>*Upgrade de VPS necessário com 50+ clientes ativos</em></p>
+
+        <h2>🎨 Estilos de Legenda</h2>
+        <table>
+            <tr><th>Estilo</th><th>Descrição</th><th>Ideal para</th></tr>
+            <tr><td><code>hormozi</code></td><td>Bold, alto contraste, palavras-chave em destaque</td><td>Business, coaching</td></tr>
+            <tr><td><code>mrbeast</code></td><td>Grande, colorido, impactante</td><td>Entertainment, gaming</td></tr>
+            <tr><td><code>tiktok</code></td><td>Moderno, clean, transições suaves</td><td>Lifestyle, trends</td></tr>
+            <tr><td><code>minimal</code></td><td>Simples, elegante, sem distrações</td><td>Documentários, educação</td></tr>
+            <tr><td><code>karaoke</code></td><td>Palavra por palavra com highlight</td><td>Música, podcasts</td></tr>
+        </table>
+
+        <h2>⚡ Capacidade</h2>
+        <table>
+            <tr><th>Workers</th><th>Vídeos/hora</th><th>Vídeos/dia</th><th>Vídeos/mês</th></tr>
+            <tr><td>1</td><td>60</td><td>1,440</td><td>43,200</td></tr>
+            <tr><td>2</td><td>120</td><td>2,880</td><td>86,400</td></tr>
+            <tr><td>4</td><td>240</td><td>5,760</td><td>172,800</td></tr>
+            <tr><td>8</td><td>480</td><td>11,520</td><td>345,600</td></tr>
+        </table>
+
+        <h2>📅 Roadmap (4 semanas)</h2>
+        
+        <h3>Semana 1: Fundação</h3>
+        <ul>
+            <li>Provisionar VPS Hetzner</li>
+            <li>Instalar stack (Python, Redis, PostgreSQL, FFmpeg)</li>
+            <li>Deploy do código atual</li>
+            <li>Configurar Nginx + SSL</li>
+            <li>Criar bucket R2</li>
+        </ul>
+
+        <h3>Semana 2: Auth e Filas</h3>
+        <ul>
+            <li>Sistema de API Keys</li>
+            <li>Redis para filas</li>
+            <li>Workers paralelos</li>
+            <li>Testes de carga</li>
+        </ul>
+
+        <h3>Semana 3: Billing</h3>
+        <ul>
+            <li>Sistema de créditos</li>
+            <li>Integração Stripe</li>
+            <li>Dashboard admin</li>
+            <li>Documentação API (Swagger)</li>
+        </ul>
+
+        <h3>Semana 4: Launch</h3>
+        <ul>
+            <li>Monitoring e alertas</li>
+            <li>Landing page</li>
+            <li>Onboarding primeiros clientes</li>
+            <li>🚀 Launch!</li>
+        </ul>
+
+        <h2>🔒 Segurança</h2>
+        <ul>
+            <li>✅ HTTPS obrigatório</li>
+            <li>✅ API Keys hasheadas</li>
+            <li>✅ Rate limiting por IP e key</li>
+            <li>✅ Validação de input</li>
+            <li>✅ Logs de acesso</li>
+            <li>✅ Backups automáticos</li>
+            <li>✅ Firewall (22, 80, 443)</li>
+        </ul>
+
+        <div class="highlight success">
+            <h3 style="margin-top: 0;">🎯 Resumo</h3>
+            <ul>
+                <li><strong>Custo fixo:</strong> ~$26/mês</li>
+                <li><strong>Custo por crédito:</strong> $0.002</li>
+                <li><strong>Breakeven:</strong> 1 cliente Pro paga a infra</li>
+                <li><strong>Diferencial:</strong> API-first, créditos acumulam, preço transparente</li>
+                <li><strong>Margem:</strong> 90-98% dependendo do plano</li>
+            </ul>
+        </div>
+
+        <hr style="margin: 40px 0;">
+        <p style="color: #64748b; font-size: 14px; text-align: center;">
+            📄 Documento atualizado em 07/02/2026<br>
+            Versão 2.0 - Modelo de Créditos + Análise Competitiva
+        </p>
+    </div>
+</body>
+</html>

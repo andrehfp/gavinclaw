@@ -1,0 +1,36 @@
+1
+00:00:00,000 --> 00:00:08,859
+E aí galera, André aqui. Eu tô terminando de finalizar um aplicativo que eu tô desenvolvendo aqui com o Cloud Code.
+
+2
+00:00:09,800 --> 00:00:13,980
+E eu quero falar pra vocês, na verdade, um resumo do que eu fiz essa semana, tá?
+
+3
+00:00:14,599 --> 00:00:16,320
+E algumas lições aprendidas aí.
+
+4
+00:00:17,039 --> 00:00:21,839
+Eu tô na minha dashboard da Vercel.
+
+5
+00:00:22,120 --> 00:00:25,679
+Se você já viu meu vídeo sobre a stack que eu tô usando, dá uma olhada lá.
+
+6
+00:00:25,679 --> 00:00:32,119
+Esse vídeo da stack aqui é o 2 antes desse, se eu não me engano, deixa eu ver se eu acho aqui pra você
+
+7
+00:00:32,119 --> 00:00:34,960
+Esse aqui ó, minha stack pra 2026, dá uma olhada nesse vídeo
+
+8
+00:00:34,960 --> 00:00:37,979
+Lá eu explico porque eu tô usando a Vercel, tá?
+
+9
+00:00:38,280 --> 00:00:41,600
+Não é o melhor dos mundos, mas é o melhor que temos pra construir
+

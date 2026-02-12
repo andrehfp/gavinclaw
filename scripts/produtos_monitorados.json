@@ -1,0 +1,17 @@
+{
+  "produtos": [
+    "café em grãos",
+    "café grãos",
+    "xampu",
+    "shampoo",
+    "papel higiênico neve",
+    "neve",
+    "arroz",
+    "feijão",
+    "óleo",
+    "ice tea leão",
+    "ice tea",
+    "chá leão"
+  ],
+  "notas": "Lista de produtos para monitorar nos encartes. Termos em minúsculo, busca parcial."
+}

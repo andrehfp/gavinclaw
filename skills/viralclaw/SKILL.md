@@ -1,6 +1,10 @@
 ---
 name: viralclaw
-description: Repurpose long videos into shorts, carousels, threads, quote cards, and audiograms via the ViralClaw API.
+description: >
+  Repurpose long videos into shorts, carousels, threads, quote cards, and audiograms via the ViralClaw API.
+  Use when: user wants to create shorts from a video, repurpose video content into multiple formats, submit a ViralClaw job, or check job status.
+  Don't use when: user wants to write text content (use content-brainstorm or linkedin-os), generate images/thumbnails (use nano-banana-pro), or edit existing short videos. Only works with the ViralClaw API — not for generic video editing.
+  Outputs: ViralClaw job submission, status checks, downloadable shorts/carousels/threads.
 metadata:
   openclaw:
     emoji: "🎬"
@@ -140,8 +144,45 @@ python3 scripts/check_credits.py
 | GET | `/api/v1/job/{job_id}` | Check job status |
 | GET | `/api/v1/credits` | Check credit balance |
 
+## Architecture (Internal)
+
+**Production stack:** VPS API (FastAPI) → VPS Worker → Modal.com (serverless GPU/CPU) → Cloudflare R2
+
+**Key files:**
+- `modal_worker.py` — Full Modal app with `process_shorts` function
+- `services/split_video.py` — Video layout detection + ffmpeg split
+- `worker.py` — VPS worker that orchestrates Modal calls
+
+**Video processing pipeline:**
+1. Upload via TUS → R2
+2. Worker downloads from R2 → dispatches to Modal
+3. Modal: download → transcode AV1→H.264 → transcribe → detect moments → face detection → split video → burn captions → upload to R2
+4. Worker persists results to PostgreSQL
+
+**Critical operational notes:**
+- `mediapipe==0.10.21` MUST be pinned (v0.10.32+ removed `mp.solutions`)
+- AV1 codec breaks opencv — `_ensure_h264()` auto-transcodes before face detection
+- Face detection uses `model_selection=1` (full-range) for small webcam overlays
+- ffmpeg timeout is 900s (37min videos need ~5min transcode on Modal)
+- `R2_PUBLIC_BASE_URL` was removed from VPS .env (signed URLs only)
+- DB persist was decoupled from `_is_r2_configured()` check
+- Don't restart VPS worker while jobs are processing (kills Modal connection)
+- Modal cold starts add ~2-3min on first run
+
+**Deploy:**
+```bash
+# Modal
+cd ~/Projects/viralclaw-api && modal deploy modal_worker.py
+
+# VPS
+rsync -avz -e "ssh -p 2222" services/split_video.py worker.py deploy@76.13.231.67:/opt/viralclaw/
+ssh -p 2222 deploy@76.13.231.67 "sudo chown viralclaw:viralclaw /opt/viralclaw/services/split_video.py /opt/viralclaw/worker.py && sudo systemctl restart viralclaw-worker@1"
+```
+
 ## Links
 
 - **API**: https://api.viral-claw.com
 - **Docs**: https://viral-claw.com
 - **Swagger**: https://api.viral-claw.com/docs
+- **Modal Dashboard**: https://modal.com/apps/andrehfp/main/deployed/viralclaw-worker
+- **VPS**: 76.13.231.67:2222 (deploy user, has sudo)

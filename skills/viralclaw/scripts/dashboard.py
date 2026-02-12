@@ -261,6 +261,27 @@ a:hover { color: var(--terracotta); }
 .job-meta span { display: flex; align-items: center; gap: 5px; }
 
 /* ── SHORTS GRID ── */
+.job-section {
+  margin-bottom: 32px;
+}
+.job-section-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 16px;
+  padding-bottom: 8px;
+  border-bottom: 2px solid var(--card-border);
+}
+.job-section-header h3 {
+  font-family: var(--font-display);
+  font-size: 1.15rem;
+  color: var(--heading);
+  margin: 0;
+}
+.job-section-date {
+  font-size: 0.85rem;
+  color: var(--muted);
+}
 .shorts-grid {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
@@ -553,21 +574,27 @@ def _score_class(score):
 # Pages
 # ---------------------------------------------------------------------------
 
+def _list_all_jobs():
+    """Fetch all jobs via /api/v1/jobs endpoint (single request)."""
+    return api_get("/api/v1/jobs?limit=100")
+
+
 def page_jobs():
-    data = api_get("/api/v1/shorts?per_page=100")
-    if "error" in data:
-        return _page("Jobs", f'<div class="error-msg">⚠ Error: {data["error"]}</div>', "jobs")
-    shorts = data.get("shorts", [])
-    jobs = {}
+    # Single request to list all jobs
+    jobs_data = _list_all_jobs()
+    all_jobs = jobs_data.get("jobs", []) if "error" not in jobs_data else []
+
+    # Also get shorts to count per job
+    shorts_data = api_get("/api/v1/shorts?per_page=100")
+    shorts = shorts_data.get("shorts", []) if "error" not in shorts_data else []
+    shorts_by_job = {}
     for s in shorts:
-        jid = str(s.get("job_id", "unknown"))
-        if jid not in jobs:
-            jobs[jid] = {"shorts": [], "id": jid}
-        jobs[jid]["shorts"].append(s)
+        jid = str(s.get("job_id", ""))
+        shorts_by_job.setdefault(jid, []).append(s)
 
     has_processing = False
 
-    if not jobs:
+    if not all_jobs:
         body = """<div class="empty-state">
 <span class="emoji">🦞</span>
 <div class="msg">No jobs yet — the lobster awaits!</div>
@@ -575,29 +602,39 @@ def page_jobs():
 </div>"""
     else:
         cards = ""
-        for jid, j in sorted(jobs.items(), key=lambda x: x[1]["shorts"][0].get("created_at",""), reverse=True):
-            first = j["shorts"][0]
-            status = first.get("status", "completed")
-            if status.lower() in ("processing", "running", "pending", "queued"):
+        for j in all_jobs:
+            jid = str(j.get("job_id", ""))
+            status = j.get("status", "unknown")
+            if status.lower() in ("processing", "queued", "pending"):
                 has_processing = True
-            styles = set(s.get("style","—") for s in j["shorts"])
-            created = _fmt_date(first.get("created_at"))
-            n = len(j["shorts"])
+
+            job_shorts = shorts_by_job.get(jid, [])
+            style = j.get("style", "—")
+            created = _fmt_date(j.get("created_at"))
+            n = len(job_shorts)
+
+            if n > 0:
+                detail = f"<strong>{n} short{'s' if n != 1 else ''}</strong> · {style}"
+            elif status.lower() in ("processing", "queued"):
+                detail = "<strong>⏳ Generating shorts...</strong>"
+            elif status.lower() == "failed":
+                detail = "<strong>❌ Failed</strong>"
+            else:
+                detail = f"<strong>{status}</strong>"
+
             cards += f"""<div class="job-card">
-<div class="job-header"><span class="job-id">{str(jid)[:12]}</span>{_badge(status)}</div>
-<div class="job-body">
-<strong>{n} short{'s' if n != 1 else ''}</strong> · {', '.join(styles)}
-</div>
+<div class="job-header"><span class="job-id">{jid}</span>{_badge(status)}</div>
+<div class="job-body">{detail}</div>
 <div class="job-meta"><span>📅 {created}</span></div>
 </div>"""
 
         body = f"""<div class="page-header">
 <div class="page-title">Jobs</div>
-<div class="page-subtitle">{len(jobs)} job{'s' if len(jobs) != 1 else ''} tracked</div>
+<div class="page-subtitle">{len(all_jobs)} job{'s' if len(all_jobs) != 1 else ''} tracked</div>
 </div>
 <div class="jobs-grid">{cards}</div>"""
 
-    return _page("Jobs", body, "jobs", refresh=30 if has_processing else 0)
+    return _page("Jobs", body, "jobs", refresh=15 if has_processing else 0)
 
 
 def page_shorts():
@@ -612,39 +649,59 @@ def page_shorts():
 <div class="hint">Your cinematic masterpieces will appear here</div>
 </div>""", "shorts")
 
-    cards = ""
-    for s in sorted(shorts, key=lambda x: x.get("score", 0) or 0, reverse=True):
-        url = s.get("url", "")
-        score = s.get("score", "—")
-        reason = s.get("reason", "")
-        dur = s.get("duration", "—")
-        style = s.get("style", "—")
-        created = _fmt_date(s.get("created_at"))
-        sc = _score_class(score)
+    # Group shorts by job_id
+    by_job = {}
+    for s in shorts:
+        jid = str(s.get("job_id", "unknown"))
+        by_job.setdefault(jid, []).append(s)
 
-        if url:
-            video_tag = f"""<div class="video-wrap">
+    sections = ""
+    for jid, job_shorts in sorted(by_job.items(), key=lambda x: x[1][0].get("created_at", ""), reverse=True):
+        # Sort shorts within job by score (descending)
+        job_shorts.sort(key=lambda x: x.get("score", 0) or 0, reverse=True)
+        first = job_shorts[0]
+        job_created = _fmt_date(first.get("created_at"))
+        style = first.get("style", "—")
+
+        cards = ""
+        for s in job_shorts:
+            url = s.get("url", "")
+            score = s.get("score", "—")
+            reason = s.get("reason", "")
+            dur = s.get("duration", "—")
+            sc = _score_class(score)
+
+            if url:
+                video_tag = f"""<div class="video-wrap">
 <video controls preload="metadata" src="{url}"></video>
 <div class="score-badge {sc}">{score}</div>
 </div>"""
-        else:
-            video_tag = f"""<div class="video-wrap">
+            else:
+                video_tag = f"""<div class="video-wrap">
 <div class="no-video">📼 No video URL</div>
 <div class="score-badge {sc}">{score}</div>
 </div>"""
 
-        cards += f"""<div class="short-card">{video_tag}
+            cards += f"""<div class="short-card">{video_tag}
 <div class="short-info">
 <span class="style-tag">{style}</span>
 <p class="reason">{reason}</p>
-<div class="meta"><span>⏱ {dur}s</span><span>📅 {created}</span><span>🆔 {str(s.get('job_id','—'))[:8]}</span></div>
+<div class="meta"><span>⏱ {dur}s</span><span>📅 {_fmt_date(s.get('created_at'))}</span></div>
 </div></div>"""
+
+        sections += f"""<div class="job-section">
+<div class="job-section-header">
+<h3>Job #{jid} · {style} · {len(job_shorts)} short{'s' if len(job_shorts) != 1 else ''}</h3>
+<span class="job-section-date">📅 {job_created}</span>
+</div>
+<div class="shorts-grid">{cards}</div>
+</div>"""
 
     body = f"""<div class="page-header">
 <div class="page-title">Shorts</div>
-<div class="page-subtitle">{len(shorts)} short{'s' if len(shorts) != 1 else ''} · sorted by score</div>
+<div class="page-subtitle">{len(shorts)} short{'s' if len(shorts) != 1 else ''} across {len(by_job)} job{'s' if len(by_job) != 1 else ''} · sorted by score</div>
 </div>
-<div class="shorts-grid">{cards}</div>"""
+{sections}"""
     return _page("Shorts", body, "shorts")
 
 

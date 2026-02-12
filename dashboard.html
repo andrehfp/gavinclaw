@@ -1,0 +1,1183 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Gavin Dashboard</title>
+  <style>
+    :root {
+      --bg: #090f1d;
+      --bg-2: #0d1628;
+      --sidebar: #0b1324;
+      --card: #111d34;
+      --card-2: #162644;
+      --line: rgba(130, 173, 255, 0.22);
+      --text: #e8f0ff;
+      --muted: #96acd2;
+      --accent: #58a6ff;
+      --ok: #3ad6a0;
+      --warn: #f6bf56;
+      --danger: #ff7f8f;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: "Segoe UI", Tahoma, sans-serif;
+      color: var(--text);
+      min-height: 100vh;
+      background:
+        radial-gradient(circle at 8% 15%, rgba(88, 166, 255, 0.16), transparent 38%),
+        radial-gradient(circle at 85% 8%, rgba(58, 214, 160, 0.08), transparent 34%),
+        linear-gradient(160deg, var(--bg) 0%, var(--bg-2) 58%, #0f1f39 100%);
+      overflow-x: hidden;
+      overflow-y: auto;
+    }
+
+    .app {
+      display: grid;
+      grid-template-columns: 280px 1fr;
+      min-height: 100vh;
+    }
+
+    .sidebar {
+      position: fixed;
+      left: 0;
+      top: 0;
+      bottom: 0;
+      width: 280px;
+      padding: 18px 14px;
+      border-right: 1px solid var(--line);
+      background: linear-gradient(180deg, rgba(7, 14, 29, 0.98), rgba(11, 19, 36, 0.96));
+      backdrop-filter: blur(8px);
+      overflow-y: auto;
+    }
+
+    .brand {
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      background: rgba(255, 255, 255, 0.02);
+      padding: 12px;
+      margin-bottom: 14px;
+    }
+
+    .brand h1 { font-size: 20px; }
+    .brand p { color: var(--muted); font-size: 12px; margin-top: 4px; }
+
+    .status {
+      margin-top: 10px;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      border: 1px solid rgba(58, 214, 160, 0.4);
+      border-radius: 999px;
+      padding: 5px 10px;
+      color: var(--ok);
+      background: rgba(58, 214, 160, 0.11);
+      font-size: 12px;
+    }
+
+    .dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: currentColor;
+      animation: pulse 1.7s infinite;
+    }
+
+    @keyframes pulse {
+      0% { transform: scale(1); opacity: 1; }
+      50% { transform: scale(1.5); opacity: 0.4; }
+      100% { transform: scale(1); opacity: 1; }
+    }
+
+    .nav {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .nav button {
+      border: 1px solid transparent;
+      border-radius: 10px;
+      background: rgba(255, 255, 255, 0.02);
+      color: var(--text);
+      text-align: left;
+      padding: 11px 12px;
+      font-size: 14px;
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+
+    .nav button:hover {
+      border-color: var(--line);
+      background: rgba(255, 255, 255, 0.05);
+    }
+
+    .nav button.active {
+      border-color: rgba(88, 166, 255, 0.65);
+      background: linear-gradient(180deg, rgba(88, 166, 255, 0.19), rgba(88, 166, 255, 0.06));
+    }
+
+    .main {
+      grid-column: 2;
+      margin-left: 280px;
+      height: 100vh;
+      overflow-y: auto;
+      padding: 18px;
+    }
+
+    .topbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 14px;
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      background: rgba(255, 255, 255, 0.02);
+      padding: 12px 14px;
+    }
+
+    .topbar h2 { font-size: 20px; }
+    .topbar p { color: var(--muted); font-size: 13px; margin-top: 3px; }
+
+    .top-actions {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+
+    .pill {
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      padding: 6px 9px;
+      font-size: 12px;
+      color: var(--muted);
+      background: rgba(255, 255, 255, 0.02);
+    }
+
+    button.action {
+      border: 1px solid var(--line);
+      border-radius: 10px;
+      background: linear-gradient(180deg, #1d3358, #182947);
+      color: var(--text);
+      padding: 8px 11px;
+      cursor: pointer;
+    }
+
+    .section { display: none; }
+    .section.active { display: block; }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(12, 1fr);
+      gap: 12px;
+    }
+
+    .card {
+      border: 1px solid var(--line);
+      border-radius: 12px;
+      background: linear-gradient(180deg, rgba(17, 29, 52, 0.96), rgba(14, 24, 43, 0.9));
+      padding: 13px;
+    }
+
+    .span-3 { grid-column: span 3; }
+    .span-4 { grid-column: span 4; }
+    .span-5 { grid-column: span 5; }
+    .span-6 { grid-column: span 6; }
+    .span-7 { grid-column: span 7; }
+    .span-8 { grid-column: span 8; }
+    .span-12 { grid-column: 1 / -1; }
+
+    .card h3 {
+      color: var(--muted);
+      font-size: 12px;
+      text-transform: uppercase;
+      letter-spacing: 0.4px;
+      margin-bottom: 10px;
+    }
+
+    .big {
+      font-size: 26px;
+      font-weight: 700;
+      margin-top: 3px;
+    }
+
+    .list {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .row {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      gap: 12px;
+      border: 1px solid rgba(130, 173, 255, 0.18);
+      border-radius: 10px;
+      background: rgba(255, 255, 255, 0.02);
+      padding: 10px;
+    }
+
+    .meta { color: var(--muted); font-size: 12px; margin-top: 3px; }
+
+    .tag {
+      border: 1px solid rgba(150, 172, 210, 0.35);
+      border-radius: 999px;
+      padding: 3px 8px;
+      font-size: 11px;
+      white-space: nowrap;
+    }
+
+    .tag.ok { border-color: rgba(58, 214, 160, 0.5); color: var(--ok); background: rgba(58, 214, 160, 0.1); }
+    .tag.warn { border-color: rgba(246, 191, 86, 0.5); color: var(--warn); background: rgba(246, 191, 86, 0.1); }
+
+    pre, textarea {
+      width: 100%;
+      border: 1px solid var(--line);
+      border-radius: 10px;
+      background: #091326;
+      color: #dbe8ff;
+      padding: 11px;
+      font-size: 13px;
+      line-height: 1.5;
+      min-height: 280px;
+      font-family: Consolas, monospace;
+    }
+
+    textarea { resize: vertical; }
+
+    .memory-layout {
+      display: grid;
+      grid-template-columns: 290px 1fr;
+      gap: 12px;
+    }
+
+    .memory-files {
+      max-height: 520px;
+      overflow-y: auto;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .file-item {
+      border: 1px solid rgba(130, 173, 255, 0.2);
+      border-radius: 10px;
+      background: rgba(255, 255, 255, 0.02);
+      color: var(--text);
+      text-align: left;
+      width: 100%;
+      padding: 10px;
+      cursor: pointer;
+    }
+
+    .file-item.active {
+      border-color: rgba(88, 166, 255, 0.65);
+      background: rgba(88, 166, 255, 0.1);
+    }
+
+    .markdown h1, .markdown h2, .markdown h3 { margin: 12px 0 8px; }
+    .markdown p { margin: 0 0 8px; }
+    .markdown ul { margin: 0 0 10px 18px; }
+    .markdown li { margin-bottom: 5px; }
+    .markdown code { background: rgba(255,255,255,0.08); padding: 1px 5px; border-radius: 6px; }
+
+    .help { color: var(--muted); font-size: 12px; margin-top: 8px; }
+
+    .command-layout {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .kanban-board {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 12px;
+      align-items: start;
+    }
+
+    .kanban-column {
+      border: 1px solid var(--line);
+      border-radius: 12px;
+      background: linear-gradient(180deg, rgba(17, 29, 52, 0.95), rgba(14, 24, 43, 0.9));
+      min-height: 240px;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .column-head {
+      padding: 10px;
+      border-bottom: 1px solid rgba(130, 173, 255, 0.2);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 8px;
+    }
+
+    .column-title {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 13px;
+      color: var(--text);
+    }
+
+    .count-badge {
+      border: 1px solid rgba(130, 173, 255, 0.36);
+      border-radius: 999px;
+      padding: 2px 8px;
+      font-size: 11px;
+      color: var(--muted);
+      background: rgba(130, 173, 255, 0.08);
+    }
+
+    .btn-mini {
+      border: 1px solid rgba(88, 166, 255, 0.45);
+      border-radius: 8px;
+      background: rgba(88, 166, 255, 0.12);
+      color: var(--text);
+      padding: 4px 8px;
+      font-size: 12px;
+      cursor: pointer;
+    }
+
+    .task-list {
+      padding: 10px;
+      min-height: 200px;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .task-list.drop-active {
+      background: rgba(88, 166, 255, 0.08);
+      border-radius: 10px;
+    }
+
+    .kanban-card {
+      border: 1px solid rgba(130, 173, 255, 0.25);
+      border-radius: 10px;
+      background: rgba(255, 255, 255, 0.02);
+      padding: 9px;
+      cursor: grab;
+      transition: border-color 0.2s ease, box-shadow 0.2s ease, transform 0.2s ease;
+    }
+
+    .kanban-card:hover {
+      border-color: rgba(88, 166, 255, 0.5);
+      box-shadow: 0 0 0 1px rgba(88, 166, 255, 0.2), 0 0 18px rgba(88, 166, 255, 0.15);
+      transform: translateY(-1px);
+    }
+
+    .kanban-card.dragging {
+      opacity: 0.6;
+      cursor: grabbing;
+    }
+
+    .task-top {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 8px;
+      margin-bottom: 5px;
+    }
+
+    .task-title {
+      display: flex;
+      align-items: center;
+      gap: 7px;
+      font-size: 13px;
+      font-weight: 600;
+    }
+
+    .priority-dot {
+      width: 9px;
+      height: 9px;
+      border-radius: 50%;
+      flex: 0 0 9px;
+    }
+
+    .priority-low { background: var(--ok); }
+    .priority-medium { background: var(--warn); }
+    .priority-high { background: var(--danger); }
+
+    .delete-btn {
+      border: 0;
+      background: transparent;
+      color: var(--muted);
+      cursor: pointer;
+      font-size: 14px;
+      line-height: 1;
+      padding: 2px;
+    }
+
+    .delete-btn:hover { color: var(--danger); }
+
+    .task-desc {
+      font-size: 12px;
+      color: var(--muted);
+      margin-bottom: 5px;
+      white-space: pre-wrap;
+      word-break: break-word;
+    }
+
+    .task-meta {
+      font-size: 11px;
+      color: var(--muted);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .activity-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 12px;
+    }
+
+    @media (max-width: 980px) {
+      .app { grid-template-columns: 1fr; }
+      .sidebar {
+        position: relative;
+        width: 100%;
+        height: auto;
+        border-right: 0;
+        border-bottom: 1px solid var(--line);
+      }
+      .main {
+        grid-column: 1;
+        margin-left: 0;
+        height: auto;
+        min-height: calc(100vh - 220px);
+      }
+      .span-3, .span-4, .span-5, .span-6, .span-7, .span-8 { grid-column: 1 / -1; }
+      .memory-layout { grid-template-columns: 1fr; }
+      .kanban-board { grid-template-columns: 1fr; }
+      .activity-grid { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+  <div class="app">
+    <aside class="sidebar">
+      <div class="brand">
+        <h1>Gavin</h1>
+        <p>AI Assistant Control Center</p>
+        <div class="status"><span class="dot"></span>Online</div>
+      </div>
+      <nav class="nav" id="sidebarNav"></nav>
+    </aside>
+
+    <main class="main">
+      <section class="topbar">
+        <div>
+          <h2 id="pageTitle">Dashboard</h2>
+          <p id="pageSubtitle">Overview com stats, sessões e tokens</p>
+        </div>
+        <div class="top-actions">
+          <span class="pill" id="lastUpdate">Atualizado: --</span>
+          <span class="pill" id="refreshCountdown">Próximo refresh: 30s</span>
+          <button class="action" id="btnRefresh" type="button">Atualizar</button>
+        </div>
+      </section>
+
+      <section id="view-dashboard" class="section active"></section>
+      <section id="view-chat" class="section"></section>
+      <section id="view-dna" class="section"></section>
+      <section id="view-memory" class="section"></section>
+      <section id="view-skills" class="section"></section>
+      <section id="view-crons" class="section"></section>
+      <section id="view-goals" class="section"></section>
+      <section id="view-todos" class="section"></section>
+      <section id="view-command-control" class="section"></section>
+      <section id="view-settings" class="section"></section>
+    </main>
+  </div>
+
+  <script>
+    const REFRESH_MS = 30000;
+    let countdown = REFRESH_MS / 1000;
+    let autoRefresh = true;
+
+    const MENU = [
+      { id: 'dashboard', label: 'Dashboard', subtitle: 'Overview com stats, sessões ativas e tokens' },
+      { id: 'chat', label: 'Chat', subtitle: 'Histórico de conversas e sessões' },
+      { id: 'dna', label: 'DNA', subtitle: 'SOUL.md e IDENTITY.md formatados' },
+      { id: 'memory', label: 'Memory', subtitle: 'MEMORY.md e memory/*.md com visualização' },
+      { id: 'skills', label: 'Skills', subtitle: 'Skills locais e skills do sistema' },
+      { id: 'crons', label: 'Cron Jobs', subtitle: 'Jobs agendados do OpenClaw' },
+      { id: 'goals', label: 'Goals', subtitle: 'Objetivos persistidos em goals.json' },
+      { id: 'todos', label: 'To-Do List', subtitle: 'Tarefas persistidas em todos.json' },
+      { id: 'command-control', label: '🎯 Command Control', subtitle: 'Kanban + atividade em tempo real do Gavin' },
+      { id: 'settings', label: 'Settings', subtitle: 'Configurações básicas da dashboard' },
+    ];
+
+    const state = {
+      current: 'dashboard',
+      status: null,
+      sessions: [],
+      crons: [],
+      skills: [],
+      memoryFiles: [],
+      currentMemoryFile: '',
+      currentMemoryContent: '',
+      dnaSoul: '',
+      dnaIdentity: '',
+      goals: [],
+      todos: [],
+      tasks: [],
+      activity: { activeSessions: [], processes: [], recent: [] },
+      error: '',
+    };
+
+    const navEl = document.getElementById('sidebarNav');
+    const pageTitleEl = document.getElementById('pageTitle');
+    const pageSubtitleEl = document.getElementById('pageSubtitle');
+    const lastUpdateEl = document.getElementById('lastUpdate');
+    const refreshCountdownEl = document.getElementById('refreshCountdown');
+
+    function esc(v) {
+      return String(v ?? '')
+        .replaceAll('&', '&amp;')
+        .replaceAll('<', '&lt;')
+        .replaceAll('>', '&gt;')
+        .replaceAll('"', '&quot;')
+        .replaceAll("'", '&#039;');
+    }
+
+    function fmtDate(value) {
+      if (!value) return 'n/d';
+      const d = new Date(value);
+      if (Number.isNaN(d.getTime())) return 'n/d';
+      return d.toLocaleString('pt-BR', { dateStyle: 'short', timeStyle: 'short' });
+    }
+
+    async function api(path, options = {}) {
+      const res = await fetch(path, { cache: 'no-store', ...options });
+      if (!res.ok) throw new Error(`HTTP ${res.status}`);
+      return res.json();
+    }
+
+    async function loadText(path) {
+      const res = await fetch(path, { cache: 'no-store' });
+      if (!res.ok) throw new Error(`HTTP ${res.status}`);
+      return res.text();
+    }
+
+    function mdToHtml(md) {
+      const lines = String(md || '').split('\n');
+      const html = [];
+      let inList = false;
+
+      for (const line of lines) {
+        const t = line.trim();
+
+        if (t.startsWith('### ')) {
+          if (inList) { html.push('</ul>'); inList = false; }
+          html.push(`<h3>${esc(t.slice(4))}</h3>`);
+          continue;
+        }
+        if (t.startsWith('## ')) {
+          if (inList) { html.push('</ul>'); inList = false; }
+          html.push(`<h2>${esc(t.slice(3))}</h2>`);
+          continue;
+        }
+        if (t.startsWith('# ')) {
+          if (inList) { html.push('</ul>'); inList = false; }
+          html.push(`<h1>${esc(t.slice(2))}</h1>`);
+          continue;
+        }
+
+        if (t.startsWith('- ')) {
+          if (!inList) { html.push('<ul>'); inList = true; }
+          html.push(`<li>${esc(t.slice(2))}</li>`);
+          continue;
+        }
+
+        if (!t) {
+          if (inList) { html.push('</ul>'); inList = false; }
+          continue;
+        }
+
+        if (inList) { html.push('</ul>'); inList = false; }
+        html.push(`<p>${esc(t)}</p>`);
+      }
+
+      if (inList) html.push('</ul>');
+      return html.join('');
+    }
+
+    function section(id) {
+      return document.getElementById(`view-${id}`);
+    }
+
+    function renderNav() {
+      navEl.innerHTML = MENU.map(item => `
+        <button data-view="${item.id}" class="${item.id === state.current ? 'active' : ''}">${item.label}</button>
+      `).join('');
+      navEl.querySelectorAll('button').forEach(btn => {
+        btn.addEventListener('click', () => setView(btn.dataset.view));
+      });
+    }
+
+    function setView(id) {
+      state.current = id;
+      MENU.forEach(item => {
+        section(item.id).classList.toggle('active', item.id === id);
+      });
+
+      const found = MENU.find(item => item.id === id);
+      pageTitleEl.textContent = found?.label || 'Dashboard';
+      pageSubtitleEl.textContent = found?.subtitle || '';
+      renderNav();
+      renderCurrent();
+    }
+
+    function renderDashboard() {
+      const stats = state.status?.stats || {};
+      const sessionsPreview = state.sessions.slice(0, 5);
+      const cronsPreview = state.crons.slice(0, 5);
+
+      section('dashboard').innerHTML = `
+        <div class="grid">
+          <article class="card span-3"><h3>Sessões Totais</h3><div class="big">${stats.sessionsTotal ?? 0}</div></article>
+          <article class="card span-3"><h3>Sessões Ativas</h3><div class="big">${stats.sessionsActive ?? 0}</div></article>
+          <article class="card span-3"><h3>Cron Habilitados</h3><div class="big">${stats.cronsEnabled ?? 0}</div></article>
+          <article class="card span-3"><h3>Memórias</h3><div class="big">${stats.memoryFiles ?? 0}</div></article>
+
+          <article class="card span-6">
+            <h3>Uso de Tokens</h3>
+            <div>${esc(stats.tokensPreview || 'n/d')}</div>
+            <div class="help">Prévia das sessões mais recentes.</div>
+          </article>
+
+          <article class="card span-6">
+            <h3>Resumo</h3>
+            <div class="list">
+              <div class="row"><div>Skills disponíveis</div><div class="tag">${stats.skillsTotal ?? 0}</div></div>
+              <div class="row"><div>Goals</div><div class="tag">${stats.goalsTotal ?? 0}</div></div>
+              <div class="row"><div>To-Dos</div><div class="tag">${stats.todosTotal ?? 0}</div></div>
+            </div>
+          </article>
+
+          <article class="card span-6">
+            <h3>Sessões Recentes</h3>
+            <div class="list">
+              ${sessionsPreview.map(s => `
+                <div class="row">
+                  <div>
+                    <div>${esc(s.key)}</div>
+                    <div class="meta">${esc(s.model)} • ${esc(s.tokens || '-')}</div>
+                  </div>
+                  <div class="tag">${esc(s.age || 'n/d')}</div>
+                </div>
+              `).join('') || '<div class="meta">Sem sessões</div>'}
+            </div>
+          </article>
+
+          <article class="card span-6">
+            <h3>Cron Jobs</h3>
+            <div class="list">
+              ${cronsPreview.map(c => `
+                <div class="row">
+                  <div>
+                    <div>${esc(c.name)}</div>
+                    <div class="meta">${esc(c.schedule || 'n/d')}</div>
+                  </div>
+                  <div class="tag ${c.enabled ? 'ok' : 'warn'}">${c.enabled ? 'ativo' : 'pausado'}</div>
+                </div>
+              `).join('') || '<div class="meta">Sem cron jobs</div>'}
+            </div>
+          </article>
+        </div>
+      `;
+    }
+
+    function renderChat() {
+      section('chat').innerHTML = `
+        <div class="card">
+          <h3>Histórico de Sessões</h3>
+          <div class="list">
+            ${state.sessions.map(s => `
+              <div class="row">
+                <div>
+                  <div>${esc(s.key)}</div>
+                  <div class="meta">${esc(s.kind)} • ${esc(s.model)} • ${esc(s.tokens || '-')}</div>
+                </div>
+                <div class="tag">${esc(s.age || 'n/d')}</div>
+              </div>
+            `).join('') || '<div class="meta">Nenhuma sessão encontrada</div>'}
+          </div>
+        </div>
+      `;
+    }
+
+    function renderDNA() {
+      section('dna').innerHTML = `
+        <div class="grid">
+          <article class="card span-6">
+            <h3>SOUL.md</h3>
+            <div class="markdown">${mdToHtml(state.dnaSoul || 'Carregando...')}</div>
+          </article>
+          <article class="card span-6">
+            <h3>IDENTITY.md</h3>
+            <div class="markdown">${mdToHtml(state.dnaIdentity || 'Carregando...')}</div>
+          </article>
+        </div>
+      `;
+    }
+
+    function renderMemory() {
+      section('memory').innerHTML = `
+        <div class="memory-layout">
+          <article class="card">
+            <h3>Arquivos</h3>
+            <div class="memory-files" id="memoryFilesList">
+              ${state.memoryFiles.map(f => `
+                <button class="file-item ${f.path === state.currentMemoryFile ? 'active' : ''}" data-path="${esc(f.path)}">
+                  <div>${esc(f.path)}</div>
+                  <div class="meta">${Math.round((f.size || 0)/1024)} KB • ${fmtDate(f.updatedAt)}</div>
+                </button>
+              `).join('') || '<div class="meta">Sem arquivos</div>'}
+            </div>
+          </article>
+          <article class="card">
+            <h3>Visualização</h3>
+            <pre>${esc(state.currentMemoryContent || 'Selecione um arquivo de memória')}</pre>
+          </article>
+        </div>
+      `;
+
+      section('memory').querySelectorAll('.file-item').forEach(btn => {
+        btn.addEventListener('click', async () => {
+          const path = btn.dataset.path;
+          await loadMemoryFile(path);
+        });
+      });
+    }
+
+    function renderSkills() {
+      section('skills').innerHTML = `
+        <div class="card">
+          <h3>Skills</h3>
+          <div class="list">
+            ${state.skills.map(skill => `
+              <div class="row">
+                <div>
+                  <div>${esc(skill.name)}</div>
+                  <div class="meta">${esc(skill.source)} • ${esc(skill.path)}</div>
+                  <div class="meta">${esc(skill.description || '')}</div>
+                </div>
+              </div>
+            `).join('') || '<div class="meta">Nenhuma skill encontrada</div>'}
+          </div>
+        </div>
+      `;
+    }
+
+    function renderCrons() {
+      section('crons').innerHTML = `
+        <div class="card">
+          <h3>Cron Jobs</h3>
+          <div class="list">
+            ${state.crons.map(c => `
+              <div class="row">
+                <div>
+                  <div>${esc(c.name)}</div>
+                  <div class="meta">${esc(c.schedule)} • Próxima: ${fmtDate(c.nextRunAt)}</div>
+                  <div class="meta">Última: ${fmtDate(c.lastRunAt)} • Status: ${esc(c.lastStatus || 'n/d')}</div>
+                </div>
+                <div class="tag ${c.enabled ? 'ok' : 'warn'}">${c.enabled ? 'ativo' : 'pausado'}</div>
+              </div>
+            `).join('') || '<div class="meta">Sem jobs</div>'}
+          </div>
+        </div>
+      `;
+    }
+
+    function renderGoals() {
+      section('goals').innerHTML = `
+        <div class="card">
+          <h3>Goals (goals.json)</h3>
+          <textarea id="goalsEditor">${esc(JSON.stringify(state.goals, null, 2))}</textarea>
+          <div style="margin-top:10px; display:flex; gap:8px;">
+            <button class="action" id="saveGoals" type="button">Salvar Goals</button>
+          </div>
+          <div class="help">Formato: array JSON.</div>
+        </div>
+      `;
+
+      document.getElementById('saveGoals').addEventListener('click', saveGoals);
+    }
+
+    function renderTodos() {
+      section('todos').innerHTML = `
+        <div class="card">
+          <h3>To-Do List (todos.json)</h3>
+          <textarea id="todosEditor">${esc(JSON.stringify(state.todos, null, 2))}</textarea>
+          <div style="margin-top:10px; display:flex; gap:8px;">
+            <button class="action" id="saveTodos" type="button">Salvar To-Dos</button>
+          </div>
+          <div class="help">Formato: array JSON.</div>
+        </div>
+      `;
+
+      document.getElementById('saveTodos').addEventListener('click', saveTodos);
+    }
+
+    function renderSettings() {
+      section('settings').innerHTML = `
+        <div class="grid">
+          <article class="card span-6">
+            <h3>Auto Refresh</h3>
+            <div class="list">
+              <div class="row">
+                <div>Atualização automática a cada 30s</div>
+                <button class="action" id="toggleRefresh" type="button">${autoRefresh ? 'Desativar' : 'Ativar'}</button>
+              </div>
+              <div class="row"><div>Endpoint API</div><div class="tag">/api/*</div></div>
+            </div>
+          </article>
+          <article class="card span-6">
+            <h3>Info</h3>
+            <div class="list">
+              <div class="row"><div>Assistant</div><div class="tag">Gavin</div></div>
+              <div class="row"><div>Tema</div><div class="tag">Dark Blue</div></div>
+              <div class="row"><div>Modo</div><div class="tag ok">SPA</div></div>
+            </div>
+          </article>
+        </div>
+      `;
+
+      document.getElementById('toggleRefresh').addEventListener('click', () => {
+        autoRefresh = !autoRefresh;
+        renderSettings();
+      });
+    }
+
+    function columnInfo() {
+      return [
+        { id: 'backlog', label: 'Backlog' },
+        { id: 'in-progress', label: 'Em Progresso' },
+        { id: 'review', label: 'Review' },
+        { id: 'done', label: 'Done' },
+      ];
+    }
+
+    function sanitizePriority(priority) {
+      return ['low', 'medium', 'high'].includes(priority) ? priority : 'medium';
+    }
+
+    function renderCommandControl() {
+      const columns = columnInfo();
+      const tasksByColumn = {};
+      columns.forEach(col => { tasksByColumn[col.id] = []; });
+
+      state.tasks.forEach(task => {
+        const col = columns.find(c => c.id === task.column)?.id || 'backlog';
+        tasksByColumn[col].push(task);
+      });
+
+      section('command-control').innerHTML = `
+        <div class="command-layout">
+          <article class="card">
+            <h3>Command Control - Kanban</h3>
+            <div class="kanban-board">
+              ${columns.map(col => `
+                <div class="kanban-column">
+                  <div class="column-head">
+                    <div class="column-title">${esc(col.label)} <span class="count-badge">${tasksByColumn[col.id].length}</span></div>
+                    <button class="btn-mini add-card-btn" data-column="${col.id}" type="button">+ Card</button>
+                  </div>
+                  <div class="task-list" data-column="${col.id}">
+                    ${tasksByColumn[col.id].map(task => `
+                      <article class="kanban-card" draggable="true" data-task-id="${esc(task.id)}">
+                        <div class="task-top">
+                          <div class="task-title">
+                            <span class="priority-dot priority-${esc(sanitizePriority(task.priority))}"></span>
+                            <span>${esc(task.title || 'Sem título')}</span>
+                          </div>
+                          <button class="delete-btn delete-task" data-task-id="${esc(task.id)}" title="Excluir" type="button">🗑</button>
+                        </div>
+                        ${task.description ? `<div class="task-desc">${esc(task.description)}</div>` : ''}
+                        <div class="task-meta">
+                          <span>${esc(sanitizePriority(task.priority))}</span>
+                          <span>${fmtDate(task.createdAt)}</span>
+                        </div>
+                      </article>
+                    `).join('')}
+                  </div>
+                </div>
+              `).join('')}
+            </div>
+          </article>
+
+          <article class="card">
+            <h3>Live Activity Feed</h3>
+            <div class="activity-grid">
+              <div>
+                <div class="meta" style="margin-bottom:8px;">Sessões ativas</div>
+                <div class="list">
+                  ${(state.activity.activeSessions || []).slice(0, 8).map(s => `
+                    <div class="row">
+                      <div>
+                        <div>${esc(s.key || 'sessão')}</div>
+                        <div class="meta">${esc(s.model || 'n/d')} • ${esc(s.age || 'n/d')}</div>
+                      </div>
+                    </div>
+                  `).join('') || '<div class="meta">Sem sessões ativas</div>'}
+                </div>
+              </div>
+              <div>
+                <div class="meta" style="margin-bottom:8px;">Processos em execução</div>
+                <div class="list">
+                  ${(state.activity.processes || []).slice(0, 8).map(p => `
+                    <div class="row">
+                      <div>
+                        <div>${esc(p.command || 'processo')} <span class="meta">#${esc(p.pid)}</span></div>
+                        <div class="meta">${esc(p.args || '')}</div>
+                      </div>
+                    </div>
+                  `).join('') || '<div class="meta">Nenhum processo relevante</div>'}
+                </div>
+              </div>
+              <div>
+                <div class="meta" style="margin-bottom:8px;">Recentes: conclusão/falha</div>
+                <div class="list">
+                  ${(state.activity.recent || []).slice(0, 8).map(evt => `
+                    <div class="row">
+                      <div>
+                        <div>${esc(evt.name || 'evento')}</div>
+                        <div class="meta">${fmtDate(evt.at)} • ${esc(evt.status || 'n/d')}</div>
+                      </div>
+                      <div class="tag ${evt.kind === 'failure' ? 'warn' : 'ok'}">${evt.kind === 'failure' ? 'falha' : 'ok'}</div>
+                    </div>
+                  `).join('') || '<div class="meta">Sem eventos recentes</div>'}
+                </div>
+              </div>
+            </div>
+          </article>
+        </div>
+      `;
+
+      section('command-control').querySelectorAll('.add-card-btn').forEach(btn => {
+        btn.addEventListener('click', () => addTask(btn.dataset.column || 'backlog'));
+      });
+
+      section('command-control').querySelectorAll('.delete-task').forEach(btn => {
+        btn.addEventListener('click', async () => {
+          const taskId = btn.dataset.taskId;
+          state.tasks = state.tasks.filter(t => t.id !== taskId);
+          await saveTasksToApi();
+          renderCommandControl();
+        });
+      });
+
+      section('command-control').querySelectorAll('.kanban-card').forEach(card => {
+        card.addEventListener('dragstart', event => {
+          event.dataTransfer.setData('text/plain', card.dataset.taskId || '');
+          card.classList.add('dragging');
+        });
+        card.addEventListener('dragend', () => card.classList.remove('dragging'));
+      });
+
+      section('command-control').querySelectorAll('.task-list').forEach(list => {
+        list.addEventListener('dragover', event => {
+          event.preventDefault();
+          list.classList.add('drop-active');
+        });
+        list.addEventListener('dragleave', () => list.classList.remove('drop-active'));
+        list.addEventListener('drop', async event => {
+          event.preventDefault();
+          list.classList.remove('drop-active');
+          const taskId = event.dataTransfer.getData('text/plain');
+          const column = list.dataset.column;
+          if (!taskId || !column) return;
+          const task = state.tasks.find(t => t.id === taskId);
+          if (!task || task.column === column) return;
+          task.column = column;
+          task.updatedAt = new Date().toISOString();
+          await saveTasksToApi();
+          renderCommandControl();
+        });
+      });
+    }
+
+    async function saveTasksToApi() {
+      await api('/api/tasks', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ tasks: state.tasks }),
+      });
+    }
+
+    async function addTask(column) {
+      const title = (prompt('Título do card:') || '').trim();
+      if (!title) return;
+      const description = (prompt('Descrição (opcional):') || '').trim();
+      const priorityInput = (prompt('Prioridade: low | medium | high', 'medium') || 'medium').trim().toLowerCase();
+      const priority = sanitizePriority(priorityInput);
+      const now = new Date().toISOString();
+      state.tasks.push({
+        id: `task-${Date.now()}-${Math.random().toString(16).slice(2, 8)}`,
+        title,
+        description,
+        priority,
+        column,
+        createdAt: now,
+        updatedAt: now,
+      });
+      await saveTasksToApi();
+      renderCommandControl();
+    }
+
+    function renderCurrent() {
+      if (state.current === 'dashboard') renderDashboard();
+      if (state.current === 'chat') renderChat();
+      if (state.current === 'dna') renderDNA();
+      if (state.current === 'memory') renderMemory();
+      if (state.current === 'skills') renderSkills();
+      if (state.current === 'crons') renderCrons();
+      if (state.current === 'goals') renderGoals();
+      if (state.current === 'todos') renderTodos();
+      if (state.current === 'command-control') renderCommandControl();
+      if (state.current === 'settings') renderSettings();
+    }
+
+    async function loadMemoryFile(path) {
+      try {
+        const payload = await api(`/api/memory/${encodeURIComponent(path)}`);
+        state.currentMemoryFile = payload.file || path;
+        state.currentMemoryContent = payload.content || '';
+        if (state.current === 'memory') renderMemory();
+      } catch (err) {
+        state.currentMemoryContent = `Erro ao abrir arquivo: ${err.message}`;
+        if (state.current === 'memory') renderMemory();
+      }
+    }
+
+    async function refreshAll() {
+      try {
+        const [statusRes, sessionsRes, cronsRes, memoryRes, skillsRes, goalsRes, todosRes, tasksRes, activityRes] = await Promise.allSettled([
+          api('/api/status'),
+          api('/api/sessions'),
+          api('/api/crons'),
+          api('/api/memory'),
+          api('/api/skills'),
+          api('/api/goals'),
+          api('/api/todos'),
+          api('/api/tasks'),
+          api('/api/activity'),
+        ]);
+
+        state.status = statusRes.status === 'fulfilled' ? statusRes.value : (state.status || {});
+        state.sessions = sessionsRes.status === 'fulfilled'
+          ? (sessionsRes.value.sessions || [])
+          : (state.status?.sessions || state.sessions || []);
+        state.crons = cronsRes.status === 'fulfilled'
+          ? (cronsRes.value.crons || [])
+          : (state.status?.cronJobs || state.crons || []);
+        state.memoryFiles = memoryRes.status === 'fulfilled' ? (memoryRes.value.files || []) : (state.memoryFiles || []);
+        state.skills = skillsRes.status === 'fulfilled' ? (skillsRes.value.skills || []) : (state.skills || []);
+        state.goals = goalsRes.status === 'fulfilled' ? (goalsRes.value.goals || []) : (state.goals || []);
+        state.todos = todosRes.status === 'fulfilled' ? (todosRes.value.todos || []) : (state.todos || []);
+        state.tasks = tasksRes.status === 'fulfilled' ? (tasksRes.value.tasks || []) : (state.tasks || []);
+        const sessionsFromEndpoint = state.sessions.filter(
+          s => String(s.age || '').includes('ago') || String(s.age || '').includes('just now')
+        ).slice(0, 8);
+        state.activity = activityRes.status === 'fulfilled'
+          ? {
+              activeSessions: sessionsFromEndpoint,
+              processes: activityRes.value.processes || [],
+              recent: activityRes.value.recent || [],
+            }
+          : {
+              activeSessions: sessionsFromEndpoint,
+              processes: state.activity.processes || [],
+              recent: state.activity.recent || [],
+            };
+
+        if (!state.currentMemoryFile && state.memoryFiles.length) {
+          await loadMemoryFile(state.memoryFiles[0].path);
+        }
+
+        if (!state.dnaSoul) {
+          const [soul, identity] = await Promise.all([
+            loadText('/SOUL.md').catch(() => 'SOUL.md não encontrado'),
+            loadText('/IDENTITY.md').catch(() => 'IDENTITY.md não encontrado'),
+          ]);
+          state.dnaSoul = soul;
+          state.dnaIdentity = identity;
+        }
+
+        lastUpdateEl.textContent = `Atualizado: ${fmtDate(new Date().toISOString())}`;
+        renderCurrent();
+      } catch (err) {
+        lastUpdateEl.textContent = `Erro: ${err.message}`;
+      }
+    }
+
+    async function saveGoals() {
+      const editor = document.getElementById('goalsEditor');
+      if (!editor) return;
+      try {
+        const parsed = JSON.parse(editor.value);
+        if (!Array.isArray(parsed)) throw new Error('Goals precisa ser um array');
+        const res = await api('/api/goals', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ goals: parsed }),
+        });
+        state.goals = res.goals || parsed;
+        renderGoals();
+      } catch (err) {
+        alert(`Falha ao salvar goals: ${err.message}`);
+      }
+    }
+
+    async function saveTodos() {
+      const editor = document.getElementById('todosEditor');
+      if (!editor) return;
+      try {
+        const parsed = JSON.parse(editor.value);
+        if (!Array.isArray(parsed)) throw new Error('Todos precisa ser um array');
+        const res = await api('/api/todos', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ todos: parsed }),
+        });
+        state.todos = res.todos || parsed;
+        renderTodos();
+      } catch (err) {
+        alert(`Falha ao salvar todos: ${err.message}`);
+      }
+    }
+
+    document.getElementById('btnRefresh').addEventListener('click', async () => {
+      countdown = REFRESH_MS / 1000;
+      await refreshAll();
+    });
+
+    setInterval(async () => {
+      if (!autoRefresh) return;
+      countdown = REFRESH_MS / 1000;
+      await refreshAll();
+    }, REFRESH_MS);
+
+    setInterval(() => {
+      countdown = countdown <= 0 ? REFRESH_MS / 1000 : countdown - 1;
+      refreshCountdownEl.textContent = `Próximo refresh: ${countdown}s`;
+    }, 1000);
+
+    renderNav();
+    renderCurrent();
+    refreshAll();
+  </script>
+</body>
+</html>

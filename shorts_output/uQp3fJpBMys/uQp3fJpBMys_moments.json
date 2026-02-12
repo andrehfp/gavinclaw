@@ -1,0 +1,46 @@
+{
+  "moments": [
+    {
+      "start": 0.0,
+      "end": 35.0,
+      "hook_text": "Você sabia que um PRD pode ter 719 linhas?",
+      "hook_score": 8,
+      "titles": [
+        "Você sabia que um PRD pode ter 719 linhas? 🤯",
+        "Descubra o que um PRD realmente revela! 📄",
+        "Quantas linhas tem o seu PRD? Surpreenda-se! 😲"
+      ],
+      "description": "Entenda a importância de um PRD bem estruturado e suas linhas.",
+      "reason": "O hook é uma afirmação impactante que gera curiosidade sobre o PRD, levando o espectador a querer saber mais.",
+      "loop_friendly": true
+    },
+    {
+      "start": 11.3,
+      "end": 46.3,
+      "hook_text": "O que acontece quando uma task é executada?",
+      "hook_score": 7,
+      "titles": [
+        "Como uma task é executada? Veja o processo! 🔍",
+        "Descubra a mágica por trás da execução de tasks! ✨",
+        "Você sabe o que acontece quando uma task é executada? 🤔"
+      ],
+      "description": "Exploração do processo de execução de tasks e como são atualizadas.",
+      "reason": "Apresenta um processo intrigante e que pode despertar a curiosidade do público sobre tarefas e sistemas.",
+      "loop_friendly": true
+    },
+    {
+      "start": 50.3,
+      "end": 60.04,
+      "hook_text": "Quais são as tarefas em um planejamento?",
+      "hook_score": 7,
+      "titles": [
+        "Quais são as 3 tarefas essenciais em um planejamento? 📋",
+        "Descubra as tarefas que todo planejamento deve ter! 🔑",
+        "Você sabe quais tarefas são essenciais no seu planejamento? 🚀"
+      ],
+      "description": "Listagem e descrição das tarefas em um planejamento.",
+      "reason": "Apresenta uma lista simples e direta, que pode ser facilmente compreendida e lembrada, além de gerar curiosidade sobre o conteúdo.",
+      "loop_friendly": false
+    }
+  ]
+}

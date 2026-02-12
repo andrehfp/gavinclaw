@@ -1,0 +1,402 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shorts Generator - Neon</title>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
+        :root {
+            --neon-pink: #ff00ff;
+            --neon-cyan: #00ffff;
+            --neon-yellow: #ffff00;
+            --bg: #0a0a0f;
+            --card-bg: rgba(20, 20, 35, 0.8);
+        }
+
+        body {
+            font-family: 'Space Grotesk', sans-serif;
+            background: var(--bg);
+            color: white;
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: 
+                radial-gradient(circle at 20% 80%, rgba(255, 0, 255, 0.15) 0%, transparent 50%),
+                radial-gradient(circle at 80% 20%, rgba(0, 255, 255, 0.15) 0%, transparent 50%),
+                radial-gradient(circle at 50% 50%, rgba(255, 255, 0, 0.05) 0%, transparent 50%);
+            pointer-events: none;
+            z-index: -1;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        .header {
+            text-align: center;
+            padding: 3rem 0;
+            position: relative;
+        }
+
+        .header h1 {
+            font-size: 3.5rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 4px;
+            background: linear-gradient(90deg, var(--neon-pink), var(--neon-cyan), var(--neon-yellow));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-shadow: 0 0 40px rgba(255, 0, 255, 0.5);
+            animation: glow 2s ease-in-out infinite alternate;
+        }
+
+        @keyframes glow {
+            from { filter: drop-shadow(0 0 20px rgba(255, 0, 255, 0.8)); }
+            to { filter: drop-shadow(0 0 40px rgba(0, 255, 255, 0.8)); }
+        }
+
+        .header p {
+            color: rgba(255, 255, 255, 0.6);
+            font-size: 1.2rem;
+            margin-top: 1rem;
+        }
+
+        .original-banner {
+            background: linear-gradient(135deg, rgba(255, 0, 255, 0.1), rgba(0, 255, 255, 0.1));
+            border: 2px solid;
+            border-image: linear-gradient(90deg, var(--neon-pink), var(--neon-cyan)) 1;
+            padding: 1.5rem 2rem;
+            margin: 2rem 0 3rem;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+
+        .original-banner h2 {
+            font-size: 1.3rem;
+            color: var(--neon-cyan);
+        }
+
+        .original-banner .channel {
+            color: rgba(255, 255, 255, 0.5);
+        }
+
+        .btn-neon {
+            padding: 0.75rem 2rem;
+            background: transparent;
+            border: 2px solid var(--neon-pink);
+            color: var(--neon-pink);
+            text-decoration: none;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            transition: all 0.3s;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .btn-neon:hover {
+            background: var(--neon-pink);
+            color: black;
+            box-shadow: 0 0 30px var(--neon-pink);
+        }
+
+        .shorts-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .short-card {
+            background: var(--card-bg);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            position: relative;
+            overflow: hidden;
+            transition: all 0.4s;
+        }
+
+        .short-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: linear-gradient(90deg, var(--neon-pink), var(--neon-cyan));
+        }
+
+        .short-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 
+                0 0 20px rgba(255, 0, 255, 0.3),
+                0 0 40px rgba(0, 255, 255, 0.2);
+            border-color: var(--neon-cyan);
+        }
+
+        .video-wrapper {
+            aspect-ratio: 9/16;
+            max-height: 380px;
+            background: #000;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+        }
+
+        .video-wrapper video {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+        }
+
+        .short-badge {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            background: linear-gradient(135deg, var(--neon-pink), var(--neon-cyan));
+            color: black;
+            padding: 0.3rem 1rem;
+            font-weight: 700;
+            font-size: 0.9rem;
+        }
+
+        .card-body {
+            padding: 1.5rem;
+        }
+
+        .card-body h3 {
+            font-size: 1.1rem;
+            margin-bottom: 1rem;
+            color: var(--neon-yellow);
+        }
+
+        .desc-box {
+            background: rgba(0, 0, 0, 0.5);
+            border-left: 3px solid var(--neon-cyan);
+            padding: 1rem;
+            margin-bottom: 1rem;
+            max-height: 180px;
+            overflow-y: auto;
+        }
+
+        .desc-box pre {
+            font-family: inherit;
+            font-size: 0.85rem;
+            color: rgba(255, 255, 255, 0.7);
+            white-space: pre-wrap;
+        }
+
+        .tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+        }
+
+        .tag {
+            background: rgba(255, 0, 255, 0.2);
+            border: 1px solid var(--neon-pink);
+            color: var(--neon-pink);
+            padding: 0.2rem 0.6rem;
+            font-size: 0.75rem;
+            font-weight: 500;
+        }
+
+        .copy-btn {
+            width: 100%;
+            margin-top: 1rem;
+            padding: 0.75rem;
+            background: transparent;
+            border: 1px solid var(--neon-cyan);
+            color: var(--neon-cyan);
+            cursor: pointer;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            transition: all 0.3s;
+        }
+
+        .copy-btn:hover {
+            background: var(--neon-cyan);
+            color: black;
+        }
+
+        .copy-btn.copied {
+            background: var(--neon-yellow);
+            border-color: var(--neon-yellow);
+            color: black;
+        }
+
+        .footer {
+            text-align: center;
+            padding: 3rem 0;
+            color: rgba(255, 255, 255, 0.4);
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            margin-top: 4rem;
+        }
+
+        @media (max-width: 768px) {
+            .header h1 { font-size: 2rem; letter-spacing: 2px; }
+            .original-banner { flex-direction: column; text-align: center; }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header class="header">
+            <h1>⚡ Shorts Generator</h1>
+            <p>Powered by AI • Neon Edition</p>
+        </header>
+
+        <div class="original-banner">
+            <div>
+                <h2>📺 Tasks aumentaram em 1000% minha produtividade</h2>
+                <span class="channel">@andreprado</span>
+            </div>
+            <a href="https://youtube.com/watch?v=USEber2sx1A" target="_blank" class="btn-neon">
+                Watch Original →
+            </a>
+        </div>
+
+        <div class="shorts-grid">
+            <div class="short-card">
+                <div class="video-wrapper">
+                    <span class="short-badge">SHORT #2</span>
+                    <video controls preload="metadata"><source src="short_2_final.mp4" type="video/mp4"></video>
+                </div>
+                <div class="card-body">
+                    <h3>O segredo é criar um PRD antes de codar</h3>
+                    <div class="desc-box">
+                        <pre id="desc-2">Antes de codar, conversa com a IA. 🧠
+
+Cria um PRD explicando tudo que você quer:
+- Stack
+- DNS
+- Fluxo do usuário
+- Arquitetura
+
+A IA vai transformar isso em planos executáveis.
+
+Resultado? Menos retrabalho, mais velocidade. 🚀</pre>
+                    </div>
+                    <div class="tags">
+                        <span class="tag">#programacao</span>
+                        <span class="tag">#ia</span>
+                        <span class="tag">#prd</span>
+                    </div>
+                    <button class="copy-btn" onclick="copyDesc('desc-2', this)">📋 Copy Description</button>
+                </div>
+            </div>
+
+            <div class="short-card">
+                <div class="video-wrapper">
+                    <span class="short-badge">SHORT #3</span>
+                    <video controls preload="metadata"><source src="short_3_final.mp4" type="video/mp4"></video>
+                </div>
+                <div class="card-body">
+                    <h3>Tasks organizadas em ondas = paralelismo</h3>
+                    <div class="desc-box">
+                        <pre id="desc-3">O segredo pra escalar com IA: ondas de tasks! 🌊
+
+Organizo as tasks assim:
+- Onda 1: tasks independentes (paralelo)
+- Onda 2: dependem da onda 1
+- E assim vai...
+
+3 agentes rodando ao mesmo tempo. Automação de verdade. ⚡</pre>
+                    </div>
+                    <div class="tags">
+                        <span class="tag">#devtips</span>
+                        <span class="tag">#automacao</span>
+                    </div>
+                    <button class="copy-btn" onclick="copyDesc('desc-3', this)">📋 Copy Description</button>
+                </div>
+            </div>
+
+            <div class="short-card">
+                <div class="video-wrapper">
+                    <span class="short-badge">SHORT #4</span>
+                    <video controls preload="metadata"><source src="short_4_final.mp4" type="video/mp4"></video>
+                </div>
+                <div class="card-body">
+                    <h3>Subagentes trabalhando em paralelo</h3>
+                    <div class="desc-box">
+                        <pre id="desc-4">Subagentes são game changer! 🎮
+
+- Agente principal delega tasks
+- Subagentes executam em paralelo
+- Cada um lê o progress.txt
+- No final, tudo se integra
+
+É delegação automatizada. 🤖</pre>
+                    </div>
+                    <div class="tags">
+                        <span class="tag">#ia</span>
+                        <span class="tag">#claudecode</span>
+                    </div>
+                    <button class="copy-btn" onclick="copyDesc('desc-4', this)">📋 Copy Description</button>
+                </div>
+            </div>
+
+            <div class="short-card">
+                <div class="video-wrapper">
+                    <span class="short-badge">SHORT #5</span>
+                    <video controls preload="metadata"><source src="short_5_final.mp4" type="video/mp4"></video>
+                </div>
+                <div class="card-body">
+                    <h3>O resultado: site completo de primeira!</h3>
+                    <div class="desc-box">
+                        <pre id="desc-5">E o resultado? 🏆
+
+Site completo. De primeira. Funcionando.
+534 testes passando. Tudo commitado.
+
+✅ PRD bem feito
+✅ Planos organizados
+✅ Tasks em ondas
+✅ Subagentes paralelos
+
+Do conceito ao deploy, sem dor de cabeça. 💪</pre>
+                    </div>
+                    <div class="tags">
+                        <span class="tag">#resultado</span>
+                        <span class="tag">#iaparadevs</span>
+                    </div>
+                    <button class="copy-btn" onclick="copyDesc('desc-5', this)">📋 Copy Description</button>
+                </div>
+            </div>
+        </div>
+
+        <footer class="footer">
+            <p>Generated by OpenClaw • 2026</p>
+        </footer>
+    </div>
+
+    <script>
+        function copyDesc(id, btn) {
+            const text = document.getElementById(id).textContent;
+            const tags = btn.parentElement.querySelector('.tags');
+            const tagsText = Array.from(tags.querySelectorAll('.tag')).map(t => t.textContent).join(' ');
+            navigator.clipboard.writeText(text + '\n\n' + tagsText).then(() => {
+                btn.classList.add('copied');
+                btn.textContent = '✓ Copied!';
+                setTimeout(() => { btn.classList.remove('copied'); btn.textContent = '📋 Copy Description'; }, 2000);
+            });
+        }
+    </script>
+</body>
+</html>

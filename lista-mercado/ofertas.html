@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ofertas do Dia</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+            min-height: 100vh;
+            color: #fff;
+            padding: 20px;
+        }
+        
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        
+        h1 {
+            text-align: center;
+            margin-bottom: 10px;
+            font-size: 1.8em;
+        }
+        
+        h1 span {
+            color: #00d4aa;
+        }
+        
+        .date {
+            text-align: center;
+            color: rgba(255,255,255,0.5);
+            margin-bottom: 20px;
+        }
+        
+        .store {
+            background: rgba(255,255,255,0.05);
+            border-radius: 15px;
+            padding: 15px;
+            margin-bottom: 15px;
+        }
+        
+        .store-header {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 15px;
+            padding-bottom: 10px;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+        }
+        
+        .store-icon {
+            font-size: 1.5em;
+        }
+        
+        .store-name {
+            font-size: 1.2em;
+            font-weight: bold;
+        }
+        
+        .store.tozetto .store-name { color: #4ade80; }
+        .store.condor .store-name { color: #60a5fa; }
+        .store.muffato .store-name { color: #fbbf24; }
+        
+        .offer {
+            background: rgba(255,255,255,0.05);
+            border-radius: 10px;
+            padding: 12px;
+            margin-bottom: 8px;
+        }
+        
+        .offer-product {
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+        
+        .offer-prices {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .price-original {
+            text-decoration: line-through;
+            color: rgba(255,255,255,0.4);
+        }
+        
+        .price-offer {
+            color: #00d4aa;
+            font-weight: bold;
+            font-size: 1.1em;
+        }
+        
+        .discount {
+            background: #ff6b6b;
+            color: #fff;
+            padding: 2px 8px;
+            border-radius: 5px;
+            font-size: 0.85em;
+            font-weight: bold;
+        }
+        
+        .store-link {
+            display: block;
+            text-align: center;
+            margin-top: 10px;
+            color: #00d4aa;
+            text-decoration: none;
+        }
+        
+        .empty {
+            text-align: center;
+            padding: 40px;
+            color: rgba(255,255,255,0.5);
+        }
+        
+        .nav {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        
+        .nav a {
+            color: #00d4aa;
+            text-decoration: none;
+            padding: 8px 16px;
+            border: 1px solid #00d4aa;
+            border-radius: 20px;
+            font-size: 14px;
+        }
+        
+        .loading {
+            text-align: center;
+            padding: 40px;
+            color: rgba(255,255,255,0.5);
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="nav">
+            <a href="/">← Lista de Compras</a>
+        </div>
+        
+        <h1>🎯 Ofertas do <span>Dia</span></h1>
+        <div class="date" id="date">Carregando...</div>
+        
+        <div id="ofertas">
+            <div class="loading">Carregando ofertas...</div>
+        </div>
+    </div>
+    
+    <script>
+        async function loadOfertas() {
+            try {
+                const resp = await fetch('/api/ofertas');
+                const data = await resp.json();
+                
+                document.getElementById('date').textContent = data.data || 'Sem data';
+                
+                const container = document.getElementById('ofertas');
+                
+                if (!data.ofertas || Object.keys(data.ofertas).length === 0) {
+                    container.innerHTML = '<div class="empty">Nenhuma oferta encontrada hoje.<br>Volte amanhã!</div>';
+                    return;
+                }
+                
+                let html = '';
+                
+                const stores = [
+                    { key: 'tozetto', name: 'Tozetto', icon: '🟢', class: 'tozetto' },
+                    { key: 'condor', name: 'Condor', icon: '🔵', class: 'condor' },
+                    { key: 'muffato', name: 'Muffato', icon: '🟡', class: 'muffato' }
+                ];
+                
+                for (const store of stores) {
+                    const ofertas = data.ofertas[store.key];
+                    if (!ofertas || ofertas.length === 0) continue;
+                    
+                    html += `
+                        <div class="store ${store.class}">
+                            <div class="store-header">
+                                <span class="store-icon">${store.icon}</span>
+                                <span class="store-name">${store.name}</span>
+                            </div>
+                    `;
+                    
+                    for (const o of ofertas) {
+                        const desconto = o.desconto ? `<span class="discount">-${Math.round(o.desconto)}%</span>` : '';
+                        const precoOriginal = o.preco_original ? `<span class="price-original">${o.preco_original}</span>` : '';
+                        
+                        html += `
+                            <div class="offer">
+                                <div class="offer-product">${o.produto}</div>
+                                <div class="offer-prices">
+                                    ${precoOriginal}
+                                    <span class="price-offer">${o.preco_oferta}</span>
+                                    ${desconto}
+                                </div>
+                            </div>
+                        `;
+                    }
+                    
+                    if (data.links && data.links[store.key]) {
+                        html += `<a class="store-link" href="${data.links[store.key]}" target="_blank">Ver encarte completo →</a>`;
+                    }
+                    
+                    html += '</div>';
+                }
+                
+                container.innerHTML = html || '<div class="empty">Nenhuma oferta dos seus produtos hoje.</div>';
+                
+            } catch (e) {
+                document.getElementById('ofertas').innerHTML = '<div class="empty">Erro ao carregar ofertas.</div>';
+            }
+        }
+        
+        loadOfertas();
+    </script>
+</body>
+</html>

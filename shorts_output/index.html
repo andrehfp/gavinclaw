@@ -1,0 +1,518 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>YouTube Shorts Generator</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --bg-primary: #0f0f0f;
+            --bg-secondary: #1a1a1a;
+            --bg-card: #212121;
+            --text-primary: #ffffff;
+            --text-secondary: #aaaaaa;
+            --accent: #ff0050;
+            --accent-hover: #ff3371;
+            --success: #00d26a;
+            --border: #333333;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: var(--bg-primary);
+            color: var(--text-primary);
+            min-height: 100vh;
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        /* Header */
+        .header {
+            text-align: center;
+            margin-bottom: 3rem;
+            padding: 2rem 0;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .header h1 {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+            background: linear-gradient(135deg, #ff0050, #ff6b35, #f7c94b);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .header p {
+            color: var(--text-secondary);
+            font-size: 1.1rem;
+        }
+
+        /* Original Video Banner */
+        .original-video {
+            background: linear-gradient(135deg, var(--bg-card), #2a1a1a);
+            border: 1px solid var(--accent);
+            border-radius: 16px;
+            padding: 1.5rem 2rem;
+            margin-bottom: 3rem;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+
+        .original-video .info {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .original-video .icon {
+            width: 48px;
+            height: 48px;
+            background: var(--accent);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+        }
+
+        .original-video h2 {
+            font-size: 1.2rem;
+            font-weight: 600;
+        }
+
+        .original-video .channel {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+        }
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.75rem 1.5rem;
+            background: var(--accent);
+            color: white;
+            text-decoration: none;
+            border-radius: 8px;
+            font-weight: 600;
+            transition: all 0.2s;
+        }
+
+        .btn:hover {
+            background: var(--accent-hover);
+            transform: translateY(-2px);
+        }
+
+        /* Shorts Grid */
+        .shorts-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 2rem;
+        }
+
+        .short-card {
+            background: var(--bg-card);
+            border-radius: 16px;
+            overflow: hidden;
+            border: 1px solid var(--border);
+            transition: all 0.3s ease;
+        }
+
+        .short-card:hover {
+            border-color: var(--accent);
+            transform: translateY(-4px);
+            box-shadow: 0 20px 40px rgba(255, 0, 80, 0.15);
+        }
+
+        .video-container {
+            position: relative;
+            background: #000;
+            aspect-ratio: 9/16;
+            max-height: 400px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .video-container video {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+        }
+
+        .short-number {
+            position: absolute;
+            top: 12px;
+            left: 12px;
+            background: var(--accent);
+            color: white;
+            padding: 0.25rem 0.75rem;
+            border-radius: 20px;
+            font-weight: 600;
+            font-size: 0.85rem;
+        }
+
+        .card-content {
+            padding: 1.5rem;
+        }
+
+        .card-content h3 {
+            font-size: 1.1rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+            line-height: 1.4;
+        }
+
+        .description {
+            background: var(--bg-secondary);
+            border-radius: 8px;
+            padding: 1rem;
+            margin-bottom: 1rem;
+            max-height: 200px;
+            overflow-y: auto;
+        }
+
+        .description pre {
+            font-family: inherit;
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+            white-space: pre-wrap;
+            word-wrap: break-word;
+        }
+
+        .hashtags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+        }
+
+        .hashtag {
+            background: rgba(255, 0, 80, 0.15);
+            color: var(--accent);
+            padding: 0.25rem 0.75rem;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 500;
+        }
+
+        .copy-btn {
+            width: 100%;
+            margin-top: 1rem;
+            padding: 0.75rem;
+            background: var(--bg-secondary);
+            border: 1px solid var(--border);
+            color: var(--text-primary);
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: 500;
+            transition: all 0.2s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+        }
+
+        .copy-btn:hover {
+            background: var(--border);
+        }
+
+        .copy-btn.copied {
+            background: var(--success);
+            border-color: var(--success);
+        }
+
+        /* Footer */
+        .footer {
+            text-align: center;
+            margin-top: 4rem;
+            padding: 2rem 0;
+            border-top: 1px solid var(--border);
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+        }
+
+        .footer a {
+            color: var(--accent);
+            text-decoration: none;
+        }
+
+        /* Stats */
+        .stats {
+            display: flex;
+            justify-content: center;
+            gap: 3rem;
+            margin-bottom: 2rem;
+        }
+
+        .stat {
+            text-align: center;
+        }
+
+        .stat-value {
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--accent);
+        }
+
+        .stat-label {
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 1rem;
+            }
+
+            .header h1 {
+                font-size: 1.8rem;
+            }
+
+            .original-video {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            .original-video .info {
+                flex-direction: column;
+            }
+
+            .stats {
+                gap: 1.5rem;
+            }
+
+            .stat-value {
+                font-size: 1.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header class="header">
+            <h1>🎬 YouTube Shorts Generator</h1>
+            <p>Shorts extraídos automaticamente com IA</p>
+        </header>
+
+        <div class="stats">
+            <div class="stat">
+                <div class="stat-value">4</div>
+                <div class="stat-label">Shorts gerados</div>
+            </div>
+            <div class="stat">
+                <div class="stat-value">~60s</div>
+                <div class="stat-label">Duração cada</div>
+            </div>
+            <div class="stat">
+                <div class="stat-value">Split</div>
+                <div class="stat-label">Formato</div>
+            </div>
+        </div>
+
+        <div class="original-video">
+            <div class="info">
+                <div class="icon">▶️</div>
+                <div>
+                    <h2>Tasks aumentaram em 1000% minha produtividade</h2>
+                    <span class="channel">@andreprado</span>
+                </div>
+            </div>
+            <a href="https://youtube.com/watch?v=USEber2sx1A" target="_blank" class="btn">
+                Assistir Original →
+            </a>
+        </div>
+
+        <div class="shorts-grid">
+            <!-- Short 2 -->
+            <div class="short-card">
+                <div class="video-container">
+                    <span class="short-number">#2</span>
+                    <video controls preload="metadata">
+                        <source src="short_2_final.mp4" type="video/mp4">
+                    </video>
+                </div>
+                <div class="card-content">
+                    <h3>O segredo é criar um PRD antes de codar</h3>
+                    <div class="description">
+                        <pre id="desc-2">Antes de codar, conversa com a IA. 🧠
+
+Cria um PRD (Product Requirements Document) explicando tudo que você quer:
+- Stack
+- DNS
+- Fluxo do usuário
+- Arquitetura
+
+A IA vai transformar isso em planos executáveis.
+
+Resultado? Menos retrabalho, mais velocidade. 🚀
+
+Vídeo completo no canal!</pre>
+                    </div>
+                    <div class="hashtags">
+                        <span class="hashtag">#programacao</span>
+                        <span class="hashtag">#ia</span>
+                        <span class="hashtag">#dicas</span>
+                        <span class="hashtag">#prd</span>
+                    </div>
+                    <button class="copy-btn" onclick="copyDescription('desc-2', this)">
+                        📋 Copiar descrição
+                    </button>
+                </div>
+            </div>
+
+            <!-- Short 3 -->
+            <div class="short-card">
+                <div class="video-container">
+                    <span class="short-number">#3</span>
+                    <video controls preload="metadata">
+                        <source src="short_3_final.mp4" type="video/mp4">
+                    </video>
+                </div>
+                <div class="card-content">
+                    <h3>Tasks organizadas em ondas = paralelismo</h3>
+                    <div class="description">
+                        <pre id="desc-3">O segredo pra escalar com IA: ondas de tasks! 🌊
+
+Ao invés de executar tudo sequencial, organizo as tasks assim:
+- Onda 1: tasks independentes (rodam em paralelo)
+- Onda 2: tasks que dependem da onda 1
+- E assim vai...
+
+Resultado: 3 agentes rodando ao mesmo tempo, cada um fazendo sua parte.
+
+Automação de verdade. ⚡</pre>
+                    </div>
+                    <div class="hashtags">
+                        <span class="hashtag">#devtips</span>
+                        <span class="hashtag">#programacao</span>
+                        <span class="hashtag">#automacao</span>
+                    </div>
+                    <button class="copy-btn" onclick="copyDescription('desc-3', this)">
+                        📋 Copiar descrição
+                    </button>
+                </div>
+            </div>
+
+            <!-- Short 4 -->
+            <div class="short-card">
+                <div class="video-container">
+                    <span class="short-number">#4</span>
+                    <video controls preload="metadata">
+                        <source src="short_4_final.mp4" type="video/mp4">
+                    </video>
+                </div>
+                <div class="card-content">
+                    <h3>Subagentes trabalhando em paralelo</h3>
+                    <div class="description">
+                        <pre id="desc-4">Subagentes são game changer! 🎮
+
+Olha o que acontece:
+- Agente principal delega tasks
+- Subagentes executam em paralelo
+- Cada um lê o progress.txt e sabe o contexto
+- No final, tudo se integra
+
+A janela de contexto do principal fica limpa.
+Os subagentes fazem o trabalho pesado.
+
+É delegação automatizada. 🤖</pre>
+                    </div>
+                    <div class="hashtags">
+                        <span class="hashtag">#ia</span>
+                        <span class="hashtag">#automacao</span>
+                        <span class="hashtag">#claudecode</span>
+                    </div>
+                    <button class="copy-btn" onclick="copyDescription('desc-4', this)">
+                        📋 Copiar descrição
+                    </button>
+                </div>
+            </div>
+
+            <!-- Short 5 -->
+            <div class="short-card">
+                <div class="video-container">
+                    <span class="short-number">#5</span>
+                    <video controls preload="metadata">
+                        <source src="short_5_final.mp4" type="video/mp4">
+                    </video>
+                </div>
+                <div class="card-content">
+                    <h3>O resultado: site completo de primeira!</h3>
+                    <div class="description">
+                        <pre id="desc-5">E o resultado? 🏆
+
+Site completo. De primeira. Funcionando.
+
+- Configurações
+- Temas dinâmicos
+- Tudo integrado
+
+534 testes passando.
+Tudo commitado.
+
+Isso é o poder de:
+✅ PRD bem feito
+✅ Planos organizados
+✅ Tasks em ondas
+✅ Subagentes paralelos
+
+Do conceito ao deploy, sem dor de cabeça. 💪
+
+Vídeo completo no canal!</pre>
+                    </div>
+                    <div class="hashtags">
+                        <span class="hashtag">#resultado</span>
+                        <span class="hashtag">#programacao</span>
+                        <span class="hashtag">#iaparadevs</span>
+                    </div>
+                    <button class="copy-btn" onclick="copyDescription('desc-5', this)">
+                        📋 Copiar descrição
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <footer class="footer">
+            <p>Gerado automaticamente por <a href="https://github.com/openclaw/openclaw">OpenClaw</a> • 2026-02-06</p>
+        </footer>
+    </div>
+
+    <script>
+        function copyDescription(elementId, button) {
+            const text = document.getElementById(elementId).textContent;
+            const hashtags = button.parentElement.querySelector('.hashtags');
+            const hashtagsText = Array.from(hashtags.querySelectorAll('.hashtag'))
+                .map(h => h.textContent).join(' ');
+            
+            const fullText = text + '\n\n' + hashtagsText;
+            
+            navigator.clipboard.writeText(fullText).then(() => {
+                button.classList.add('copied');
+                button.innerHTML = '✓ Copiado!';
+                setTimeout(() => {
+                    button.classList.remove('copied');
+                    button.innerHTML = '📋 Copiar descrição';
+                }, 2000);
+            });
+        }
+    </script>
+</body>
+</html>

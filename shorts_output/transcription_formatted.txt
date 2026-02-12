@@ -1,0 +1,224 @@
+[00:00] E aí galera, beleza? André aqui. Eu estou testando uma nova funcionalidade do Cloud Code aqui e eu
+[00:13] conversei com um amigo, nós trocamos uma ideia e tal, outra hora falo mais sobre esse projeto, mas é um
+[00:29] Então é um negócio bem mais complexo, tá?
+[00:39] Olha só, eu já fiz um desenho aqui, tá?
+[00:48] e eu vou tentar mostrar pra você o resultado final, tá?
+[00:54] Inicialmente, a ideia do projeto
+[01:00] Eu não gostei muito do resultado final, eu achei bem ruim
+[01:05] Então conversando com o Cloud Code, eu conversei com ele
+[01:13] Eu recomendo que você use
+[01:19] Eu estou usando o Mac
+[01:23] Eu não sou patrocinado nem nada
+[01:28] E não preciso pagar nada
+[01:34] No Linux eu não sei se tem alguma coisa nesse sentido
+[01:40] Que eu acho que é o whisperdictator.com
+[01:47] Baixa aí pra Windows pra você ver como é que funciona
+[01:52] Entra lá, whisperdictator.com
+[01:58] E ir falando do seu fluxo, o que você imagina que vai acontecer com o usuário
+[02:05] E essa concepção vai gerar pra você
+[02:11] Eu criei aqui um
+[02:14] Prd, e o meu arquivo prd
+[02:23] Qual vai ser a nossa stack
+[02:29] Como é que vai servir o DNS
+[02:34] E isso tudo
+[02:40] Eu não sei porque que ele tá travando
+[02:46] Vou tentar desvencilhar disso
+[02:52] O que dá para fazer também
+[03:00] A partir desse PRD aqui
+[03:06] Então a gente tem aqui planos
+[03:12] Então a gente tem planos aqui
+[03:19] pra variar, só que é naquele modo planejamento
+[03:25] a fazer o planejamento, mas eu não quero um planejamento
+[03:31] partes menores e crie
+[03:37] local chamada plans
+[03:42] deixa eu ver se eu vou conseguir abrir
+[03:49] Todos os planos que eu tenho
+[03:53] Porque eu comecei a conversar mais com ele
+[03:58] Foi do 1 ao 9
+[04:02] Qual é o objetivo?
+[04:06] Fundação do projeto TurboSight
+[04:10] Porque o nome é horrível
+[04:15] Qual vai ser o scaffolding
+[04:22] E é bem detalhado mesmo, tá?
+[04:26] Você vai perguntando para a IA.
+[04:33] faça uma pergunta para deixar esse PRD bem robusto.
+[04:40] porque senão ela vai falar, cara, tá ok, tá certo, vamos executar.
+[04:48] Levando em consideração aí
+[04:53] A minha ideia é que, sei lá
+[05:00] Se você quiser ser bem mais chato
+[05:05] Para o Gemini e pergunta se está
+[05:11] Então ele vai gerar esses planos aqui
+[05:22] arquivo aqui, settings.json, na tua pasta do cloud, você coloca aqui embaixo plans
+[05:35] aqui embaixo. Ele ainda gera com o nome errado, com aquele nome estranho lá, mas você pode
+[05:44] pra eu poder acompanhar, tá?
+[05:50] 100%. Então ele criou aqui esses planos.
+[05:56] bom, eu deixei o plano, cara, gerou
+[06:02] parte, senão você vai ficar doido, tá?
+[06:08] nas tasks, tá?
+[06:14] cara, analise o plano
+[06:20] que tá lá no .cloudplans
+[06:27] ele analisou isso aqui, tá?
+[06:32] o index lá dos planos.
+[06:38] uma tabela que mostra
+[07:03] O que que tem nesse progress aqui?
+[07:11] Ele tem tudo que o agente precisa
+[07:17] Na geração
+[07:23] Isso aqui ajuda os próximos agentes
+[07:29] Ele está falando que, olha só
+[07:36] Que nós temos um scheduler rodando por trás
+[07:44] Qualquer job que receba DTO
+[07:52] Olha só, ele arrumou aqui, normalize properties job
+[08:01] O próximo agente que for executar isso aqui
+[08:07] Ele já sabe qual é a forma certa de utilizar ele
+[08:15] Então tem um arquivo aqui
+[08:22] Ele olha isso aqui e no final da execução
+[08:29] Aí ele vai criar isso aqui pra mim, olha só
+[08:34] Cria tasks pra esse plano
+[08:40] Número do plano, tá?
+[08:46] Tudo isso aqui nos arquivos lá nas tasks
+[08:52] Planejamento, por exemplo, ele vai ter
+[08:57] Task 2, task 3
+[09:03] Tem uma coisa que eu não consigo controlar ainda, que é a janela de contexto
+[09:13] E que acabam tendo que compactar a janela de contexto
+[09:20] De 0 a 200 mil tokens é a janela de contexto dos modelos Antropic hoje
+[09:30] Chega um ponto que o modelo começa a ficar burro
+[09:39] E pior que isso, ele acaba fazendo a compactação
+[09:49] Travou de novo minha tela aqui
+[09:53] Alguma coisa com...
+[10:01] Deixa eu ver se...
+[10:09] Tá
+[10:14] Aí ele faz a compactação e fica pior ainda
+[10:20] Eu vou explicar pra você o que eu tô fazendo aqui
+[10:27] Então quanto mais eu entender o que tá acontecendo aqui
+[10:33] E roda tudo automático pra mim, tá?
+[10:42] No caso da... vou mostrar 14, que foi a última que ele gerou.
+[10:49] A task 1 travou de novo.
+[10:58] Vou colocar application aqui, vamos ver.
+[11:06] A task 2 a 6 ele consegue executar em paralelo
+[11:12] Como ele já estudou o progress.txt
+[11:21] Use skill front-end de design para todas as tasks visuais
+[11:27] Ver got as 3551 e progress.txt
+[11:34] Tem que falar pra ele não quebrar nada que já existe
+[11:40] O que tem que fazer na primeira, o que tem que fazer na segunda, na terceira, na quarta
+[11:48] No 14 aqui, do 0 ao 15
+[11:55] Ele faz isso em todas, tá?
+[12:01] Então, por exemplo, na 11 ele gerou um readme, ele não gerou um overview
+[12:10] Dito isso
+[12:15] Então ele vai escrever lá as tasks, beleza
+[12:22] De pouquinho em pouquinho
+[12:28] Eu peço pra ele olhar o cloudprogress.txt
+[12:36] Eu peço pra ele escolher só um plano, tá?
+[12:47] Então, por exemplo, o próximo que ele vai executar é o 9
+[12:53] O 9 ele já executou
+[13:07] com um asterisco aqui para ele estudar todos os arquivos que estão aqui dentro,
+[13:15] mas eu pedi para ele criar as tasks para serem executadas por subagentes em paralelo.
+[13:45] Dito isso, tá funcionando ainda, tá?
+[13:51] Eu vou...
+[13:59] Ele atualizou alguma coisa aqui.
+[14:11] Ah, ele já implementou
+[14:17] Mas ele já implementou a 10, tá?
+[14:25] Porque a 10 foi muito simples
+[14:31] E adicionou algumas coisas aqui, ó
+[14:39] O que ele aprendeu
+[14:45] E tem duas falhas que estão acontecendo por coisas do projeto minha mesmo, tá?
+[15:00] Então tá aqui, ó, .cloud barra prompt barra start.
+[15:09] Eu não sei se vai ser grande também, porque é coisa pequena, tá?
+[15:21] E olha só, ele escolheu que o próximo plano para ser executado é o 11, corrigir logo quebrado no site público.
+[15:33] Talvez ele não crie, mas nós vamos chegar no ponto que ele vai criar
+[15:39] Começando com a onda 1
+[15:44] E task 004 verify 7.php em paralelo
+[15:51] Em subagentes, tá?
+[15:56] E também 20 mil aqui embaixo
+[16:02] Então o que ele tá fazendo é proteger
+[16:08] Do sub-agentes
+[16:13] E quando você souber, você me dá o retorno
+[16:20] E deixa eu ver aqui
+[16:26] Ah, tem 6 tasks, tá?
+[16:33] Ele completou a primeira onda
+[16:39] E cria as tasks para serem executadas em subagentes em paralelo
+[16:48] Ele está executando agora a segunda onda
+[16:54] Então ele está executando essas duas tasks em paralelo
+[17:00] E aqui ele só usou 31% da minha
+[17:06] Eu vou ter que mostrar de novo pra vocês, pera aí
+[17:12] Ele terminou essa
+[17:18] E a segunda onda ele está rodando com dois agentes
+[17:23] completou a segunda
+[17:32] ele deveria estar mostrando aqui embaixo essas ondas, mas ele não está
+[17:39] olha só, agora ele está testando
+[17:44] então se eu vier aqui, as 5 e as 6
+[17:50] fazendo os testes automatizados pra ver se tudo funciona, tá?
+[17:58] com o que ele aprendeu, tá?
+[18:04] pra você o que ele vai criar aqui.
+[18:12] na página de detalhe, e no layout
+[18:18] Todos essas funcionalidades aí pra nós também
+[18:24] Porque eu consigo manter o controle
+[18:31] Também que ficou grande, sobre o GSD
+[18:37] Eu consigo iterar mais
+[18:43] Usando isso aqui, tá?
+[18:50] Essas referências
+[18:55] E aqui na minha janela de contexto
+[19:01] Ele não tá usando a minha principal, tá?
+[19:07] E essas tasks tem muita coisa que dá pra fazer, tá?
+[19:13] Até enquanto ele tá desenvolvendo
+[19:17] Ele fez esse site aqui praticamente de primeira, tá?
+[19:24] Deve ter caído o servidor também
+[19:29] Cara, foi
+[19:37] Então, tenant funciona
+[19:44] Então ele fez isso de primeira
+[19:52] Então ele cria essas tasks aqui
+[19:58] Até chegar nas tasks
+[20:03] Quando ele executa elas
+[20:08] Lê o progress.txt
+[20:15] O Progress é a nossa
+[20:39] está rodando em paralelo, os testes demoram bastante, tá? Eu tenho até que diminuir isso,
+[20:55] No futuro eu vou agradecer por ter feito isso, mas agora é meio chato porque tem que esperar ele rodar todos os testes
+[21:09] Mas acho que agora ele tá procurando outras referências de logo aqui em cima que demora mais, tá?
+[21:18] Nenhuma skill aqui, eu estou usando nesse projeto
+[21:24] Mas eu poderia usar, tá?
+[21:30] Ele rodou as três ondas
+[21:37] Ao longo do meu projeto
+[21:43] E esse teste demora, tá?
+[21:47] Ele não vai mostrar, tá?
+[21:54] Pra ver se quebrou alguma coisa no meu sistema, tá?
+[22:01] Mas são 534 testes com 1.394 acertações
+[22:10] Que eu tenho que arrumar depois
+[22:14] Então olha só
+[22:21] Ele vai adicionar alguma coisa
+[22:27] Olha só, no progress, ele colocou tudo isso aqui
+[22:35] E tá tudo lá, tá?
+[22:41] Afetava bem mais lugares do que se esperava
+[22:46] De Windows
+[22:52] Ele arrumou tudo isso aqui
+[23:01] Aqui nas
+[23:07] Está aqui completinho
+[23:19] Ele tá fazendo o commit agora, porque eu pedi para ele fazer o commit.
+[23:34] Qual que foi o primeiro commit?
+[23:56] Que foi a primeira coisa que eu fiz
+[24:07] Ele não tá mostrando a data, tá?
+[24:10] Então, aqui, ontem à noite eu terminei de fazer isso aqui
+[24:17] Aí, às 7 horas
+[24:24] Fiz mais alguns planos e tá aí, tá?
+[24:29] Rodar o aplicativo pra eu testar
+[24:37] Mas vamos ver, né?
+[24:48] Vamos ver se vai funcionar aqui, né?
+[25:07] Ah tá, agora tá
+[25:11] Mas olha só que legal
+[25:16] Isso aqui eu coloquei depois
+[25:21] Na verdade, a última task é para refazer tudo isso aqui.
+[25:32] Aqui as configurações, olha só.
+[25:44] E o tema, olha só que legal.
+[25:49] Que tá rodando, por exemplo
+[25:55] Selecionar um outro aqui, por exemplo, o Vibrante
+[26:02] Então essa vai ser a ideia
+[26:08] Mas isso aqui foi tudo de primeira, tá gente?
+[26:13] Foi de primeira
+[26:19] Eu vou só dar um commit geral aqui
+[26:24] No meu banco de dados
+[26:30] Ah tá, agora tá tudo certo
+[26:35] Eu vou limpar
+[26:42] E agora foi, então agora eu já consegui automatizar
+[26:48] Até terminar os projetos
+[26:54] Eu vou mostrar pra vocês
+[27:00] E é isso aí, espero que tenha
+[27:05] Nesse vídeo, qualquer dúvida que você tiver
+[27:12] Legenda por Sônia Ruberti

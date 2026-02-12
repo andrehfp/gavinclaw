@@ -1,0 +1,14 @@
+[Unit]
+Description=Shorts Scheduler - Agendador de YouTube Shorts
+After=network.target
+
+[Service]
+Type=simple
+User=andreprado
+WorkingDirectory=/home/andreprado/.openclaw/workspace/shorts-scheduler
+ExecStart=/usr/bin/python3 /home/andreprado/.openclaw/workspace/shorts-scheduler/server.py
+Restart=always
+RestartSec=5
+
+[Install]
+WantedBy=multi-user.target

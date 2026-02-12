@@ -1,0 +1,409 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shorts Generator - Glass</title>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
+        body {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            min-height: 100vh;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 50%, #f093fb 100%);
+            background-attachment: fixed;
+            color: white;
+            line-height: 1.6;
+        }
+
+        .bg-shapes {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            overflow: hidden;
+            z-index: -1;
+        }
+
+        .bg-shapes div {
+            position: absolute;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.1);
+            animation: float 20s infinite ease-in-out;
+        }
+
+        .bg-shapes .shape1 { width: 400px; height: 400px; top: -100px; right: -100px; animation-delay: 0s; }
+        .bg-shapes .shape2 { width: 300px; height: 300px; bottom: -50px; left: -50px; animation-delay: -5s; }
+        .bg-shapes .shape3 { width: 200px; height: 200px; top: 50%; left: 30%; animation-delay: -10s; }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0) rotate(0deg); }
+            50% { transform: translateY(-30px) rotate(10deg); }
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 2rem;
+            position: relative;
+            z-index: 1;
+        }
+
+        .glass {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 24px;
+        }
+
+        .header {
+            text-align: center;
+            padding: 3rem 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .header h1 {
+            font-size: 3rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+            text-shadow: 0 4px 30px rgba(0, 0, 0, 0.2);
+        }
+
+        .header p {
+            opacity: 0.8;
+            font-size: 1.1rem;
+        }
+
+        .original-card {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 1.5rem 2rem;
+            margin-bottom: 2rem;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+
+        .original-info {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .yt-icon {
+            width: 50px;
+            height: 50px;
+            background: #ff0000;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+        }
+
+        .original-info h2 {
+            font-size: 1.1rem;
+            font-weight: 600;
+        }
+
+        .original-info span {
+            opacity: 0.7;
+            font-size: 0.9rem;
+        }
+
+        .watch-btn {
+            padding: 0.75rem 1.5rem;
+            background: white;
+            color: #764ba2;
+            text-decoration: none;
+            border-radius: 50px;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            transition: all 0.3s;
+        }
+
+        .watch-btn:hover {
+            transform: scale(1.05);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+        }
+
+        .shorts-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .short-card {
+            overflow: hidden;
+            transition: all 0.4s ease;
+        }
+
+        .short-card:hover {
+            transform: translateY(-8px) scale(1.02);
+            box-shadow: 0 30px 60px rgba(0, 0, 0, 0.3);
+        }
+
+        .video-area {
+            position: relative;
+            aspect-ratio: 9/16;
+            max-height: 400px;
+            background: rgba(0, 0, 0, 0.3);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .video-area video {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+        }
+
+        .badge {
+            position: absolute;
+            top: 12px;
+            left: 12px;
+            background: white;
+            color: #764ba2;
+            padding: 0.3rem 0.8rem;
+            border-radius: 50px;
+            font-weight: 700;
+            font-size: 0.8rem;
+        }
+
+        .card-content {
+            padding: 1.5rem;
+        }
+
+        .card-content h3 {
+            font-size: 1rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+        }
+
+        .desc-container {
+            background: rgba(0, 0, 0, 0.2);
+            border-radius: 12px;
+            padding: 1rem;
+            margin-bottom: 1rem;
+            max-height: 160px;
+            overflow-y: auto;
+        }
+
+        .desc-container pre {
+            font-family: inherit;
+            font-size: 0.85rem;
+            opacity: 0.9;
+            white-space: pre-wrap;
+        }
+
+        .tags-row {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.4rem;
+            margin-bottom: 1rem;
+        }
+
+        .tag {
+            background: rgba(255, 255, 255, 0.2);
+            padding: 0.25rem 0.6rem;
+            border-radius: 50px;
+            font-size: 0.75rem;
+            font-weight: 500;
+        }
+
+        .copy-btn {
+            width: 100%;
+            padding: 0.75rem;
+            background: rgba(255, 255, 255, 0.2);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            color: white;
+            border-radius: 12px;
+            cursor: pointer;
+            font-weight: 600;
+            font-size: 0.9rem;
+            transition: all 0.3s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+        }
+
+        .copy-btn:hover {
+            background: rgba(255, 255, 255, 0.3);
+        }
+
+        .copy-btn.copied {
+            background: rgba(52, 199, 89, 0.5);
+        }
+
+        .footer {
+            text-align: center;
+            padding: 2rem;
+            margin-top: 3rem;
+            opacity: 0.7;
+            font-size: 0.9rem;
+        }
+
+        @media (max-width: 768px) {
+            .header h1 { font-size: 2rem; }
+            .original-card { flex-direction: column; text-align: center; }
+            .original-info { flex-direction: column; }
+        }
+    </style>
+</head>
+<body>
+    <div class="bg-shapes">
+        <div class="shape1"></div>
+        <div class="shape2"></div>
+        <div class="shape3"></div>
+    </div>
+
+    <div class="container">
+        <header class="header glass">
+            <h1>🎬 Shorts Generator</h1>
+            <p>Glassmorphism Edition • Powered by AI</p>
+        </header>
+
+        <div class="original-card glass">
+            <div class="original-info">
+                <div class="yt-icon">▶️</div>
+                <div>
+                    <h2>Tasks aumentaram em 1000% minha produtividade</h2>
+                    <span>@andreprado</span>
+                </div>
+            </div>
+            <a href="https://youtube.com/watch?v=USEber2sx1A" target="_blank" class="watch-btn">
+                Assistir Original →
+            </a>
+        </div>
+
+        <div class="shorts-grid">
+            <div class="short-card glass">
+                <div class="video-area">
+                    <span class="badge">SHORT 2</span>
+                    <video controls preload="metadata"><source src="short_2_final.mp4" type="video/mp4"></video>
+                </div>
+                <div class="card-content">
+                    <h3>O segredo é criar um PRD antes de codar</h3>
+                    <div class="desc-container">
+                        <pre id="d2">Antes de codar, conversa com a IA. 🧠
+
+Cria um PRD explicando tudo:
+- Stack
+- Fluxo do usuário
+- Arquitetura
+
+A IA transforma em planos executáveis.
+Menos retrabalho, mais velocidade. 🚀</pre>
+                    </div>
+                    <div class="tags-row">
+                        <span class="tag">#programacao</span>
+                        <span class="tag">#ia</span>
+                        <span class="tag">#prd</span>
+                    </div>
+                    <button class="copy-btn" onclick="copy('d2',this)">📋 Copiar</button>
+                </div>
+            </div>
+
+            <div class="short-card glass">
+                <div class="video-area">
+                    <span class="badge">SHORT 3</span>
+                    <video controls preload="metadata"><source src="short_3_final.mp4" type="video/mp4"></video>
+                </div>
+                <div class="card-content">
+                    <h3>Tasks em ondas = paralelismo</h3>
+                    <div class="desc-container">
+                        <pre id="d3">O segredo: ondas de tasks! 🌊
+
+- Onda 1: tasks independentes (paralelo)
+- Onda 2: dependem da onda 1
+
+3 agentes rodando ao mesmo tempo.
+Automação de verdade. ⚡</pre>
+                    </div>
+                    <div class="tags-row">
+                        <span class="tag">#devtips</span>
+                        <span class="tag">#automacao</span>
+                    </div>
+                    <button class="copy-btn" onclick="copy('d3',this)">📋 Copiar</button>
+                </div>
+            </div>
+
+            <div class="short-card glass">
+                <div class="video-area">
+                    <span class="badge">SHORT 4</span>
+                    <video controls preload="metadata"><source src="short_4_final.mp4" type="video/mp4"></video>
+                </div>
+                <div class="card-content">
+                    <h3>Subagentes em paralelo</h3>
+                    <div class="desc-container">
+                        <pre id="d4">Subagentes são game changer! 🎮
+
+- Agente principal delega
+- Subagentes executam em paralelo
+- Cada um lê o progress.txt
+- No final, tudo se integra
+
+É delegação automatizada. 🤖</pre>
+                    </div>
+                    <div class="tags-row">
+                        <span class="tag">#ia</span>
+                        <span class="tag">#claudecode</span>
+                    </div>
+                    <button class="copy-btn" onclick="copy('d4',this)">📋 Copiar</button>
+                </div>
+            </div>
+
+            <div class="short-card glass">
+                <div class="video-area">
+                    <span class="badge">SHORT 5</span>
+                    <video controls preload="metadata"><source src="short_5_final.mp4" type="video/mp4"></video>
+                </div>
+                <div class="card-content">
+                    <h3>Resultado: site de primeira!</h3>
+                    <div class="desc-container">
+                        <pre id="d5">E o resultado? 🏆
+
+Site completo. De primeira.
+534 testes passando.
+
+✅ PRD bem feito
+✅ Tasks em ondas
+✅ Subagentes paralelos
+
+Do conceito ao deploy! 💪</pre>
+                    </div>
+                    <div class="tags-row">
+                        <span class="tag">#resultado</span>
+                        <span class="tag">#iaparadevs</span>
+                    </div>
+                    <button class="copy-btn" onclick="copy('d5',this)">📋 Copiar</button>
+                </div>
+            </div>
+        </div>
+
+        <footer class="footer">
+            Generated by OpenClaw • 2026
+        </footer>
+    </div>
+
+    <script>
+        function copy(id, btn) {
+            const text = document.getElementById(id).textContent;
+            const tags = btn.parentElement.querySelector('.tags-row');
+            const tagsText = Array.from(tags.querySelectorAll('.tag')).map(t => t.textContent).join(' ');
+            navigator.clipboard.writeText(text + '\n\n' + tagsText).then(() => {
+                btn.classList.add('copied');
+                btn.innerHTML = '✓ Copiado!';
+                setTimeout(() => { btn.classList.remove('copied'); btn.innerHTML = '📋 Copiar'; }, 2000);
+            });
+        }
+    </script>
+</body>
+</html>

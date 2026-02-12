@@ -1,0 +1,74 @@
+{
+  "moments": [
+    {
+      "start": 1,
+      "end": 15,
+      "hook_text": "Criar aplicativo não é mais o diferencial!",
+      "hook_score": 9,
+      "titles": [
+        "O Segredo por Trás do Sucesso dos Apps",
+        "Por que Criar Apps Não é Suficiente?",
+        "A Verdade Sobre Desenvolver Aplicativos Hoje"
+      ],
+      "description": "André revela que criar software hoje em dia não é mais o que importa, mas sim o canal de distribuição. Uma visão provocativa sobre o mercado de tecnologia.",
+      "reason": "Esse momento oferece uma visão impactante e pode gerar reflexão, encorajando a audiência a compartilhar e comentar sobre suas próprias experiências.",
+      "loop_friendly": false
+    },
+    {
+      "start": 32,
+      "end": 42,
+      "hook_text": "Um gráfico que revela a verdade sobre Slack e Teams!",
+      "hook_score": 8,
+      "titles": [
+        "Slack vs Teams: O Que Você Precisa Saber",
+        "A Verdade por Trás do Sucesso do Teams",
+        "Você Sabe por que o Teams Venceu o Slack?"
+      ],
+      "description": "André compara Slack e Teams, mostrando como a distribuição é mais importante que a qualidade do software.",
+      "reason": "A comparação entre duas grandes plataformas gera curiosidade e pode ser um tópico de discussão, aumentando o engajamento.",
+      "loop_friendly": false
+    },
+    {
+      "start": 50,
+      "end": 60,
+      "hook_text": "Em menos de 24 horas, eu lancei três SaaS!",
+      "hook_score": 9,
+      "titles": [
+        "Incrível! 3 SaaS lançados em 24 horas",
+        "Desenvolvimento Ágil: Três SaaS em Menos de Um Dia",
+        "Como Lançar Vários Produtos em Tempo Recorde"
+      ],
+      "description": "André compartilha sua surpreendente experiência de desenvolver e lançar três produtos SaaS em menos de 24 horas.",
+      "reason": "Esse momento traz uma sensação de urgência e inspiração, incentivando outras pessoas a agir rapidamente em seus projetos.",
+      "loop_friendly": false
+    },
+    {
+      "start": 34,
+      "end": 46,
+      "hook_text": "Veja como consegui criar um produto em apenas 2 dias!",
+      "hook_score": 8,
+      "titles": [
+        "O Produto Lançado em Apenas Dois Dias!",
+        "Do Zero ao Produto em 48 Horas!",
+        "Como Acelerar seu Desenvolvimento de Produtos"
+      ],
+      "description": "André descreve seu processo rápido de criação e lançamento de um aplicativo, mostrando o que ele aprendeu no caminho.",
+      "reason": "O aprendizado rápido e a capacidade de criar de forma ágil ressoam com empreendedores que desejam maximizar seu tempo e recursos.",
+      "loop_friendly": false
+    },
+    {
+      "start": 102,
+      "end": 115,
+      "hook_text": "A chave do sucesso não está no software, mas na distribuição!",
+      "hook_score": 10,
+      "titles": [
+        "Descubra o Verdadeiro Segredo do Sucesso",
+        "Distribuição: O Que Realmente Importa no Seu Produto",
+        "Como Conquistar o Mercado com Seu SaaS"
+      ],
+      "description": "André enfatiza a importância de ter um canal de distribuição forte para o sucesso de um produto, destacando uma estratégia comum na indústria.",
+      "reason": "Esse momento é uma verdade poderosa que pode ressoar com empreendedores e criadores de conteúdo, incentivando discussões e compartilhamentos.",
+      "loop_friendly": false
+    }
+  ]
+}

@@ -1,0 +1,38 @@
+{
+  "title": "A Aventura de Luna na Floresta Mágica",
+  "author": "Criado com IA",
+  "child_name": "Luna",
+  "size": "21x21cm",
+  "bleed_mm": 3,
+  "output_path": "scripts/kids_book/output/luna_book.pdf",
+  "pages": [
+    {
+      "image_path": "scripts/kids_book/images/cover.png",
+      "text": ""
+    },
+    {
+      "image_path": "scripts/kids_book/images/page1.png",
+      "text": "Era uma vez uma menina chamada Luna, que adorava explorar a floresta perto de sua casa."
+    },
+    {
+      "image_path": "scripts/kids_book/images/page2.png",
+      "text": "Um dia, Luna encontrou uma borboleta brilhante que a convidou para uma aventura mágica."
+    },
+    {
+      "image_path": "scripts/kids_book/images/page3.png",
+      "text": "Juntas, elas voaram sobre rios cristalinos e montanhas coloridas."
+    },
+    {
+      "image_path": "scripts/kids_book/images/page4.png",
+      "text": "No caminho, encontraram um coelho que sabia contar as melhores histórias do mundo."
+    },
+    {
+      "image_path": "scripts/kids_book/images/page5.png",
+      "text": "Quando o sol começou a se pôr, Luna voltou para casa com o coração cheio de alegria."
+    },
+    {
+      "image_path": "scripts/kids_book/images/page6.png",
+      "text": "E toda noite, antes de dormir, Luna sonhava com novas aventuras na floresta mágica. Fim."
+    }
+  ]
+}
