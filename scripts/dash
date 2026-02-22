@@ -1,0 +1,444 @@
+#!/home/andreprado/.openclaw/workspace/scripts/moldaspace_env/bin/python3
+"""
+dash — Unified metrics dashboard across all projects.
+
+Usage:
+    dash                    Overview (all projects)
+    dash moldaspace         MoldaSpace metrics
+    dash maia               Instagram @studio.maia.arch
+    dash youtube            YouTube channel stats
+    dash twitter            Twitter/X stats
+    dash reddit             Reddit u/maia_archviz
+    dash viralclaw          ViralClaw API health + jobs
+    dash system             Server health
+"""
+
+import argparse
+import json
+import os
+import subprocess
+import sys
+import time
+from datetime import datetime
+
+SCRIPTS = os.path.dirname(os.path.realpath(__file__))
+WORKSPACE = os.path.dirname(SCRIPTS)
+SECRETS = os.path.expanduser("~/.openclaw/.secrets")
+
+# Colors
+R = "\033[0m"
+B = "\033[1m"
+G = "\033[32m"
+Y = "\033[33m"
+C = "\033[36m"
+RED = "\033[31m"
+DIM = "\033[2m"
+MAG = "\033[35m"
+
+
+def load_env_secret(name):
+    path = os.path.join(SECRETS, name)
+    env = {}
+    if os.path.exists(path):
+        with open(path) as f:
+            for line in f:
+                line = line.strip()
+                if line and not line.startswith('#') and '=' in line:
+                    k, v = line.split('=', 1)
+                    env[k.strip()] = v.strip().strip('"\'')
+    return env
+
+
+def load_json_secret(name):
+    path = os.path.join(SECRETS, name)
+    if os.path.exists(path):
+        with open(path) as f:
+            return json.load(f)
+    return None
+
+
+def run_capture(cmd, timeout=10):
+    """Run command and capture output."""
+    try:
+        r = subprocess.run(cmd, capture_output=True, text=True, timeout=timeout, shell=isinstance(cmd, str))
+        return r.stdout.strip(), r.returncode
+    except subprocess.TimeoutExpired:
+        return "", 1
+    except Exception as e:
+        return str(e), 1
+
+
+def bar(value, max_val, width=20):
+    """Simple progress bar."""
+    pct = min(value / max_val, 1.0) if max_val > 0 else 0
+    filled = int(pct * width)
+    color = G if pct < 0.7 else Y if pct < 0.9 else RED
+    return f"{color}{'█' * filled}{'░' * (width - filled)}{R} {pct*100:.0f}%"
+
+
+# ─── moldaspace ───────────────────────────────────────────────────
+
+def dash_moldaspace():
+    """MoldaSpace revenue + users."""
+    import psycopg2
+
+    env = load_env_secret("moldaspace_db.env")
+    db_url = f"postgresql://{env['PGUSER']}:{env['PGPASSWORD']}@{env['PGHOST']}/{env['PGDATABASE']}?sslmode=require"
+    PRICE = 0.47
+
+    try:
+        conn = psycopg2.connect(db_url)
+        cur = conn.cursor()
+
+        queries = {
+            "total_users": "SELECT COUNT(*) FROM user_credits",
+            "signups_today": "SELECT COUNT(*) FROM user_credits WHERE signup_date >= CURRENT_DATE",
+            "signups_yesterday": "SELECT COUNT(*) FROM user_credits WHERE signup_date >= CURRENT_DATE - INTERVAL '1 day' AND signup_date < CURRENT_DATE",
+            "signups_7d": "SELECT COUNT(*) FROM user_credits WHERE signup_date >= NOW() - INTERVAL '7 days'",
+            "active_7d": "SELECT COUNT(DISTINCT user_id) FROM credit_transactions WHERE created_at >= NOW() - INTERVAL '7 days'",
+            "paid_users": "SELECT COUNT(DISTINCT user_id) FROM credit_transactions WHERE type='purchase'",
+            "rev_today": "SELECT COALESCE(SUM(amount),0), COUNT(*) FROM credit_transactions WHERE type='purchase' AND created_at >= CURRENT_DATE",
+            "rev_yesterday": "SELECT COALESCE(SUM(amount),0), COUNT(*) FROM credit_transactions WHERE type='purchase' AND created_at >= CURRENT_DATE - INTERVAL '1 day' AND created_at < CURRENT_DATE",
+            "rev_7d": "SELECT COALESCE(SUM(amount),0), COUNT(*) FROM credit_transactions WHERE type='purchase' AND created_at >= NOW() - INTERVAL '7 days'",
+            "mrr": "SELECT COALESCE(SUM(amount),0), COUNT(*) FROM credit_transactions WHERE type='purchase' AND created_at >= NOW() - INTERVAL '30 days'",
+            "walls_today": "SELECT COUNT(*) FROM user_credits WHERE last_credit_wall_at >= CURRENT_DATE",
+            "walls_7d": "SELECT COUNT(*) FROM user_credits WHERE last_credit_wall_at >= NOW() - INTERVAL '7 days'",
+        }
+
+        d = {}
+        for key, sql in queries.items():
+            cur.execute(sql)
+            row = cur.fetchone()
+            d[key] = row if len(row) > 1 else row[0]
+
+        cur.close()
+        conn.close()
+
+        mrr_val = float(d["mrr"][0]) * PRICE
+        target = 10000
+
+        print(f"\n  {B}{C}💰 MoldaSpace{R}  {DIM}moldaspace.com{R}")
+        print(f"  {'─' * 44}")
+        print(f"  MRR (30d)    ${mrr_val:>8.2f}  {bar(mrr_val, target)}")
+        print(f"  Today        ${float(d['rev_today'][0]) * PRICE:>8.2f}  ({d['rev_today'][1]} purchases)")
+        print(f"  Yesterday    ${float(d['rev_yesterday'][0]) * PRICE:>8.2f}  ({d['rev_yesterday'][1]} purchases)")
+        print(f"  7d           ${float(d['rev_7d'][0]) * PRICE:>8.2f}  ({d['rev_7d'][1]} purchases)")
+        print(f"  {'─' * 44}")
+        print(f"  Users        {d['total_users']:>6}   Signups today: {d['signups_today']}")
+        print(f"  Active 7d    {d['active_7d']:>6}   Yesterday: {d['signups_yesterday']}")
+        conv = (d["paid_users"] / d["total_users"] * 100) if d["total_users"] > 0 else 0
+        print(f"  Paid         {d['paid_users']:>6}   Conversion: {conv:.1f}%")
+        print(f"  Credit walls {d['walls_today']:>6}   (7d: {d['walls_7d']})")
+        return True
+
+    except Exception as e:
+        print(f"  {RED}MoldaSpace: {e}{R}")
+        return False
+
+
+# ─── maia ig ──────────────────────────────────────────────────────
+
+def dash_maia():
+    """Instagram @studio.maia.arch."""
+    import requests
+
+    creds = load_json_secret("instagram_maia_api.json")
+    if not creds:
+        print(f"  {RED}No Maia IG credentials{R}")
+        return False
+
+    try:
+        ig_id = creds["ig_account_id"]
+        token = creds["page_access_token"]
+
+        r = requests.get(f"https://graph.facebook.com/v21.0/{ig_id}",
+            params={"fields": "followers_count,media_count,username", "access_token": token}, timeout=10)
+        account = r.json()
+
+        r2 = requests.get(f"https://graph.facebook.com/v21.0/{ig_id}/media",
+            params={"fields": "id,like_count,comments_count,timestamp,media_type", "access_token": token, "limit": 10}, timeout=10)
+        media = r2.json().get("data", [])
+        likes = sum(p.get("like_count", 0) for p in media)
+        comments = sum(p.get("comments_count", 0) for p in media)
+        avg = round((likes + comments) / max(len(media), 1), 1)
+
+        print(f"\n  {B}{MAG}📱 Instagram @{account.get('username', 'studio.maia.arch')}{R}")
+        print(f"  {'─' * 44}")
+        print(f"  Followers    {account.get('followers_count', 0):>6}")
+        print(f"  Posts        {account.get('media_count', 0):>6}")
+        print(f"  Avg engage   {avg:>6}   (last {len(media)} posts)")
+        print(f"  Recent       {likes:>3} likes / {comments:>3} comments")
+        if media:
+            last = media[0]
+            print(f"  Last post    {last.get('timestamp', '')[:10]}  ({last.get('media_type', '')})")
+        return True
+
+    except Exception as e:
+        print(f"  {RED}Maia IG: {e}{R}")
+        return False
+
+
+# ─── youtube ──────────────────────────────────────────────────────
+
+def dash_youtube():
+    """YouTube channel stats."""
+    yt_script = os.path.join(SCRIPTS, "youtube_shorts", "youtube_analytics.py")
+    venv_python = os.path.join(SCRIPTS, "youtube_shorts", ".venv", "bin", "python3")
+
+    if not os.path.exists(venv_python):
+        venv_python = "python3"
+
+    out, rc = run_capture([venv_python, yt_script, "analytics", "--days", "7"], timeout=15)
+    if rc != 0 or not out:
+        print(f"\n  {B}{RED}▶ YouTube{R}  {DIM}@andreprado{R}")
+        print(f"  {'─' * 44}")
+        print(f"  {DIM}Analytics unavailable (auth may need refresh){R}")
+        return False
+
+    print(f"\n  {B}{RED}▶ YouTube{R}  {DIM}@andreprado{R}")
+    print(f"  {'─' * 44}")
+    for line in out.split('\n'):
+        line = line.strip()
+        if line and not line.startswith('=') and not line.startswith('YouTube'):
+            print(f"  {line}")
+    return True
+
+
+# ─── twitter ──────────────────────────────────────────────────────
+
+def dash_twitter():
+    """Twitter/X stats."""
+    out, rc = run_capture(["x-cli", "user", "get", "andrehfp"], timeout=10)
+
+    if rc != 0:
+        print(f"\n  {B}{C}🐦 Twitter/X{R}  {DIM}@andrehfp{R}")
+        print(f"  {'─' * 44}")
+        print(f"  {DIM}Unavailable{R}")
+        return False
+
+    print(f"\n  {B}{C}🐦 Twitter/X{R}  {DIM}@andrehfp{R}")
+    print(f"  {'─' * 44}")
+
+    # Parse stats from any output format
+    import re
+    full = out.replace('\n', ' ')
+
+    # Try "followers: 523 | following: 903 | tweet: 6,418" format
+    nums = re.findall(r'(\w+):\s*([\d,]+)', full)
+    stats = {k.lower(): v for k, v in nums}
+
+    if 'followers' in stats:
+        print(f"  Followers    {stats.get('followers', '?'):>6}")
+        print(f"  Following    {stats.get('following', '?'):>6}")
+        print(f"  Tweets       {stats.get('tweet', '?'):>6}")
+        print(f"  Likes        {stats.get('like', '?'):>6}")
+    else:
+        # Fallback: just print raw
+        for line in out.split('\n'):
+            line = line.strip()
+            if line and not line.startswith('╭') and not line.startswith('╰') and not line.startswith('│'):
+                print(f"  {line}")
+
+    return True
+
+
+# ─── reddit ───────────────────────────────────────────────────────
+
+def dash_reddit():
+    """Reddit u/maia_archviz."""
+    # Try to get status via the reddit_comment script
+    python = os.path.join(SCRIPTS, "moldaspace_env", "bin", "python3")
+    out, rc = run_capture([python, os.path.join(SCRIPTS, "reddit_comment.py"), "--test"], timeout=10)
+
+    print(f"\n  {B}{Y}🤖 Reddit{R}  {DIM}u/maia_archviz{R}")
+    print(f"  {'─' * 44}")
+
+    if rc != 0:
+        print(f"  {DIM}Auth unavailable (no Camofox session){R}")
+
+        # Try to get last known stats from dashboard data
+        dashboard_path = os.path.join(WORKSPACE, "moldaspace", "dashboard", "data.json")
+        if os.path.exists(dashboard_path):
+            try:
+                with open(dashboard_path) as f:
+                    data = json.load(f)
+                karma = data.get("reddit_karma", "?")
+                posts = data.get("reddit_posts", [])
+                print(f"  Karma        {karma:>6}   (cached)")
+                print(f"  Comments     {len(posts):>6}   (cached)")
+            except Exception:
+                pass
+        return False
+
+    import re
+    full = out.replace('\n', ' ')
+
+    # Extract username
+    user_match = re.search(r'u/(\w+)', full)
+    username = user_match.group(1) if user_match else "maia_archviz"
+
+    # Extract karma
+    comment_karma = re.search(r'[Cc]omment karma:\s*(\d+)', full)
+    post_karma = re.search(r'[Pp]ost karma:\s*(\d+)', full)
+
+    ck = comment_karma.group(1) if comment_karma else "?"
+    pk = post_karma.group(1) if post_karma else "?"
+
+    print(f"  Comment karma {ck:>5}")
+    print(f"  Post karma    {pk:>5}")
+    return True
+
+
+# ─── viralclaw ────────────────────────────────────────────────────
+
+def dash_viralclaw():
+    """ViralClaw API health."""
+    import urllib.request
+
+    print(f"\n  {B}{G}🚀 ViralClaw{R}  {DIM}api.viral-claw.com{R}")
+    print(f"  {'─' * 44}")
+
+    try:
+        req = urllib.request.Request("https://api.viral-claw.com/api/v1/health")
+        req.add_header("X-API-Key", "health-check")
+        resp = urllib.request.urlopen(req, timeout=5)
+        status = resp.getcode()
+        print(f"  API          {'🟢 UP' if status < 400 else '🔴 DOWN'}")
+    except urllib.error.HTTPError as e:
+        # 401/403 means API is up but key is wrong - that's fine
+        if e.code in (401, 403, 422):
+            print(f"  API          🟢 UP  (auth required)")
+        else:
+            print(f"  API          🔴 DOWN ({e.code})")
+    except Exception as e:
+        print(f"  API          🔴 DOWN ({e})")
+
+    return True
+
+
+# ─── system ───────────────────────────────────────────────────────
+
+def dash_system():
+    """Server health."""
+    print(f"\n  {B}🖥️  System{R}  {DIM}mediarr{R}")
+    print(f"  {'─' * 44}")
+
+    # Disk
+    out, _ = run_capture("df -h /mnt/ssd | tail -1")
+    if out:
+        parts = out.split()
+        used_pct = int(parts[4].replace('%', '')) if len(parts) >= 5 else 0
+        avail = parts[3] if len(parts) >= 4 else '?'
+        print(f"  Disk /mnt/ssd {bar(used_pct, 100)}  ({avail} free)")
+
+    out, _ = run_capture("df -h / | tail -1")
+    if out:
+        parts = out.split()
+        used_pct = int(parts[4].replace('%', '')) if len(parts) >= 5 else 0
+        avail = parts[3] if len(parts) >= 4 else '?'
+        print(f"  Disk /       {bar(used_pct, 100)}  ({avail} free)")
+
+    # Memory
+    out, _ = run_capture("free -h | grep Mem")
+    if out:
+        parts = out.split()
+        total = parts[1] if len(parts) >= 2 else '?'
+        used = parts[2] if len(parts) >= 3 else '?'
+        print(f"  Memory       {used} / {total}")
+
+    # Load
+    out, _ = run_capture("cat /proc/loadavg")
+    if out:
+        loads = out.split()[:3]
+        print(f"  Load         {' / '.join(loads)}")
+
+    # Services
+    out, _ = run_capture("pgrep -f field_player | wc -l")
+    fs42 = out.strip() if out else "0"
+    out, _ = run_capture("pgrep -f jellyfin | wc -l")
+    jf = out.strip() if out else "0"
+
+    services = []
+    if int(fs42) > 0:
+        services.append(f"FS42({fs42})")
+    else:
+        services.append(f"{RED}FS42 DOWN{R}")
+    if int(jf) > 0:
+        services.append("Jellyfin")
+    else:
+        services.append(f"{RED}Jellyfin DOWN{R}")
+
+    print(f"  Services     {' | '.join(services)}")
+
+    # Uptime
+    out, _ = run_capture("uptime -p")
+    if out:
+        print(f"  Uptime       {out.replace('up ', '')}")
+
+    return True
+
+
+# ─── overview ─────────────────────────────────────────────────────
+
+def dash_overview():
+    """Full dashboard."""
+    now = datetime.now()
+    print(f"\n{B}{'═' * 50}{R}")
+    print(f"{B}  📊 DASHBOARD  {R}{DIM}{now.strftime('%A, %b %d %Y — %H:%M')}{R}")
+    print(f"{B}{'═' * 50}{R}")
+
+    dash_moldaspace()
+    dash_maia()
+    dash_twitter()
+    dash_reddit()
+    dash_viralclaw()
+    dash_system()
+
+    print(f"\n{B}{'═' * 50}{R}")
+    print(f"{DIM}  Use: dash <section> for details | dash youtube for YT{R}")
+    print()
+
+
+# ─── main ─────────────────────────────────────────────────────────
+
+def main():
+    parser = argparse.ArgumentParser(
+        prog="dash",
+        description="Unified metrics dashboard",
+        formatter_class=argparse.RawDescriptionHelpFormatter,
+        epilog="""
+Sections:
+  dash                 Full overview (all projects)
+  dash moldaspace      MoldaSpace revenue + users
+  dash maia            Instagram @studio.maia.arch
+  dash youtube         YouTube channel analytics
+  dash twitter         Twitter/X stats
+  dash reddit          Reddit u/maia_archviz
+  dash viralclaw       ViralClaw API health
+  dash system          Server health (disk, memory, services)
+        """
+    )
+    parser.add_argument("section", nargs="?", default="overview",
+                        choices=["overview", "moldaspace", "maia", "youtube", "twitter", "reddit", "viralclaw", "system"],
+                        help="Dashboard section")
+
+    args = parser.parse_args()
+
+    sections = {
+        "overview": dash_overview,
+        "moldaspace": dash_moldaspace,
+        "maia": dash_maia,
+        "youtube": dash_youtube,
+        "twitter": dash_twitter,
+        "reddit": dash_reddit,
+        "viralclaw": dash_viralclaw,
+        "system": dash_system,
+    }
+
+    fn = sections.get(args.section, dash_overview)
+    fn()
+    return 0
+
+
+if __name__ == "__main__":
+    sys.exit(main() or 0)

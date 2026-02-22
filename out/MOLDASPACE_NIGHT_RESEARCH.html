@@ -1,0 +1,119 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>MoldaSpace Night Research - README Técnico</title>
+  <style>
+    :root{
+      --bg:#0b1020;--card:#121a33;--text:#e9eefc;--muted:#a9b4d0;--acc:#7aa2ff;--line:#26345f;
+    }
+    *{box-sizing:border-box}
+    body{margin:0;font-family:Inter,Segoe UI,Roboto,Arial,sans-serif;background:linear-gradient(160deg,#0a0f1f,#111a33);color:var(--text);}
+    .wrap{max-width:920px;margin:40px auto;padding:0 20px}
+    .hero{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:28px 30px;box-shadow:0 10px 40px rgba(0,0,0,.28)}
+    h1{margin:0 0 10px;font-size:34px}
+    .sub{color:var(--muted);font-size:16px}
+    .badge{display:inline-block;margin-top:12px;background:#1f2c57;color:#c8d8ff;border:1px solid #36549f;padding:6px 10px;border-radius:999px;font-size:12px}
+    section{margin-top:20px;background:var(--card);border:1px solid var(--line);border-radius:14px;padding:22px}
+    h2{margin:0 0 12px;color:#cfe0ff;font-size:22px}
+    ul{margin:8px 0 0 20px;line-height:1.55}
+    li{margin:4px 0}
+    code,pre{font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace}
+    pre{background:#0a1227;border:1px solid #273b70;border-radius:10px;padding:14px;overflow:auto;color:#d7e5ff;font-size:13px}
+    .grid{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+    .kpi{background:#0a1227;border:1px solid #273b70;border-radius:12px;padding:14px}
+    .kpi b{display:block;color:#d8e7ff;margin-bottom:6px}
+    .foot{color:var(--muted);font-size:13px;margin:20px 0 30px;text-align:center}
+    @media (max-width:740px){.grid{grid-template-columns:1fr} h1{font-size:28px}}
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <div class="hero">
+      <h1>MoldaSpace Night Research</h1>
+      <div class="sub">README técnico pronto para copiar e usar no OpenClaw.</div>
+      <div class="badge">Daily Intelligence Report • Noturno • Acionável</div>
+    </div>
+
+    <section>
+      <h2>Objetivo</h2>
+      <ul>
+        <li>Gerar relatório diário com métricas, concorrência, SEO, comunidade e plano de ação.</li>
+        <li>Reduzir achismo e acelerar decisões de growth.</li>
+      </ul>
+    </section>
+
+    <section>
+      <h2>Pré-requisitos</h2>
+      <ul>
+        <li>OpenClaw funcionando</li>
+        <li>Fonte de métricas (DB/PostHog/GSC/CLI)</li>
+        <li>Canal de entrega (Telegram/Discord/etc.)</li>
+      </ul>
+    </section>
+
+    <section>
+      <h2>Prompt-base (copiar e colar)</h2>
+<pre>Você é um analista de growth do MoldaSpace. Gere um “Daily Intelligence Report” objetivo.
+
+1) Coletar métricas principais (MRR, receita 24h/7d, signups 24h/7d, ativos 7d).
+2) Rodar 4 trilhas: concorrentes, SEO, comunidade, growth.
+3) Identificar top 5 achados com impacto.
+4) Propor plano de ação de amanhã (P1/P2/P3, esforço e impacto).
+5) Salvar em memory/moldaspace-daily/YYYY-MM-DD.md.
+
+Formato:
+- Resumo executivo (5 linhas)
+- Métricas
+- Top findings
+- Riscos
+- Plano de ação (3 a 5 ações)</pre>
+    </section>
+
+    <section>
+      <h2>Execução via Heartbeat (simples)</h2>
+<pre>## MoldaSpace Night Research (00:30-04:30)
+- [ ] Gerar Daily Intelligence Report
+- [ ] Rodar trilhas: concorrentes, SEO, comunidade, growth
+- [ ] Consolidar top 5 achados
+- [ ] Propor plano de amanhã (P1/P2/P3)
+- [ ] Salvar em memory/moldaspace-daily/YYYY-MM-DD.md</pre>
+    </section>
+
+    <section>
+      <h2>Execução via Cron (previsível)</h2>
+<pre>{
+  "name": "moldaspace-night-research",
+  "schedule": { "kind": "cron", "expr": "0 3 * * *", "tz": "America/Sao_Paulo" },
+  "payload": { "kind": "agentTurn", "message": "[PROMPT-BASE]" },
+  "sessionTarget": "isolated",
+  "enabled": true
+}</pre>
+    </section>
+
+    <section>
+      <h2>Template do relatório</h2>
+<pre># MoldaSpace Daily Intelligence Report - YYYY-MM-DD
+
+## Resumo executivo
+## Métricas
+## Top findings
+## Riscos
+## Plano de ação (amanhã)</pre>
+    </section>
+
+    <section>
+      <h2>Checklist de qualidade</h2>
+      <div class="grid">
+        <div class="kpi"><b>Qualidade</b>Top findings com impacto real e evidência numérica.</div>
+        <div class="kpi"><b>Ação</b>3 a 5 ações priorizadas com esforço/impacto.</div>
+        <div class="kpi"><b>Consistência</b>Salvar sempre em <code>memory/moldaspace-daily/</code>.</div>
+        <div class="kpi"><b>Sinal > ruído</b>Relatório curto, claro, sem encher linguiça.</div>
+      </div>
+    </section>
+
+    <div class="foot">MoldaSpace Night Research • OpenClaw • README técnico</div>
+  </div>
+</body>
+</html>

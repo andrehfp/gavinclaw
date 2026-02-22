@@ -1,62 +1,44 @@
----
-name: social-media-poster
-description: >
-  Unified social media posting skill for cross-platform content distribution.
-  Use when: user wants to post simultaneously or manage content across multiple social platforms (LinkedIn, Twitter/X, Instagram, Facebook).
-  Don't use when: creating initial content draft (use content-brainstorm or hormozi-content-engine), or generating images (use nano-banana-pro).
-  Outputs: cross-platform post scheduling, platform-specific formatting, tracking of published posts.
----
+# Social Media Poster Skill
 
-# Social Media Poster
-
-Unified interface for multi-platform social media publishing.
+## Overview
+Unified cross-platform social media posting skill. Supports simultaneous or selective posting across platforms.
 
 ## Supported Platforms
-- [x] LinkedIn (scripts/linkedin_post.py)
-- [x] Twitter/X (scripts/twitter_post.py)
-- [ ] Instagram (Meta Business API)
-- [ ] Facebook (Meta Business API)
+- Twitter/X (EN)
+- Instagram (Warm Editorial style)
+- Facebook (optional)
 
-## Workflow
+LinkedIn is discontinued (Feb 14, 2026) and should not be used.
 
-1. **Receive Content**
-   - Single post draft
-   - Multiple platform-specific variations
-   - Metadata (tags, CTAs, etc)
+## Usage
+```python
+from social_media_poster import post
 
-2. **Platform Validation**
-   - Check credentials for each platform
-   - Verify posting permissions
-   - Handle authentication refreshes
-
-3. **Platform-Specific Formatting**
-   - Adjust text length
-   - Modify hashtags
-   - Adapt tone
-   - Manage media attachments
-
-4. **Scheduling & Publishing**
-   - Immediate post
-   - Schedule for specific time
-   - Batch posting across platforms
-
-5. **Post-Publishing**
-   - Track post URLs
-   - Record engagement metrics
-   - Store in `memory/social_posts.jsonl`
+post(
+    content="Your post text",
+    platforms=["twitter", "instagram"],
+    media=["/path/to/image.jpg"],
+    hashtags=["#example", "#crossposting"],
+    scheduling_options={
+        "date": "2026-02-15T14:00:00",
+        "timezone": "America/Sao_Paulo"
+    }
+)
+```
 
 ## Configuration
+Requires credentials in:
+- `~/.openclaw/.secrets/twitter_credentials.json`
+- `~/.openclaw/.secrets/instagram_maia_api.json`
+- `~/.openclaw/.secrets/facebook_credentials.json` (optional)
 
-Requires:
-- OAuth tokens for each platform
-- `~/.openclaw/.secrets/` credential files
-- Active API access
+## Platform-Specific Rules
+- **Twitter/X:** English, concise, startup/tech focus
+- **Instagram:** Visual-first, lifestyle/behind-the-scenes
+- **Facebook:** Community-oriented content
 
-## Pending Integrations
-- Twitter/X: Waiting for Read+Write permissions
-- Instagram: Waiting for Meta Business API setup
-
-## Monitoring
-- Log all posting attempts
-- Alert on failed posts
-- Auto-retry with exponential backoff
+## Roadmap
+- [ ] Multi-platform scheduling
+- [ ] Content adaptation per platform
+- [ ] Analytics tracking
+- [ ] A/B testing support

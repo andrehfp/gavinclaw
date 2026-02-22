@@ -1,0 +1,49 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+SPARK_HOME="/home/andreprado/.openclaw/workspace/spark-intelligence"
+export SPARK_WORKSPACE="/home/andreprado/.openclaw/workspace"
+export PYTHONUNBUFFERED=1
+
+if [[ ! -d "$SPARK_HOME/.venv" ]]; then
+  echo "Spark venv not found at $SPARK_HOME/.venv"
+  exit 1
+fi
+
+source "$SPARK_HOME/.venv/bin/activate"
+cd "$SPARK_HOME"
+
+cmd="${1:-status}"
+shift || true
+
+case "$cmd" in
+  up)
+    python -m spark.cli up --lite
+    ;;
+  down)
+    python -m spark.cli down
+    ;;
+  health)
+    python -m spark.cli health
+    ;;
+  services|status)
+    python -m spark.cli services
+    ;;
+  bridge-update)
+    python -m spark.cli bridge --update "$@"
+    ;;
+  bridge-status)
+    python -m spark.cli bridge --status
+    ;;
+  learnings)
+    python -m spark.cli learnings --limit "${1:-20}"
+    ;;
+  capture-scan)
+    python -m spark.cli capture --scan
+    python -m spark.cli capture --list --limit "${1:-20}"
+    ;;
+  *)
+    echo "Usage: spark-openclaw {up|down|health|services|bridge-update|bridge-status|learnings [n]|capture-scan [n]}"
+    exit 2
+    ;;
+esac

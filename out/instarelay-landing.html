@@ -1,0 +1,122 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>InstaRelay — Operação de Instagram sem caos</title>
+  <style>
+    :root{--bg:#0b0d12;--card:#121722;--muted:#9aa4b2;--text:#f4f7fb;--acc:#5eead4;--acc2:#60a5fa;--line:#243041}
+    *{box-sizing:border-box} body{margin:0;background:radial-gradient(1000px 500px at 80% -10%,#1b2a44 0%,#0b0d12 60%);color:var(--text);font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,Arial}
+    .wrap{max-width:1040px;margin:0 auto;padding:24px}
+    .nav{display:flex;justify-content:space-between;align-items:center;padding:8px 0 24px}
+    .logo{font-weight:800;letter-spacing:.2px}.logo span{color:var(--acc)}
+    .btn{display:inline-block;padding:12px 18px;border-radius:10px;text-decoration:none;font-weight:700}
+    .btn-pri{background:linear-gradient(135deg,var(--acc),var(--acc2));color:#04121c}
+    .btn-sec{border:1px solid var(--line);color:var(--text)}
+    .hero{padding:40px 0 24px}
+    h1{font-size:48px;line-height:1.05;margin:0 0 16px;max-width:860px}
+    .sub{font-size:20px;color:var(--muted);max-width:760px;line-height:1.45}
+    .hero-cta{display:flex;gap:12px;flex-wrap:wrap;margin-top:24px}
+    .proof{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;margin-top:28px}
+    .p{background:rgba(18,23,34,.75);border:1px solid var(--line);border-radius:12px;padding:14px}
+    .p b{display:block;font-size:20px}
+    section{padding:46px 0;border-top:1px solid #1a2332}
+    h2{font-size:32px;margin:0 0 12px}
+    .muted{color:var(--muted)}
+    .grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px}
+    .card{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:16px}
+    .card h3{margin:0 0 8px;font-size:18px}
+    .steps{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px}
+    .step{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:16px}
+    .step .n{display:inline-block;background:#1f2b3d;border:1px solid #2d3c54;border-radius:999px;padding:4px 9px;font-size:12px;margin-bottom:10px}
+    .pricing{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px}
+    .plan{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:18px}
+    .plan.featured{border-color:#5eead4;box-shadow:0 0 0 1px #5eead4 inset}
+    .price{font-size:28px;font-weight:800}
+    footer{padding:34px 0 60px;color:var(--muted)}
+    @media (max-width:860px){h1{font-size:36px}.proof,.grid,.steps,.pricing{grid-template-columns:1fr}}
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <div class="nav">
+      <div class="logo">Insta<span>Relay</span></div>
+      <a class="btn btn-sec" href="#waitlist">Entrar na waitlist</a>
+    </div>
+
+    <section class="hero" style="border-top:none">
+      <h1>Seu Instagram não precisa mais ser uma operação no escuro.</h1>
+      <p class="sub">O InstaRelay é um operador de Instagram focado em execução confiável. Publica na conta certa, organiza comentários pendentes e te dá controle total com logs e guardrails.</p>
+      <div class="hero-cta">
+        <a class="btn btn-pri" href="#waitlist">Quero acesso antecipado</a>
+        <a class="btn btn-sec" href="#como">Ver como funciona</a>
+      </div>
+      <div class="proof">
+        <div class="p"><b>-80%</b>tempo gasto na operação manual</div>
+        <div class="p"><b>0 surpresas</b>cada ação com log, status e rastreio</div>
+        <div class="p"><b>+consistência</b>publicação e resposta sem caos diário</div>
+      </div>
+    </section>
+
+    <section>
+      <h2>O problema</h2>
+      <p class="muted">Creator e agência pequena perdem horas em tarefas repetitivas e ainda correm risco de erro operacional.</p>
+      <div class="grid">
+        <div class="card"><h3>Conta errada</h3><p>Postar na conta errada é o tipo de erro que destrói confiança em minutos.</p></div>
+        <div class="card"><h3>Comentários esquecidos</h3><p>Inbox sem priorização vira bola de neve e engajamento cai.</p></div>
+        <div class="card"><h3>Falha sem explicação</h3><p>Post agendado falha e ninguém sabe por quê. Sem log, sem diagnóstico.</p></div>
+      </div>
+    </section>
+
+    <section id="como">
+      <h2>Como funciona</h2>
+      <div class="steps">
+        <div class="step"><div class="n">1</div><h3>Conecte suas contas</h3><p>Configure perfis (ex: pessoal, marca, cliente) e regras de segurança.</p></div>
+        <div class="step"><div class="n">2</div><h3>Execute por chat</h3><p>“Publica esse carrossel na Maia” ou “responde comentários pendentes”.</p></div>
+        <div class="step"><div class="n">3</div><h3>Aprovação inteligente</h3><p>Você valida o que importa. O agente executa o operacional repetitivo.</p></div>
+        <div class="step"><div class="n">4</div><h3>Rastreio completo</h3><p>Cada job com status, retry, erro detalhado e permalink final.</p></div>
+      </div>
+    </section>
+
+    <section>
+      <h2>O que você ganha no dia a dia</h2>
+      <div class="grid">
+        <div class="card"><h3>Publish sem dor</h3><p>Photo, vídeo e carrossel com guardrails de conta e retry automático.</p></div>
+        <div class="card"><h3>Comments Inbox</h3><p>Lista só comentários pendentes, com sugestões curtas de resposta.</p></div>
+        <div class="card"><h3>Analytics acionável</h3><p>Resumo 7/30 dias com top post, pior post e taxa de resposta.</p></div>
+      </div>
+    </section>
+
+    <section>
+      <h2>Pra quem é</h2>
+      <div class="grid">
+        <div class="card"><h3>Criador solo</h3><p>Quer consistência sem virar escravo do app.</p></div>
+        <div class="card"><h3>Social manager</h3><p>Opera 3-20 contas e precisa de segurança operacional.</p></div>
+        <div class="card"><h3>Agência pequena</h3><p>Precisa escalar sem contratar operação pra tudo.</p></div>
+      </div>
+    </section>
+
+    <section>
+      <h2>Preço inicial (beta)</h2>
+      <div class="pricing">
+        <div class="plan"><h3>Creator</h3><div class="price">R$49/mês</div><p>1 conta • publish + comments inbox + analytics básico</p></div>
+        <div class="plan featured"><h3>Pro</h3><div class="price">R$99/mês</div><p>3 contas • multiaccount + sugestões IA + prioridade</p></div>
+        <div class="plan"><h3>Agency</h3><div class="price">R$249/mês</div><p>10 contas • workspace, logs avançados e suporte dedicado</p></div>
+      </div>
+    </section>
+
+    <section id="waitlist">
+      <h2>Quer testar primeiro?</h2>
+      <p class="muted">Entrando agora, você pega o preço beta e participa do roadmap dos próximos recursos.</p>
+      <div class="hero-cta">
+        <a class="btn btn-pri" href="mailto:hello@instarelay.app?subject=Quero%20acesso%20ao%20InstaRelay">Entrar na waitlist beta</a>
+        <a class="btn btn-sec" href="mailto:hello@instarelay.app?subject=Demo%20InstaRelay">Pedir demo</a>
+      </div>
+    </section>
+
+    <footer>
+      InstaRelay • Instagram Operations Reliability
+    </footer>
+  </div>
+</body>
+</html>

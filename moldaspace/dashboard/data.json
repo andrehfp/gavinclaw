@@ -1,0 +1,1285 @@
+{
+  "mrr": 270,
+  "total": 627,
+  "paying": 29,
+  "repeat": 32,
+  "karma": 55,
+  "seo": 3,
+  "ig": 1,
+  "reddit_posts": [
+    {
+      "date": "2026-02-19",
+      "sub": "r/archviz",
+      "post": "Small house in rural Wyoming (3ds Max + Fstorm portfolio)",
+      "url": "https://old.reddit.com/r/archviz/comments/1r8xu4i/small_house_in_rural_wyoming/o6922nq/",
+      "angle": "Fstorm volumetric atmosphere defense — golden hour exterior with tree line light is Fstorm's strength; dismissive 'looks suburban' comment misses design intent; small restrained rural housing is intentional; interior window light balance coexisting with exterior is technically hard to pull off",
+      "upvotes": 0,
+      "listeners": 0,
+      "status": "✅ verified on profile (script returned t1_o6922nq)"
+    },
+    {
+      "date": "2026-02-19",
+      "sub": "r/DesignMyRoom",
+      "post": "Help me design this space (English/French country living room)",
+      "url": "https://old.reddit.com/r/DesignMyRoom/comments/1r8tp1x/help_me_design_this_space_i_know_i_shouldnt_put/o6923m1/",
+      "angle": "Chair placement: angle 45° off wall toward loveseat = conversation grouping not waiting room; blue botanical loveseat is already perfect for English country; aubusson/floral rug pulling blues+creams from loveseat; remove plastic lamp shade wrapping; cream linen curtains hung high+wide; botanical prints or gilded mirror for walls",
+      "upvotes": 0,
+      "listeners": 0,
+      "status": "✅ verified on profile (script returned t1_o6923m1) — first comment on post (was 0 comments)"
+    },
+    {
+      "date": "2026-02-19",
+      "sub": "r/archviz",
+      "post": "PIMP MY AImage (AI editing of archviz renders, legal practices)",
+      "url": "https://old.reddit.com/r/archviz/comments/1r8v0c7/pimp_my_aimage/o687yeb/",
+      "angle": "Client AI editing of renders = copyright issue; contract clause template ('client may not modify/use AI tools to generate derivative works without written consent'); metadata/EXIF watermarking for paper trail; professional framing not precious",
+      "upvotes": 0,
+      "listeners": 0,
+      "status": "✅ verified — script returned t1_o687yeb"
+    },
+    {
+      "date": "2026-02-18",
+      "sub": "r/InteriorDesign",
+      "post": "What's the ideal placement for lights in a wet room/shower?",
+      "url": "https://old.reddit.com/r/InteriorDesign/comments/1r6k0wv/whats_the_ideal_placement_for_lights_in_a_wet/o657h2j/",
+      "angle": "Option 2 (2 over shower arms + 1 back third) is best for 70x60 near-square layout; 110° Hue dispersion covers wide cone so center-of-bay not needed; y-axis centerline creates strip effect in square spaces; offset bathtub light toward faucet end to avoid overhead glare when lying back; 4\" over 6\" saves ceiling space for speakers + cleaner tile look",
+      "upvotes": 1,
+      "listeners": 0,
+      "status": "✅ verified on profile (20:00 cron session)"
+    },
+    {
+      "date": "2026-02-18",
+      "sub": "r/DesignMyRoom",
+      "post": "What colour rug do i go for.. (bedroom with cognac bed, charcoal wardrobe, pine floor)",
+      "url": "https://old.reddit.com/r/DesignMyRoom/comments/1r8fjjs/what_colour_rug_do_i_go_for/o657hji/",
+      "angle": "Room already has warm tones (cognac bed, brass light, pine floor) — rug should lean into that; two routes: terracotta/rust (deepens palette) or jute/sisal (neutral, lets furniture hero); best pick: vintage Persian/kilim with rust+ochre+deep green ties feature wall + floor + bed; size up so both bed and incoming chair have front legs on rug",
+      "upvotes": 1,
+      "listeners": 0,
+      "status": "✅ verified on profile (20:00 cron session)"
+    },
+    {
+      "date": "2026-02-18",
+      "sub": "r/archviz",
+      "post": "Need advice (3ds Max + Corona beginner projects)",
+      "url": "https://old.reddit.com/r/archviz/comments/1r8ap53/need_advice/o63rzzo/",
+      "angle": "Key/fill lighting ratio for depth (reduce dome, let window/sun dominate); Corona material roughness variation prevents plastic look; two-point perspective for interior camera; encouragement on quality jump between projects",
+      "upvotes": 1,
+      "listeners": 0,
+      "status": "✅ verified on profile (16:00 cron session)"
+    },
+    {
+      "date": "2026-02-18",
+      "sub": "r/DesignMyRoom",
+      "post": "Mid-century modern house with small living room",
+      "url": "https://old.reddit.com/r/DesignMyRoom/comments/1r85ibe/midcentury_modern_house_with_small_living_room/o63s03q/",
+      "angle": "Fireplace-first orientation for MCM gathering spaces; leggy furniture for small rooms (exposed legs = continuous floor); sheer linen curtains ceiling-to-floor (height trick + period authentic); starburst/asymmetric mirror for MCM authenticity + light",
+      "upvotes": 1,
+      "listeners": 0,
+      "status": "✅ verified on profile (16:00 cron session)"
+    },
+    {
+      "date": "2026-02-18",
+      "sub": "r/archviz",
+      "post": "HDRI lighting issue - 3DS max + Corona",
+      "url": "https://old.reddit.com/r/archviz/comments/1r856r9/hdri_lighting_issue_3ds_max_corona/o62aju1/",
+      "angle": "Corona camera exposure settings (ISO/f-stop/shutter) as main culprit; matching tutorial camera values; HDRI dome intensity multiplier; override input gamma 1.0 in Corona bitmap loader",
+      "upvotes": 1,
+      "listeners": 0,
+      "status": "✅ verified on profile (12:00 cron session) — first comment on fresh post"
+    },
+    {
+      "date": "2026-02-18",
+      "sub": "r/DesignMyRoom",
+      "post": "Can't figure out a colour scheme for my kitchen",
+      "url": "https://old.reddit.com/r/DesignMyRoom/comments/1r82rqg/cant_figure_out_a_colour_scheme_for_my_kitchen/o62ajx4/",
+      "angle": "Warm brown tile as anchor — clay/terracotta cushion, natural oak table bridges black/white to warm floor; shiplap shelf in natural wood; round pedestal table confirmed",
+      "upvotes": 1,
+      "listeners": 0,
+      "status": "✅ verified on profile (12:00 cron session)"
+    },
+    {
+      "date": "2026-02-18",
+      "sub": "r/archviz",
+      "post": "Where to find assets optimized for real-time rendering?",
+      "url": "https://old.reddit.com/r/archviz/comments/1r7x74n/where_to_find_assets_optimized_for_realtime/o61eyqq/",
+      "angle": "Fab.com (Quixel Megascans successor) for real-time native assets, Sketchfab with PBR filter for plants/everyday objects, Laubwerk for optimized vegetation (paid), D5 built-in library, Turbosquid as last resort",
+      "upvotes": 1,
+      "listeners": 0,
+      "status": "✅ verified on profile (9:00 cron session)"
+    },
+    {
+      "date": "2026-02-18",
+      "sub": "r/archviz",
+      "post": "Orange tint in final render",
+      "url": "https://old.reddit.com/r/archviz/comments/1r7w897/orange_tint_in_final_render/o61f0hg/",
+      "angle": "VRay Sun + Dome light competition at default values: sun intensity 0.03-0.05 vs dome at 1.0, disable 'affect atmosphere' to let HDRI control sky and use sun as directional shadow caster",
+      "upvotes": 1,
+      "listeners": 0,
+      "status": "✅ verified on profile (9:00 cron session)"
+    },
+    {
+      "date": "2026-02-17",
+      "sub": "r/InteriorDesign",
+      "post": "Is it just me, or has minimalism become an excuse for rooms to look like doctor's offices?",
+      "url": "https://old.reddit.com/r/InteriorDesign/comments/1r6v01r/is_it_just_me_or_has_minimalism_become_an_excuse/o5yb2mk/",
+      "angle": "Lighting is the real culprit (warm 2700k bulbs, floor lamps), texture on a budget (floor-to-ceiling curtains, jute/wool rug, ceramic), vintage route for curated vs showroom look",
+      "upvotes": 1,
+      "listeners": 0,
+      "status": "✅ verified on profile (20:00 cron session)"
+    },
+    {
+      "date": "2026-02-17",
+      "sub": "r/archviz",
+      "post": "Beginner help needed",
+      "url": "https://old.reddit.com/r/archviz/comments/1r7cmuf/beginner_help_needed/o5yazip/",
+      "angle": "Tutorial copying is valid, redo from scratch to learn, lighting+materials > modeling, start small (one room/facade before full building), Blender Cycles vs game engines",
+      "upvotes": 1,
+      "listeners": 0,
+      "status": "✅ verified on profile (20:00 cron session)"
+    },
+    {
+      "date": "2026-02-17",
+      "sub": "r/archviz",
+      "post": "5070 or 5070ti for archviz & gaming ? (reply to No_Advance_1263)",
+      "url": "https://old.reddit.com/r/archviz/comments/1r766lg/5070_or_5070ti_for_archviz_gaming/o5yawn2/",
+      "angle": "D5+SketchUp live sync performance: 64GB RAM advice, reduce realtime GI during sync, crank up for final renders",
+      "upvotes": 1,
+      "listeners": 0,
+      "status": "✅ verified on profile (20:00 cron session) — reply to engaged thread"
+    },
+    {
+      "date": "2026-02-17",
+      "sub": "r/DesignMyRoom",
+      "post": "How would you decorate this room for two people living in there?",
+      "url": "https://old.reddit.com/r/DesignMyRoom/comments/1r70v4a/how_would_you_decorate_this_room_for_two_people/o5vje91/",
+      "angle": "Studio design for two people: dual workspaces, zone definition, murphy bed/daybed, floating desks, vertical storage solutions",
+      "upvotes": 1,
+      "listeners": 0,
+      "status": "✅ verified on profile (12:00 cron session)"
+    },
+    {
+      "date": "2026-02-17",
+      "sub": "r/archviz",
+      "post": "5070 or 5070ti for archviz & gaming ?",
+      "url": "https://old.reddit.com/r/archviz/comments/1r766lg/5070_or_5070ti_for_archviz_gaming/o5vjasz/",
+      "angle": "Rhino + D5/Unreal technical advice: VRAM importance for complex scenes, cost-benefit analysis, testing strategy",
+      "upvotes": 1,
+      "listeners": 0,
+      "status": "✅ verified on profile (12:00 cron session)"
+    },
+    {
+      "date": "2026-02-17",
+      "sub": "r/InteriorDesign",
+      "post": "Layout suggestions for small living room with an open kitchen",
+      "url": "https://old.reddit.com/r/InteriorDesign/comments/1r6nwop/layout_suggestions_for_small_living_room_with_an/o5vj6yp/",
+      "angle": "Square layout solutions: floating sofa placement, console table room divider, round vs rectangular dining tables, kitchen work triangle",
+      "upvotes": 1,
+      "listeners": 0,
+      "status": "✅ verified on profile (12:00 cron session)"
+    },
+    {
+      "date": "2026-02-17",
+      "sub": "r/DesignMyRoom",
+      "post": "What should i do with living room?",
+      "url": "https://old.reddit.com/r/DesignMyRoom/comments/1r6xgrw/what_should_i_do_with_living_room/o5uoqde/",
+      "angle": "Scale and visual weight analysis, TV console, proper coffee table sizing, color temperature contrast (warm accents for cool tones)",
+      "upvotes": 1,
+      "listeners": 0,
+      "status": "✅ verified on profile (9:00 cron session)"
+    },
+    {
+      "date": "2026-02-16",
+      "sub": "r/InteriorDesign",
+      "post": "Help with Couch and TV placement in living area",
+      "url": "https://old.reddit.com/r/InteriorDesign/comments/1r5ukpd/help_with_couch_and_tv_placement_in_living_area/o5rq55x/",
+      "angle": "Sectional angle advice, curtain solutions for reflection, floating layout, clearance considerations",
+      "upvotes": 2,
+      "listeners": 1,
+      "status": "✅ verified on profile (20:00 cron session) + OP replied positively"
+    },
+    {
+      "date": "2026-02-16",
+      "sub": "r/archviz",
+      "post": "Seeking honest advice regarding my recent work (3ds max + Corona)",
+      "url": "https://old.reddit.com/r/archviz/comments/1r6ht67/seeking_honest_advice_regarding_my_recent_work/o5rq23c/",
+      "angle": "UV mapping fix for ceiling lights, imperfections for realism, material roughness variation",
+      "upvotes": 1,
+      "listeners": 0,
+      "status": "✅ verified on profile (20:00 cron session)"
+    },
+    {
+      "date": "2026-02-16",
+      "sub": "r/DesignMyRoom",
+      "post": "How to balance all the wood?",
+      "url": "https://old.reddit.com/r/DesignMyRoom/comments/1r6gd8i/how_to_balance_all_the_wood/o5qdkm4/",
+      "angle": "Cottage core guidance: honey oak floors, glass cabinet fronts, tone variation over fighting wood",
+      "upvotes": 1,
+      "listeners": 0,
+      "status": "✅ verified on profile (cron session)"
+    },
+    {
+      "date": "2026-02-16",
+      "sub": "r/archviz",
+      "post": "First attempt at ArchViz using Blender",
+      "url": "https://old.reddit.com/r/archviz/comments/1r6cp8z/first_attempt_at_archviz_using_blender/o5qdobt/",
+      "angle": "Blender capabilities, workflow advice, monitor calibration, learning curve",
+      "upvotes": 2,
+      "listeners": 1,
+      "status": "✅ verified on profile (cron session) + OP replied positively"
+    },
+    {
+      "date": "2026-02-16",
+      "sub": "r/archviz",
+      "post": "Floor Plan Feedback for North-Facing Corner Block – Melbourne",
+      "url": "https://old.reddit.com/r/archviz/comments/1r64qm8/floor_plan_feedback_for_northfacing_corner_block/o5o8q5e/",
+      "angle": "Melbourne north-facing technical insights: clerestory windows, skylights, ensuite window positioning, kitchen sink orientation",
+      "upvotes": 1,
+      "listeners": 0,
+      "status": "✅ verified on profile (cron session)"
+    },
+    {
+      "date": "2026-02-16",
+      "sub": "r/InteriorDesign",
+      "post": "Help us decide our living room layout please",
+      "url": "https://old.reddit.com/r/InteriorDesign/comments/1r4ywua/help_us_decide_our_living_room_layout_please/o5o8qus/",
+      "angle": "Modified option 3: L-shaped sofa, floating arrangement, natural light preservation, radiator solutions",
+      "upvotes": 1,
+      "listeners": 0,
+      "status": "✅ verified on profile (cron session)"
+    },
+    {
+      "date": "2026-02-16",
+      "sub": "r/DesignMyRoom",
+      "post": "Living room layout hell",
+      "url": "https://old.reddit.com/r/DesignMyRoom/comments/1r600rf/living_room_layout_hell/o5o8rjl/",
+      "angle": "19.5x13.5 ft space: TV by fireplace, two-zone layout, floating shelves as dividers",
+      "upvotes": 1,
+      "listeners": 0,
+      "status": "✅ verified on profile (cron session)"
+    },
+    {
+      "date": "2026-02-13",
+      "sub": "r/archviz",
+      "post": "Customer not satisfied",
+      "url": "https://www.reddit.com/r/archviz/comments/1r3zwlr/comment/o592esu/",
+      "angle": "Emotional storytelling > technical fixes. Vignette shots, mood references, art direction.",
+      "upvotes": 2,
+      "listeners": 2,
+      "status": "✅ OP replied ✅ We replied back ✅"
+    },
+    {
+      "date": "2026-02-14",
+      "sub": "r/archviz",
+      "post": "First time working with interiors",
+      "url": "https://www.reddit.com/r/archviz/comments/1r3z8c4/comment/o5c12ul/",
+      "angle": "Color temperature mixing, material imperfections for realism",
+      "upvotes": 1,
+      "listeners": 0,
+      "status": "🟢 posted via cron"
+    },
+    {
+      "date": "2026-02-14",
+      "sub": "r/InteriorDesign",
+      "post": "Awkward L Shape Kitchen",
+      "url": "https://www.reddit.com/r/InteriorDesign/comments/1r3rgaj/comment/o5c1ffd/",
+      "angle": "Underfloor heating, work triangle, 1200mm clearance",
+      "upvotes": 1,
+      "listeners": 0,
+      "status": "🟢 posted via cron"
+    },
+    {
+      "date": "2026-02-14",
+      "sub": "r/DesignMyRoom",
+      "post": "Help me figure out what kind of rug to buy pls!!",
+      "url": "https://old.reddit.com/r/DesignMyRoom/comments/1r4ygyo/help_me_figure_out_what_kind_of_rug_to_buy_pls/",
+      "angle": "Rug texture and color selection strategies",
+      "upvotes": 0,
+      "listeners": 0,
+      "status": "❌ NOT POSTED - logged incorrectly by cron"
+    },
+    {
+      "date": "2026-02-15",
+      "sub": "r/DesignMyRoom",
+      "post": "Help needed for colour recommendation",
+      "url": "https://old.reddit.com/r/DesignMyRoom/comments/1r5dn2g/help_needed_for_colour_recommendation/o5i3kvu/",
+      "angle": "Warm gray/sage green color suggestions for orangey floors",
+      "upvotes": 1,
+      "listeners": 0,
+      "status": "✅ verified on profile"
+    },
+    {
+      "date": "2026-02-15",
+      "sub": "r/archviz",
+      "post": "D5 Render DOF blur issue",
+      "url": "https://old.reddit.com/r/archviz/comments/1r2v0to/d5_render_dof_blur_issue/o5i3rlt/",
+      "angle": "Technical D5 Render DOF troubleshooting - depth buffer mode",
+      "upvotes": 1,
+      "listeners": 0,
+      "status": "✅ verified on profile"
+    },
+    {
+      "date": "2026-02-15",
+      "sub": "r/InteriorDesign",
+      "post": "How would you redesign this kitchen for family use",
+      "url": "https://old.reddit.com/r/InteriorDesign/comments/1r4ktvb/how_would_you_redesign_this_kitchen_for_family_use/o5i3yor/",
+      "angle": "Work triangle flow, fridge relocation, counter extension",
+      "upvotes": 1,
+      "listeners": 0,
+      "status": "✅ verified on profile"
+    },
+    {
+      "date": "2026-02-15",
+      "sub": "r/archviz",
+      "post": "Practice Kitchen Render",
+      "url": "https://old.reddit.com/r/archviz/comments/1r4jmbm/practice_kitchen_render_seeking_honest_advice_3ds/o5i3v70/",
+      "angle": "Camera height, handle scale, material imperfections",
+      "upvotes": 1,
+      "listeners": 0,
+      "status": "✅ verified on profile"
+    },
+    {
+      "date": "2026-02-15",
+      "sub": "r/archviz",
+      "post": "Customer not satisfied (reply)",
+      "url": "https://old.reddit.com/r/archviz/comments/1r3zwlr/customer_not_satisfied/o5d85jv/",
+      "angle": "Follow-up: 3 storytelling objects trick",
+      "upvotes": 1,
+      "listeners": 0,
+      "status": "✅ verified on profile"
+    },
+    {
+      "date": "2026-02-15",
+      "sub": "r/archviz",
+      "post": "Personal bedroom visualization (3Ds Max + Corona)",
+      "url": "https://www.reddit.com/r/archviz/comments/1r5iv0g/personal_bedroom_visualization_3ds_max_corona/",
+      "angle": "Corona lighting advice: IES profiles, fill lighting, shadow density",
+      "upvotes": 0,
+      "listeners": 0,
+      "status": "❌ FAILED - Reddit server error, not verified on profile"
+    },
+    {
+      "date": "2026-02-15",
+      "sub": "r/DesignMyRoom",
+      "post": "Help Me Design my Bedroom!",
+      "url": "https://www.reddit.com/r/DesignMyRoom/comments/1r5myh4/help_me_design_my_bedroom/",
+      "angle": "Fairycore aesthetic: sage green curtains, corner desk, macrame",
+      "upvotes": 0,
+      "listeners": 0,
+      "status": "❌ FAILED - Reddit server error, not verified on profile"
+    },
+    {
+      "date": "2026-02-16",
+      "sub": "auth_blocked",
+      "post": "Reddit seeding session attempt",
+      "url": null,
+      "angle": "Authentication failure - missing maia_archviz password",
+      "upvotes": 0,
+      "listeners": 0,
+      "status": "❌ BLOCKED - No reddit_session cookie, missing credentials"
+    },
+    {
+      "date": "2026-02-19",
+      "sub": "r/archviz",
+      "post": "That ai website i cannot put the name on it... (AI for render imperfections)",
+      "url": "https://old.reddit.com/r/archviz/comments/1r96prf/that_ai_website_i_cannot_put_the_name_on_it/o6afuax/",
+      "angle": "SD img2img at low denoising (0.3-0.4) = 'reality grunge pass'; ComfyUI workflows for this on civitai; D5 Render weather particles alternative; asked if ComfyUI/civitai rings any bells",
+      "upvotes": 0,
+      "listeners": 0,
+      "status": "✅ verified — script returned t1_o6afuax. First comment on 0-comment post."
+    },
+    {
+      "date": "2026-02-19",
+      "sub": "r/archviz",
+      "post": "Materials for archviz (unique seamless textures from manufacturers)",
+      "url": "https://old.reddit.com/r/archviz/comments/1r9600g/materials_for_archviz/o6afv3y/",
+      "angle": "Cole & Son / Elitis / Bisazza / de Gournay offer digital assets to architects directly; Poliigon + Arroway for standard quality; Dimensiva curated for interiors; AmbientCG free basics; Mutina / Lea Ceramiche manufacturer portals for tiles; Corona material browser",
+      "upvotes": 0,
+      "listeners": 0,
+      "status": "✅ verified — script returned t1_o6afv3y. First comment on 0-comment post."
+    },
+    {
+      "date": "2026-02-19",
+      "sub": "r/archviz",
+      "post": "First Results After 1.5 Months of Intensive Learning (D5 + SketchUp + ComfyUI)",
+      "url": "https://old.reddit.com/r/archviz/comments/1r9eb9u/first_results_after_15_months_of_intensive/o6bsfap/",
+      "angle": "D5 roughness variation in materials (uniform defaults = plastic read); ComfyUI denoise <0.35 on architecture (higher = geometry drift fights SketchUp precision); pendant lights as key source vs dome = right approach. First comment on 0-comment post.",
+      "upvotes": 0,
+      "listeners": 0,
+      "status": "✅ verified — script returned t1_o6bsfap. First comment on 0-comment post."
+    },
+    {
+      "date": "2026-02-19",
+      "sub": "r/InteriorDesign",
+      "post": "Big Blank Slate guest bathroom layout advice (Nerdy_Fisherman)",
+      "url": "https://old.reddit.com/r/InteriorDesign/comments/1r98tmb/big_blank_slate_guest_bathroom_layout_advice/o6bsfyq/",
+      "angle": "Transom > full window (waterproofing + privacy); east-facing transom = morning diffused light in shower; horizontal LED bar at vanity replaces natural light effectively; toilet sightline from door = priority; plumbing consolidation on north/east walls = lower construction cost.",
+      "upvotes": 0,
+      "listeners": 0,
+      "status": "✅ verified — script returned t1_o6bsfyq. First human comment on post."
+    },
+    {
+      "date": "2026-02-19",
+      "sub": "r/archviz",
+      "post": "Materials for archviz — REPLY to djal_archviz Blender-Cycles follow-up",
+      "url": "https://old.reddit.com/r/archviz/comments/1r9600g/materials_for_archviz/o6bsou9/",
+      "angle": "Blender-specific: AmbientCG + Polyhaven = best for Cycles PBR; Node Wrangler addon ctrl+shift+t shortcut for importing PBR sets; Texture Coordinate + Map node for UV scale control; Poliigon Blender addon for library integration.",
+      "upvotes": 0,
+      "listeners": 0,
+      "status": "✅ verified — t1_o6bsou9 posted via raw urllib (reply to t1_ comment id). Response from Reddit API confirmed."
+    },
+    {
+      "date": "2026-02-20",
+      "sub": "r/archviz",
+      "post": "Vray+Sketchup, looking for critique on recent work (Mammoth_Road620)",
+      "url": "https://old.reddit.com/r/archviz/comments/1r9pvep/vraysketchup_looking_for_critique_on_recent_work/o6epd44/",
+      "angle": "Plateau at 'acceptable but not convincing' = materials + lighting; VRay+SketchUp defaults look clean (no roughness variation = CG read); single dome+sun too flat (add fill lights near windows for interior bounce); white balance as believability factor; post-processing: curves + chromatic aberration + slight lens blur; ComfyUI img2img at low denoise for final pass. Encouraged existing solid base.",
+      "upvotes": 0,
+      "listeners": 0,
+      "status": "✅ verified — script returned t1_o6epd44. Confirmed on profile."
+    },
+    {
+      "date": "2026-02-20",
+      "sub": "r/DesignMyRoom",
+      "post": "help me finalize my room (Green_Tie_7655 — bedroom with boring corners)",
+      "url": "https://old.reddit.com/r/DesignMyRoom/comments/1r9suct/help_me_finalize_my_room/o6epetm/",
+      "angle": "Dead corner by desk: tall floor plant (fiddle leaf or monstera) adds height without visual clutter; naked walls = grouping not adding (cluster 3-5 pieces close together vs spread out); layering textiles (different throw textures on bed/chair) adds depth art alone doesn't.",
+      "upvotes": 0,
+      "listeners": 0,
+      "status": "✅ verified — script returned t1_o6epetm. Confirmed on profile."
+    },
+    {
+      "date": "2026-02-20",
+      "sub": "r/archviz",
+      "post": "Recent Interior Visualization Work (Kiril3Dartist)",
+      "url": "https://old.reddit.com/r/archviz/comments/1ra1lq7/recent_interior_visualization_work/o6h0lpk/",
+      "angle": "Corona interior feedback: mood is solid but timber floor plank width reads oversized vs sofa/pillows; suggested scaling texture down/narrower boards for realism. Added tip to increase subtle roughness variation on floor/fabrics to avoid overly clean CG look.",
+      "upvotes": 0,
+      "listeners": 0,
+      "status": "✅ verified — script returned t1_o6h0lpk. Confirmed on profile."
+    },
+    {
+      "date": "2026-02-20",
+      "sub": "r/DesignMyRoom",
+      "post": "Rug help! (ControlTall4099)",
+      "url": "https://old.reddit.com/r/DesignMyRoom/comments/1ra396p/rug_help/o6h0lva/",
+      "angle": "Recommended calm-but-not-flat approach: oatmeal/greige textured wool rug with subtle linear weave; keep neutral palette without deadening the room. Reinforced large size (9x12) with front legs of all seating on rug for grounded layout.",
+      "upvotes": 0,
+      "listeners": 0,
+      "status": "✅ verified — script returned t1_o6h0lva. Confirmed on profile."
+    },
+    {
+      "date": "2026-02-20",
+      "sub": "r/archviz",
+      "post": "My recent work. Open to work. (Nearby-Strike2794)",
+      "url": "https://old.reddit.com/r/archviz/comments/1r9qc47/my_recent_work_open_to_work/o6icske/",
+      "angle": "SketchUp+D5 feedback: praised lighting base, suggested next realism gains via wood roughness variation + stronger contact shadows where furniture meets floor/walls; noted camera height choice as a strength.",
+      "upvotes": 0,
+      "listeners": 0,
+      "status": "✅ verified — script returned t1_o6icske. Confirmed on profile."
+    },
+    {
+      "date": "2026-02-20",
+      "sub": "r/InteriorDesign",
+      "post": "Should I destroy the wall between a kitchen and living room? (iamzamek)",
+      "url": "https://old.reddit.com/r/InteriorDesign/comments/1r9oxb0/should_i_destroy_the_wall_between_a_kitchen_and/o6icsof/",
+      "angle": "Recommended partial opening over full demolition: 120-140cm pass-through/half wall with counter for visibility and social flow while preserving acoustic separation and reducing visual clutter/noise/smell transfer.",
+      "upvotes": 0,
+      "listeners": 0,
+      "status": "✅ verified — script returned t1_o6icsof. Confirmed on profile."
+    },
+    {
+      "date": "2026-02-20",
+      "sub": "r/InteriorDesign",
+      "post": "REPLY — Big \"Blank Slate\" guest bathroom ... layout advice needed! (Nerdy_Fisherman)",
+      "url": "https://old.reddit.com/r/InteriorDesign/comments/1r98tmb/big_blank_slate_guest_bathroom_layout_advice/o6icy1j/",
+      "angle": "Follow-up feedback on revised double-vanity concept: validated north-wall vanity upgrade; advised frosted/high-sill narrow window for privacy, strong vertical vanity task lighting, and confirmed plumbing grouping remains cost-efficient.",
+      "upvotes": 0,
+      "listeners": 0,
+      "status": "✅ verified — direct API reply posted as t1_o6icy1j and confirmed via single-comment thread in Camofox."
+    },
+    {
+      "date": "2026-02-20",
+      "sub": "r/archviz",
+      "post": "REPLY — First Results After 1.5 Months (JeanFrann roughness maps follow-up)",
+      "url": "https://old.reddit.com/r/archviz/comments/1r9eb9u/first_results_after_15_months_of_intensive/o6icy3w/",
+      "angle": "Technical follow-up: roughness-map workflow sequencing (base conservative → broad low-contrast breakup → micro high-frequency detail), warning against overly strong high-frequency noise; D5 tip to evaluate with close camera + grazing side light.",
+      "upvotes": 0,
+      "listeners": 0,
+      "status": "✅ verified — direct API reply posted as t1_o6icy3w and confirmed via single-comment thread in Camofox."
+    },
+    {
+      "date": "2026-02-21",
+      "sub": "r/archviz",
+      "post": "My recent visualisation. Open to work.",
+      "url": "https://old.reddit.com/r/archviz/comments/1rai1vz/my_recent_visualisation_open_to_work/o6l7pxi/",
+      "angle": "Constructive critique on realism artifacts: plant clipping by sink, white seam likely roughness/normal issue, slight camera-height tweak and stronger contact shadow under vanity for grounding.",
+      "upvotes": 0,
+      "listeners": 0,
+      "status": "✅ verified on profile (script returned t1_o6l7pxi)"
+    },
+    {
+      "date": "2026-02-21",
+      "sub": "r/InteriorDesign",
+      "post": "Bathroom Tile Help",
+      "url": "https://old.reddit.com/r/InteriorDesign/comments/1ra4bb5/bathroom_tile_help/o6l7q96/",
+      "angle": "6x17 bathroom guidance: keep birch tile continuous on floor, use very light warm-neutral wet-room wall tile to preserve brightness with limited natural light, and apply seafoam/coastal blue as controlled accent (niche/back wall + textiles).",
+      "upvotes": 0,
+      "listeners": 0,
+      "status": "✅ verified on profile (script returned t1_o6l7q96)"
+    },
+    {
+      "date": "2026-02-21",
+      "sub": "r/archviz",
+      "post": "Why the post is getting deleted?",
+      "url": "https://old.reddit.com/r/archviz/comments/1raqrdu/why_the_post_is_getting_deleted/o6ly4jh/",
+      "angle": "Automod troubleshooting checklist: simplify post format (single image + neutral title), avoid trigger words (pricing/DM/open-to-work), remove watermark/text overlays, and escalate to mods with exact post ID to identify filter hit.",
+      "upvotes": 0,
+      "listeners": 0,
+      "status": "✅ verified on profile (script returned t1_o6ly4jh)"
+    },
+    {
+      "date": "2026-02-21",
+      "sub": "r/DesignMyRoom",
+      "post": "What color(s) should I paint this?",
+      "url": "https://old.reddit.com/r/DesignMyRoom/comments/1rarlfq/what_colors_should_i_paint_this/o6ly53l/",
+      "angle": "Entryway palette guidance with incoming black hardware: warm greige walls (avoid cool gray), crisp white trim/door, and muted accent decor (dusty olive or clay) to transition smoothly into adjacent living spaces.",
+      "upvotes": 0,
+      "listeners": 0,
+      "status": "✅ verified on profile (script returned t1_o6ly53l)"
+    },
+    {
+      "date": "2026-02-21",
+      "sub": "r/archviz",
+      "post": "Spent way too much time on these interiors, would love honest feedback !",
+      "url": "https://old.reddit.com/r/archviz/comments/1rayzga/spent_way_too_much_time_on_these_interiors_would/o6nabuk/",
+      "angle": "Realism polish feedback: subtle roughness breakup on painted materials, stronger contact shadows at furniture-floor intersections, and varied color temperature between key/practical lights to avoid uniform white balance across shots.",
+      "upvotes": 0,
+      "listeners": 0,
+      "status": "✅ verified on profile (script returned t1_o6nabuk)"
+    },
+    {
+      "date": "2026-02-21",
+      "sub": "r/InteriorDesign",
+      "post": "Thoughts? Layout1 or layout2? Or anything you'd do differently?",
+      "url": "https://old.reddit.com/r/InteriorDesign/comments/1raqq3e/thoughts_layout1_or_layout2_or_anything_youd_do/o6nacmz/",
+      "angle": "Layout guidance: keep layout 2 window-facing orientation, but avoid floating TV island; place TV on side wall with slim swivel mount for flexibility while preserving open circulation.",
+      "upvotes": 0,
+      "listeners": 0,
+      "status": "✅ verified on profile (script returned t1_o6nacmz)"
+    },
+    {
+      "date": "2026-02-21",
+      "sub": "r/archviz",
+      "post": "Generated this video with Kling AI based on the 3d visualization I created",
+      "url": "https://old.reddit.com/r/archviz/comments/1razal6/generated_this_video_with_kling_ai_based_on_the/o6oiz2h/",
+      "angle": "AI-to-video polish feedback: add subtle camera settle at cuts, motion blur on hand/object interaction, and exposure/white-balance matching between first/last frames to reduce synthetic transition feel.",
+      "upvotes": 0,
+      "listeners": 0,
+      "status": "✅ verified on profile (script returned t1_o6oiz2h)"
+    },
+    {
+      "date": "2026-02-21",
+      "sub": "r/InteriorDesign",
+      "post": "Help maximizing kitchen/living room/dining room semi-open floor plan",
+      "url": "https://old.reddit.com/r/InteriorDesign/comments/1ramlo5/help_maximizing_kitchenliving_roomdining_room/o6oizub/",
+      "angle": "Space-planning recommendation: shallow peninsula for prep/storage without blocking dining circulation; sofa-back to define hallway path; side-wall TV on low console with swivel mount to keep open-plan clarity.",
+      "upvotes": 0,
+      "listeners": 0,
+      "status": "✅ verified on profile (script returned t1_o6oizub)"
+    },
+    {
+      "date": "2026-02-22",
+      "sub": "r/archviz",
+      "post": "How has AI actually integrated into your archviz workflow?",
+      "url": "https://old.reddit.com/r/archviz/comments/1rbc5ge/how_has_ai_actually_integrated_into_your_archviz/o6rbsmy/",
+      "angle": "Shared practical AI workflow split: fast mood/camera iteration in pre-production, traditional final render in Corona/D5, and post-stage variation testing (weather/lens/styling). Added caution on perspective/material drift when AI influence exceeds ~20–30%.",
+      "upvotes": 0,
+      "listeners": 0,
+      "status": "✅ verified on profile (script returned t1_o6rbsmy)"
+    },
+    {
+      "date": "2026-02-22",
+      "sub": "r/InteriorDesign",
+      "post": "Help designing a small space with kitchen and living room",
+      "url": "https://old.reddit.com/r/InteriorDesign/comments/1ranfr0/help_designing_a_small_space_with_kitchen_and/o6rbsq3/",
+      "angle": "Small-space plan: keep one continuous kitchen wall (full-height storage), use shallow peninsula instead of fixed island, keep flooring continuous across zones, and separate functions via lighting layers to make room feel larger.",
+      "upvotes": 0,
+      "listeners": 0,
+      "status": "✅ verified on profile (script returned t1_o6rbsq3)"
+    },
+    {
+      "date": "2026-02-22",
+      "sub": "r/InteriorDesign",
+      "post": "REPLY — Help maximizing kitchen/living room/dining room semi-open floor plan",
+      "url": "https://old.reddit.com/r/InteriorDesign/comments/1ramlo5/help_maximizing_kitchenliving_roomdining_room/o6rbwyg/",
+      "angle": "Follow-up reply: media wall can work if kept visually light and shallow (30–35cm), favoring floating console + slim vertical panel to preserve perceived room width.",
+      "upvotes": 0,
+      "listeners": 0,
+      "status": "✅ verified on profile (script returned t1_o6rbwyg)"
+    },
+    {
+      "date": "2026-02-22",
+      "sub": "r/archviz",
+      "post": "REPLY — Why the post is getting deleted?",
+      "url": "https://old.reddit.com/r/archviz/comments/1raqrdu/why_the_post_is_getting_deleted/o6rbx1b/",
+      "angle": "Follow-up moderation troubleshooting: nudity filters can still trigger on blurred content; suggested full crop/alternate frame, NSFW flag + explicit note, then manual mod review with post ID.",
+      "upvotes": 0,
+      "listeners": 0,
+      "status": "✅ verified on profile (script returned t1_o6rbx1b)"
+    },
+    {
+      "date": "2026-02-22",
+      "sub": "r/InteriorDesign",
+      "post": "REPLY — Should I destroy the wall between a kitchen and living room?",
+      "url": "https://old.reddit.com/r/InteriorDesign/comments/1r9oxb0/should_i_destroy_the_wall_between_a_kitchen_and/o6rbx3r/",
+      "angle": "Follow-up dimensional guidance: 130cm opening is viable; keep ~100–105cm clear passage and use remaining width as return/counter, ideally with continuous countertop through opening.",
+      "upvotes": 0,
+      "listeners": 0,
+      "status": "✅ verified on profile (script returned t1_o6rbx3r)"
+    },
+    {
+      "date": "2026-02-22",
+      "sub": "r/archviz",
+      "post": "House on a Mountain Scene",
+      "url": "https://old.reddit.com/r/archviz/comments/1rb3zrr/house_on_a_mountain_scene/o6s44am/",
+      "angle": "Constructive workflow feedback for Archicad→Blender: export by stable layer/collection naming to preserve material assignment on reimport; improve white-on-white readability with subtle warm/cool separation plus low-height roughness breakup; suggested practical Greek-island vegetation workflow using quixel/polyhaven base plus manual hero-zone scatter.",
+      "upvotes": 0,
+      "listeners": 0,
+      "status": "✅ verified on profile (script returned t1_o6s44am)"
+    },
+    {
+      "date": "2026-02-22",
+      "sub": "r/DesignMyRoom",
+      "post": "How would you design this living room / bedroom space?",
+      "url": "https://old.reddit.com/r/DesignMyRoom/comments/1rbmqr3/how_would_you_design_this_living_room_bedroom/o6s44es/",
+      "angle": "Rental-friendly cozy plan: bigger rug footprint (front legs on), added floor lamp + high/wide full-length curtains, and visual decluttering by grouping decor into clear zones with one larger plant focus.",
+      "upvotes": 0,
+      "listeners": 0,
+      "status": "✅ verified on profile (script returned t1_o6s44es)"
+    },
+    {
+      "date": "2026-02-22",
+      "sub": "r/InteriorDesign",
+      "post": "REPLY — Help designing a small space with kitchen and living room",
+      "url": "https://old.reddit.com/r/InteriorDesign/comments/1ranfr0/help_designing_a_small_space_with_kitchen_and/o6s47ns/",
+      "angle": "Follow-up dimensional clarification: peninsula can work without crowding if kept shallow (~55–60cm) with ~90–100cm clear walkway; use light fronts and tuck-under stools to reduce visual bulk.",
+      "upvotes": 0,
+      "listeners": 0,
+      "status": "✅ verified on profile (script returned t1_o6s47ns)"
+    },
+    {
+      "date": "2026-02-22",
+      "sub": "r/archviz",
+      "post": "Am I overdoing the post-production?",
+      "url": "https://old.reddit.com/r/archviz/comments/1rbsxdb/am_i_overdoing_the_postproduction/o6tkcz1/",
+      "angle": "Constructive post-processing critique: advised reducing foliage dominance (sat/luminance + local contrast), reinforcing architectural focal hierarchy with subtle targeted vignette/clarity, and comparing against a 10–15% lower-contrast version to avoid overprocessed look.",
+      "upvotes": 0,
+      "listeners": 0,
+      "status": "✅ verified on profile (script returned t1_o6tkcz1)"
+    },
+    {
+      "date": "2026-02-22",
+      "sub": "r/InteriorDesign",
+      "post": "Choosing baseboards",
+      "url": "https://old.reddit.com/r/InteriorDesign/comments/1rbhzwf/choosing_baseboards/o6tkd40/",
+      "angle": "Recommended painted 120–150mm baseboards for 2.9m ceilings with matched casing profile; warned 60mm oak veneer may read underscaled; suggested practical install tactics for old uneven walls (back-bevel/scribe + caulk) and warm-white undertone with dark wall colors.",
+      "upvotes": 0,
+      "listeners": 0,
+      "status": "✅ verified on profile (script returned t1_o6tkd40)"
+    },
+    {
+      "date": "2026-02-22",
+      "sub": "r/archviz",
+      "post": "REPLY — House on a Mountain Scene",
+      "url": "https://old.reddit.com/r/archviz/comments/1rb3zrr/house_on_a_mountain_scene/o6tkjut/",
+      "angle": "Follow-up implementation guidance: hybrid export workflow (larger architecture chunks + segmented repeat elements) and stable object naming/material slots to preserve assignments across reimports.",
+      "upvotes": 0,
+      "listeners": 0,
+      "status": "✅ verified on profile (script returned t1_o6tkjut)"
+    },
+    {
+      "date": "2026-02-22",
+      "sub": "r/InteriorDesign",
+      "post": "REPLY — Help designing a small space with kitchen and living room",
+      "url": "https://old.reddit.com/r/InteriorDesign/comments/1ranfr0/help_designing_a_small_space_with_kitchen_and/o6tkjzp/",
+      "angle": "Follow-up tradeoff explanation: peninsula vs L-shape by function (prep/social surface, zoning, optional seating) while noting L-shape benefits for max circulation and minimal visual mass.",
+      "upvotes": 0,
+      "listeners": 0,
+      "status": "✅ verified on profile (script returned t1_o6tkjzp)"
+    }
+  ],
+  "ig_calendar": [
+    {
+      "date": "2026-02-14",
+      "time": "12:00",
+      "type": "🎬 Reel",
+      "title": "Sketch→Render: Modern Living Room",
+      "hook": "Watch this sketch become a $500K living room ✨",
+      "status": "posted",
+      "cron": null,
+      "url": "https://www.instagram.com/reel/DUvhfN7lDRQ/"
+    },
+    {
+      "date": "2026-02-15",
+      "time": "12:00",
+      "type": "🎬 Reel",
+      "title": "Sketch→Render: Scandinavian Bedroom",
+      "hook": "POV: You asked AI to design your dream bedroom",
+      "status": "uploaded",
+      "cron": null,
+      "url": "https://litter.catbox.moe/mgjiw0.mp4"
+    },
+    {
+      "date": "2026-02-16",
+      "time": "09:00",
+      "type": "🎬 Reel",
+      "title": "Sketch→Render: Luxury Bathroom",
+      "hook": "POV: AI transforms a rough sketch into this ✨",
+      "status": "cron-active",
+      "cron": "7ec2fc07"
+    },
+    {
+      "date": "2026-02-16",
+      "time": "12:00",
+      "type": "🎠 Carousel",
+      "title": "5 Lived-In Details That Make Renders Sell",
+      "hook": "Save this for your next project 📌",
+      "status": "cron-active",
+      "cron": "b98660c6"
+    },
+    {
+      "date": "2026-02-16",
+      "time": "15:00",
+      "type": "🖼️ Render",
+      "title": "Showcase: Coastal Beach House",
+      "hook": "Would you live here? 🏡",
+      "status": "cron-active",
+      "cron": "dd604068"
+    },
+    {
+      "date": "2026-02-16",
+      "time": "19:00",
+      "type": "💬 Quote Card",
+      "title": "Stop delivering only wide shots",
+      "hook": "Design wisdom 💡",
+      "status": "cron-active",
+      "cron": "debf0249"
+    },
+    {
+      "date": "2026-02-17",
+      "time": "09:00",
+      "type": "🎬 Reel",
+      "title": "Sketch→Render: Modern Living Room",
+      "hook": "POV: AI transforms a rough sketch into this ✨",
+      "status": "pending",
+      "cron": "7ec2fc07"
+    },
+    {
+      "date": "2026-02-17",
+      "time": "12:00",
+      "type": "🎠 Carousel",
+      "title": "Same Room, 3 Moods",
+      "hook": "Save this for your next project 📌",
+      "status": "pending",
+      "cron": "b98660c6"
+    },
+    {
+      "date": "2026-02-17",
+      "time": "15:00",
+      "type": "🖼️ Render",
+      "title": "Showcase: Mid-Century Modern Dining",
+      "hook": "Would you live here? 🏡",
+      "status": "pending",
+      "cron": "dd604068"
+    },
+    {
+      "date": "2026-02-17",
+      "time": "19:00",
+      "type": "📊 Infographic",
+      "title": "5 Lighting Mistakes That Kill Your Renders",
+      "hook": "Infographic via infomygraphic.com",
+      "status": "pending",
+      "cron": "debf0249"
+    },
+    {
+      "date": "2026-02-18",
+      "time": "09:00",
+      "type": "🎬 Reel",
+      "title": "Sketch→Render: Scandinavian Bedroom",
+      "hook": "POV: AI transforms a rough sketch into this ✨",
+      "status": "pending",
+      "cron": "7ec2fc07"
+    },
+    {
+      "date": "2026-02-18",
+      "time": "12:00",
+      "type": "🎠 Carousel",
+      "title": "Before the render: mood board process",
+      "hook": "Save this for your next project 📌",
+      "status": "pending",
+      "cron": "b98660c6"
+    },
+    {
+      "date": "2026-02-18",
+      "time": "15:00",
+      "type": "🖼️ Render",
+      "title": "Showcase: Bohemian Studio",
+      "hook": "Would you live here? 🏡",
+      "status": "pending",
+      "cron": "dd604068"
+    },
+    {
+      "date": "2026-02-18",
+      "time": "19:00",
+      "type": "🔄 Comparison",
+      "title": "Same room: Modern vs Scandinavian",
+      "hook": "Which style wins? A or B? 👇",
+      "status": "pending",
+      "cron": "debf0249"
+    },
+    {
+      "date": "2026-02-19",
+      "time": "09:00",
+      "type": "🎬 Reel",
+      "title": "Sketch→Render: Industrial Kitchen",
+      "hook": "POV: AI transforms a rough sketch into this ✨",
+      "status": "pending",
+      "cron": "7ec2fc07"
+    },
+    {
+      "date": "2026-02-19",
+      "time": "12:00",
+      "type": "🎠 Carousel",
+      "title": "What clients actually want vs what they say",
+      "hook": "Save this for your next project 📌",
+      "status": "pending",
+      "cron": "b98660c6"
+    },
+    {
+      "date": "2026-02-19",
+      "time": "15:00",
+      "type": "🖼️ Render",
+      "title": "Showcase: Contemporary Penthouse",
+      "hook": "Would you live here? 🏡",
+      "status": "pending",
+      "cron": "dd604068"
+    },
+    {
+      "date": "2026-02-19",
+      "time": "19:00",
+      "type": "📸 Post",
+      "title": "The vignette technique",
+      "hook": "Community engagement post",
+      "status": "pending",
+      "cron": "debf0249"
+    },
+    {
+      "date": "2026-02-20",
+      "time": "09:00",
+      "type": "🎬 Reel",
+      "title": "Sketch→Render: Minimalist Home Office",
+      "hook": "POV: AI transforms a rough sketch into this ✨",
+      "status": "pending",
+      "cron": "7ec2fc07"
+    },
+    {
+      "date": "2026-02-20",
+      "time": "12:00",
+      "type": "🎠 Carousel",
+      "title": "5 Common Layout Mistakes in Living Rooms",
+      "hook": "Save this for your next project 📌",
+      "status": "pending",
+      "cron": "b98660c6"
+    },
+    {
+      "date": "2026-02-20",
+      "time": "15:00",
+      "type": "🖼️ Render",
+      "title": "Showcase: Mediterranean Terrace",
+      "hook": "Would you live here? 🏡",
+      "status": "pending",
+      "cron": "dd604068"
+    },
+    {
+      "date": "2026-02-20",
+      "time": "19:00",
+      "type": "💬 Quote Card",
+      "title": "Define scope or die trying",
+      "hook": "Design wisdom 💡",
+      "status": "pending",
+      "cron": "debf0249"
+    },
+    {
+      "date": "2026-02-21",
+      "time": "09:00",
+      "type": "🎬 Reel",
+      "title": "Sketch→Render: Japanese Zen Living Room",
+      "hook": "POV: AI transforms a rough sketch into this ✨",
+      "status": "pending",
+      "cron": "7ec2fc07"
+    },
+    {
+      "date": "2026-02-21",
+      "time": "12:00",
+      "type": "🎠 Carousel",
+      "title": "Color Psychology in Interior Design",
+      "hook": "Save this for your next project 📌",
+      "status": "pending",
+      "cron": "b98660c6"
+    },
+    {
+      "date": "2026-02-21",
+      "time": "15:00",
+      "type": "🖼️ Render",
+      "title": "Showcase: Art Deco Lobby",
+      "hook": "Would you live here? 🏡",
+      "status": "pending",
+      "cron": "dd604068"
+    },
+    {
+      "date": "2026-02-21",
+      "time": "19:00",
+      "type": "📊 Infographic",
+      "title": "Camera Placement Checklist for Interior Renders",
+      "hook": "Infographic via infomygraphic.com",
+      "status": "pending",
+      "cron": "debf0249"
+    },
+    {
+      "date": "2026-02-22",
+      "time": "09:00",
+      "type": "🎬 Reel",
+      "title": "Sketch→Render: Coastal Beach House",
+      "hook": "POV: AI transforms a rough sketch into this ✨",
+      "status": "pending",
+      "cron": "7ec2fc07"
+    },
+    {
+      "date": "2026-02-22",
+      "time": "12:00",
+      "type": "🎠 Carousel",
+      "title": "3 Materials Dominating 2026",
+      "hook": "Save this for your next project 📌",
+      "status": "pending",
+      "cron": "b98660c6"
+    },
+    {
+      "date": "2026-02-22",
+      "time": "15:00",
+      "type": "🖼️ Render",
+      "title": "Showcase: Tropical Modern Kitchen",
+      "hook": "Would you live here? 🏡",
+      "status": "pending",
+      "cron": "dd604068"
+    },
+    {
+      "date": "2026-02-22",
+      "time": "19:00",
+      "type": "🔄 Comparison",
+      "title": "Same room: Modern vs Scandinavian",
+      "hook": "Which style wins? A or B? 👇",
+      "status": "pending",
+      "cron": "debf0249"
+    },
+    {
+      "date": "2026-02-23",
+      "time": "09:00",
+      "type": "🎬 Reel",
+      "title": "Sketch→Render: Mid-Century Modern Dining",
+      "hook": "POV: AI transforms a rough sketch into this ✨",
+      "status": "pending",
+      "cron": "7ec2fc07"
+    },
+    {
+      "date": "2026-02-23",
+      "time": "12:00",
+      "type": "🎠 Carousel",
+      "title": "Natural Light vs Artificial: Side by Side",
+      "hook": "Save this for your next project 📌",
+      "status": "pending",
+      "cron": "b98660c6"
+    },
+    {
+      "date": "2026-02-23",
+      "time": "15:00",
+      "type": "🖼️ Render",
+      "title": "Showcase: Cozy Cabin Bedroom",
+      "hook": "Would you live here? 🏡",
+      "status": "pending",
+      "cron": "dd604068"
+    },
+    {
+      "date": "2026-02-23",
+      "time": "19:00",
+      "type": "📸 Post",
+      "title": "AI rendering changed my workflow",
+      "hook": "Community engagement post",
+      "status": "pending",
+      "cron": "debf0249"
+    },
+    {
+      "date": "2026-02-24",
+      "time": "09:00",
+      "type": "🎬 Reel",
+      "title": "Sketch→Render: Bohemian Studio",
+      "hook": "POV: AI transforms a rough sketch into this ✨",
+      "status": "pending",
+      "cron": "7ec2fc07"
+    },
+    {
+      "date": "2026-02-24",
+      "time": "12:00",
+      "type": "🎠 Carousel",
+      "title": "The Power of Vignette Shots",
+      "hook": "Save this for your next project 📌",
+      "status": "pending",
+      "cron": "b98660c6"
+    },
+    {
+      "date": "2026-02-24",
+      "time": "15:00",
+      "type": "🖼️ Render",
+      "title": "Showcase: Grand Library",
+      "hook": "Would you live here? 🏡",
+      "status": "pending",
+      "cron": "dd604068"
+    },
+    {
+      "date": "2026-02-24",
+      "time": "19:00",
+      "type": "💬 Quote Card",
+      "title": "Your client says something feels off",
+      "hook": "Design wisdom 💡",
+      "status": "pending",
+      "cron": "debf0249"
+    },
+    {
+      "date": "2026-02-25",
+      "time": "09:00",
+      "type": "🎬 Reel",
+      "title": "Sketch→Render: Contemporary Penthouse",
+      "hook": "POV: AI transforms a rough sketch into this ✨",
+      "status": "pending",
+      "cron": "7ec2fc07"
+    },
+    {
+      "date": "2026-02-25",
+      "time": "12:00",
+      "type": "🎠 Carousel",
+      "title": "Kitchen Styles: Modern vs Classic vs Industrial",
+      "hook": "Save this for your next project 📌",
+      "status": "pending",
+      "cron": "b98660c6"
+    },
+    {
+      "date": "2026-02-25",
+      "time": "15:00",
+      "type": "🖼️ Render",
+      "title": "Showcase: Luxury Bathroom",
+      "hook": "Would you live here? 🏡",
+      "status": "pending",
+      "cron": "dd604068"
+    },
+    {
+      "date": "2026-02-25",
+      "time": "19:00",
+      "type": "📊 Infographic",
+      "title": "Render Resolution Guide: When to Use What",
+      "hook": "Infographic via infomygraphic.com",
+      "status": "pending",
+      "cron": "debf0249"
+    },
+    {
+      "date": "2026-02-26",
+      "time": "09:00",
+      "type": "🎬 Reel",
+      "title": "Sketch→Render: Mediterranean Terrace",
+      "hook": "POV: AI transforms a rough sketch into this ✨",
+      "status": "pending",
+      "cron": "7ec2fc07"
+    },
+    {
+      "date": "2026-02-26",
+      "time": "12:00",
+      "type": "🎠 Carousel",
+      "title": "5 Lived-In Details That Make Renders Sell",
+      "hook": "Save this for your next project 📌",
+      "status": "pending",
+      "cron": "b98660c6"
+    },
+    {
+      "date": "2026-02-26",
+      "time": "15:00",
+      "type": "🖼️ Render",
+      "title": "Showcase: Modern Living Room",
+      "hook": "Would you live here? 🏡",
+      "status": "pending",
+      "cron": "dd604068"
+    },
+    {
+      "date": "2026-02-26",
+      "time": "19:00",
+      "type": "🔄 Comparison",
+      "title": "Same room: Modern vs Scandinavian",
+      "hook": "Which style wins? A or B? 👇",
+      "status": "pending",
+      "cron": "debf0249"
+    },
+    {
+      "date": "2026-02-27",
+      "time": "09:00",
+      "type": "🎬 Reel",
+      "title": "Sketch→Render: Art Deco Lobby",
+      "hook": "POV: AI transforms a rough sketch into this ✨",
+      "status": "pending",
+      "cron": "7ec2fc07"
+    },
+    {
+      "date": "2026-02-27",
+      "time": "12:00",
+      "type": "🎠 Carousel",
+      "title": "Same Room, 3 Moods",
+      "hook": "Save this for your next project 📌",
+      "status": "pending",
+      "cron": "b98660c6"
+    },
+    {
+      "date": "2026-02-27",
+      "time": "15:00",
+      "type": "🖼️ Render",
+      "title": "Showcase: Scandinavian Bedroom",
+      "hook": "Would you live here? 🏡",
+      "status": "pending",
+      "cron": "dd604068"
+    },
+    {
+      "date": "2026-02-27",
+      "time": "19:00",
+      "type": "📸 Post",
+      "title": "Camera angles that sell the space",
+      "hook": "Community engagement post",
+      "status": "pending",
+      "cron": "debf0249"
+    },
+    {
+      "date": "2026-02-28",
+      "time": "09:00",
+      "type": "🎬 Reel",
+      "title": "Sketch→Render: Tropical Modern Kitchen",
+      "hook": "POV: AI transforms a rough sketch into this ✨",
+      "status": "pending",
+      "cron": "7ec2fc07"
+    },
+    {
+      "date": "2026-02-28",
+      "time": "12:00",
+      "type": "🎠 Carousel",
+      "title": "Before the render: mood board process",
+      "hook": "Save this for your next project 📌",
+      "status": "pending",
+      "cron": "b98660c6"
+    },
+    {
+      "date": "2026-02-28",
+      "time": "15:00",
+      "type": "🖼️ Render",
+      "title": "Showcase: Industrial Kitchen",
+      "hook": "Would you live here? 🏡",
+      "status": "pending",
+      "cron": "dd604068"
+    },
+    {
+      "date": "2026-02-28",
+      "time": "19:00",
+      "type": "💬 Quote Card",
+      "title": "Why mood boards matter more than renders",
+      "hook": "Design wisdom 💡",
+      "status": "pending",
+      "cron": "debf0249"
+    },
+    {
+      "date": "2026-03-01",
+      "time": "09:00",
+      "type": "🎬 Reel",
+      "title": "Sketch→Render: Cozy Cabin Bedroom",
+      "hook": "POV: AI transforms a rough sketch into this ✨",
+      "status": "pending",
+      "cron": "7ec2fc07"
+    },
+    {
+      "date": "2026-03-01",
+      "time": "12:00",
+      "type": "🎠 Carousel",
+      "title": "What clients actually want vs what they say",
+      "hook": "Save this for your next project 📌",
+      "status": "pending",
+      "cron": "b98660c6"
+    },
+    {
+      "date": "2026-03-01",
+      "time": "15:00",
+      "type": "🖼️ Render",
+      "title": "Showcase: Minimalist Home Office",
+      "hook": "Would you live here? 🏡",
+      "status": "pending",
+      "cron": "dd604068"
+    },
+    {
+      "date": "2026-03-01",
+      "time": "19:00",
+      "type": "📊 Infographic",
+      "title": "Color Temperature Chart for Interiors",
+      "hook": "Infographic via infomygraphic.com",
+      "status": "pending",
+      "cron": "debf0249"
+    }
+  ],
+  "crons": {
+    "reddit": {
+      "frequency": "4x/dia (9h, 12h, 16h, 20h)",
+      "next": "2026-02-17T20:00",
+      "lastStatus": "✅ ok (2026-02-20 20:00) - 2 new comments + 2 replies: r/archviz SketchUp+D5 realism feedback + follow-up on roughness workflow; r/InteriorDesign kitchen/living wall strategy + bathroom concept follow-up. Karma: 28 (up from 27)."
+    },
+    "report": {
+      "frequency": "1x/dia (8h)",
+      "next": "2026-02-16T08:00",
+      "lastStatus": "✅ ok"
+    },
+    "igComments": {
+      "frequency": "cada 30min",
+      "next": "continuous",
+      "lastStatus": "✅ ok"
+    },
+    "igEngagement": {
+      "frequency": "1x/dia (10h)",
+      "next": "2026-02-16T10:00",
+      "lastStatus": "⏸️ manual (André)"
+    }
+  },
+  "tiktok": {
+    "account": "studio.maia.arch",
+    "status": "blocked - awaiting recovery",
+    "posts": 0
+  },
+  "posts": [
+    {
+      "platform": "instagram",
+      "account": "maia",
+      "media_id": "18113874544629676",
+      "timestamp": "2026-02-15T17:00:43.928778",
+      "type": "quote_card",
+      "hashtags": [
+        "archviz",
+        "interiordesign",
+        "renderingtips",
+        "architecturelife",
+        "3dvisualization",
+        "clientfeedback",
+        "designtips",
+        "renderlovers",
+        "archilovers",
+        "architecturevisualization"
+      ]
+    }
+  ]
+}

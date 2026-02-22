@@ -1,0 +1,6 @@
+sketch: https://v3b.fal.media/files/b/0a8edb54/SbrGo3KaVArJ-C23bqt5g_bedroom-sketch.png
+render: https://v3b.fal.media/files/b/0a8edb54/1uc77-tVXG6t0vBcQh7xt_bedroom-render.png
+Submitting to Veo 3.1...
+Request: bb3c9004-a385-432c-b0cf-c51b1cd6ed3b
+Done in 47s
+Saved: output/fal-video-test/veo-sketch-to-render.mp4 (3.8 MB)

@@ -1,0 +1,477 @@
+﻿{
+  "values": {
+    "min_occurrences": 1,
+    "min_occurrences_critical": 1,
+    "confidence_threshold": 0.6,
+    "gate_threshold": 0.45,
+    "max_retries_per_error": 3,
+    "max_file_touches": 5,
+    "no_evidence_steps": 6,
+    "max_steps": 40,
+    "advice_cache_ttl": 180,
+    "queue_batch_size": 100
+  },
+  "semantic": {
+    "enabled": true,
+    "min_similarity": 0.5,
+    "min_fusion_score": 0.5,
+    "weight_recency": 0.1,
+    "weight_outcome": 0.45,
+    "mmr_lambda": 0.5,
+    "dedupe_similarity": 0.88,
+    "index_on_write": true,
+    "index_on_read": true,
+    "index_backfill_limit": 500,
+    "index_cache_ttl_seconds": 120,
+    "exclude_categories": [],
+    "category_caps": {
+      "cognitive": 3,
+      "trigger": 2,
+      "default": 2,
+      "user_understanding": 2,
+      "context": 2,
+      "self_awareness": 2,
+      "meta_learning": 2,
+      "wisdom": 3,
+      "reasoning": 2
+    },
+    "category_exclude": [],
+    "log_retrievals": true,
+    "rescue_min_similarity": 0.3,
+    "rescue_min_fusion_score": 0.2
+  },
+  "triggers": {
+    "enabled": true,
+    "rules_file": "<USER_HOME>\\.spark\\trigger_rules.yaml"
+  },
+  "promotion": {
+    "adapter_budgets": {
+      "CLAUDE.md": {
+        "max_items": 40
+      },
+      "AGENTS.md": {
+        "max_items": 30
+      },
+      "TOOLS.md": {
+        "max_items": 25
+      },
+      "SOUL.md": {
+        "max_items": 25
+      },
+      ".cursorrules": {
+        "max_items": 40
+      },
+      ".windsurfrules": {
+        "max_items": 40
+      }
+    },
+    "confidence_floor": 0.95,
+    "min_age_hours": 6.0,
+    "auto_interval_s": 3600,
+    "threshold": 0.80
+  },
+  "synthesizer": {
+    "mode": "auto",
+    "ai_timeout_s": 10.0,
+    "cache_ttl_s": 120,
+    "max_cache_entries": 50,
+    "preferred_provider": "minimax",
+    "minimax_model": "MiniMax-M2.5"
+  },
+  "advisory_engine": {
+    "enabled": true,
+    "max_ms": 4000,
+    "include_mind": true,
+    "prefetch_queue_enabled": false,
+    "prefetch_inline_enabled": true,
+    "prefetch_inline_max_jobs": 1,
+    "delivery_stale_s": 600,
+    "advisory_text_repeat_cooldown_s": 300,
+    "actionability_enforce": true,
+    "force_programmatic_synth": false,
+    "selective_ai_synth_enabled": true,
+    "selective_ai_min_remaining_ms": 1800,
+    "selective_ai_min_authority": "whisper"
+  },
+  "advisory_gate": {
+    "max_emit_per_call": 2,
+    "tool_cooldown_s": 15,
+    "advice_repeat_cooldown_s": 300,
+    "warning_threshold": 0.68,
+    "note_threshold": 0.38,
+    "whisper_threshold": 0.27,
+    "emit_whispers": true
+  },
+  "advisory_packet_store": {
+    "packet_ttl_s": 600,
+    "max_index_packets": 2000,
+    "relaxed_effectiveness_weight": 2.0,
+    "relaxed_low_effectiveness_threshold": 0.3,
+    "relaxed_low_effectiveness_penalty": 0.5,
+    "relaxed_max_candidates": 6,
+    "packet_lookup_candidates": 6,
+    "packet_lookup_llm_enabled": false,
+    "packet_lookup_llm_provider": "minimax",
+    "packet_lookup_llm_timeout_s": 1.2,
+    "packet_lookup_llm_top_k": 3,
+    "packet_lookup_llm_min_candidates": 2,
+    "packet_lookup_llm_context_chars": 220,
+    "packet_lookup_llm_provider_url": "https://api.minimax.io/v1",
+    "packet_lookup_llm_model": "MiniMax-M2.5",
+    "obsidian_enabled": false,
+    "obsidian_auto_export": false,
+    "obsidian_export_max_packets": 300,
+    "obsidian_export_dir": ""
+  },
+  "advisory_prefetch": {
+    "worker_enabled": false,
+    "max_jobs_per_run": 2,
+    "max_tools_per_job": 3,
+    "min_probability": 0.25
+  },
+  "advisor": {
+    "min_reliability": 0.6,
+    "min_validations_strong": 2,
+    "max_items": 4,
+    "cache_ttl": 180,
+    "min_rank_score": 0.4,
+    "max_advice_items": 5,
+    "mind_max_stale_s": 86400,
+    "mind_stale_allow_if_empty": false,
+    "mind_min_salience": 0.30,
+    "replay_enabled": true,
+    "replay_min_strict": 5,
+    "replay_min_delta": 0.25,
+    "replay_max_age_s": 1209600,
+    "replay_strict_window_s": 1500,
+    "replay_min_context": 0.24,
+    "replay_max_records": 2500,
+    "replay_mode": "standard",
+    "guidance_style": "balanced",
+    "source_weights": "0.400"
+  },
+  "retrieval": {
+    "level": "2",
+    "overrides": {
+      "mode": "auto",
+      "gate_strategy": "minimal",
+      "semantic_limit": 10,
+      "max_queries": 3,
+      "agentic_query_limit": 3,
+      "agentic_deadline_ms": 700,
+      "agentic_rate_limit": 0.35,
+      "agentic_rate_window": 80,
+      "fast_path_budget_ms": 250,
+      "prefilter_enabled": true,
+      "prefilter_max_insights": 500,
+      "lexical_weight": 0.28,
+      "bm25_k1": 1.2,
+      "bm25_b": 0.75,
+      "bm25_mix": 0.75,
+      "complexity_threshold": 2,
+      "min_results_no_escalation": 4,
+      "min_top_score_no_escalation": 0.02,
+      "escalate_on_high_risk": true,
+      "escalate_on_trigger": false,
+      "semantic_context_min": 0.12,
+      "semantic_lexical_min": 0.02,
+      "semantic_strong_override": 0.92,
+      "escalate_on_weak_primary": true,
+      "intent_coverage_weight": 0.06,
+      "support_boost_weight": 0.08,
+      "reliability_weight": 0.04,
+      "semantic_intent_min": 0.02
+    },
+    "domain_profile_enabled": true,
+    "domain_profiles": {
+      "memory": {
+        "semantic_limit": 12,
+        "max_queries": 4,
+        "agentic_query_limit": 4,
+        "lexical_weight": 0.4,
+        "intent_coverage_weight": 0.1,
+        "support_boost_weight": 0.1,
+        "reliability_weight": 0.05,
+        "semantic_intent_min": 0.03,
+        "min_results_no_escalation": 5,
+        "min_top_score_no_escalation": 0.74
+      },
+      "coding": {
+        "semantic_limit": 11,
+        "lexical_weight": 0.34,
+        "intent_coverage_weight": 0.06,
+        "support_boost_weight": 0.08,
+        "reliability_weight": 0.04,
+        "semantic_intent_min": 0.02
+      }
+    }
+  },
+  "meta_ralph": {
+    "quality_threshold": 3.8,
+    "needs_work_threshold": 2,
+    "needs_work_close_delta": 0.5,
+    "min_outcome_samples": 5,
+    "min_tuneable_samples": 50,
+    "min_needs_work_samples": 5,
+    "min_source_samples": 15,
+    "attribution_window_s": 1800,
+    "strict_attribution_require_trace": true
+  },
+  "eidos": {
+    "max_steps": 40,
+    "max_time_seconds": 1200,
+    "max_retries_per_error": 3,
+    "max_file_touches": 5,
+    "no_evidence_limit": 6
+  },
+  "scheduler": {
+    "enabled": true
+  },
+  "sync": {
+    "mode": "all"
+  },
+  "source_roles": {
+    "_doc": "Defines each source's PRIMARY job. Distillers are NOT advisory sources Ã¢â‚¬â€ measure them on pattern quality, not helpfulness.",
+    "distillers": {
+      "_doc": "These sources distill/funnel/learn Ã¢â‚¬â€ advisory helpfulness is NOT their metric",
+      "cognitive": {
+        "role": "learner",
+        "metric": "insight_diversity_and_validation_rate",
+        "description": "Learns and stores reusable insights from sessions"
+      },
+      "eidos": {
+        "role": "distiller",
+        "metric": "distillation_reliability_and_reuse",
+        "description": "Extracts reusable rules from episode outcomes"
+      },
+      "engagement": {
+        "role": "predictor",
+        "metric": "prediction_accuracy",
+        "description": "Predicts and tracks surprise/engagement patterns"
+      }
+    },
+    "direct_advisory": {
+      "_doc": "These sources exist TO advise Ã¢â‚¬â€ measure them on helpfulness",
+      "sources": [
+        "semantic",
+        "semantic-agentic",
+        "prefetch",
+        "bank",
+        "convo",
+        "self_awareness",
+        "chip",
+        "trigger",
+        "skill"
+      ]
+    },
+    "disabled_from_advisory": {
+      "_doc": "Sources removed from advisory pipeline. Mind re-enabled 2026-02-21 (was circular: disabled -> 0% -> stays disabled)."
+    }
+  },
+  "auto_tuner": {
+    "enabled": true,
+    "mode": "apply",
+    "last_run": "2026-02-20T10:25:16+00:00",
+    "run_interval_s": 43200,
+    "max_change_per_run": 0.15,
+    "source_boosts": {
+      "cognitive": 1.65,
+      "semantic": 0.35,
+      "self_awareness": 0.353,
+      "trigger": 0.401,
+      "mind": 0.2,
+      "eidos": 0.85,
+      "convo": 0.8,
+      "prefetch": 0.4,
+      "semantic-agentic": 0.4,
+      "bank": 0.7,
+      "advisor": 0.85,
+      "baseline": 0.85
+    },
+    "source_effectiveness": {
+      "advisor": 0.0176,
+      "bank": 0.0952,
+      "baseline": 0.0536,
+      "cognitive": 0.621,
+      "eidos": 0.0507,
+      "mind": 0.0,
+      "prefetch": 0.0449,
+      "self_awareness": 0.0458,
+      "semantic": 0.032,
+      "semantic-agentic": 0.0378,
+      "trigger": 0.0515
+    },
+    "tuning_log": [
+      {
+        "timestamp": "2026-02-07T17:00:00",
+        "action": "initial_calibration",
+        "changes": {
+          "cognitive_boost": "1.0 -> 1.2 (85.9% helpful, top performer)",
+          "semantic_boost": "1.0 -> 0.5 (2.9% helpful, demoted)",
+          "self_awareness_boost": "1.0 -> 0.6 (4.7% helpful, demoted)",
+          "mind_boost": "1.0 -> 0.3 (0% helpful, minimal weight)"
+        },
+        "data_basis": "27,316 advisor outcomes across 7 sources"
+      },
+      {
+        "timestamp": "2026-02-07T15:05:02+00:00",
+        "action": "auto_tune",
+        "changes": {
+          "cognitive": "1.2 -> 1.255 (85.7% effective, 12938 samples)",
+          "self_awareness": "0.6 -> 0.45 (4.6% effective, 3289 samples)",
+          "semantic": "0.5 -> 0.35 (3.2% effective, 1606 samples)",
+          "trigger": "0.7 -> 0.55 (5.8% effective, 138 samples)"
+        },
+        "data_basis": "17,991 advisor outcomes across 7 sources"
+      },
+      {
+        "timestamp": "2026-02-09T09:10:42+00:00",
+        "action": "auto_tune",
+        "changes": {
+          "cognitive": "1.255 -> 1.398 (84.3% effective, 13160 samples)",
+          "self_awareness": "0.45 -> 0.353 (4.1% effective, 4817 samples)",
+          "trigger": "0.55 -> 0.4 (3.6% effective, 494 samples)"
+        },
+        "data_basis": "21,206 advisor outcomes across 7 sources"
+      },
+      {
+        "timestamp": "2026-02-10T09:11:08+00:00",
+        "action": "auto_tune",
+        "changes": {
+          "trigger": "0.4 -> 0.35 (3.6% effective, 496 samples)"
+        },
+        "data_basis": "22,360 advisor outcomes across 7 sources"
+      },
+      {
+        "timestamp": "2026-02-16T09:44:04+00:00",
+        "action": "auto_tune_noop",
+        "changes": {},
+        "data_basis": "23,961 advisor outcomes across 9 sources"
+      },
+      {
+        "timestamp": "2026-02-17T09:44:12+00:00",
+        "action": "auto_tune",
+        "changes": {
+          "prefetch": "1.0 -> 0.85 (0.0% effective, 130 samples)",
+          "semantic-agentic": "1.0 -> 0.85 (1.7% effective, 58 samples)"
+        },
+        "data_basis": "25,003 advisor outcomes across 10 sources"
+      },
+      {
+        "timestamp": "2026-02-18T09:44:34+00:00",
+        "action": "auto_tune",
+        "changes": {
+          "prefetch": "0.85 -> 0.7 (0.5% effective, 191 samples)",
+          "semantic-agentic": "0.85 -> 0.7 (1.6% effective, 61 samples)"
+        },
+        "data_basis": "25,350 advisor outcomes across 11 sources"
+      },
+      {
+        "timestamp": "2026-02-19T09:45:16+00:00",
+        "action": "auto_tune",
+        "changes": {
+          "bank": "1.0 -> 0.85 (9.5% effective, 42 samples)",
+          "prefetch": "0.7 -> 0.55 (4.0% effective, 572 samples)",
+          "semantic-agentic": "0.7 -> 0.55 (1.6% effective, 63 samples)"
+        },
+        "data_basis": "26,085 advisor outcomes across 13 sources"
+      },
+      {
+        "timestamp": "2026-02-20T10:25:16+00:00",
+        "action": "auto_tune",
+        "changes": {
+          "advisor": "1.0 -> 0.85 (1.8% effective, 341 samples)",
+          "bank": "0.85 -> 0.7 (9.5% effective, 42 samples)",
+          "baseline": "1.0 -> 0.85 (5.4% effective, 168 samples)",
+          "cognitive": "1.398 -> 1.52 (62.1% effective, 18065 samples)",
+          "eidos": "1.0 -> 0.85 (5.1% effective, 138 samples)",
+          "mind": "0.0 -> 0.2 (0.0% effective, 23 samples)",
+          "prefetch": "0.55 -> 0.4 (4.5% effective, 3185 samples)",
+          "semantic-agentic": "0.55 -> 0.4 (3.8% effective, 793 samples)",
+          "trigger": "0.35 -> 0.401 (5.1% effective, 1127 samples)"
+        },
+        "data_basis": "33,315 advisor outcomes across 15 sources"
+      }
+    ],
+    "max_changes_per_cycle": 4
+  },
+  "updated_at": "2026-02-20T10:25:16+00:00",
+  "chip_merge": {
+    "duplicate_churn_ratio": 0.95,
+    "duplicate_churn_min_processed": 20,
+    "duplicate_churn_cooldown_s": 300,
+    "min_cognitive_value": 0.24,
+    "min_actionability": 0.18,
+    "min_transferability": 0.15,
+    "min_statement_len": 18
+  },
+  "advisory_quality": {
+    "profile": "enhanced",
+    "preferred_provider": "minimax",
+    "ai_timeout_s": 15.0,
+    "minimax_model": "MiniMax-M2.5",
+    "source": "project_default_minimax",
+    "updated_at": "2026-02-16T11:12:58+00:00"
+  },
+  "advisory_preferences": {
+    "memory_mode": "standard",
+    "guidance_style": "balanced",
+    "source": "spark_cli_repair_20260216_cycle",
+    "updated_at": "2026-02-16T11:11:57+00:00"
+  },
+  "memory_emotion": {
+    "enabled": true,
+    "write_capture_enabled": true,
+    "retrieval_state_match_weight": 0.22,
+    "retrieval_min_state_similarity": 0.3
+  },
+  "memory_learning": {
+    "enabled": true,
+    "retrieval_learning_weight": 0.25,
+    "retrieval_min_learning_signal": 0.2,
+    "calm_mode_bonus": 0.08
+  },
+  "memory_retrieval_guard": {
+    "enabled": true,
+    "base_score_floor": 0.30,
+    "max_total_boost": 0.42
+  },
+  "bridge_worker": {
+    "enabled": true
+  },
+  "memory_capture": {
+    "enabled": true,
+    "auto_save_threshold": 0.65
+  },
+  "observatory": {
+    "enabled": true,
+    "auto_sync": true,
+    "sync_cooldown_s": 120,
+    "vault_dir": "C:\\Users\\USER\\Documents\\Obsidian Vault\\Spark-Intelligence-Observatory",
+    "generate_canvas": true,
+    "max_recent_items": 20,
+    "explore_cognitive_max": 200,
+    "explore_distillations_max": 200,
+    "explore_episodes_max": 100,
+    "explore_verdicts_max": 100,
+    "explore_promotions_max": 200,
+    "explore_advice_max": 200,
+    "explore_routing_max": 100,
+    "explore_tuning_max": 200,
+    "explore_decisions_max": 200,
+    "explore_feedback_max": 200
+  },
+  "production_gates": {
+    "enforce_meta_ralph_quality_band": true,
+    "min_quality_samples": 50,
+    "min_quality_rate": 0.3,
+    "max_quality_rate": 0.6,
+    "min_advisory_readiness_ratio": 0.4,
+    "min_advisory_freshness_ratio": 0.35,
+    "max_advisory_inactive_ratio": 0.4,
+    "min_advisory_avg_effectiveness": 0.35,
+    "max_advisory_store_queue_depth": 1200,
+    "max_advisory_top_category_concentration": 0.85
+  }
+}
+

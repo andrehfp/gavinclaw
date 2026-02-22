@@ -56,13 +56,3 @@ python3 scripts/check_credits.py
 ## License
 
 MIT
-
-
-## Gavin replication
-
-This repo is also the replication source of the Gavin runtime profile.
-
-- Manifest: `replication/MANIFEST.md`
-- Bootstrap guide: `replication/BOOTSTRAP_NEW_MACHINE.md`
-- Sync from active workspace: `scripts/sync_from_workspace.sh`
-- Restore into workspace: `scripts/restore_to_workspace.sh`

@@ -1,0 +1,28 @@
+{
+  "generated_at_epoch": 1771720128,
+  "source": "scripts/public_release_safety_check.py",
+  "rules": [
+    "S603",
+    "S607",
+    "S608",
+    "S609",
+    "S610",
+    "S611",
+    "S612",
+    "S701",
+    "S702"
+  ],
+  "targets": [
+    "lib",
+    "hooks",
+    "adapters",
+    "sparkd.py",
+    "bridge_worker.py",
+    "spark_watchdog.py",
+    "spark_scheduler.py",
+    "spark_pulse.py",
+    "mind_server.py",
+    "cli.py"
+  ],
+  "ruff_fingerprints": []
+}

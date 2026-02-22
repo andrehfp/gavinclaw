@@ -1,0 +1,245 @@
+#!/usr/bin/env python3
+import argparse
+import json
+import os
+import sys
+import urllib.parse
+import urllib.request
+from typing import Any, Dict, List
+
+API_BASE = os.environ.get("KEYWORDS_EVERYWHERE_API_BASE", "https://api.keywordseverywhere.com")
+
+
+def err(code: str, message: str, details: Dict[str, Any] | None = None):
+    out = {"ok": False, "error": {"code": code, "message": message, "details": details or {}}}
+    print(json.dumps(out, ensure_ascii=False))
+    sys.exit(1)
+
+
+def classify_intent(keyword: str, forced: str) -> str:
+    if forced in {"tofu", "mofu", "bofu"}:
+        return forced
+    k = keyword.lower()
+    bofu_tokens = ["alternative", "vs", "pricing", "price", "for ", "melhor", "alternativa", "preço"]
+    mofu_tokens = ["best", "workflow", "tools", "software", "comparison", "comparativo"]
+    tofu_tokens = ["what is", "guide", "tips", "como", "o que é", "dicas"]
+
+    if any(t in k for t in bofu_tokens):
+        return "bofu"
+    if any(t in k for t in mofu_tokens):
+        return "mofu"
+    if any(t in k for t in tofu_tokens):
+        return "tofu"
+    return "mofu"
+
+
+def priority(intent: str, volume: float | int | None, competition: float | None) -> str:
+    v = float(volume or 0)
+    c = float(competition if competition is not None else 0.5)
+    if intent == "bofu" and (v >= 200 or c <= 0.8):
+        return "high"
+    if intent == "mofu" and v >= 300 and c <= 0.7:
+        return "high"
+    if v >= 100:
+        return "medium"
+    return "low"
+
+
+def post_form(path: str, form_data: Dict[str, Any], api_key: str) -> Dict[str, Any]:
+    data_items: List[tuple[str, str]] = []
+    for k, v in form_data.items():
+        if isinstance(v, list):
+            for item in v:
+                data_items.append((k, str(item)))
+        else:
+            data_items.append((k, str(v)))
+
+    encoded = urllib.parse.urlencode(data_items).encode("utf-8")
+    req = urllib.request.Request(
+        f"{API_BASE}{path}",
+        data=encoded,
+        headers={
+            "Accept": "application/json",
+            "Authorization": f"Bearer {api_key}",
+            "Content-Type": "application/x-www-form-urlencoded",
+        },
+        method="POST",
+    )
+
+    try:
+        with urllib.request.urlopen(req, timeout=45) as resp:
+            body = resp.read().decode("utf-8", errors="replace")
+            return json.loads(body)
+    except urllib.error.HTTPError as e:
+        body = e.read().decode("utf-8", errors="replace") if hasattr(e, "read") else ""
+        err("PROVIDER_ERROR", f"Keywords Everywhere HTTP {e.code}", {"body": body[:800]})
+    except Exception as e:
+        err("NETWORK_ERROR", "Failed to reach Keywords Everywhere", {"message": str(e)})
+
+
+def normalize_keyword_item(raw: Any) -> Dict[str, Any]:
+    if isinstance(raw, str):
+        return {"keyword": raw, "volume": None, "cpc": None, "competition": None}
+    if isinstance(raw, dict):
+        kw = raw.get("keyword") or raw.get("kw") or raw.get("term") or raw.get("name")
+        volume = raw.get("vol") if raw.get("vol") is not None else raw.get("volume")
+        cpc = raw.get("cpc")
+        comp = raw.get("competition")
+        return {"keyword": kw, "volume": volume, "cpc": cpc, "competition": comp}
+    return {"keyword": str(raw), "volume": None, "cpc": None, "competition": None}
+
+
+def cmd_discover(args):
+    seed = args.seed.strip()
+    if not seed:
+        err("VALIDATION_ERROR", "--seed is required")
+
+    if args.limit < 1 or args.limit > 200:
+        err("VALIDATION_ERROR", "--limit must be between 1 and 200")
+
+    if args.dry_run:
+        mock_keywords = [
+            seed,
+            f"best {seed}",
+            f"{seed} for architects",
+            f"{seed} pricing",
+            f"{seed} vs enscape",
+        ][: max(1, min(args.limit, 5))]
+        items = []
+        for kw in mock_keywords:
+            intent = classify_intent(kw, args.intent)
+            items.append(
+                {
+                    "keyword": kw,
+                    "volume": None,
+                    "cpc": None,
+                    "competition": None,
+                    "intent": intent,
+                    "priority": priority(intent, None, None),
+                }
+            )
+        out = {
+            "ok": True,
+            "action": "seo.keywords.discover",
+            "data": {
+                "seed": seed,
+                "lang": args.lang,
+                "country": args.country,
+                "items": items,
+                "dry_run": True,
+                "schema_version": 1,
+            },
+        }
+        print(json.dumps(out, ensure_ascii=False))
+        return
+
+    api_key = os.environ.get("KEYWORDS_EVERYWHERE_API_KEY")
+    if not api_key:
+        err("VALIDATION_ERROR", "Missing KEYWORDS_EVERYWHERE_API_KEY")
+
+    related = post_form(
+        "/get_related_keywords",
+        {"keyword": seed, "num": args.limit},
+        api_key,
+    )
+
+    related_list = related.get("data") or []
+    if not isinstance(related_list, list):
+        related_list = []
+
+    # include seed itself first
+    keywords = [seed] + [str(k) for k in related_list if str(k).strip() and str(k).strip().lower() != seed.lower()]
+    keywords = keywords[: args.limit]
+
+    kw_payload = {
+        "kw[]": keywords,
+        "country": args.country.lower(),
+        "currency": "usd",
+        "dataSource": "cli",
+    }
+    kw_data = post_form("/get_keyword_data", kw_payload, api_key)
+
+    raw_items = kw_data.get("data") or []
+    if not isinstance(raw_items, list):
+        raw_items = []
+
+    normalized: List[Dict[str, Any]] = []
+    for raw in raw_items:
+        item = normalize_keyword_item(raw)
+        kw = (item.get("keyword") or "").strip()
+        if not kw:
+            continue
+        intent = classify_intent(kw, args.intent)
+        normalized.append(
+            {
+                "keyword": kw,
+                "volume": item.get("volume"),
+                "cpc": item.get("cpc"),
+                "competition": item.get("competition"),
+                "intent": intent,
+                "priority": priority(intent, item.get("volume"), item.get("competition")),
+            }
+        )
+
+    # fallback when KE returns only raw strings/no metrics
+    if not normalized:
+        for kw in keywords:
+            intent = classify_intent(kw, args.intent)
+            normalized.append(
+                {
+                    "keyword": kw,
+                    "volume": None,
+                    "cpc": None,
+                    "competition": None,
+                    "intent": intent,
+                    "priority": priority(intent, None, None),
+                }
+            )
+
+    out = {
+        "ok": True,
+        "action": "seo.keywords.discover",
+        "data": {
+            "seed": seed,
+            "lang": args.lang,
+            "country": args.country.upper(),
+            "items": normalized,
+            "credits_consumed": kw_data.get("credits_consumed"),
+            "time_taken": kw_data.get("time_taken"),
+            "schema_version": 1,
+        },
+    }
+    print(json.dumps(out, ensure_ascii=False))
+
+
+def build_parser():
+    p = argparse.ArgumentParser(description="SEO Keywords CLI")
+    sub = p.add_subparsers(dest="command", required=True)
+
+    d = sub.add_parser("discover", help="Discover and enrich keyword ideas")
+    d.add_argument("--seed", required=True)
+    d.add_argument("--lang", default="en")
+    d.add_argument("--country", default="US")
+    d.add_argument("--limit", type=int, default=30)
+    d.add_argument("--intent", choices=["auto", "tofu", "mofu", "bofu"], default="auto")
+    d.add_argument("--json", action="store_true")
+    d.add_argument("--dry-run", action="store_true")
+
+    return p
+
+
+def main():
+    parser = build_parser()
+    args = parser.parse_args()
+
+    if not getattr(args, "json", False):
+        err("VALIDATION_ERROR", "This CLI requires --json output mode")
+
+    if args.command == "discover":
+        cmd_discover(args)
+    else:
+        err("VALIDATION_ERROR", f"Unknown command: {args.command}")
+
+
+if __name__ == "__main__":
+    main()

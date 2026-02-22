@@ -1,0 +1,13 @@
+{
+  "ltx-2-19b": {
+    "status": "success",
+    "time": 86.42483806610107,
+    "video_url": "https://v3b.fal.media/files/b/0a8edad7/wtreEfcO9ZmYAbCRurN66_7Z7wlrZL.mp4",
+    "local_path": "/home/andreprado/.openclaw/workspace/output/fal-video-test/ltx-2-19b.mp4",
+    "result": {
+      "video": "{'url': 'https://v3b.fal.media/files/b/0a8edad7/wtreEfcO9ZmYAbCRurN66_7Z7wlrZL.mp4', 'content_type': 'video/mp4', 'file_name': 'wtreEfcO9ZmYAbCRurN66_7Z7wlrZL.mp4', 'file_size': None, 'width': 1536, '",
+      "seed": "1426356856",
+      "prompt": "Style: Photorealistic, architectural visualization, 4K quality - The camera slowly pans from left to right, revealing the modern living room. Warm golden sunset light streams through the glass doors, "
+    }
+  }
+}

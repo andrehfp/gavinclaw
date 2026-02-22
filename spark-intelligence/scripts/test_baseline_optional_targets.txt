@@ -1,0 +1,4 @@
+# Non-blocking baseline checks for OSS smoke safety.
+# Add tests here when they are useful for drift detection but not yet release-blocking.
+# tests/test_seed_advisory_theories.py
+# tests/test_trace_hud.py

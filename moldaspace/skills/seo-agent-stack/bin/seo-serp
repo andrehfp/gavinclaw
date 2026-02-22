@@ -1,0 +1,242 @@
+#!/usr/bin/env python3
+import argparse
+import base64
+import json
+import os
+import sys
+import urllib.error
+import urllib.request
+from typing import Any, Dict, List
+
+API_BASE = os.environ.get("DATAFORSEO_API_BASE", "https://api.dataforseo.com/v3")
+
+COUNTRY_TO_LOCATION = {
+    "US": 2840,
+    "BR": 2076,
+    "GB": 2826,
+    "CA": 2124,
+    "AU": 2036,
+}
+
+LANG_TO_CODE = {
+    "en": "en",
+    "pt": "pt",
+    "es": "es",
+    "fr": "fr",
+    "de": "de",
+}
+
+HIGH_AUTHORITY = [
+    "wikipedia.org",
+    "reddit.com",
+    "youtube.com",
+    "forbes.com",
+    "hubspot.com",
+    "semrush.com",
+    "ahrefs.com",
+    "shopify.com",
+    "adobe.com",
+    "autodesk.com",
+]
+
+
+def err(code: str, message: str, details: Dict[str, Any] | None = None):
+    out = {"ok": False, "error": {"code": code, "message": message, "details": details or {}}}
+    print(json.dumps(out, ensure_ascii=False))
+    sys.exit(1)
+
+
+def basic_auth_header(login: str, password: str) -> str:
+    token = base64.b64encode(f"{login}:{password}".encode("utf-8")).decode("ascii")
+    return f"Basic {token}"
+
+
+def post_json(path: str, payload: Any, login: str, password: str) -> Dict[str, Any]:
+    req = urllib.request.Request(
+        f"{API_BASE}{path}",
+        data=json.dumps(payload).encode("utf-8"),
+        headers={
+            "Content-Type": "application/json",
+            "Accept": "application/json",
+            "Authorization": basic_auth_header(login, password),
+        },
+        method="POST",
+    )
+    try:
+        with urllib.request.urlopen(req, timeout=60) as resp:
+            return json.loads(resp.read().decode("utf-8", errors="replace"))
+    except urllib.error.HTTPError as e:
+        body = e.read().decode("utf-8", errors="replace") if hasattr(e, "read") else ""
+        err("PROVIDER_ERROR", f"DataForSEO HTTP {e.code}", {"body": body[:1200]})
+    except Exception as e:
+        err("NETWORK_ERROR", "Failed to reach DataForSEO", {"message": str(e)})
+
+
+def domain_from_url(url: str) -> str:
+    try:
+        from urllib.parse import urlparse
+
+        return (urlparse(url).netloc or "").lower()
+    except Exception:
+        return ""
+
+
+def infer_serp_intent(keyword: str, titles: List[str]) -> str:
+    k = keyword.lower()
+    text = " ".join(titles).lower()
+    if "alternative" in k or " vs " in f" {k} " or "alternative" in text or "comparison" in text:
+        return "comparison"
+    if any(x in k for x in ["best", "top", "software", "tools"]) or "best" in text:
+        return "listicle"
+    if any(x in k for x in ["how to", "guide", "como", "o que é"]):
+        return "informational"
+    return "mixed"
+
+
+def infer_difficulty(top_urls: List[str]) -> str:
+    if not top_urls:
+        return "unknown"
+    score = 0
+    for u in top_urls[:10]:
+        d = domain_from_url(u)
+        if any(h in d for h in HIGH_AUTHORITY):
+            score += 2
+        if d.endswith(".gov") or d.endswith(".edu"):
+            score += 2
+    if score >= 10:
+        return "high"
+    if score >= 4:
+        return "medium"
+    return "low"
+
+
+def build_gaps(items: List[Dict[str, Any]]) -> List[str]:
+    titles = [str(i.get("title") or "") for i in items]
+    snippets = [str(i.get("description") or i.get("snippet") or "") for i in items]
+    joined = (" ".join(titles + snippets)).lower()
+    gaps = []
+    if "before" not in joined and "after" not in joined:
+        gaps.append("missing before/after visual proof")
+    if "price" not in joined and "pricing" not in joined and "preço" not in joined:
+        gaps.append("no pricing comparison")
+    if "faq" not in joined:
+        gaps.append("no FAQ-style objection handling")
+    return gaps[:4]
+
+
+def cmd_analyze(args):
+    if not args.keyword.strip():
+        err("VALIDATION_ERROR", "--keyword is required")
+    if args.depth < 1 or args.depth > 100:
+        err("VALIDATION_ERROR", "--depth must be between 1 and 100")
+
+    location_code = COUNTRY_TO_LOCATION.get(args.country.upper())
+    if location_code is None:
+        err("VALIDATION_ERROR", f"Unsupported country for now: {args.country}", {"supported": sorted(COUNTRY_TO_LOCATION.keys())})
+
+    language_code = LANG_TO_CODE.get(args.lang.lower())
+    if language_code is None:
+        err("VALIDATION_ERROR", f"Unsupported language for now: {args.lang}", {"supported": sorted(LANG_TO_CODE.keys())})
+
+    if args.dry_run:
+        out = {
+            "ok": True,
+            "action": "seo.serp.analyze",
+            "data": {
+                "keyword": args.keyword,
+                "difficulty": "unknown",
+                "serp_intent": "mixed",
+                "top_urls": [],
+                "gaps": [],
+                "dry_run": True,
+                "schema_version": 1,
+            },
+        }
+        print(json.dumps(out, ensure_ascii=False))
+        return
+
+    login = os.environ.get("DATAFORSEO_LOGIN")
+    password = os.environ.get("DATAFORSEO_PASSWORD")
+    if not login or not password:
+        err("VALIDATION_ERROR", "Missing DATAFORSEO_LOGIN or DATAFORSEO_PASSWORD")
+
+    payload = [
+        {
+            "keyword": args.keyword,
+            "location_code": location_code,
+            "language_code": language_code,
+            "device": "desktop",
+            "depth": args.depth,
+            "se_domain": "google.com",
+        }
+    ]
+
+    response = post_json("/serp/google/organic/live/advanced", payload, login, password)
+
+    tasks = response.get("tasks") or []
+    if not tasks:
+        err("PROVIDER_ERROR", "DataForSEO returned no tasks", {"response": response})
+
+    result = (tasks[0].get("result") or [{}])[0]
+    items = result.get("items") or []
+    if not isinstance(items, list):
+        items = []
+
+    organic_items = [i for i in items if str(i.get("type", "")).startswith("organic")]
+    top = organic_items[: args.depth]
+
+    top_urls = []
+    titles = []
+    for i, row in enumerate(top, start=1):
+        url = row.get("url") or ""
+        title = row.get("title") or ""
+        top_urls.append({"rank": i, "url": url, "title": title})
+        titles.append(str(title))
+
+    out = {
+        "ok": True,
+        "action": "seo.serp.analyze",
+        "data": {
+            "keyword": args.keyword,
+            "difficulty": infer_difficulty([x["url"] for x in top_urls]),
+            "serp_intent": infer_serp_intent(args.keyword, titles),
+            "top_urls": top_urls,
+            "gaps": build_gaps(top),
+            "cost": tasks[0].get("cost"),
+            "time": tasks[0].get("time"),
+            "schema_version": 1,
+        },
+    }
+    print(json.dumps(out, ensure_ascii=False))
+
+
+def build_parser():
+    p = argparse.ArgumentParser(description="SEO SERP CLI")
+    sub = p.add_subparsers(dest="command", required=True)
+
+    a = sub.add_parser("analyze", help="Analyze SERP for one keyword")
+    a.add_argument("--keyword", required=True)
+    a.add_argument("--lang", default="en")
+    a.add_argument("--country", default="US")
+    a.add_argument("--depth", type=int, default=10)
+    a.add_argument("--json", action="store_true")
+    a.add_argument("--dry-run", action="store_true")
+
+    return p
+
+
+def main():
+    parser = build_parser()
+    args = parser.parse_args()
+
+    if not getattr(args, "json", False):
+        err("VALIDATION_ERROR", "This CLI requires --json output mode")
+
+    if args.command == "analyze":
+        cmd_analyze(args)
+    else:
+        err("VALIDATION_ERROR", f"Unknown command: {args.command}")
+
+
+if __name__ == "__main__":
+    main()

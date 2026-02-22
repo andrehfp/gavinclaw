@@ -26,6 +26,7 @@
 - **Structure**: Hook → Main insight (1-2 key points) → Actionable takeaway → CTA
 - **What works**: One big idea per issue, personal anecdotes, practical frameworks, "here's exactly how"
 - **Subject line**: Curiosity gap or specific benefit. Under 50 chars
+- **Mandatory final pass**: Apply Humanizer cleanup (https://github.com/blader/humanizer) before final delivery. Remove AI tells, fluff, sycophancy, and formulaic phrasing
 
 ## Instagram (Carousels)
 - **Tone**: Visual-first, educational or storytelling

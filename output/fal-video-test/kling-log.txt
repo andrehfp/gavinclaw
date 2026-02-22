@@ -1,0 +1,21 @@
+Uploading /home/andreprado/.openclaw/workspace/moldaspace/renders/living-render.png to fal storage...
+  → https://v3b.fal.media/files/b/0a8eda68/fgbES1kjBy9Y1dTPTPuYK_living-render.png
+
+============================================================
+Testing: kling-v3-pro
+Endpoint: fal-ai/kling-video/v3/pro/image-to-video
+Est. cost: $1.12 (5s)
+============================================================
+Request ID: 321a11f5-ea75-4471-acf7-d40d385161d4
+Completed in 992.1s
+Result keys: ['video']
+Downloading to /home/andreprado/.openclaw/workspace/output/fal-video-test/kling-v3-pro.mp4...
+  → 9.1 MB
+
+============================================================
+SUMMARY
+============================================================
+  kling-v3-pro: success | 992s | ~$1.12
+    → /home/andreprado/.openclaw/workspace/output/fal-video-test/kling-v3-pro.mp4
+
+Results saved to /home/andreprado/.openclaw/workspace/output/fal-video-test/results.json

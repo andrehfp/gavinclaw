@@ -1,0 +1,14 @@
+name = "gavin-email-worker"
+main = "worker.js"
+compatibility_date = "2024-09-01"
+
+# Environment variables (set via `wrangler secret put`)
+# TELEGRAM_BOT_TOKEN — OpenClaw's Telegram bot token
+# TELEGRAM_CHAT_ID — "-1003702782668" (André's group)
+# TELEGRAM_THREAD_ID — thread for email notifications (create one)
+# FORWARD_TO — optional fallback email address
+
+# Optional: R2 bucket for email archival
+# [[r2_buckets]]
+# binding = "EMAIL_BUCKET"
+# bucket_name = "gavin-emails"

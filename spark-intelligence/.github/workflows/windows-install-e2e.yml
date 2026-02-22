@@ -1,0 +1,28 @@
+name: Windows Install E2E
+
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - main
+    paths:
+      - "install.ps1"
+      - "scripts/bootstrap_windows.ps1"
+      - ".github/workflows/windows-install-e2e.yml"
+
+jobs:
+  windows-install-and-health:
+    runs-on: windows-latest
+    steps:
+      - name: One-liner install from website command
+        shell: pwsh
+        run: |
+          $ErrorActionPreference = "Stop"
+          $work = Join-Path $env:RUNNER_TEMP ("spark-e2e-" + [guid]::NewGuid().ToString("N"))
+          New-Item -ItemType Directory -Path $work | Out-Null
+          Set-Location $work
+          irm https://raw.githubusercontent.com/vibeforge1111/vibeship-spark-intelligence/main/install.ps1 | iex
+          Set-Location (Join-Path $work "vibeship-spark-intelligence")
+          .\.venv\Scripts\python -m spark.cli up
+          .\.venv\Scripts\python -m spark.cli health
+          .\.venv\Scripts\python -m spark.cli down

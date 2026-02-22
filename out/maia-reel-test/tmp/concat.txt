@@ -1,0 +1,3 @@
+file 'title.mp4'
+file 'transition.mp4'
+file 'endcard.mp4'

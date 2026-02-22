@@ -1,0 +1,159 @@
+# Chips (runtime-generated domain intelligence)
+chips/
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+
+# Virtual environments
+.env
+.env.local
+.env.*.local
+.venv
+env/
+venv/
+ENV/
+
+# Secrets - NEVER commit
+*.secret
+secrets.json
+telegram_token.txt
+.telegram_token
+
+# IDE
+.idea/
+.vscode/
+*.swp
+*.swo
+*~
+.cursorrules
+.windsurfrules
+
+# Spark local data (user-specific)
+.spark/
+.learnings/
+*.db
+
+# optcheck local data (keep config tracked)
+.optcheck/
+!.optcheck/config.yml
+!.optcheck/config.yaml
+!.optcheck/config.json
+
+# Moltbook credentials - NEVER commit
+moltbook_credentials.json
+.moltbook/
+*moltbook*.key
+*moltbook*_sk_*
+
+# OS
+.DS_Store
+Thumbs.db
+nul
+
+# Test artifacts
+.pytest_cache/
+.coverage
+htmlcov/
+
+# Local runtime artifacts
+logs/
+tmp/
+_tmp/
+
+# vibeship-optimizer (project state is local; keep config/logbook/reports tracked)
+.vibeship-optimizer/
+.vibeship_optimizer/
+
+# Run artifacts (keep canonical summaries tracked; stash per-run outputs)
+docs/reports/_runs/
+docs/reports/
+dashboard_out.txt
+dashboard_err.txt
+reports/tune_replay_*.md
+reports/preflight_check_attest.md
+
+# Internal research notes (not for public repo)
+docs/MINIMAX_KIMI_APPLICATION_IDEAS.md
+docs/MINIMAX_KIMI_48_PROJECTS.md
+docs/CARMACK_WEEK_OF_PAPERS.md
+docs/SPARK_CARMACK_OPTIMIZATION_IMPLEMENTATION.md
+
+# Launch hygiene / local artifacts
+.openclaw_last_health.txt
+openclaw_test.txt
+_tool_test.txt
+zzz_test3.txt
+tmp_openclaw_integration_audit_prompt.txt
+tmp_json_extract_*.py
+C*tmp_ch*.md
+*.sparkmultiplier_grants.jsonl
+
+# Large generated artifacts (keep repo lightweight)
+reports/advisory_auto_score_*.json
+visuals/out/*.mp4
+
+# Local npm scratch files (not tracked in repo)
+package.json
+package-lock.json
+
+# Benchmark artifacts
+benchmarks/
+benchmarks/out/
+benchmarks/logs/
+
+# Sandbox artifacts
+sandbox/spark_sandbox/
+sandbox/spark_sandbox_diff.json
+node_modules/
+_pw_smoke.js
+
+# OSS launch hygiene (removed from public share)
+logs/
+dist/
+build/
+vibeship_spark.egg-info/
+vibeship_spark_intelligence.egg-info/
+.pypirc
+site/
+
+# Local test/debug scratch files
+_test_*.txt
+*_test_output.txt
+*_test_err.txt
+*_test_out.txt
+*.scratch
+*.local
+
+# MCP server config (may contain API keys in env fields)
+.mcp.json
+
+# Runtime-modified files (Spark hook writes to these)
+# These are auto-generated per-user by Spark's promoter; not for version control.
+CLAUDE.md
+AGENTS.md
+SOUL.md
+TOOLS.md
+
+# Any file with local Windows paths in name
+C?UsersUSER*
+*test_output.txt
+*test_out.txt
+*test_err.txt

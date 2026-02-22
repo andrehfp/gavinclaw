@@ -1,0 +1,16 @@
+{
+  "counts": {
+    "chip_highlights": 0,
+    "insights": 0,
+    "promoted": 0
+  },
+  "generated_at": "2026-02-22T17:41:59",
+  "insights": [],
+  "project": {
+    "done": "",
+    "phase": "discovery",
+    "project_key": "spark-intelligence"
+  },
+  "schema_version": "spark_advisory_payload_v1",
+  "source": "context_sync"
+}

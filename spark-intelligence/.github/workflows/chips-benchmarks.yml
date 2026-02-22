@@ -1,0 +1,55 @@
+name: Chips Benchmarks
+
+on:
+  pull_request:
+    paths:
+      - "benchmarks/**"
+      - "chips/**"
+      - "lib/chips/**"
+      - "lib/chip_merger.py"
+      - "lib/advisor.py"
+      - "lib/context_sync.py"
+      - "lib/promoter.py"
+      - "tests/**"
+  workflow_dispatch:
+
+jobs:
+  benchmark:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Install
+        run: |
+          python -m pip install --upgrade pip
+          pip install -e .[dev]
+
+      - name: Run Chip Benchmarks
+        run: |
+          python benchmarks/run_benchmarks.py \
+            --chips vibecoding,marketing,game_dev,biz-ops,bench_core,spark-core \
+            --limit 300 \
+            --out-dir benchmarks/out/ci \
+            --enrich
+
+      - name: Run Chips Tests
+        run: |
+          pytest -q tests/test_chips_multiformat.py tests/test_10_improvements.py::test_10_chips_activation
+
+      - name: Verify Benchmark Output
+        run: |
+          test -f benchmarks/out/ci/report.json
+          test -f benchmarks/out/ci/report.md
+
+      - name: Upload Benchmark Artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: chips-benchmark-report
+          path: benchmarks/out/ci/

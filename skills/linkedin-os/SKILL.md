@@ -1,10 +1,10 @@
 ---
 name: linkedin-os
 description: >
-  Generate LinkedIn posts, optimize profiles, and plan content strategy using Justin Welsh's methodology.
-  Use when: writing a specific LinkedIn post, optimizing LinkedIn profile, planning LinkedIn content calendar, crafting LinkedIn hooks, LinkedIn growth tactics.
-  Don't use when: brainstorming content for multiple platforms (use content-brainstorm), generating images, or repurposing video content (use viralclaw).
-  Outputs: ready-to-publish LinkedIn posts (PT-BR), profile optimization suggestions, content calendars.
+  [DISCONTINUED as of Feb 14, 2026] Previously generated LinkedIn posts using Justin Welsh's methodology.
+  André decided to stop LinkedIn posting to focus on Twitter/X and Instagram.
+  Use content-brainstorm or other skills for cross-platform content instead.
+  Outputs: N/A (skill archived).
 ---
 
 # LinkedIn Operating System

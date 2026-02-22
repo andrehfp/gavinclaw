@@ -1,0 +1,33 @@
+{
+  "id": "spark-telemetry-hooks",
+  "name": "Spark Telemetry Hooks",
+  "version": "2026.2.16",
+  "description": "Emit redacted llm_input/llm_output telemetry to a local JSONL spool.",
+  "main": "index.ts",
+  "configSchema": {
+    "type": "object",
+    "additionalProperties": false,
+    "properties": {
+      "spoolFile": {
+        "type": "string",
+        "description": "Absolute path to telemetry JSONL spool file."
+      },
+      "includePromptPreview": {
+        "type": "boolean",
+        "default": false,
+        "description": "Include prompt preview text (redaction disabled when true)."
+      },
+      "includeOutputPreview": {
+        "type": "boolean",
+        "default": false,
+        "description": "Include output preview text (redaction disabled when true)."
+      },
+      "previewChars": {
+        "type": "number",
+        "default": 240,
+        "minimum": 32,
+        "maximum": 1200
+      }
+    }
+  }
+}

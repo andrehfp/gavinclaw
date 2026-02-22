@@ -1,0 +1,6 @@
+sketch: https://v3b.fal.media/files/b/0a8edb36/iMi3W6Pco1IeuRTEW8RkI_bedroom-sketch.png
+render: https://v3b.fal.media/files/b/0a8edb36/3YAjnDJ7L93WoiKGEy8xC_bedroom-render.png
+Submitting...
+Request: cf4964dd-dfec-4f88-bb9e-5a7aca219167
+Done!
+Saved: output/fal-video-test/ltx-sketch-to-render.mp4 (3.5 MB)

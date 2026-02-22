@@ -1,0 +1,534 @@
+#!/home/andreprado/.openclaw/workspace/scripts/moldaspace_env/bin/python3
+"""
+maia — Unified CLI for MoldaSpace operations.
+
+Usage:
+    maia analytics [--days N] [--json]
+    maia revenue [--days N]
+    maia users [--days N]
+    maia sprint
+    maia post reel <style>
+    maia post render <scene> [--resolution 2K]
+    maia post carousel <theme> [--slides N]
+    maia post image <path> <caption>
+    maia reddit status
+    maia reddit list <subreddit> [--sort hot] [--limit 10]
+    maia reddit comment <post> <text>
+    maia ig status
+    maia ig comments
+    maia mission
+"""
+
+import argparse
+import json
+import os
+import subprocess
+import sys
+from datetime import datetime
+
+SCRIPTS = os.path.dirname(os.path.realpath(__file__))
+WORKSPACE = os.path.dirname(SCRIPTS)
+MOLDASPACE = os.path.join(WORKSPACE, "moldaspace")
+SECRETS = os.path.expanduser("~/.openclaw/.secrets")
+PYTHON = os.path.join(SCRIPTS, "moldaspace_env", "bin", "python3")
+
+# Colors
+R = "\033[0m"
+B = "\033[1m"
+G = "\033[32m"
+Y = "\033[33m"
+C = "\033[36m"
+RED = "\033[31m"
+DIM = "\033[2m"
+
+
+def run_script(script, args=None, capture=False):
+    """Run a script from the scripts directory."""
+    cmd = [PYTHON, os.path.join(SCRIPTS, script)] + (args or [])
+    if capture:
+        result = subprocess.run(cmd, capture_output=True, text=True)
+        return result.stdout, result.stderr, result.returncode
+    else:
+        return subprocess.run(cmd).returncode
+
+
+def load_secret(name):
+    path = os.path.join(SECRETS, name)
+    if os.path.exists(path):
+        with open(path) as f:
+            return f.read().strip()
+    return None
+
+
+def load_json_secret(name):
+    path = os.path.join(SECRETS, name)
+    if os.path.exists(path):
+        with open(path) as f:
+            return json.load(f)
+    return None
+
+
+def load_env_secret(name):
+    path = os.path.join(SECRETS, name)
+    env = {}
+    if os.path.exists(path):
+        with open(path) as f:
+            for line in f:
+                line = line.strip()
+                if line and not line.startswith('#') and '=' in line:
+                    k, v = line.split('=', 1)
+                    env[k.strip()] = v.strip().strip('"\'')
+    return env
+
+
+# ─── analytics ────────────────────────────────────────────────────
+
+def cmd_analytics(args):
+    """Run full analytics (PostHog + GSC + Neon + Instagram)."""
+    extra = ["--days", str(args.days)]
+    if args.json:
+        extra.append("--json")
+    return run_script("moldaspace_analytics.py", extra)
+
+
+# ─── revenue ──────────────────────────────────────────────────────
+
+def cmd_revenue(args):
+    """Quick revenue check from Neon DB."""
+    import psycopg2
+
+    env = load_env_secret("moldaspace_db.env")
+    db_url = env.get("DATABASE_URL") or env.get("NEON_DATABASE_URL") or env.get("DB_URL")
+    if not db_url and all(k in env for k in ["PGHOST", "PGDATABASE", "PGUSER", "PGPASSWORD"]):
+        db_url = f"postgresql://{env['PGUSER']}:{env['PGPASSWORD']}@{env['PGHOST']}/{env['PGDATABASE']}?sslmode=require"
+
+    if not db_url:
+        print(f"{RED}Error: No DB URL found in moldaspace_db.env{R}")
+        return 1
+
+    PRICE_PER_CREDIT = 0.47
+    days = args.days
+
+    try:
+        conn = psycopg2.connect(db_url)
+        cur = conn.cursor()
+
+        # Today
+        cur.execute("""
+            SELECT COALESCE(SUM(amount),0), COUNT(*) FROM credit_transactions
+            WHERE type='purchase' AND created_at >= CURRENT_DATE
+        """)
+        today_credits, today_count = cur.fetchone()
+
+        # Yesterday
+        cur.execute("""
+            SELECT COALESCE(SUM(amount),0), COUNT(*) FROM credit_transactions
+            WHERE type='purchase'
+            AND created_at >= CURRENT_DATE - INTERVAL '1 day'
+            AND created_at < CURRENT_DATE
+        """)
+        yesterday_credits, yesterday_count = cur.fetchone()
+
+        # N days
+        cur.execute(f"""
+            SELECT COALESCE(SUM(amount),0), COUNT(*) FROM credit_transactions
+            WHERE type='purchase' AND created_at >= NOW() - INTERVAL '{days} days'
+        """)
+        nd_credits, nd_count = cur.fetchone()
+
+        # 30 days (MRR)
+        cur.execute("""
+            SELECT COALESCE(SUM(amount),0), COUNT(*) FROM credit_transactions
+            WHERE type='purchase' AND created_at >= NOW() - INTERVAL '30 days'
+        """)
+        mrr_credits, mrr_count = cur.fetchone()
+
+        # Credit wall hits today
+        cur.execute("""
+            SELECT COUNT(*) FROM user_credits
+            WHERE last_credit_wall_at >= CURRENT_DATE
+        """)
+        wall_today = cur.fetchone()[0]
+
+        # Credit wall hits N days
+        cur.execute(f"""
+            SELECT COUNT(*) FROM user_credits
+            WHERE last_credit_wall_at >= NOW() - INTERVAL '{days} days'
+        """)
+        wall_nd = cur.fetchone()[0]
+
+        cur.close()
+        conn.close()
+
+        print(f"\n{B}💰 MoldaSpace Revenue{R}")
+        print(f"{'─' * 40}")
+        print(f"  {B}Today:{R}     ${float(today_credits) * PRICE_PER_CREDIT:>8.2f}  ({today_count} purchases)")
+        print(f"  {B}Yesterday:{R} ${float(yesterday_credits) * PRICE_PER_CREDIT:>8.2f}  ({yesterday_count} purchases)")
+        print(f"  {B}{days}d:{R}       ${float(nd_credits) * PRICE_PER_CREDIT:>8.2f}  ({nd_count} purchases)")
+        print(f"  {B}MRR (30d):{R} ${float(mrr_credits) * PRICE_PER_CREDIT:>8.2f}  ({mrr_count} purchases)")
+        print(f"{'─' * 40}")
+        print(f"  {Y}Credit wall hits:{R} {wall_today} today / {wall_nd} in {days}d")
+        print()
+        return 0
+
+    except Exception as e:
+        print(f"{RED}DB Error: {e}{R}")
+        return 1
+
+
+# ─── users ────────────────────────────────────────────────────────
+
+def cmd_users(args):
+    """Quick user metrics from Neon DB."""
+    import psycopg2
+
+    env = load_env_secret("moldaspace_db.env")
+    db_url = env.get("DATABASE_URL") or env.get("NEON_DATABASE_URL") or env.get("DB_URL")
+    if not db_url and all(k in env for k in ["PGHOST", "PGDATABASE", "PGUSER", "PGPASSWORD"]):
+        db_url = f"postgresql://{env['PGUSER']}:{env['PGPASSWORD']}@{env['PGHOST']}/{env['PGDATABASE']}?sslmode=require"
+
+    if not db_url:
+        print(f"{RED}Error: No DB URL found in moldaspace_db.env{R}")
+        return 1
+
+    days = args.days
+
+    try:
+        conn = psycopg2.connect(db_url)
+        cur = conn.cursor()
+
+        cur.execute("SELECT COUNT(*) FROM user_credits")
+        total = cur.fetchone()[0]
+
+        cur.execute("SELECT COUNT(*) FROM user_credits WHERE signup_date >= CURRENT_DATE")
+        today = cur.fetchone()[0]
+
+        cur.execute("SELECT COUNT(*) FROM user_credits WHERE signup_date >= CURRENT_DATE - INTERVAL '1 day' AND signup_date < CURRENT_DATE")
+        yesterday = cur.fetchone()[0]
+
+        cur.execute(f"SELECT COUNT(*) FROM user_credits WHERE signup_date >= NOW() - INTERVAL '{days} days'")
+        nd = cur.fetchone()[0]
+
+        cur.execute("SELECT COUNT(DISTINCT user_id) FROM credit_transactions WHERE created_at >= NOW() - INTERVAL '7 days'")
+        active_7d = cur.fetchone()[0]
+
+        # Trial to paid conversion
+        cur.execute("SELECT COUNT(DISTINCT user_id) FROM credit_transactions WHERE type='purchase'")
+        paid_users = cur.fetchone()[0]
+
+        cur.close()
+        conn.close()
+
+        conversion = (paid_users / total * 100) if total > 0 else 0
+
+        print(f"\n{B}👥 MoldaSpace Users{R}")
+        print(f"{'─' * 40}")
+        print(f"  {B}Total:{R}      {total:>6}")
+        print(f"  {B}Today:{R}      {today:>6}")
+        print(f"  {B}Yesterday:{R}  {yesterday:>6}")
+        print(f"  {B}{days}d:{R}        {nd:>6}")
+        print(f"  {B}Active 7d:{R}  {active_7d:>6}")
+        print(f"{'─' * 40}")
+        print(f"  {Y}Paid users:{R} {paid_users} ({conversion:.1f}% conversion)")
+        print()
+        return 0
+
+    except Exception as e:
+        print(f"{RED}DB Error: {e}{R}")
+        return 1
+
+
+# ─── sprint ───────────────────────────────────────────────────────
+
+def cmd_sprint(args):
+    """Show current sprint status."""
+    plans_dir = os.path.join(MOLDASPACE, "plans")
+    
+    # Find latest sprint file
+    sprint_files = sorted(
+        [f for f in os.listdir(plans_dir) if f.startswith("weekly-sprint-")],
+        reverse=True
+    )
+    
+    if not sprint_files:
+        print(f"{RED}No sprint files found in {plans_dir}{R}")
+        return 1
+    
+    sprint_path = os.path.join(plans_dir, sprint_files[0])
+    print(f"{DIM}Sprint: {sprint_files[0]}{R}\n")
+    
+    with open(sprint_path) as f:
+        print(f.read())
+    
+    return 0
+
+
+# ─── mission ──────────────────────────────────────────────────────
+
+def cmd_mission(args):
+    """Show MISSION_CONTROL.md."""
+    path = os.path.join(MOLDASPACE, "MISSION_CONTROL.md")
+    if not os.path.exists(path):
+        print(f"{RED}MISSION_CONTROL.md not found{R}")
+        return 1
+    with open(path) as f:
+        print(f.read())
+    return 0
+
+
+# ─── post ─────────────────────────────────────────────────────────
+
+def cmd_post(args):
+    """Post content to Instagram @studio.maia.arch."""
+    post_type = args.post_type
+
+    if post_type == "reel":
+        style = " ".join(args.content)
+        if not style:
+            print(f"{RED}Usage: maia post reel <style>{R}")
+            print(f"  Example: maia post reel \"modern living room\"")
+            return 1
+        output = f"/tmp/maia-reel-{datetime.now().strftime('%Y%m%d-%H%M')}.mp4"
+        print(f"{C}Generating reel: {style}{R}")
+        rc = run_script("moldaspace_reel.py", [style, "-o", output])
+        if rc != 0:
+            print(f"{RED}Reel generation failed{R}")
+            return rc
+        print(f"\n{G}✅ Reel saved: {output}{R}")
+        print(f"{DIM}To post: maia post image {output} \"your caption\"{R}")
+        return 0
+
+    elif post_type == "render":
+        scene = " ".join(args.content)
+        if not scene:
+            print(f"{RED}Usage: maia post render <scene>{R}")
+            return 1
+        output = f"/tmp/maia-render-{datetime.now().strftime('%Y%m%d-%H%M')}.png"
+        resolution = args.resolution or "2K"
+        prompt = f"Photorealistic interior render, {scene}, natural lighting, architectural photography, 8K quality, warm tones"
+        nbp_script = os.path.expanduser("~/.npm-global/lib/node_modules/openclaw/skills/nano-banana-pro/scripts/generate_image.py")
+        cmd = ["uv", "run", nbp_script, "--prompt", prompt, "--filename", output, "--resolution", resolution]
+        print(f"{C}Generating render: {scene}{R}")
+        rc = subprocess.run(cmd).returncode
+        if rc != 0:
+            print(f"{RED}Render generation failed{R}")
+            return rc
+        print(f"\n{G}✅ Render saved: {output}{R}")
+        print(f"{DIM}To post: maia post image {output} \"your caption\"{R}")
+        return 0
+
+    elif post_type == "image":
+        if len(args.content) < 2:
+            print(f"{RED}Usage: maia post image <path> <caption>{R}")
+            return 1
+        image_path = args.content[0]
+        caption = " ".join(args.content[1:])
+        print(f"{C}Posting to @studio.maia.arch...{R}")
+        rc = run_script("instagram_post.py", ["--account", "maia", "--image", image_path, "--caption", caption])
+        if rc == 0:
+            print(f"{G}✅ Posted to Instagram{R}")
+        return rc
+
+    elif post_type == "carousel":
+        # Expects: maia post carousel img1 img2 img3 --caption "text"
+        images = [c for c in args.content if not c.startswith("--")]
+        if len(images) < 2:
+            print(f"{RED}Usage: maia post carousel <img1> <img2> ... --caption \"text\"{R}")
+            return 1
+        caption = args.caption or ""
+        print(f"{C}Posting carousel ({len(images)} images) to @studio.maia.arch...{R}")
+        cmd_args = ["--account", "maia", "--carousel"] + images + ["--caption", caption]
+        rc = run_script("instagram_post.py", cmd_args)
+        if rc == 0:
+            print(f"{G}✅ Carousel posted to Instagram{R}")
+        return rc
+
+    else:
+        print(f"{RED}Unknown post type: {post_type}{R}")
+        print(f"Available: reel, render, image, carousel")
+        return 1
+
+
+# ─── reddit ───────────────────────────────────────────────────────
+
+def cmd_reddit(args):
+    """Reddit operations for u/maia_archviz."""
+    reddit_action = args.reddit_action
+    extra = args.args or []
+
+    if reddit_action == "status":
+        return run_script("reddit_comment.py", ["--test"])
+
+    elif reddit_action == "list":
+        sub = extra[0] if extra else "archviz"
+        sort = args.sort or "hot"
+        limit = str(args.limit or 10)
+        return run_script("reddit_comment.py", ["-s", sub, "--sort", sort, "--limit", limit])
+
+    elif reddit_action == "comment":
+        if len(extra) < 2:
+            print(f"{RED}Usage: maia reddit comment <post_url_or_id> \"text\"{R}")
+            return 1
+        return run_script("reddit_comment.py", [extra[0], " ".join(extra[1:])])
+
+    else:
+        print(f"{RED}Unknown reddit action: {reddit_action}{R}")
+        print(f"Available: status, list, comment")
+        return 1
+
+
+# ─── ig ───────────────────────────────────────────────────────────
+
+def cmd_ig(args):
+    """Instagram operations for @studio.maia.arch."""
+    ig_action = args.ig_action
+
+    if ig_action == "status":
+        # Quick IG status via Instagram API
+        creds = load_json_secret("instagram_maia_api.json")
+        if not creds:
+            print(f"{RED}No Maia Instagram credentials found{R}")
+            return 1
+
+        import requests
+        ig_id = creds["ig_account_id"]
+        token = creds["page_access_token"]
+
+        r = requests.get(f"https://graph.facebook.com/v21.0/{ig_id}",
+            params={"fields": "followers_count,media_count,username", "access_token": token})
+
+        if r.status_code != 200:
+            print(f"{RED}Instagram API error: {r.status_code}{R}")
+            return 1
+
+        data = r.json()
+
+        # Recent media
+        r2 = requests.get(f"https://graph.facebook.com/v21.0/{ig_id}/media",
+            params={"fields": "id,like_count,comments_count,timestamp,media_type", "access_token": token, "limit": 10})
+        media = r2.json().get("data", [])
+        total_likes = sum(p.get("like_count", 0) for p in media)
+        total_comments = sum(p.get("comments_count", 0) for p in media)
+        avg_eng = round((total_likes + total_comments) / max(len(media), 1), 1)
+
+        print(f"\n{B}📱 Instagram @{data.get('username', 'studio.maia.arch')}{R}")
+        print(f"{'─' * 40}")
+        print(f"  {B}Followers:{R}  {data.get('followers_count', 0)}")
+        print(f"  {B}Posts:{R}      {data.get('media_count', 0)}")
+        print(f"  {B}Avg engagement (last {len(media)}):{R} {avg_eng}")
+        print(f"  {B}Recent likes:{R}    {total_likes}")
+        print(f"  {B}Recent comments:{R} {total_comments}")
+
+        if media:
+            last = media[0]
+            print(f"{'─' * 40}")
+            print(f"  {DIM}Last post: {last.get('timestamp', '')[:10]} ({last.get('media_type', '')})")
+            print(f"  Likes: {last.get('like_count', 0)} | Comments: {last.get('comments_count', 0)}{R}")
+        print()
+        return 0
+
+    elif ig_action == "comments":
+        print(f"{C}Checking comments on @studio.maia.arch...{R}")
+        return run_script("maia_comments.py")
+
+    else:
+        print(f"{RED}Unknown ig action: {ig_action}{R}")
+        print(f"Available: status, comments")
+        return 1
+
+
+# ─── main ─────────────────────────────────────────────────────────
+
+def main():
+    parser = argparse.ArgumentParser(
+        prog="maia",
+        description="Unified CLI for MoldaSpace operations",
+        formatter_class=argparse.RawDescriptionHelpFormatter,
+        epilog="""
+Examples:
+  maia analytics               Full analytics (PostHog + GSC + DB + IG)
+  maia analytics --json        JSON output
+  maia revenue                 Quick revenue check
+  maia revenue --days 30       Revenue for last 30 days
+  maia users                   User metrics
+  maia sprint                  Show current sprint
+  maia mission                 Show MISSION_CONTROL.md
+  maia post reel "modern kitchen"     Generate before/after reel
+  maia post render "luxury bath"      Generate photorealistic render
+  maia post image photo.png "caption" Post image to IG
+  maia reddit status           Test Reddit auth
+  maia reddit list archviz     List posts from r/archviz
+  maia reddit comment <id> "text"  Post a comment
+  maia ig status               Instagram account status
+  maia ig comments             Check/reply to comments
+        """
+    )
+    sub = parser.add_subparsers(dest="command", help="Command")
+
+    # analytics
+    p_analytics = sub.add_parser("analytics", aliases=["a"], help="Full analytics")
+    p_analytics.add_argument("--days", type=int, default=7)
+    p_analytics.add_argument("--json", action="store_true")
+
+    # revenue
+    p_revenue = sub.add_parser("revenue", aliases=["rev", "$"], help="Quick revenue")
+    p_revenue.add_argument("--days", type=int, default=7)
+
+    # users
+    p_users = sub.add_parser("users", aliases=["u"], help="User metrics")
+    p_users.add_argument("--days", type=int, default=7)
+
+    # sprint
+    sub.add_parser("sprint", aliases=["s"], help="Current sprint")
+
+    # mission
+    sub.add_parser("mission", aliases=["mc"], help="MISSION_CONTROL.md")
+
+    # post
+    p_post = sub.add_parser("post", aliases=["p"], help="Post content to IG")
+    p_post.add_argument("post_type", choices=["reel", "render", "image", "carousel"])
+    p_post.add_argument("content", nargs="*", default=[])
+    p_post.add_argument("--resolution", default="2K")
+    p_post.add_argument("--caption", default="")
+
+    # reddit
+    p_reddit = sub.add_parser("reddit", aliases=["r"], help="Reddit operations")
+    p_reddit.add_argument("reddit_action", choices=["status", "list", "comment"])
+    p_reddit.add_argument("args", nargs="*", help="action-specific args")
+    p_reddit.add_argument("--sort", default="hot")
+    p_reddit.add_argument("--limit", type=int, default=10)
+
+    # ig
+    p_ig = sub.add_parser("ig", help="Instagram operations")
+    p_ig.add_argument("ig_action", choices=["status", "comments"])
+
+    args = parser.parse_args()
+
+    if not args.command:
+        parser.print_help()
+        return 0
+
+    cmd = args.command
+    if cmd in ("analytics", "a"):
+        return cmd_analytics(args)
+    elif cmd in ("revenue", "rev", "$"):
+        return cmd_revenue(args)
+    elif cmd in ("users", "u"):
+        return cmd_users(args)
+    elif cmd in ("sprint", "s"):
+        return cmd_sprint(args)
+    elif cmd in ("mission", "mc"):
+        return cmd_mission(args)
+    elif cmd in ("post", "p"):
+        return cmd_post(args)
+    elif cmd in ("reddit", "r"):
+        return cmd_reddit(args)
+    elif cmd == "ig":
+        return cmd_ig(args)
+    else:
+        parser.print_help()
+        return 0
+
+
+if __name__ == "__main__":
+    sys.exit(main() or 0)

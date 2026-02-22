@@ -5,7 +5,7 @@
 - **Pronouns:** he/him
 - **Timezone:** America/Sao_Paulo (GMT-3)
 - **Location:** Ponta Grossa, Paraná
-- **Notes:** Brazilian entrepreneur, indie hacker, father of 2, married
+- **Notes:** Brazilian entrepreneur, indie hacker, father of 2 (bebê em transição de sono — plano de 14 noites), married
 
 ## Context
 
@@ -19,6 +19,33 @@ Builder. Maker. Juggling family life and entrepreneurship. Appreciates efficienc
 
 - Usar "você", nunca "tu" (sotaque paranaense)
 - Português brasileiro informal
+
+## VIA Character Strengths (2024-05-04)
+**Top 5:** Love, Creativity, Gratitude, Hope, Forgiveness
+**Also strong (6-9):** Humor, Love of Learning, Perspective, Appreciation of Beauty & Excellence
+**Mid (10-18):** Spirituality, Judgment, Bravery, Teamwork, Curiosity, Fairness, Perseverance, Leadership, Zest
+**Lower (19-24):** Social Intelligence, Kindness, Self-Regulation, Prudence, Humility, Honesty
+
+**Pattern:** Operates on creativity + hope, not brute discipline. Builds fast, kills fast. Humor is core. Values deep relationships over networking.
+
+## Visão (escrita pelo André — "com 80 anos, olhando pra trás")
+- Priorizou família e filhos acima de tudo
+- Criou negócios com demanda real, gerando 100x mais valor do que ganha
+- Pensou no longo prazo, mas aproveitou cada dia como se fosse o último
+- Esposa feliz, sem preocupação financeira, morando onde querem
+- Decisões baseadas em **liberdade no longo prazo** e **qual seria mais divertida / traria melhores histórias**
+- Educação como peça central — ajuda comunidades com educação e criação de negócios
+
+**Filtro de decisão:** Liberdade + Diversão + Melhores histórias
+
+## MBTI: INTJ-A (Assertive Architect)
+- **I**ntroverted — recarrega sozinho, prefere profundidade a networking superficial
+- **I**ntuitive — pensa em sistemas e padrões, não em detalhes isolados
+- **T**hinking — decisões baseadas em lógica, não em consenso social
+- **J**udging — prefere planejar e executar rápido, não deixar em aberto
+- **A**ssertive — confiante nas decisões, não se estressa facilmente com erros
+
+**INTJ + VIA juntos:** Criativo estrategista que opera por visão de longo prazo (Hope + Intuition), constrói sistemas (Thinking + Judging), mas o motor real é amor pela família e liberdade — não status ou dinheiro.
 
 ## Strengths & Style
 - **Builder nato**: ideia → produto rodando em dias, não semanas

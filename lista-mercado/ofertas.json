@@ -1,8 +1,16 @@
 {
-  "data": "12/02/2026",
-  "atualizado": "2026-02-12T08:00:15.362546",
+  "data": "18/02/2026",
+  "atualizado": "2026-02-18T08:00:12.368195",
   "ofertas": {
-    "tozetto": [],
+    "tozetto": [
+      {
+        "produto": "Óleo Liza Milho ou Algodão 900ml",
+        "preco_original": "R$14.99",
+        "preco_oferta": "R$13.49",
+        "validade": "19/02/2026",
+        "desconto": 10.00667111407605
+      }
+    ],
     "condor": [
       {
         "produto": "Shampoo",

@@ -1,0 +1,228 @@
+"""Generate the main flow dashboard (flow.md) with Mermaid diagram + live metrics."""
+
+from __future__ import annotations
+
+import time
+from typing import Any
+
+from .linker import stage_link, fmt_ts, fmt_ago, fmt_num, fmt_size, health_badge
+
+
+def _health_status(data: dict[int, dict]) -> list[tuple[str, str, str]]:
+    """Compute health rows from stage data."""
+    rows = []
+    # Queue
+    q = data.get(2, {})
+    pending = q.get("estimated_pending", 0)
+    q_status = "healthy" if pending < 5000 else ("warning" if pending < 20000 else "critical")
+    rows.append(("Queue depth", f"~{fmt_num(pending)} pending", q_status))
+
+    # Pipeline
+    p = data.get(3, {})
+    last_ts = p.get("last_cycle_ts")
+    ago = fmt_ago(last_ts)
+    p_status = "healthy"
+    if last_ts:
+        diff = time.time() - last_ts
+        if diff > 600:
+            p_status = "critical"
+        elif diff > 300:
+            p_status = "warning"
+    rows.append(("Last pipeline cycle", ago, p_status))
+    rows.append(("Processing rate", f"{p.get('last_processing_rate', 0):.1f} ev/s", "healthy"))
+    rows.append(("Events processed", fmt_num(p.get("total_events_processed", 0)), "healthy"))
+    rows.append(("Insights created", fmt_num(p.get("total_insights_created", 0)), "healthy"))
+
+    # Memory Capture
+    mc = data.get(4, {})
+    rows.append(("Pending memories", fmt_num(mc.get("pending_count", 0)), "healthy"))
+
+    # Meta-Ralph
+    mr = data.get(5, {})
+    rows.append(("Meta-Ralph roasted", fmt_num(mr.get("total_roasted", 0)), "healthy"))
+    pass_rate = mr.get("pass_rate", 0)
+    rows.append(("Meta-Ralph pass rate", f"{pass_rate}%",
+                 "healthy" if pass_rate > 30 else ("warning" if pass_rate > 15 else "critical")))
+    rows.append(("Meta-Ralph avg score", str(mr.get("avg_total_score", 0)), "healthy"))
+
+    # Cognitive
+    cg = data.get(6, {})
+    rows.append(("Cognitive insights", fmt_num(cg.get("total_insights", 0)), "healthy"))
+
+    # EIDOS
+    ei = data.get(7, {})
+    rows.append(("EIDOS episodes", fmt_num(ei.get("episodes", 0)), "healthy" if ei.get("db_exists") else "warning"))
+    rows.append(("EIDOS distillations", fmt_num(ei.get("distillations", 0)), "healthy"))
+
+    # Advisory
+    ad = data.get(8, {})
+    rows.append(("Advisory given", fmt_num(ad.get("total_advice_given", 0)), "healthy"))
+    rows.append(("Advisory followed", f"{ad.get('followed_rate', 0)}%", "healthy"))
+    emit_rate = ad.get("decision_emit_rate", 0)
+    rows.append(("Advisory emit rate", f"{emit_rate}%",
+                 "healthy" if emit_rate > 20 else "warning"))
+    fb_follow = ad.get("feedback_follow_rate", 0)
+    rows.append(("Implicit follow rate", f"{fb_follow}%",
+                 "healthy" if fb_follow > 40 else "warning"))
+
+    # Promotion
+    pr = data.get(9, {})
+    rows.append(("Promotion log entries", fmt_num(pr.get("total_entries", 0)), "healthy"))
+
+    # Chips
+    ch = data.get(10, {})
+    rows.append(("Active chips", fmt_num(ch.get("total_chips", 0)), "healthy"))
+
+    return rows
+
+
+def _mermaid_diagram(data: dict[int, dict]) -> str:
+    """Generate the Mermaid flowchart with live metrics."""
+    p = data.get(3, {})
+    q = data.get(2, {})
+    mc = data.get(4, {})
+    mr = data.get(5, {})
+    cg = data.get(6, {})
+    ei = data.get(7, {})
+    ad = data.get(8, {})
+    pr = data.get(9, {})
+    ch = data.get(10, {})
+    pk = data.get(11, {})
+
+    lines = [
+        "```mermaid",
+        "flowchart TD",
+        f'    A["`**Event Capture**',
+        f'    hooks/observe.py',
+        f'    _Last: {fmt_ago(data.get(1, {}).get("last_cycle_ts"))}_`"]',
+        f'    --> B["`**Queue**',
+        f'    ~{fmt_num(q.get("estimated_pending", 0))} pending',
+        f'    _{fmt_size(q.get("events_file_size", 0))}_`"]',
+        "",
+        f'    B --> C["`**Pipeline**',
+        f'    {fmt_num(p.get("total_events_processed", 0))} processed',
+        f'    _{p.get("last_processing_rate", 0):.1f} ev/s_`"]',
+        "",
+        f'    C --> D["`**Memory Capture**',
+        f'    {fmt_num(mc.get("pending_count", 0))} pending',
+        f'    _Importance scoring_`"]',
+        "",
+        f'    D --> E{{"`**Meta-Ralph**',
+        f'    Quality Gate',
+        f'    _{fmt_num(mr.get("total_roasted", 0))} roasted_`"}}',
+        "",
+        f'    E -->|pass| F["`**Cognitive Learner**',
+        f'    {fmt_num(cg.get("total_insights", 0))} insights',
+        f'    _{len(cg.get("category_distribution", {}))} categories_`"]',
+        "",
+        f'    E -->|reject| X["`**Rejected**',
+        f'    _Below threshold_`"]',
+        "",
+        f'    C --> G["`**EIDOS**',
+        f'    {fmt_num(ei.get("episodes", 0))} episodes',
+        f'    _{fmt_num(ei.get("distillations", 0))} distillations_`"]',
+        "",
+        f'    F --> H["`**Advisory**',
+        f'    {fmt_num(ad.get("total_advice_given", 0))} given',
+        f'    _{ad.get("followed_rate", 0)}% followed_`"]',
+        "",
+        f'    G --> H',
+        "",
+        f'    H --> I["`**Promotion**',
+        f'    {fmt_num(pr.get("total_entries", 0))} log entries',
+        f'    _CLAUDE.md + targets_`"]',
+        "",
+        f'    C --> J["`**Chips**',
+        f'    {fmt_num(ch.get("total_chips", 0))} active modules',
+        f'    _{fmt_size(ch.get("total_size", 0))}_`"]',
+        "",
+        f'    J --> H',
+        "",
+        f'    C --> K["`**Predictions**',
+        f'    {fmt_num(pk.get("outcomes_count", 0))} outcomes',
+        f'    _Surprise tracking_`"]',
+        "",
+        f'    K --> G',
+        "",
+        f'    L["`**Tuneables**',
+        f'    {len(data.get(12, {}).get("sections", {}))} sections',
+        f'    _Hot-reload_`"]',
+        f'    -.->|configures| E',
+        f'    L -.->|configures| H',
+        "",
+        '    style X fill:#4a2020,stroke:#ff6666,color:#ff9999',
+        '    style E fill:#2a3a2a,stroke:#66cc66,color:#88ee88',
+        "```",
+    ]
+    return "\n".join(lines)
+
+
+def generate_flow_dashboard(data: dict[int, dict[str, Any]]) -> str:
+    """Generate the full flow.md content."""
+    now = fmt_ts(time.time())
+    sections = []
+
+    # Header
+    sections.append(f"# Spark Intelligence Observatory\n")
+    sections.append(f"> Last generated: {now}")
+    p = data.get(3, {})
+    sections.append(f"> Pipeline: {fmt_num(p.get('total_events_processed', 0))} events processed, {fmt_num(p.get('total_insights_created', 0))} insights created\n")
+
+    # System Health table
+    sections.append("## System Health\n")
+    sections.append("| Metric | Value | Status |")
+    sections.append("|--------|-------|--------|")
+    for metric, value, status in _health_status(data):
+        sections.append(f"| {metric} | {value} | {health_badge(status)} |")
+    sections.append("")
+
+    # Mermaid diagram
+    sections.append("## Intelligence Flow\n")
+    sections.append(_mermaid_diagram(data))
+    sections.append("")
+
+    # Stage links
+    sections.append("## Stage Detail Pages\n")
+    for i in range(1, 13):
+        sd = data.get(i, {})
+        name = sd.get("name", f"Stage {i}")
+        desc = _stage_description(i)
+        sections.append(f"{i}. {stage_link(i)} — {desc}")
+    sections.append("")
+
+    # Data flow narrative
+    sections.append("## How Data Flows\n")
+    sections.append(f"- An **event** enters via {stage_link(1)} and lands in the {stage_link(2)}")
+    sections.append(f"- The {stage_link(3)} processes batches, feeding {stage_link(4)}")
+    sections.append(f"- {stage_link(5)} gates every insight before it enters {stage_link(6)}")
+    sections.append(f"- {stage_link(8)} retrieves from {stage_link(6)}, {stage_link(7)}, and {stage_link(10)}")
+    sections.append(f"- High-confidence insights get {stage_link(9, 'promoted')} to CLAUDE.md")
+    sections.append(f"- {stage_link(11)} close the loop: predict, observe, evaluate, learn")
+    sections.append("")
+
+    # Quick links to existing pages
+    sections.append("## Quick Links\n")
+    sections.append("- [[explore/_index|Explore Individual Items]] — browse cognitive insights, distillations, episodes, verdicts")
+    sections.append("- [[../watchtower|Advisory Watchtower]] — existing advisory deep-dive")
+    sections.append("- [[../packets/index|Advisory Packet Catalog]] — existing packet view")
+    sections.append("")
+
+    return "\n".join(sections)
+
+
+def _stage_description(num: int) -> str:
+    descs = {
+        1: "Hook integration, session tracking, predictions",
+        2: "Event buffering, overflow, compaction",
+        3: "Batch processing, priority ordering, learning yield",
+        4: "Importance scoring, domain detection, pending items",
+        5: "Quality gate, roast verdicts, noise filtering",
+        6: "Insight store, categories, reliability tracking",
+        7: "Episodes, steps, distillations, predict-evaluate loop",
+        8: "Retrieval, ranking, emission, effectiveness feedback",
+        9: "Target files, criteria, promotion log",
+        10: "Domain modules, per-chip activity",
+        11: "Outcomes, links, surprise tracking",
+        12: "Configuration, hot-reload, all sections",
+    }
+    return descs.get(num, "")

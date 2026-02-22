@@ -1,0 +1,81 @@
+# Spark Learning Sources Configuration
+#
+# Control what sources Spark learns from to become more intelligent.
+# Users can opt-in/out of different learning channels.
+
+learning_sources:
+  # ALWAYS ON - Core learning from work
+  work_sessions:
+    enabled: true
+    description: "Learn from coding sessions, tool usage, and outcomes"
+    cannot_disable: true
+    learns:
+      - Tool effectiveness patterns
+      - User preferences and style
+      - What approaches work/fail
+      - Domain-specific knowledge from projects
+
+  user_feedback:
+    enabled: true
+    description: "Learn from explicit user corrections and preferences"
+    cannot_disable: true
+    learns:
+      - Communication preferences
+      - Accuracy corrections
+      - Style preferences
+
+  # OpenClaw agent sessions
+  openclaw:
+    enabled: true
+    description: "Learn from OpenClaw agent sessions, tool usage, and outcomes"
+    learns:
+      - Tool effectiveness patterns
+      - User preferences and workflow style
+      - Multi-agent coordination patterns
+      - Session lifecycle and model switching behavior
+    adapter: "openclaw_tailer"
+    agent: "main"
+    poll_interval: 2.0
+
+  # OPT-IN - Internet learning for higher intelligence
+  web_research:
+    enabled: true  # User can set to false
+    description: "Research web for deeper understanding of topics"
+    learns:
+      - Technical documentation
+      - Industry analysis
+      - Future predictions
+      - Expert opinions
+    depth: "moderate"  # shallow, moderate, deep
+
+  news_events:
+    enabled: true  # User can set to false
+    description: "Track relevant news and world events"
+    learns:
+      - Industry news
+      - Regulatory changes
+      - Market movements
+      - Technology announcements
+    relevance_filter: "user_interests"  # Only news relevant to user's work
+
+# What Spark aims to understand
+intelligence_goals:
+  - "Where things are heading in user's domains"
+  - "Emerging patterns before they become obvious"
+  - "Cross-domain connections and insights"
+  - "What will matter in 6-12 months"
+  - "User's competitive landscape"
+
+# Privacy controls
+privacy:
+  store_locally: true
+  sync_to_cloud: false
+  share_learnings: false
+  data_retention_days: 365
+
+# Learning quality filters
+quality_filters:
+  min_engagement_for_trends: 100  # Minimum engagement to consider a trend
+  min_confidence_to_store: 0.6
+  validate_before_promote: true
+  require_multiple_sources: true  # Cross-reference before believing

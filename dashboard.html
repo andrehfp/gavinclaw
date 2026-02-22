@@ -1,37 +1,46 @@
 <!DOCTYPE html>
-<html lang="pt-BR">
+<html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Gavin Dashboard</title>
+  <title>Gavin Command Center</title>
   <style>
     :root {
       --bg: #090f1d;
       --bg-2: #0d1628;
       --sidebar: #0b1324;
-      --card: #111d34;
-      --card-2: #162644;
+      --card: rgba(17, 29, 52, 0.6);
+      --card-hover: rgba(17, 29, 52, 0.8);
+      --glass: rgba(255, 255, 255, 0.05);
+      --glass-border: rgba(255, 255, 255, 0.1);
       --line: rgba(130, 173, 255, 0.22);
       --text: #e8f0ff;
       --muted: #96acd2;
       --accent: #58a6ff;
-      --ok: #3ad6a0;
+      --green: #3ad6a0;
       --warn: #f6bf56;
       --danger: #ff7f8f;
+      
+      /* Platform colors */
+      --instagram: #E4405F;
+      --twitter: #1DA1F2;
+      --youtube: #FF0000;
+      --newsletter: #F6BF56;
+      --linkedin: #0A66C2;
     }
 
     * { box-sizing: border-box; margin: 0; padding: 0; }
 
     body {
-      font-family: "Segoe UI", Tahoma, sans-serif;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
       color: var(--text);
       min-height: 100vh;
-      background:
-        radial-gradient(circle at 8% 15%, rgba(88, 166, 255, 0.16), transparent 38%),
-        radial-gradient(circle at 85% 8%, rgba(58, 214, 160, 0.08), transparent 34%),
-        linear-gradient(160deg, var(--bg) 0%, var(--bg-2) 58%, #0f1f39 100%);
+      background: 
+        radial-gradient(circle at 20% 80%, rgba(88, 166, 255, 0.1), transparent 50%),
+        radial-gradient(circle at 80% 20%, rgba(58, 214, 160, 0.08), transparent 50%),
+        radial-gradient(circle at 40% 40%, rgba(246, 191, 86, 0.05), transparent 50%),
+        linear-gradient(135deg, var(--bg) 0%, var(--bg-2) 100%);
       overflow-x: hidden;
-      overflow-y: auto;
     }
 
     .app {
@@ -46,125 +55,191 @@
       top: 0;
       bottom: 0;
       width: 280px;
-      padding: 18px 14px;
+      padding: 20px;
+      background: linear-gradient(180deg, rgba(11, 19, 36, 0.95), rgba(7, 14, 29, 0.98));
+      backdrop-filter: blur(20px);
       border-right: 1px solid var(--line);
-      background: linear-gradient(180deg, rgba(7, 14, 29, 0.98), rgba(11, 19, 36, 0.96));
-      backdrop-filter: blur(8px);
+      z-index: 100;
       overflow-y: auto;
     }
 
     .brand {
-      border: 1px solid var(--line);
-      border-radius: 14px;
-      background: rgba(255, 255, 255, 0.02);
-      padding: 12px;
-      margin-bottom: 14px;
+      background: var(--glass);
+      border: 1px solid var(--glass-border);
+      border-radius: 16px;
+      padding: 16px;
+      margin-bottom: 24px;
+      backdrop-filter: blur(10px);
     }
 
-    .brand h1 { font-size: 20px; }
-    .brand p { color: var(--muted); font-size: 12px; margin-top: 4px; }
+    .brand h1 { 
+      font-size: 24px; 
+      font-weight: 700;
+      background: linear-gradient(135deg, var(--accent), var(--green));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .brand p { 
+      color: var(--muted); 
+      font-size: 13px; 
+      margin-top: 6px; 
+    }
 
     .status {
-      margin-top: 10px;
+      margin-top: 12px;
       display: inline-flex;
       align-items: center;
       gap: 8px;
-      border: 1px solid rgba(58, 214, 160, 0.4);
+      border: 1px solid rgba(58, 214, 160, 0.3);
       border-radius: 999px;
-      padding: 5px 10px;
-      color: var(--ok);
-      background: rgba(58, 214, 160, 0.11);
+      padding: 6px 12px;
+      color: var(--green);
+      background: rgba(58, 214, 160, 0.1);
       font-size: 12px;
+      font-weight: 500;
     }
 
-    .dot {
+    .pulse-dot {
       width: 8px;
       height: 8px;
       border-radius: 50%;
       background: currentColor;
-      animation: pulse 1.7s infinite;
+      animation: pulse 2s infinite;
     }
 
     @keyframes pulse {
-      0% { transform: scale(1); opacity: 1; }
-      50% { transform: scale(1.5); opacity: 0.4; }
-      100% { transform: scale(1); opacity: 1; }
+      0%, 100% { opacity: 1; transform: scale(1); }
+      50% { opacity: 0.5; transform: scale(1.2); }
     }
 
     .nav {
       display: flex;
       flex-direction: column;
-      gap: 8px;
+      gap: 4px;
     }
 
-    .nav button {
+    .nav-item {
       border: 1px solid transparent;
-      border-radius: 10px;
-      background: rgba(255, 255, 255, 0.02);
+      border-radius: 12px;
+      background: transparent;
       color: var(--text);
       text-align: left;
-      padding: 11px 12px;
+      padding: 14px 16px;
       font-size: 14px;
+      font-weight: 500;
       cursor: pointer;
-      transition: all 0.2s ease;
+      transition: all 0.3s ease;
+      display: flex;
+      align-items: center;
+      gap: 12px;
     }
 
-    .nav button:hover {
-      border-color: var(--line);
-      background: rgba(255, 255, 255, 0.05);
+    .nav-item:hover {
+      background: var(--glass);
+      border-color: var(--glass-border);
+      transform: translateX(4px);
     }
 
-    .nav button.active {
-      border-color: rgba(88, 166, 255, 0.65);
-      background: linear-gradient(180deg, rgba(88, 166, 255, 0.19), rgba(88, 166, 255, 0.06));
+    .nav-item.active {
+      background: linear-gradient(135deg, rgba(88, 166, 255, 0.2), rgba(88, 166, 255, 0.1));
+      border-color: rgba(88, 166, 255, 0.4);
+      transform: translateX(8px);
+    }
+
+    .nav-icon {
+      font-size: 16px;
+      width: 20px;
+      text-align: center;
     }
 
     .main {
-      grid-column: 2;
       margin-left: 280px;
-      height: 100vh;
+      padding: 20px;
+      min-height: 100vh;
       overflow-y: auto;
-      padding: 18px;
     }
 
-    .topbar {
+    .header {
+      background: var(--glass);
+      border: 1px solid var(--glass-border);
+      border-radius: 16px;
+      padding: 20px;
+      margin-bottom: 24px;
+      backdrop-filter: blur(10px);
       display: flex;
       justify-content: space-between;
       align-items: center;
-      gap: 12px;
-      margin-bottom: 14px;
-      border: 1px solid var(--line);
-      border-radius: 14px;
-      background: rgba(255, 255, 255, 0.02);
-      padding: 12px 14px;
+      flex-wrap: wrap;
+      gap: 16px;
     }
 
-    .topbar h2 { font-size: 20px; }
-    .topbar p { color: var(--muted); font-size: 13px; margin-top: 3px; }
+    .header h1 { 
+      font-size: 28px; 
+      font-weight: 700; 
+    }
 
-    .top-actions {
+    .header p { 
+      color: var(--muted); 
+      font-size: 14px; 
+      margin-top: 4px; 
+    }
+
+    .header-actions {
       display: flex;
       align-items: center;
-      gap: 8px;
+      gap: 12px;
       flex-wrap: wrap;
     }
 
     .pill {
-      border: 1px solid var(--line);
+      background: var(--glass);
+      border: 1px solid var(--glass-border);
       border-radius: 999px;
-      padding: 6px 9px;
+      padding: 8px 16px;
       font-size: 12px;
       color: var(--muted);
-      background: rgba(255, 255, 255, 0.02);
+      backdrop-filter: blur(10px);
     }
 
-    button.action {
-      border: 1px solid var(--line);
-      border-radius: 10px;
-      background: linear-gradient(180deg, #1d3358, #182947);
-      color: var(--text);
-      padding: 8px 11px;
+    .btn {
+      background: linear-gradient(135deg, var(--accent), #4a8cf7);
+      border: none;
+      border-radius: 12px;
+      color: white;
+      padding: 10px 20px;
+      font-size: 14px;
+      font-weight: 600;
       cursor: pointer;
+      transition: all 0.3s ease;
+    }
+
+    .btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 25px rgba(88, 166, 255, 0.3);
+    }
+
+    .fab {
+      position: fixed;
+      bottom: 30px;
+      right: 30px;
+      width: 60px;
+      height: 60px;
+      background: linear-gradient(135deg, var(--green), #2eb894);
+      border: none;
+      border-radius: 50%;
+      color: white;
+      font-size: 24px;
+      cursor: pointer;
+      box-shadow: 0 8px 25px rgba(58, 214, 160, 0.4);
+      transition: all 0.3s ease;
+      z-index: 1000;
+    }
+
+    .fab:hover {
+      transform: scale(1.1);
+      box-shadow: 0 12px 35px rgba(58, 214, 160, 0.6);
     }
 
     .section { display: none; }
@@ -172,294 +247,444 @@
 
     .grid {
       display: grid;
-      grid-template-columns: repeat(12, 1fr);
-      gap: 12px;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 20px;
+    }
+
+    .grid-2 {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 20px;
+    }
+
+    .grid-3 {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+    }
+
+    .grid-4 {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 20px;
     }
 
     .card {
-      border: 1px solid var(--line);
-      border-radius: 12px;
-      background: linear-gradient(180deg, rgba(17, 29, 52, 0.96), rgba(14, 24, 43, 0.9));
-      padding: 13px;
+      background: var(--card);
+      border: 1px solid var(--glass-border);
+      border-radius: 16px;
+      padding: 24px;
+      backdrop-filter: blur(10px);
+      transition: all 0.3s ease;
     }
 
-    .span-3 { grid-column: span 3; }
-    .span-4 { grid-column: span 4; }
-    .span-5 { grid-column: span 5; }
-    .span-6 { grid-column: span 6; }
-    .span-7 { grid-column: span 7; }
-    .span-8 { grid-column: span 8; }
-    .span-12 { grid-column: 1 / -1; }
+    .card:hover {
+      background: var(--card-hover);
+      transform: translateY(-2px);
+      box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
+    }
 
-    .card h3 {
+    .card-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 16px;
+    }
+
+    .card-title {
+      font-size: 18px;
+      font-weight: 600;
+      color: var(--text);
+    }
+
+    .card-subtitle {
       color: var(--muted);
-      font-size: 12px;
-      text-transform: uppercase;
-      letter-spacing: 0.4px;
-      margin-bottom: 10px;
+      font-size: 14px;
+      margin-top: 4px;
     }
 
-    .big {
-      font-size: 26px;
+    .stat-number {
+      font-size: 36px;
       font-weight: 700;
-      margin-top: 3px;
+      color: var(--accent);
+      margin-top: 12px;
     }
 
     .list {
       display: flex;
       flex-direction: column;
-      gap: 8px;
-    }
-
-    .row {
-      display: flex;
-      justify-content: space-between;
-      align-items: flex-start;
-      gap: 12px;
-      border: 1px solid rgba(130, 173, 255, 0.18);
-      border-radius: 10px;
-      background: rgba(255, 255, 255, 0.02);
-      padding: 10px;
-    }
-
-    .meta { color: var(--muted); font-size: 12px; margin-top: 3px; }
-
-    .tag {
-      border: 1px solid rgba(150, 172, 210, 0.35);
-      border-radius: 999px;
-      padding: 3px 8px;
-      font-size: 11px;
-      white-space: nowrap;
-    }
-
-    .tag.ok { border-color: rgba(58, 214, 160, 0.5); color: var(--ok); background: rgba(58, 214, 160, 0.1); }
-    .tag.warn { border-color: rgba(246, 191, 86, 0.5); color: var(--warn); background: rgba(246, 191, 86, 0.1); }
-
-    pre, textarea {
-      width: 100%;
-      border: 1px solid var(--line);
-      border-radius: 10px;
-      background: #091326;
-      color: #dbe8ff;
-      padding: 11px;
-      font-size: 13px;
-      line-height: 1.5;
-      min-height: 280px;
-      font-family: Consolas, monospace;
-    }
-
-    textarea { resize: vertical; }
-
-    .memory-layout {
-      display: grid;
-      grid-template-columns: 290px 1fr;
       gap: 12px;
     }
 
-    .memory-files {
-      max-height: 520px;
-      overflow-y: auto;
-      display: flex;
-      flex-direction: column;
-      gap: 8px;
-    }
-
-    .file-item {
-      border: 1px solid rgba(130, 173, 255, 0.2);
-      border-radius: 10px;
-      background: rgba(255, 255, 255, 0.02);
-      color: var(--text);
-      text-align: left;
-      width: 100%;
-      padding: 10px;
-      cursor: pointer;
-    }
-
-    .file-item.active {
-      border-color: rgba(88, 166, 255, 0.65);
-      background: rgba(88, 166, 255, 0.1);
-    }
-
-    .markdown h1, .markdown h2, .markdown h3 { margin: 12px 0 8px; }
-    .markdown p { margin: 0 0 8px; }
-    .markdown ul { margin: 0 0 10px 18px; }
-    .markdown li { margin-bottom: 5px; }
-    .markdown code { background: rgba(255,255,255,0.08); padding: 1px 5px; border-radius: 6px; }
-
-    .help { color: var(--muted); font-size: 12px; margin-top: 8px; }
-
-    .command-layout {
-      display: flex;
-      flex-direction: column;
-      gap: 12px;
-    }
-
-    .kanban-board {
-      display: grid;
-      grid-template-columns: repeat(4, 1fr);
-      gap: 12px;
-      align-items: start;
-    }
-
-    .kanban-column {
-      border: 1px solid var(--line);
+    .list-item {
+      background: var(--glass);
+      border: 1px solid var(--glass-border);
       border-radius: 12px;
-      background: linear-gradient(180deg, rgba(17, 29, 52, 0.95), rgba(14, 24, 43, 0.9));
-      min-height: 240px;
+      padding: 16px;
       display: flex;
-      flex-direction: column;
-    }
-
-    .column-head {
-      padding: 10px;
-      border-bottom: 1px solid rgba(130, 173, 255, 0.2);
-      display: flex;
-      align-items: center;
       justify-content: space-between;
-      gap: 8px;
-    }
-
-    .column-title {
-      display: inline-flex;
       align-items: center;
-      gap: 8px;
-      font-size: 13px;
-      color: var(--text);
+      transition: all 0.2s ease;
     }
 
-    .count-badge {
-      border: 1px solid rgba(130, 173, 255, 0.36);
-      border-radius: 999px;
-      padding: 2px 8px;
-      font-size: 11px;
-      color: var(--muted);
-      background: rgba(130, 173, 255, 0.08);
+    .list-item:hover {
+      background: rgba(255, 255, 255, 0.08);
     }
 
-    .btn-mini {
-      border: 1px solid rgba(88, 166, 255, 0.45);
-      border-radius: 8px;
-      background: rgba(88, 166, 255, 0.12);
-      color: var(--text);
-      padding: 4px 8px;
-      font-size: 12px;
-      cursor: pointer;
-    }
-
-    .task-list {
-      padding: 10px;
-      min-height: 200px;
-      display: flex;
-      flex-direction: column;
-      gap: 8px;
-    }
-
-    .task-list.drop-active {
-      background: rgba(88, 166, 255, 0.08);
-      border-radius: 10px;
-    }
-
-    .kanban-card {
-      border: 1px solid rgba(130, 173, 255, 0.25);
-      border-radius: 10px;
-      background: rgba(255, 255, 255, 0.02);
-      padding: 9px;
-      cursor: grab;
-      transition: border-color 0.2s ease, box-shadow 0.2s ease, transform 0.2s ease;
-    }
-
-    .kanban-card:hover {
-      border-color: rgba(88, 166, 255, 0.5);
-      box-shadow: 0 0 0 1px rgba(88, 166, 255, 0.2), 0 0 18px rgba(88, 166, 255, 0.15);
-      transform: translateY(-1px);
-    }
-
-    .kanban-card.dragging {
-      opacity: 0.6;
-      cursor: grabbing;
-    }
-
-    .task-top {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 8px;
-      margin-bottom: 5px;
-    }
-
-    .task-title {
-      display: flex;
-      align-items: center;
-      gap: 7px;
-      font-size: 13px;
-      font-weight: 600;
-    }
-
-    .priority-dot {
-      width: 9px;
-      height: 9px;
+    .platform-icon {
+      width: 24px;
+      height: 24px;
       border-radius: 50%;
-      flex: 0 0 9px;
-    }
-
-    .priority-low { background: var(--ok); }
-    .priority-medium { background: var(--warn); }
-    .priority-high { background: var(--danger); }
-
-    .delete-btn {
-      border: 0;
-      background: transparent;
-      color: var(--muted);
-      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
       font-size: 14px;
-      line-height: 1;
-      padding: 2px;
+      margin-right: 12px;
     }
 
-    .delete-btn:hover { color: var(--danger); }
+    .platform-instagram { background: var(--instagram); }
+    .platform-twitter { background: var(--twitter); }
+    .platform-youtube { background: var(--youtube); }
+    .platform-newsletter { background: var(--newsletter); }
+    .platform-linkedin { background: var(--linkedin); }
 
-    .task-desc {
-      font-size: 12px;
-      color: var(--muted);
-      margin-bottom: 5px;
-      white-space: pre-wrap;
-      word-break: break-word;
-    }
-
-    .task-meta {
+    .badge {
+      padding: 4px 12px;
+      border-radius: 999px;
       font-size: 11px;
-      color: var(--muted);
+      font-weight: 600;
+      text-transform: uppercase;
+    }
+
+    .badge-draft { background: rgba(150, 172, 210, 0.2); color: var(--muted); }
+    .badge-ready { background: rgba(88, 166, 255, 0.2); color: var(--accent); }
+    .badge-scheduled { background: rgba(246, 191, 86, 0.2); color: var(--warn); }
+    .badge-published { background: rgba(58, 214, 160, 0.2); color: var(--green); }
+    .badge-failed { background: rgba(255, 127, 143, 0.2); color: var(--danger); }
+
+    /* Calendar Styles */
+    .calendar-header {
       display: flex;
       justify-content: space-between;
       align-items: center;
+      margin-bottom: 24px;
+    }
+
+    .calendar-nav {
+      display: flex;
       gap: 8px;
     }
 
-    .activity-grid {
-      display: grid;
-      grid-template-columns: repeat(3, minmax(0, 1fr));
-      gap: 12px;
+    .calendar-nav button {
+      background: var(--glass);
+      border: 1px solid var(--glass-border);
+      border-radius: 8px;
+      color: var(--text);
+      padding: 8px 12px;
+      cursor: pointer;
+      transition: all 0.2s ease;
     }
 
-    @media (max-width: 980px) {
+    .calendar-nav button:hover {
+      background: rgba(255, 255, 255, 0.1);
+    }
+
+    .calendar-grid {
+      display: grid;
+      grid-template-columns: repeat(7, 1fr);
+      gap: 1px;
+      background: var(--line);
+      border-radius: 12px;
+      overflow: hidden;
+    }
+
+    .calendar-day {
+      background: var(--card);
+      min-height: 120px;
+      padding: 12px 8px;
+      position: relative;
+    }
+
+    .calendar-day.today {
+      background: rgba(88, 166, 255, 0.1);
+      border: 2px solid var(--accent);
+    }
+
+    .calendar-day-header {
+      font-size: 11px;
+      font-weight: 600;
+      color: var(--muted);
+      text-transform: uppercase;
+      margin-bottom: 8px;
+      text-align: center;
+    }
+
+    .calendar-day-number {
+      font-size: 14px;
+      font-weight: 600;
+      margin-bottom: 8px;
+      text-align: center;
+    }
+
+    .post-pill {
+      background: var(--glass);
+      border-radius: 8px;
+      padding: 4px 8px;
+      margin: 2px 0;
+      font-size: 10px;
+      font-weight: 500;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      border-left: 3px solid;
+    }
+
+    .post-pill:hover {
+      background: rgba(255, 255, 255, 0.15);
+      transform: scale(1.02);
+    }
+
+    .post-pill.instagram { border-left-color: var(--instagram); }
+    .post-pill.twitter { border-left-color: var(--twitter); }
+    .post-pill.youtube { border-left-color: var(--youtube); }
+    .post-pill.newsletter { border-left-color: var(--newsletter); }
+    .post-pill.linkedin { border-left-color: var(--linkedin); }
+
+    /* Content Engine Sub-navigation */
+    .content-nav {
+      display: flex;
+      gap: 4px;
+      margin-bottom: 24px;
+      background: var(--glass);
+      border: 1px solid var(--glass-border);
+      border-radius: 12px;
+      padding: 8px;
+    }
+
+    .content-nav-item {
+      background: transparent;
+      border: none;
+      border-radius: 8px;
+      color: var(--muted);
+      padding: 12px 20px;
+      font-size: 14px;
+      font-weight: 500;
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+
+    .content-nav-item.active {
+      background: rgba(88, 166, 255, 0.2);
+      color: var(--accent);
+    }
+
+    /* Donut Chart */
+    .donut-chart {
+      position: relative;
+      width: 200px;
+      height: 200px;
+      margin: 20px auto;
+    }
+
+    .donut-segment {
+      fill: none;
+      stroke-width: 30;
+      transition: all 0.3s ease;
+      cursor: pointer;
+    }
+
+    .donut-segment:hover {
+      stroke-width: 35;
+    }
+
+    .donut-center {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      text-align: center;
+    }
+
+    .donut-total {
+      font-size: 24px;
+      font-weight: 700;
+      color: var(--text);
+    }
+
+    .donut-label {
+      font-size: 12px;
+      color: var(--muted);
+    }
+
+    /* Slide-out Panel */
+    .slide-panel {
+      position: fixed;
+      top: 0;
+      right: -400px;
+      width: 400px;
+      height: 100vh;
+      background: var(--card);
+      backdrop-filter: blur(20px);
+      border-left: 1px solid var(--glass-border);
+      padding: 24px;
+      z-index: 1000;
+      transition: right 0.3s ease;
+      overflow-y: auto;
+    }
+
+    .slide-panel.open {
+      right: 0;
+    }
+
+    .slide-panel-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 24px;
+      padding-bottom: 16px;
+      border-bottom: 1px solid var(--line);
+    }
+
+    .close-panel {
+      background: none;
+      border: none;
+      color: var(--muted);
+      font-size: 24px;
+      cursor: pointer;
+    }
+
+    /* Responsive */
+    @media (max-width: 1024px) {
       .app { grid-template-columns: 1fr; }
       .sidebar {
         position: relative;
         width: 100%;
         height: auto;
-        border-right: 0;
-        border-bottom: 1px solid var(--line);
+      }
+      .main { margin-left: 0; }
+      .grid-2, .grid-3, .grid-4 { grid-template-columns: 1fr; }
+      .fab { bottom: 20px; right: 20px; }
+    }
+
+    @media (max-width: 768px) {
+      .sidebar {
+        padding: 16px;
       }
       .main {
-        grid-column: 1;
-        margin-left: 0;
-        height: auto;
-        min-height: calc(100vh - 220px);
+        padding: 16px;
       }
-      .span-3, .span-4, .span-5, .span-6, .span-7, .span-8 { grid-column: 1 / -1; }
-      .memory-layout { grid-template-columns: 1fr; }
-      .kanban-board { grid-template-columns: 1fr; }
-      .activity-grid { grid-template-columns: 1fr; }
+      .header {
+        flex-direction: column;
+        text-align: center;
+      }
+      .calendar-grid {
+        grid-template-columns: 1fr;
+        gap: 8px;
+      }
+      .slide-panel {
+        width: 100vw;
+        right: -100vw;
+      }
+    }
+
+    .loading {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 40px;
+      color: var(--muted);
+    }
+
+    .error {
+      background: rgba(255, 127, 143, 0.1);
+      border: 1px solid rgba(255, 127, 143, 0.3);
+      border-radius: 12px;
+      padding: 16px;
+      color: var(--danger);
+      margin-bottom: 20px;
+    }
+
+    /* Queue drag and drop */
+    .queue-item {
+      background: var(--glass);
+      border: 1px solid var(--glass-border);
+      border-radius: 12px;
+      padding: 16px;
+      margin-bottom: 12px;
+      cursor: grab;
+      transition: all 0.2s ease;
+    }
+
+    .queue-item:hover {
+      background: rgba(255, 255, 255, 0.08);
+      transform: translateY(-1px);
+    }
+
+    .queue-item.dragging {
+      opacity: 0.5;
+      cursor: grabbing;
+    }
+
+    .queue-content {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+    }
+
+    .queue-meta {
+      flex: 1;
+    }
+
+    .queue-title {
+      font-weight: 600;
+      margin-bottom: 4px;
+    }
+
+    .queue-details {
+      font-size: 12px;
+      color: var(--muted);
+    }
+
+    .filter-bar {
+      display: flex;
+      gap: 12px;
+      margin-bottom: 20px;
+      flex-wrap: wrap;
+    }
+
+    .filter-select {
+      background: var(--glass);
+      border: 1px solid var(--glass-border);
+      border-radius: 8px;
+      color: var(--text);
+      padding: 8px 12px;
+      font-size: 14px;
+    }
+
+    .posts-table {
+      width: 100%;
+      border-collapse: collapse;
+      background: var(--card);
+      border-radius: 12px;
+      overflow: hidden;
+    }
+
+    .posts-table th,
+    .posts-table td {
+      padding: 16px;
+      text-align: left;
+      border-bottom: 1px solid var(--line);
+    }
+
+    .posts-table th {
+      background: var(--glass);
+      font-weight: 600;
+      font-size: 12px;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+
+    .posts-table tr:hover {
+      background: var(--glass);
     }
   </style>
 </head>
@@ -468,716 +693,1421 @@
     <aside class="sidebar">
       <div class="brand">
         <h1>Gavin</h1>
-        <p>AI Assistant Control Center</p>
-        <div class="status"><span class="dot"></span>Online</div>
+        <p>AI Command Center</p>
+        <div class="status">
+          <span class="pulse-dot"></span>
+          <span>Online</span>
+        </div>
       </div>
-      <nav class="nav" id="sidebarNav"></nav>
+      
+      <nav class="nav">
+        <button class="nav-item active" data-section="overview">
+          <span class="nav-icon">🏠</span>
+          Overview
+        </button>
+        <button class="nav-item" data-section="content-engine">
+          <span class="nav-icon">⚡</span>
+          Content Engine
+        </button>
+        <button class="nav-item" data-section="tasks">
+          <span class="nav-icon">📋</span>
+          Tasks
+        </button>
+        <button class="nav-item" data-section="system">
+          <span class="nav-icon">⚙️</span>
+          System
+        </button>
+      </nav>
     </aside>
 
     <main class="main">
-      <section class="topbar">
+      <header class="header">
         <div>
-          <h2 id="pageTitle">Dashboard</h2>
-          <p id="pageSubtitle">Overview com stats, sessões e tokens</p>
+          <h1 id="pageTitle">Overview</h1>
+          <p id="pageSubtitle">System status and activity overview</p>
         </div>
-        <div class="top-actions">
-          <span class="pill" id="lastUpdate">Atualizado: --</span>
-          <span class="pill" id="refreshCountdown">Próximo refresh: 30s</span>
-          <button class="action" id="btnRefresh" type="button">Atualizar</button>
+        <div class="header-actions">
+          <span class="pill" id="lastUpdate">Updated: --</span>
+          <span class="pill" id="refreshCountdown">Next: 30s</span>
+          <button class="btn" id="refreshBtn">Refresh</button>
+        </div>
+      </header>
+
+      <!-- Overview Section -->
+      <section id="overview" class="section active">
+        <!-- Business Metrics -->
+        <div style="margin-bottom: 24px;">
+          <h2 style="font-size: 18px; font-weight: 600; margin-bottom: 16px; color: var(--accent);">Business Metrics</h2>
+          <div class="grid-3" id="businessMetricsGrid">
+            <div class="card">
+              <div class="card-header"><div class="card-title">MRR</div></div>
+              <div class="stat-number" id="metricMRR" style="color: var(--green);">...</div>
+              <div class="card-subtitle">Monthly Recurring Revenue</div>
+            </div>
+            <div class="card">
+              <div class="card-header"><div class="card-title">Revenue 24h</div></div>
+              <div class="stat-number" id="metricRev24h">...</div>
+              <div class="card-subtitle">Last 24 hours</div>
+            </div>
+            <div class="card">
+              <div class="card-header"><div class="card-title">Total Users</div></div>
+              <div class="stat-number" id="metricTotalUsers">...</div>
+              <div class="card-subtitle">All time</div>
+            </div>
+            <div class="card">
+              <div class="card-header"><div class="card-title">Signups 7d</div></div>
+              <div class="stat-number" id="metricSignups7d" style="color: var(--warn);">...</div>
+              <div class="card-subtitle">Last 7 days</div>
+            </div>
+            <div class="card">
+              <div class="card-header"><div class="card-title">IG Followers</div></div>
+              <div class="stat-number" id="metricIGFollowers" style="color: #E4405F;">...</div>
+              <div class="card-subtitle">@studio.maia.arch</div>
+            </div>
+            <div class="card">
+              <div class="card-header"><div class="card-title">Reddit Karma</div></div>
+              <div class="stat-number" id="metricRedditKarma" style="color: #FF4500;">...</div>
+              <div class="card-subtitle">MoldaSpace account</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="grid-4">
+          <div class="card">
+            <div class="card-header">
+              <div class="card-title">Total Posts</div>
+            </div>
+            <div class="stat-number" id="totalPosts">-</div>
+            <div class="card-subtitle">All time</div>
+          </div>
+          
+          <div class="card">
+            <div class="card-header">
+              <div class="card-title">Scheduled Today</div>
+            </div>
+            <div class="stat-number" id="scheduledToday">-</div>
+            <div class="card-subtitle">Ready to publish</div>
+          </div>
+          
+          <div class="card">
+            <div class="card-header">
+              <div class="card-title">Published This Week</div>
+            </div>
+            <div class="stat-number" id="publishedWeek">-</div>
+            <div class="card-subtitle">Last 7 days</div>
+          </div>
+          
+          <div class="card">
+            <div class="card-header">
+              <div class="card-title">Queue Size</div>
+            </div>
+            <div class="stat-number" id="queueSize">-</div>
+            <div class="card-subtitle">Draft + Ready</div>
+          </div>
+        </div>
+
+        <div class="grid-2" style="margin-top: 24px;">
+          <div class="card">
+            <div class="card-header">
+              <div class="card-title">Upcoming Posts</div>
+              <div class="card-subtitle">Next 3 scheduled</div>
+            </div>
+            <div class="list" id="upcomingPosts">
+              <div class="loading">Loading...</div>
+            </div>
+          </div>
+          
+          <div class="card">
+            <div class="card-header">
+              <div class="card-title">System Health</div>
+              <div class="card-subtitle">Server status</div>
+            </div>
+            <div class="list" id="systemHealth">
+              <div class="loading">Loading...</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="card" style="margin-top: 24px;">
+          <div class="card-header">
+            <div class="card-title">Recent Activity</div>
+            <div class="card-subtitle">Last 5 items</div>
+          </div>
+          <div class="list" id="recentActivity">
+            <div class="loading">Loading...</div>
+          </div>
         </div>
       </section>
 
-      <section id="view-dashboard" class="section active"></section>
-      <section id="view-chat" class="section"></section>
-      <section id="view-dna" class="section"></section>
-      <section id="view-memory" class="section"></section>
-      <section id="view-skills" class="section"></section>
-      <section id="view-crons" class="section"></section>
-      <section id="view-goals" class="section"></section>
-      <section id="view-todos" class="section"></section>
-      <section id="view-command-control" class="section"></section>
-      <section id="view-settings" class="section"></section>
+      <!-- Content Engine Section -->
+      <section id="content-engine" class="section">
+        <div class="content-nav">
+          <button class="content-nav-item active" data-content-view="calendar">Calendar</button>
+          <button class="content-nav-item" data-content-view="queue">Content Queue</button>
+          <button class="content-nav-item" data-content-view="posts">All Posts</button>
+          <button class="content-nav-item" data-content-view="stats">Stats</button>
+        </div>
+
+        <!-- Calendar View -->
+        <div id="content-calendar" class="content-view">
+          <div class="calendar-header">
+            <h2 id="currentWeek">Loading...</h2>
+            <div class="calendar-nav">
+              <button id="prevWeek">&larr; Previous</button>
+              <button id="todayBtn">Today</button>
+              <button id="nextWeek">Next &rarr;</button>
+            </div>
+          </div>
+          <div class="calendar-grid" id="calendarGrid">
+            <div class="loading">Loading calendar...</div>
+          </div>
+        </div>
+
+        <!-- Content Queue -->
+        <div id="content-queue" class="content-view" style="display: none;">
+          <div class="card">
+            <div class="card-header">
+              <div class="card-title">Content Queue</div>
+              <div class="card-subtitle">Drag to reorder posts</div>
+            </div>
+            <div id="queueList">
+              <div class="loading">Loading queue...</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- All Posts -->
+        <div id="content-posts" class="content-view" style="display: none;">
+          <div class="filter-bar">
+            <select class="filter-select" id="platformFilter">
+              <option value="">All Platforms</option>
+              <option value="instagram">📸 Instagram</option>
+              <option value="twitter">🐦 Twitter/X</option>
+              <option value="youtube">🎬 YouTube</option>
+              <option value="newsletter">📰 Newsletter</option>
+              <option value="linkedin">🔵 LinkedIn</option>
+            </select>
+            <select class="filter-select" id="statusFilter">
+              <option value="">All Status</option>
+              <option value="draft">Draft</option>
+              <option value="ready">Ready</option>
+              <option value="scheduled">Scheduled</option>
+              <option value="published">Published</option>
+              <option value="failed">Failed</option>
+            </select>
+            <select class="filter-select" id="typeFilter">
+              <option value="">All Types</option>
+              <option value="post">Post</option>
+              <option value="story">Story</option>
+              <option value="video">Video</option>
+              <option value="newsletter">Newsletter</option>
+            </select>
+          </div>
+          <div class="card">
+            <table class="posts-table" id="postsTable">
+              <thead>
+                <tr>
+                  <th>Platform</th>
+                  <th>Title</th>
+                  <th>Type</th>
+                  <th>Status</th>
+                  <th>Scheduled</th>
+                  <th>Created</th>
+                </tr>
+              </thead>
+              <tbody id="postsTableBody">
+                <tr>
+                  <td colspan="6" class="loading">Loading posts...</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <!-- Stats Dashboard -->
+        <div id="content-stats" class="content-view" style="display: none;">
+          <div class="grid-2">
+            <div class="card">
+              <div class="card-header">
+                <div class="card-title">Posts by Platform</div>
+              </div>
+              <div class="donut-chart">
+                <svg width="200" height="200" id="platformChart">
+                  <!-- Dynamic SVG content -->
+                </svg>
+                <div class="donut-center">
+                  <div class="donut-total" id="donutTotal">-</div>
+                  <div class="donut-label">Total Posts</div>
+                </div>
+              </div>
+              <div id="platformLegend" class="list">
+                <!-- Dynamic legend -->
+              </div>
+            </div>
+            
+            <div class="card">
+              <div class="card-header">
+                <div class="card-title">Performance</div>
+              </div>
+              <div class="list" id="performanceStats">
+                <div class="loading">Loading stats...</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="grid-2" style="margin-top: 24px;">
+            <div class="card">
+              <div class="card-header">
+                <div class="card-title">Content Types</div>
+              </div>
+              <div class="list" id="contentTypes">
+                <div class="loading">Loading...</div>
+              </div>
+            </div>
+            
+            <div class="card">
+              <div class="card-header">
+                <div class="card-title">Publishing Streak</div>
+              </div>
+              <div class="stat-number" id="publishingStreak">-</div>
+              <div class="card-subtitle">Consecutive days with content</div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Tasks Section -->
+      <section id="tasks" class="section">
+        <div class="card">
+          <div class="card-header">
+            <div class="card-title">Task Board</div>
+            <div class="card-subtitle">Drag and drop to manage tasks</div>
+          </div>
+          <div class="grid-4" id="taskBoard">
+            <div class="loading">Loading tasks...</div>
+          </div>
+        </div>
+      </section>
+
+      <!-- System Section -->
+      <section id="system" class="section">
+        <div class="grid-2">
+          <div class="card">
+            <div class="card-header">
+              <div class="card-title">Server Status</div>
+            </div>
+            <div class="list" id="serverStatus">
+              <div class="loading">Loading...</div>
+            </div>
+          </div>
+          
+          <div class="card">
+            <div class="card-header">
+              <div class="card-title">Services</div>
+            </div>
+            <div class="list" id="services">
+              <div class="loading">Loading...</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="card" style="margin-top: 24px;">
+          <div class="card-header">
+            <div class="card-title">System Resources</div>
+          </div>
+          <div class="grid-3" id="systemResources">
+            <div class="loading">Loading...</div>
+          </div>
+        </div>
+      </section>
     </main>
   </div>
 
+  <!-- Slide-out Panel for Post Details -->
+  <div id="slidePanel" class="slide-panel">
+    <div class="slide-panel-header">
+      <h3 id="panelTitle">Post Details</h3>
+      <button class="close-panel" id="closePanel">&times;</button>
+    </div>
+    <div id="panelContent">
+      <!-- Dynamic content -->
+    </div>
+  </div>
+
+  <!-- Floating Action Button -->
+  <button class="fab" id="quickAddBtn" title="Quick Add Post">+</button>
+
   <script>
-    const REFRESH_MS = 30000;
-    let countdown = REFRESH_MS / 1000;
-    let autoRefresh = true;
-
-    const MENU = [
-      { id: 'dashboard', label: 'Dashboard', subtitle: 'Overview com stats, sessões ativas e tokens' },
-      { id: 'chat', label: 'Chat', subtitle: 'Histórico de conversas e sessões' },
-      { id: 'dna', label: 'DNA', subtitle: 'SOUL.md e IDENTITY.md formatados' },
-      { id: 'memory', label: 'Memory', subtitle: 'MEMORY.md e memory/*.md com visualização' },
-      { id: 'skills', label: 'Skills', subtitle: 'Skills locais e skills do sistema' },
-      { id: 'crons', label: 'Cron Jobs', subtitle: 'Jobs agendados do OpenClaw' },
-      { id: 'goals', label: 'Goals', subtitle: 'Objetivos persistidos em goals.json' },
-      { id: 'todos', label: 'To-Do List', subtitle: 'Tarefas persistidas em todos.json' },
-      { id: 'command-control', label: '🎯 Command Control', subtitle: 'Kanban + atividade em tempo real do Gavin' },
-      { id: 'settings', label: 'Settings', subtitle: 'Configurações básicas da dashboard' },
-    ];
-
+    // State management
     const state = {
-      current: 'dashboard',
-      status: null,
-      sessions: [],
-      crons: [],
-      skills: [],
-      memoryFiles: [],
-      currentMemoryFile: '',
-      currentMemoryContent: '',
-      dnaSoul: '',
-      dnaIdentity: '',
-      goals: [],
-      todos: [],
+      currentSection: 'overview',
+      currentContentView: 'calendar',
+      currentWeek: new Date(),
+      posts: [],
+      queue: [],
+      stats: {},
       tasks: [],
-      activity: { activeSessions: [], processes: [], recent: [] },
-      error: '',
+      systemStatus: {},
+      refreshInterval: null,
+      countdown: 30
     };
 
-    const navEl = document.getElementById('sidebarNav');
-    const pageTitleEl = document.getElementById('pageTitle');
-    const pageSubtitleEl = document.getElementById('pageSubtitle');
-    const lastUpdateEl = document.getElementById('lastUpdate');
-    const refreshCountdownEl = document.getElementById('refreshCountdown');
+    // Platform configuration
+    const platforms = {
+      instagram: { icon: '📸', color: '#E4405F', name: 'Instagram' },
+      twitter: { icon: '🐦', color: '#1DA1F2', name: 'Twitter/X' },
+      youtube: { icon: '🎬', color: '#FF0000', name: 'YouTube' },
+      newsletter: { icon: '📰', color: '#F6BF56', name: 'Newsletter' },
+      linkedin: { icon: '🔵', color: '#0A66C2', name: 'LinkedIn' }
+    };
 
-    function esc(v) {
-      return String(v ?? '')
-        .replaceAll('&', '&amp;')
-        .replaceAll('<', '&lt;')
-        .replaceAll('>', '&gt;')
-        .replaceAll('"', '&quot;')
-        .replaceAll("'", '&#039;');
-    }
-
-    function fmtDate(value) {
-      if (!value) return 'n/d';
-      const d = new Date(value);
-      if (Number.isNaN(d.getTime())) return 'n/d';
-      return d.toLocaleString('pt-BR', { dateStyle: 'short', timeStyle: 'short' });
-    }
-
-    async function api(path, options = {}) {
-      const res = await fetch(path, { cache: 'no-store', ...options });
-      if (!res.ok) throw new Error(`HTTP ${res.status}`);
-      return res.json();
-    }
-
-    async function loadText(path) {
-      const res = await fetch(path, { cache: 'no-store' });
-      if (!res.ok) throw new Error(`HTTP ${res.status}`);
-      return res.text();
-    }
-
-    function mdToHtml(md) {
-      const lines = String(md || '').split('\n');
-      const html = [];
-      let inList = false;
-
-      for (const line of lines) {
-        const t = line.trim();
-
-        if (t.startsWith('### ')) {
-          if (inList) { html.push('</ul>'); inList = false; }
-          html.push(`<h3>${esc(t.slice(4))}</h3>`);
-          continue;
-        }
-        if (t.startsWith('## ')) {
-          if (inList) { html.push('</ul>'); inList = false; }
-          html.push(`<h2>${esc(t.slice(3))}</h2>`);
-          continue;
-        }
-        if (t.startsWith('# ')) {
-          if (inList) { html.push('</ul>'); inList = false; }
-          html.push(`<h1>${esc(t.slice(2))}</h1>`);
-          continue;
-        }
-
-        if (t.startsWith('- ')) {
-          if (!inList) { html.push('<ul>'); inList = true; }
-          html.push(`<li>${esc(t.slice(2))}</li>`);
-          continue;
-        }
-
-        if (!t) {
-          if (inList) { html.push('</ul>'); inList = false; }
-          continue;
-        }
-
-        if (inList) { html.push('</ul>'); inList = false; }
-        html.push(`<p>${esc(t)}</p>`);
-      }
-
-      if (inList) html.push('</ul>');
-      return html.join('');
-    }
-
-    function section(id) {
-      return document.getElementById(`view-${id}`);
-    }
-
-    function renderNav() {
-      navEl.innerHTML = MENU.map(item => `
-        <button data-view="${item.id}" class="${item.id === state.current ? 'active' : ''}">${item.label}</button>
-      `).join('');
-      navEl.querySelectorAll('button').forEach(btn => {
-        btn.addEventListener('click', () => setView(btn.dataset.view));
-      });
-    }
-
-    function setView(id) {
-      state.current = id;
-      MENU.forEach(item => {
-        section(item.id).classList.toggle('active', item.id === id);
-      });
-
-      const found = MENU.find(item => item.id === id);
-      pageTitleEl.textContent = found?.label || 'Dashboard';
-      pageSubtitleEl.textContent = found?.subtitle || '';
-      renderNav();
-      renderCurrent();
-    }
-
-    function renderDashboard() {
-      const stats = state.status?.stats || {};
-      const sessionsPreview = state.sessions.slice(0, 5);
-      const cronsPreview = state.crons.slice(0, 5);
-
-      section('dashboard').innerHTML = `
-        <div class="grid">
-          <article class="card span-3"><h3>Sessões Totais</h3><div class="big">${stats.sessionsTotal ?? 0}</div></article>
-          <article class="card span-3"><h3>Sessões Ativas</h3><div class="big">${stats.sessionsActive ?? 0}</div></article>
-          <article class="card span-3"><h3>Cron Habilitados</h3><div class="big">${stats.cronsEnabled ?? 0}</div></article>
-          <article class="card span-3"><h3>Memórias</h3><div class="big">${stats.memoryFiles ?? 0}</div></article>
-
-          <article class="card span-6">
-            <h3>Uso de Tokens</h3>
-            <div>${esc(stats.tokensPreview || 'n/d')}</div>
-            <div class="help">Prévia das sessões mais recentes.</div>
-          </article>
-
-          <article class="card span-6">
-            <h3>Resumo</h3>
-            <div class="list">
-              <div class="row"><div>Skills disponíveis</div><div class="tag">${stats.skillsTotal ?? 0}</div></div>
-              <div class="row"><div>Goals</div><div class="tag">${stats.goalsTotal ?? 0}</div></div>
-              <div class="row"><div>To-Dos</div><div class="tag">${stats.todosTotal ?? 0}</div></div>
-            </div>
-          </article>
-
-          <article class="card span-6">
-            <h3>Sessões Recentes</h3>
-            <div class="list">
-              ${sessionsPreview.map(s => `
-                <div class="row">
-                  <div>
-                    <div>${esc(s.key)}</div>
-                    <div class="meta">${esc(s.model)} • ${esc(s.tokens || '-')}</div>
-                  </div>
-                  <div class="tag">${esc(s.age || 'n/d')}</div>
-                </div>
-              `).join('') || '<div class="meta">Sem sessões</div>'}
-            </div>
-          </article>
-
-          <article class="card span-6">
-            <h3>Cron Jobs</h3>
-            <div class="list">
-              ${cronsPreview.map(c => `
-                <div class="row">
-                  <div>
-                    <div>${esc(c.name)}</div>
-                    <div class="meta">${esc(c.schedule || 'n/d')}</div>
-                  </div>
-                  <div class="tag ${c.enabled ? 'ok' : 'warn'}">${c.enabled ? 'ativo' : 'pausado'}</div>
-                </div>
-              `).join('') || '<div class="meta">Sem cron jobs</div>'}
-            </div>
-          </article>
-        </div>
-      `;
-    }
-
-    function renderChat() {
-      section('chat').innerHTML = `
-        <div class="card">
-          <h3>Histórico de Sessões</h3>
-          <div class="list">
-            ${state.sessions.map(s => `
-              <div class="row">
-                <div>
-                  <div>${esc(s.key)}</div>
-                  <div class="meta">${esc(s.kind)} • ${esc(s.model)} • ${esc(s.tokens || '-')}</div>
-                </div>
-                <div class="tag">${esc(s.age || 'n/d')}</div>
-              </div>
-            `).join('') || '<div class="meta">Nenhuma sessão encontrada</div>'}
-          </div>
-        </div>
-      `;
-    }
-
-    function renderDNA() {
-      section('dna').innerHTML = `
-        <div class="grid">
-          <article class="card span-6">
-            <h3>SOUL.md</h3>
-            <div class="markdown">${mdToHtml(state.dnaSoul || 'Carregando...')}</div>
-          </article>
-          <article class="card span-6">
-            <h3>IDENTITY.md</h3>
-            <div class="markdown">${mdToHtml(state.dnaIdentity || 'Carregando...')}</div>
-          </article>
-        </div>
-      `;
-    }
-
-    function renderMemory() {
-      section('memory').innerHTML = `
-        <div class="memory-layout">
-          <article class="card">
-            <h3>Arquivos</h3>
-            <div class="memory-files" id="memoryFilesList">
-              ${state.memoryFiles.map(f => `
-                <button class="file-item ${f.path === state.currentMemoryFile ? 'active' : ''}" data-path="${esc(f.path)}">
-                  <div>${esc(f.path)}</div>
-                  <div class="meta">${Math.round((f.size || 0)/1024)} KB • ${fmtDate(f.updatedAt)}</div>
-                </button>
-              `).join('') || '<div class="meta">Sem arquivos</div>'}
-            </div>
-          </article>
-          <article class="card">
-            <h3>Visualização</h3>
-            <pre>${esc(state.currentMemoryContent || 'Selecione um arquivo de memória')}</pre>
-          </article>
-        </div>
-      `;
-
-      section('memory').querySelectorAll('.file-item').forEach(btn => {
-        btn.addEventListener('click', async () => {
-          const path = btn.dataset.path;
-          await loadMemoryFile(path);
-        });
-      });
-    }
-
-    function renderSkills() {
-      section('skills').innerHTML = `
-        <div class="card">
-          <h3>Skills</h3>
-          <div class="list">
-            ${state.skills.map(skill => `
-              <div class="row">
-                <div>
-                  <div>${esc(skill.name)}</div>
-                  <div class="meta">${esc(skill.source)} • ${esc(skill.path)}</div>
-                  <div class="meta">${esc(skill.description || '')}</div>
-                </div>
-              </div>
-            `).join('') || '<div class="meta">Nenhuma skill encontrada</div>'}
-          </div>
-        </div>
-      `;
-    }
-
-    function renderCrons() {
-      section('crons').innerHTML = `
-        <div class="card">
-          <h3>Cron Jobs</h3>
-          <div class="list">
-            ${state.crons.map(c => `
-              <div class="row">
-                <div>
-                  <div>${esc(c.name)}</div>
-                  <div class="meta">${esc(c.schedule)} • Próxima: ${fmtDate(c.nextRunAt)}</div>
-                  <div class="meta">Última: ${fmtDate(c.lastRunAt)} • Status: ${esc(c.lastStatus || 'n/d')}</div>
-                </div>
-                <div class="tag ${c.enabled ? 'ok' : 'warn'}">${c.enabled ? 'ativo' : 'pausado'}</div>
-              </div>
-            `).join('') || '<div class="meta">Sem jobs</div>'}
-          </div>
-        </div>
-      `;
-    }
-
-    function renderGoals() {
-      section('goals').innerHTML = `
-        <div class="card">
-          <h3>Goals (goals.json)</h3>
-          <textarea id="goalsEditor">${esc(JSON.stringify(state.goals, null, 2))}</textarea>
-          <div style="margin-top:10px; display:flex; gap:8px;">
-            <button class="action" id="saveGoals" type="button">Salvar Goals</button>
-          </div>
-          <div class="help">Formato: array JSON.</div>
-        </div>
-      `;
-
-      document.getElementById('saveGoals').addEventListener('click', saveGoals);
-    }
-
-    function renderTodos() {
-      section('todos').innerHTML = `
-        <div class="card">
-          <h3>To-Do List (todos.json)</h3>
-          <textarea id="todosEditor">${esc(JSON.stringify(state.todos, null, 2))}</textarea>
-          <div style="margin-top:10px; display:flex; gap:8px;">
-            <button class="action" id="saveTodos" type="button">Salvar To-Dos</button>
-          </div>
-          <div class="help">Formato: array JSON.</div>
-        </div>
-      `;
-
-      document.getElementById('saveTodos').addEventListener('click', saveTodos);
-    }
-
-    function renderSettings() {
-      section('settings').innerHTML = `
-        <div class="grid">
-          <article class="card span-6">
-            <h3>Auto Refresh</h3>
-            <div class="list">
-              <div class="row">
-                <div>Atualização automática a cada 30s</div>
-                <button class="action" id="toggleRefresh" type="button">${autoRefresh ? 'Desativar' : 'Ativar'}</button>
-              </div>
-              <div class="row"><div>Endpoint API</div><div class="tag">/api/*</div></div>
-            </div>
-          </article>
-          <article class="card span-6">
-            <h3>Info</h3>
-            <div class="list">
-              <div class="row"><div>Assistant</div><div class="tag">Gavin</div></div>
-              <div class="row"><div>Tema</div><div class="tag">Dark Blue</div></div>
-              <div class="row"><div>Modo</div><div class="tag ok">SPA</div></div>
-            </div>
-          </article>
-        </div>
-      `;
-
-      document.getElementById('toggleRefresh').addEventListener('click', () => {
-        autoRefresh = !autoRefresh;
-        renderSettings();
-      });
-    }
-
-    function columnInfo() {
-      return [
-        { id: 'backlog', label: 'Backlog' },
-        { id: 'in-progress', label: 'Em Progresso' },
-        { id: 'review', label: 'Review' },
-        { id: 'done', label: 'Done' },
-      ];
-    }
-
-    function sanitizePriority(priority) {
-      return ['low', 'medium', 'high'].includes(priority) ? priority : 'medium';
-    }
-
-    function renderCommandControl() {
-      const columns = columnInfo();
-      const tasksByColumn = {};
-      columns.forEach(col => { tasksByColumn[col.id] = []; });
-
-      state.tasks.forEach(task => {
-        const col = columns.find(c => c.id === task.column)?.id || 'backlog';
-        tasksByColumn[col].push(task);
-      });
-
-      section('command-control').innerHTML = `
-        <div class="command-layout">
-          <article class="card">
-            <h3>Command Control - Kanban</h3>
-            <div class="kanban-board">
-              ${columns.map(col => `
-                <div class="kanban-column">
-                  <div class="column-head">
-                    <div class="column-title">${esc(col.label)} <span class="count-badge">${tasksByColumn[col.id].length}</span></div>
-                    <button class="btn-mini add-card-btn" data-column="${col.id}" type="button">+ Card</button>
-                  </div>
-                  <div class="task-list" data-column="${col.id}">
-                    ${tasksByColumn[col.id].map(task => `
-                      <article class="kanban-card" draggable="true" data-task-id="${esc(task.id)}">
-                        <div class="task-top">
-                          <div class="task-title">
-                            <span class="priority-dot priority-${esc(sanitizePriority(task.priority))}"></span>
-                            <span>${esc(task.title || 'Sem título')}</span>
-                          </div>
-                          <button class="delete-btn delete-task" data-task-id="${esc(task.id)}" title="Excluir" type="button">🗑</button>
-                        </div>
-                        ${task.description ? `<div class="task-desc">${esc(task.description)}</div>` : ''}
-                        <div class="task-meta">
-                          <span>${esc(sanitizePriority(task.priority))}</span>
-                          <span>${fmtDate(task.createdAt)}</span>
-                        </div>
-                      </article>
-                    `).join('')}
-                  </div>
-                </div>
-              `).join('')}
-            </div>
-          </article>
-
-          <article class="card">
-            <h3>Live Activity Feed</h3>
-            <div class="activity-grid">
-              <div>
-                <div class="meta" style="margin-bottom:8px;">Sessões ativas</div>
-                <div class="list">
-                  ${(state.activity.activeSessions || []).slice(0, 8).map(s => `
-                    <div class="row">
-                      <div>
-                        <div>${esc(s.key || 'sessão')}</div>
-                        <div class="meta">${esc(s.model || 'n/d')} • ${esc(s.age || 'n/d')}</div>
-                      </div>
-                    </div>
-                  `).join('') || '<div class="meta">Sem sessões ativas</div>'}
-                </div>
-              </div>
-              <div>
-                <div class="meta" style="margin-bottom:8px;">Processos em execução</div>
-                <div class="list">
-                  ${(state.activity.processes || []).slice(0, 8).map(p => `
-                    <div class="row">
-                      <div>
-                        <div>${esc(p.command || 'processo')} <span class="meta">#${esc(p.pid)}</span></div>
-                        <div class="meta">${esc(p.args || '')}</div>
-                      </div>
-                    </div>
-                  `).join('') || '<div class="meta">Nenhum processo relevante</div>'}
-                </div>
-              </div>
-              <div>
-                <div class="meta" style="margin-bottom:8px;">Recentes: conclusão/falha</div>
-                <div class="list">
-                  ${(state.activity.recent || []).slice(0, 8).map(evt => `
-                    <div class="row">
-                      <div>
-                        <div>${esc(evt.name || 'evento')}</div>
-                        <div class="meta">${fmtDate(evt.at)} • ${esc(evt.status || 'n/d')}</div>
-                      </div>
-                      <div class="tag ${evt.kind === 'failure' ? 'warn' : 'ok'}">${evt.kind === 'failure' ? 'falha' : 'ok'}</div>
-                    </div>
-                  `).join('') || '<div class="meta">Sem eventos recentes</div>'}
-                </div>
-              </div>
-            </div>
-          </article>
-        </div>
-      `;
-
-      section('command-control').querySelectorAll('.add-card-btn').forEach(btn => {
-        btn.addEventListener('click', () => addTask(btn.dataset.column || 'backlog'));
-      });
-
-      section('command-control').querySelectorAll('.delete-task').forEach(btn => {
-        btn.addEventListener('click', async () => {
-          const taskId = btn.dataset.taskId;
-          state.tasks = state.tasks.filter(t => t.id !== taskId);
-          await saveTasksToApi();
-          renderCommandControl();
-        });
-      });
-
-      section('command-control').querySelectorAll('.kanban-card').forEach(card => {
-        card.addEventListener('dragstart', event => {
-          event.dataTransfer.setData('text/plain', card.dataset.taskId || '');
-          card.classList.add('dragging');
-        });
-        card.addEventListener('dragend', () => card.classList.remove('dragging'));
-      });
-
-      section('command-control').querySelectorAll('.task-list').forEach(list => {
-        list.addEventListener('dragover', event => {
-          event.preventDefault();
-          list.classList.add('drop-active');
-        });
-        list.addEventListener('dragleave', () => list.classList.remove('drop-active'));
-        list.addEventListener('drop', async event => {
-          event.preventDefault();
-          list.classList.remove('drop-active');
-          const taskId = event.dataTransfer.getData('text/plain');
-          const column = list.dataset.column;
-          if (!taskId || !column) return;
-          const task = state.tasks.find(t => t.id === taskId);
-          if (!task || task.column === column) return;
-          task.column = column;
-          task.updatedAt = new Date().toISOString();
-          await saveTasksToApi();
-          renderCommandControl();
-        });
-      });
-    }
-
-    async function saveTasksToApi() {
-      await api('/api/tasks', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ tasks: state.tasks }),
-      });
-    }
-
-    async function addTask(column) {
-      const title = (prompt('Título do card:') || '').trim();
-      if (!title) return;
-      const description = (prompt('Descrição (opcional):') || '').trim();
-      const priorityInput = (prompt('Prioridade: low | medium | high', 'medium') || 'medium').trim().toLowerCase();
-      const priority = sanitizePriority(priorityInput);
-      const now = new Date().toISOString();
-      state.tasks.push({
-        id: `task-${Date.now()}-${Math.random().toString(16).slice(2, 8)}`,
-        title,
-        description,
-        priority,
-        column,
-        createdAt: now,
-        updatedAt: now,
-      });
-      await saveTasksToApi();
-      renderCommandControl();
-    }
-
-    function renderCurrent() {
-      if (state.current === 'dashboard') renderDashboard();
-      if (state.current === 'chat') renderChat();
-      if (state.current === 'dna') renderDNA();
-      if (state.current === 'memory') renderMemory();
-      if (state.current === 'skills') renderSkills();
-      if (state.current === 'crons') renderCrons();
-      if (state.current === 'goals') renderGoals();
-      if (state.current === 'todos') renderTodos();
-      if (state.current === 'command-control') renderCommandControl();
-      if (state.current === 'settings') renderSettings();
-    }
-
-    async function loadMemoryFile(path) {
+    // API functions
+    async function api(endpoint, options = {}) {
       try {
-        const payload = await api(`/api/memory/${encodeURIComponent(path)}`);
-        state.currentMemoryFile = payload.file || path;
-        state.currentMemoryContent = payload.content || '';
-        if (state.current === 'memory') renderMemory();
-      } catch (err) {
-        state.currentMemoryContent = `Erro ao abrir arquivo: ${err.message}`;
-        if (state.current === 'memory') renderMemory();
+        const controller = new AbortController();
+        const timeoutId = setTimeout(() => controller.abort(), 5000);
+        const response = await fetch(endpoint, {
+          ...options,
+          signal: controller.signal,
+          headers: {
+            'Content-Type': 'application/json',
+            ...options.headers
+          }
+        });
+        clearTimeout(timeoutId);
+        
+        if (!response.ok) {
+          throw new Error(`HTTP ${response.status}: ${response.statusText}`);
+        }
+        
+        return await response.json();
+      } catch (error) {
+        console.error(`API Error (${endpoint}):`, error);
+        throw error;
       }
     }
 
-    async function refreshAll() {
+    // Utility functions
+    function formatDate(dateString) {
+      if (!dateString) return 'N/A';
+      const date = new Date(dateString);
+      return date.toLocaleDateString('en-US', { 
+        month: 'short', 
+        day: 'numeric',
+        hour: '2-digit',
+        minute: '2-digit'
+      });
+    }
+
+    function formatRelativeTime(dateString) {
+      if (!dateString) return 'N/A';
+      const date = new Date(dateString);
+      const now = new Date();
+      const diff = now - date;
+      
+      const minutes = Math.floor(diff / 60000);
+      const hours = Math.floor(diff / 3600000);
+      const days = Math.floor(diff / 86400000);
+      
+      if (minutes < 60) return `${minutes}m ago`;
+      if (hours < 24) return `${hours}h ago`;
+      return `${days}d ago`;
+    }
+
+    function getPlatformIcon(platform) {
+      return platforms[platform]?.icon || '📄';
+    }
+
+    function getPlatformColor(platform) {
+      return platforms[platform]?.color || '#666';
+    }
+
+    function getStatusBadgeClass(status) {
+      return `badge-${status}` || 'badge-draft';
+    }
+
+    // Navigation
+    function initNavigation() {
+      document.querySelectorAll('.nav-item').forEach(item => {
+        item.addEventListener('click', () => {
+          const section = item.dataset.section;
+          setActiveSection(section);
+        });
+      });
+
+      document.querySelectorAll('.content-nav-item').forEach(item => {
+        item.addEventListener('click', () => {
+          const view = item.dataset.contentView;
+          setActiveContentView(view);
+        });
+      });
+    }
+
+    function setActiveSection(section) {
+      state.currentSection = section;
+      
+      // Update nav
+      document.querySelectorAll('.nav-item').forEach(item => {
+        item.classList.toggle('active', item.dataset.section === section);
+      });
+      
+      // Update sections
+      document.querySelectorAll('.section').forEach(sec => {
+        sec.classList.toggle('active', sec.id === section);
+      });
+      
+      // Update header
+      const titles = {
+        'overview': { title: 'Overview', subtitle: 'System status and activity overview' },
+        'content-engine': { title: 'Content Engine', subtitle: 'Content planning and publishing' },
+        'tasks': { title: 'Tasks', subtitle: 'Project management and workflows' },
+        'system': { title: 'System', subtitle: 'Server status and resources' }
+      };
+      
+      const info = titles[section] || titles['overview'];
+      document.getElementById('pageTitle').textContent = info.title;
+      document.getElementById('pageSubtitle').textContent = info.subtitle;
+      
+      // Load section data
+      loadSectionData(section);
+    }
+
+    function setActiveContentView(view) {
+      state.currentContentView = view;
+      
+      // Update content nav
+      document.querySelectorAll('.content-nav-item').forEach(item => {
+        item.classList.toggle('active', item.dataset.contentView === view);
+      });
+      
+      // Update content views
+      document.querySelectorAll('.content-view').forEach(viewEl => {
+        viewEl.style.display = viewEl.id === `content-${view}` ? 'block' : 'none';
+      });
+      
+      // Load view data
+      loadContentView(view);
+    }
+
+    // Data loading
+    async function loadSectionData(section) {
+      switch (section) {
+        case 'overview':
+          await loadOverview();
+          break;
+        case 'content-engine':
+          await loadContentEngine();
+          break;
+        case 'tasks':
+          await loadTasks();
+          break;
+        case 'system':
+          await loadSystem();
+          break;
+      }
+    }
+
+    async function loadBusinessMetrics() {
       try {
-        const [statusRes, sessionsRes, cronsRes, memoryRes, skillsRes, goalsRes, todosRes, tasksRes, activityRes] = await Promise.allSettled([
+        const data = await api('/api/metrics');
+        const m = data.moldaspace || {};
+        const ig = data.instagram || {};
+        document.getElementById('metricMRR').textContent = '$' + (m.mrr || 0).toFixed(2);
+        document.getElementById('metricRev24h').textContent = '$' + (m.revenue24h || 0).toFixed(2);
+        document.getElementById('metricTotalUsers').textContent = m.totalUsers || 0;
+        document.getElementById('metricSignups7d').textContent = m.signups7d || 0;
+        document.getElementById('metricIGFollowers').textContent = ig.followers || 0;
+        document.getElementById('metricRedditKarma').textContent = m.redditKarma || 0;
+      } catch (e) {
+        console.error('Error loading business metrics:', e);
+      }
+    }
+
+    async function loadOverview() {
+      try {
+        // Load business metrics
+        loadBusinessMetrics();
+
+        // Load stats
+        const [stats, scheduled, system, activity] = await Promise.allSettled([
+          api('/api/content/stats'),
+          api('/api/content/scheduled'),
           api('/api/status'),
-          api('/api/sessions'),
-          api('/api/crons'),
-          api('/api/memory'),
-          api('/api/skills'),
-          api('/api/goals'),
-          api('/api/todos'),
-          api('/api/tasks'),
-          api('/api/activity'),
+          api('/api/activity')
         ]);
 
-        state.status = statusRes.status === 'fulfilled' ? statusRes.value : (state.status || {});
-        state.sessions = sessionsRes.status === 'fulfilled'
-          ? (sessionsRes.value.sessions || [])
-          : (state.status?.sessions || state.sessions || []);
-        state.crons = cronsRes.status === 'fulfilled'
-          ? (cronsRes.value.crons || [])
-          : (state.status?.cronJobs || state.crons || []);
-        state.memoryFiles = memoryRes.status === 'fulfilled' ? (memoryRes.value.files || []) : (state.memoryFiles || []);
-        state.skills = skillsRes.status === 'fulfilled' ? (skillsRes.value.skills || []) : (state.skills || []);
-        state.goals = goalsRes.status === 'fulfilled' ? (goalsRes.value.goals || []) : (state.goals || []);
-        state.todos = todosRes.status === 'fulfilled' ? (todosRes.value.todos || []) : (state.todos || []);
-        state.tasks = tasksRes.status === 'fulfilled' ? (tasksRes.value.tasks || []) : (state.tasks || []);
-        const sessionsFromEndpoint = state.sessions.filter(
-          s => String(s.age || '').includes('ago') || String(s.age || '').includes('just now')
-        ).slice(0, 8);
-        state.activity = activityRes.status === 'fulfilled'
-          ? {
-              activeSessions: sessionsFromEndpoint,
-              processes: activityRes.value.processes || [],
-              recent: activityRes.value.recent || [],
-            }
-          : {
-              activeSessions: sessionsFromEndpoint,
-              processes: state.activity.processes || [],
-              recent: state.activity.recent || [],
-            };
-
-        if (!state.currentMemoryFile && state.memoryFiles.length) {
-          await loadMemoryFile(state.memoryFiles[0].path);
+        // Update stat cards
+        if (stats.status === 'fulfilled') {
+          const s = stats.value.stats || stats.value;
+          const platStats = s.platform_stats || [];
+          const totalPosts = platStats.reduce((a,p) => a + (p.total_posts||0), 0);
+          const totalPublished = platStats.reduce((a,p) => a + (p.published||0), 0);
+          const totalScheduled = platStats.reduce((a,p) => a + (p.scheduled||0), 0);
+          const totalDrafts = platStats.reduce((a,p) => a + (p.drafts||0), 0);
+          const scheduledList = scheduled.status === 'fulfilled' ? (scheduled.value.scheduled || scheduled.value.posts || []) : [];
+          document.getElementById('totalPosts').textContent = totalPosts;
+          document.getElementById('scheduledToday').textContent = getScheduledToday(scheduledList);
+          document.getElementById('publishedWeek').textContent = totalPublished;
+          document.getElementById('queueSize').textContent = totalDrafts;
         }
 
-        if (!state.dnaSoul) {
-          const [soul, identity] = await Promise.all([
-            loadText('/SOUL.md').catch(() => 'SOUL.md não encontrado'),
-            loadText('/IDENTITY.md').catch(() => 'IDENTITY.md não encontrado'),
-          ]);
-          state.dnaSoul = soul;
-          state.dnaIdentity = identity;
+        // Update upcoming posts
+        if (scheduled.status === 'fulfilled') {
+          renderUpcomingPosts(scheduled.value.scheduled || scheduled.value.posts || []);
         }
 
-        lastUpdateEl.textContent = `Atualizado: ${fmtDate(new Date().toISOString())}`;
-        renderCurrent();
-      } catch (err) {
-        lastUpdateEl.textContent = `Erro: ${err.message}`;
+        // Update system health
+        if (system.status === 'fulfilled') {
+          renderSystemHealth(system.value);
+        }
+
+        // Update recent activity
+        if (activity.status === 'fulfilled') {
+          renderRecentActivity(activity.value.recent || []);
+        }
+
+      } catch (error) {
+        console.error('Error loading overview:', error);
+        showError('Failed to load overview data');
       }
     }
 
-    async function saveGoals() {
-      const editor = document.getElementById('goalsEditor');
-      if (!editor) return;
+    function getScheduledToday(posts) {
+      const today = new Date().toISOString().split('T')[0];
+      return posts.filter(post => 
+        post.scheduled_at && post.scheduled_at.startsWith(today)
+      ).length;
+    }
+
+    function getPublishedWeek(stats) {
+      // This would ideally come from the backend
+      return stats.published_this_week || stats.published || 0;
+    }
+
+    function renderUpcomingPosts(posts) {
+      const container = document.getElementById('upcomingPosts');
+      
+      if (!posts.length) {
+        container.innerHTML = '<div class="list-item">No upcoming posts</div>';
+        return;
+      }
+
+      const upcoming = posts.slice(0, 3);
+      container.innerHTML = upcoming.map(post => `
+        <div class="list-item">
+          <div style="display: flex; align-items: center; gap: 12px;">
+            <div class="platform-icon platform-${post.platform}">
+              ${getPlatformIcon(post.platform)}
+            </div>
+            <div>
+              <div>${post.title || 'Untitled'}</div>
+              <div class="card-subtitle">${formatDate(post.scheduled_at)}</div>
+            </div>
+          </div>
+          <div class="badge ${getStatusBadgeClass(post.status)}">${post.status}</div>
+        </div>
+      `).join('');
+    }
+
+    function renderSystemHealth(systemData) {
+      const container = document.getElementById('systemHealth');
+      
+      const healthItems = [
+        { label: 'API Server', status: 'online', value: 'Running' },
+        { label: 'Database', status: 'online', value: 'SQLite Connected' },
+        { label: 'Queue Worker', status: 'online', value: 'Active' },
+        { label: 'Storage', status: 'online', value: `${systemData.disk_usage || 'N/A'}` }
+      ];
+
+      container.innerHTML = healthItems.map(item => `
+        <div class="list-item">
+          <div>${item.label}</div>
+          <div class="badge ${item.status === 'online' ? 'badge-published' : 'badge-failed'}">${item.value}</div>
+        </div>
+      `).join('');
+    }
+
+    function renderRecentActivity(activities) {
+      const container = document.getElementById('recentActivity');
+      
+      if (!activities.length) {
+        container.innerHTML = '<div class="list-item">No recent activity</div>';
+        return;
+      }
+
+      const recent = activities.slice(0, 5);
+      container.innerHTML = recent.map(activity => `
+        <div class="list-item">
+          <div>
+            <div>${activity.description || activity.name}</div>
+            <div class="card-subtitle">${formatRelativeTime(activity.timestamp || activity.at)}</div>
+          </div>
+          <div class="badge ${activity.type === 'error' ? 'badge-failed' : 'badge-published'}">${activity.status || 'completed'}</div>
+        </div>
+      `).join('');
+    }
+
+    async function loadContentEngine() {
+      await loadContentView(state.currentContentView);
+    }
+
+    async function loadContentView(view) {
+      switch (view) {
+        case 'calendar':
+          await loadCalendarView();
+          break;
+        case 'queue':
+          await loadQueueView();
+          break;
+        case 'posts':
+          await loadPostsView();
+          break;
+        case 'stats':
+          await loadStatsView();
+          break;
+      }
+    }
+
+    async function loadCalendarView() {
       try {
-        const parsed = JSON.parse(editor.value);
-        if (!Array.isArray(parsed)) throw new Error('Goals precisa ser um array');
-        const res = await api('/api/goals', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ goals: parsed }),
-        });
-        state.goals = res.goals || parsed;
-        renderGoals();
-      } catch (err) {
-        alert(`Falha ao salvar goals: ${err.message}`);
+        const posts = await api('/api/content/posts');
+        state.posts = posts.posts || [];
+        renderCalendar();
+      } catch (error) {
+        console.error('Error loading calendar:', error);
+        showCalendarError();
       }
     }
 
-    async function saveTodos() {
-      const editor = document.getElementById('todosEditor');
-      if (!editor) return;
+    function renderCalendar() {
+      const container = document.getElementById('calendarGrid');
+      const weekStart = getWeekStart(state.currentWeek);
+      
+      // Update week display
+      document.getElementById('currentWeek').textContent = `Week of ${weekStart.toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' })}`;
+      
+      // Generate calendar days
+      const days = [];
+      for (let i = 0; i < 7; i++) {
+        const day = new Date(weekStart);
+        day.setDate(day.getDate() + i);
+        days.push(day);
+      }
+      
+      const dayNames = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'];
+      
+      container.innerHTML = days.map((day, index) => {
+        const dayPosts = getPostsForDay(day);
+        const isToday = isDateToday(day);
+        
+        return `
+          <div class="calendar-day ${isToday ? 'today' : ''}">
+            <div class="calendar-day-header">${dayNames[index]}</div>
+            <div class="calendar-day-number">${day.getDate()}</div>
+            ${dayPosts.map(post => `
+              <div class="post-pill ${post.platform}" onclick="showPostDetails('${post.id}')" title="${(post.title || 'Untitled').replace(/"/g, '&quot;')}">
+                ${getPostThumbnail(post)} ${getPlatformIcon(post.platform)} ${(post.title || 'Untitled').substring(0, 25)}${(post.title||'').length > 25 ? '…' : ''}
+              </div>
+            `).join('')}
+          </div>
+        `;
+      }).join('');
+    }
+
+    function getWeekStart(date) {
+      const start = new Date(date);
+      const day = start.getDay();
+      const diff = start.getDate() - day + (day === 0 ? -6 : 1); // Adjust for Monday start
+      start.setDate(diff);
+      start.setHours(0, 0, 0, 0);
+      return start;
+    }
+
+    function getPostsForDay(day) {
+      const dayStr = day.toISOString().split('T')[0];
+      return state.posts.filter(post => {
+        const postDate = post.scheduled_at || post.published_at;
+        return postDate && postDate.startsWith(dayStr);
+      });
+    }
+
+    function isDateToday(date) {
+      const today = new Date();
+      return date.toDateString() === today.toDateString();
+    }
+
+    async function loadQueueView() {
       try {
-        const parsed = JSON.parse(editor.value);
-        if (!Array.isArray(parsed)) throw new Error('Todos precisa ser um array');
-        const res = await api('/api/todos', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ todos: parsed }),
-        });
-        state.todos = res.todos || parsed;
-        renderTodos();
-      } catch (err) {
-        alert(`Falha ao salvar todos: ${err.message}`);
+        const queue = await api('/api/content/queue');
+        state.queue = queue.queue || queue.posts || [];
+        renderQueue();
+      } catch (error) {
+        console.error('Error loading queue:', error);
+        showQueueError();
       }
     }
 
-    document.getElementById('btnRefresh').addEventListener('click', async () => {
-      countdown = REFRESH_MS / 1000;
-      await refreshAll();
-    });
+    function renderQueue() {
+      const container = document.getElementById('queueList');
+      
+      if (!state.queue.length) {
+        container.innerHTML = '<div class="list-item">No posts in queue</div>';
+        return;
+      }
 
-    setInterval(async () => {
-      if (!autoRefresh) return;
-      countdown = REFRESH_MS / 1000;
-      await refreshAll();
-    }, REFRESH_MS);
+      container.innerHTML = state.queue.map((post, index) => `
+        <div class="queue-item" draggable="true" data-post-id="${post.id}" data-index="${index}">
+          <div class="queue-content">
+            <div class="platform-icon platform-${post.platform}">
+              ${getPlatformIcon(post.platform)}
+            </div>
+            <div class="queue-meta">
+              <div class="queue-title">${post.title || 'Untitled'}</div>
+              <div class="queue-details">
+                <span class="badge ${getStatusBadgeClass(post.status)}">${post.status}</span>
+                <span class="badge badge-draft">${post.content_type || 'post'}</span>
+                <span style="color: var(--muted);">Created ${formatRelativeTime(post.created_at)}</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      `).join('');
 
-    setInterval(() => {
-      countdown = countdown <= 0 ? REFRESH_MS / 1000 : countdown - 1;
-      refreshCountdownEl.textContent = `Próximo refresh: ${countdown}s`;
-    }, 1000);
+      // Add drag and drop functionality
+      initQueueDragDrop();
+    }
 
-    renderNav();
-    renderCurrent();
-    refreshAll();
+    function initQueueDragDrop() {
+      const queueItems = document.querySelectorAll('.queue-item');
+      
+      queueItems.forEach(item => {
+        item.addEventListener('dragstart', (e) => {
+          e.dataTransfer.setData('text/plain', item.dataset.postId);
+          item.classList.add('dragging');
+        });
+        
+        item.addEventListener('dragend', () => {
+          item.classList.remove('dragging');
+        });
+        
+        item.addEventListener('dragover', (e) => {
+          e.preventDefault();
+        });
+        
+        item.addEventListener('drop', async (e) => {
+          e.preventDefault();
+          const draggedId = e.dataTransfer.getData('text/plain');
+          const targetIndex = parseInt(item.dataset.index);
+          await reorderQueue(draggedId, targetIndex);
+        });
+      });
+    }
+
+    async function reorderQueue(postId, newIndex) {
+      try {
+        const reorderedIds = [...state.queue];
+        const oldIndex = reorderedIds.findIndex(post => post.id === postId);
+        
+        if (oldIndex !== -1) {
+          const [removed] = reorderedIds.splice(oldIndex, 1);
+          reorderedIds.splice(newIndex, 0, removed);
+          
+          await api('/api/content/queue/reorder', {
+            method: 'POST',
+            body: JSON.stringify({ order: reorderedIds.map(post => post.id) })
+          });
+          
+          await loadQueueView();
+        }
+      } catch (error) {
+        console.error('Error reordering queue:', error);
+        showError('Failed to reorder queue');
+      }
+    }
+
+    async function loadPostsView() {
+      try {
+        const posts = await api('/api/content/posts');
+        state.posts = posts.posts || [];
+        renderPostsTable();
+      } catch (error) {
+        console.error('Error loading posts:', error);
+        showPostsError();
+      }
+    }
+
+    function renderPostsTable() {
+      const tbody = document.getElementById('postsTableBody');
+      
+      if (!state.posts.length) {
+        tbody.innerHTML = '<tr><td colspan="6" style="text-align: center; color: var(--muted);">No posts found</td></tr>';
+        return;
+      }
+
+      tbody.innerHTML = state.posts.map(post => `
+        <tr onclick="showPostDetails('${post.id}')">
+          <td>
+            <div style="display: flex; align-items: center; gap: 8px;">
+              ${getPostThumbnail(post)}
+              <div class="platform-icon platform-${post.platform}" style="width: 20px; height: 20px; font-size: 12px;">
+                ${getPlatformIcon(post.platform)}
+              </div>
+              ${platforms[post.platform]?.name || post.platform}
+            </div>
+          </td>
+          <td>${post.title || 'Untitled'}</td>
+          <td>
+            <span class="badge badge-draft">${post.content_type || 'post'}</span>
+          </td>
+          <td>
+            <span class="badge ${getStatusBadgeClass(post.status)}">${post.status}</span>
+          </td>
+          <td>${formatDate(post.scheduled_at)}</td>
+          <td>${formatDate(post.created_at)}</td>
+        </tr>
+      `).join('');
+    }
+
+    async function loadStatsView() {
+      try {
+        const raw = await api('/api/content/stats');
+        state.stats = raw.stats || raw;
+        renderStats();
+      } catch (error) {
+        console.error('Error loading stats:', error);
+        showStatsError();
+      }
+    }
+
+    function renderStats() {
+      const platStats = state.stats.platform_stats || [];
+      const totalPosts = platStats.reduce((a,p) => a + (p.total_posts||0), 0);
+      const totalPublished = platStats.reduce((a,p) => a + (p.published||0), 0);
+      const totalScheduled = platStats.reduce((a,p) => a + (p.scheduled||0), 0);
+      
+      // Render donut chart
+      renderDonutChart(platStats, totalPosts);
+      
+      // Render performance stats
+      const performanceContainer = document.getElementById('performanceStats');
+      performanceContainer.innerHTML = `
+        <div class="list-item">
+          <div>Total Posts</div>
+          <div class="stat-number" style="font-size: 18px;">${totalPosts}</div>
+        </div>
+        <div class="list-item">
+          <div>Published</div>
+          <div class="stat-number" style="font-size: 18px; color: var(--green);">${totalPublished}</div>
+        </div>
+        <div class="list-item">
+          <div>Scheduled</div>
+          <div class="stat-number" style="font-size: 18px; color: var(--warn);">${totalScheduled}</div>
+        </div>
+        <div class="list-item">
+          <div>Success rate</div>
+          <div class="stat-number" style="font-size: 18px; color: var(--green);">${Math.round(totalPublished / Math.max(totalPosts, 1) * 100)}%</div>
+        </div>
+      `;
+      
+      // Render content types from platform breakdown
+      const typesContainer = document.getElementById('contentTypes');
+      typesContainer.innerHTML = platStats.map(p => `
+        <div class="list-item">
+          <div>${getPlatformIcon(p.platform)} ${(platforms[p.platform]?.name || p.platform)}</div>
+          <div class="badge badge-draft">${p.total_posts} posts</div>
+        </div>
+      `).join('') || '<div class="list-item">No data available</div>';
+      
+      // Update publishing streak
+      document.getElementById('publishingStreak').textContent = totalPublished;
+    }
+
+    function renderDonutChart(platStats, totalPosts) {
+      const chart = document.getElementById('platformChart');
+      const total = document.getElementById('donutTotal');
+      const legend = document.getElementById('platformLegend');
+      
+      platStats = platStats || [];
+      totalPosts = totalPosts || 0;
+      
+      total.textContent = totalPosts;
+      
+      if (!totalPosts) {
+        chart.innerHTML = '';
+        legend.innerHTML = '<div class="list-item">No data available</div>';
+        return;
+      }
+      
+      // Calculate segments
+      let currentAngle = 0;
+      const segments = [];
+      
+      platStats.forEach(p => {
+        const platform = p.platform;
+        if (p.total_posts > 0) {
+          const percentage = p.total_posts / totalPosts;
+          const angle = percentage * 360;
+          
+          segments.push({
+            platform,
+            count: data.total,
+            percentage: Math.round(percentage * 100),
+            startAngle: currentAngle,
+            endAngle: currentAngle + angle,
+            color: getPlatformColor(platform)
+          });
+          
+          currentAngle += angle;
+        }
+      });
+      
+      // Render SVG segments
+      const radius = 85;
+      const centerX = 100;
+      const centerY = 100;
+      
+      chart.innerHTML = segments.map(segment => {
+        const startAngleRad = (segment.startAngle - 90) * (Math.PI / 180);
+        const endAngleRad = (segment.endAngle - 90) * (Math.PI / 180);
+        
+        const x1 = centerX + radius * Math.cos(startAngleRad);
+        const y1 = centerY + radius * Math.sin(startAngleRad);
+        const x2 = centerX + radius * Math.cos(endAngleRad);
+        const y2 = centerY + radius * Math.sin(endAngleRad);
+        
+        const largeArcFlag = segment.endAngle - segment.startAngle > 180 ? 1 : 0;
+        
+        return `
+          <path d="M ${centerX} ${centerY} L ${x1} ${y1} A ${radius} ${radius} 0 ${largeArcFlag} 1 ${x2} ${y2} Z"
+                fill="${segment.color}" opacity="0.8" class="donut-segment"
+                title="${platforms[segment.platform]?.name}: ${segment.count} posts (${segment.percentage}%)">
+          </path>
+        `;
+      }).join('');
+      
+      // Render legend
+      legend.innerHTML = segments.map(segment => `
+        <div class="list-item">
+          <div style="display: flex; align-items: center; gap: 8px;">
+            <div style="width: 12px; height: 12px; background: ${segment.color}; border-radius: 50%;"></div>
+            <span>${platforms[segment.platform]?.name || segment.platform}</span>
+          </div>
+          <div>
+            <span class="badge badge-draft">${segment.count}</span>
+            <span style="color: var(--muted); font-size: 11px;">${segment.percentage}%</span>
+          </div>
+        </div>
+      `).join('');
+    }
+
+    async function loadTasks() {
+      try {
+        const tasks = await api('/api/tasks');
+        state.tasks = tasks.tasks || [];
+        renderTaskBoard();
+      } catch (error) {
+        console.error('Error loading tasks:', error);
+        showError('Failed to load tasks');
+      }
+    }
+
+    function renderTaskBoard() {
+      const container = document.getElementById('taskBoard');
+      const columns = ['backlog', 'in-progress', 'review', 'done'];
+      const columnNames = {
+        'backlog': 'Backlog',
+        'in-progress': 'In Progress', 
+        'review': 'Review',
+        'done': 'Done'
+      };
+      
+      const tasksByColumn = {};
+      columns.forEach(col => { tasksByColumn[col] = []; });
+      
+      state.tasks.forEach(task => {
+        const column = task.column || 'backlog';
+        if (tasksByColumn[column]) {
+          tasksByColumn[column].push(task);
+        }
+      });
+      
+      container.innerHTML = columns.map(column => `
+        <div class="card">
+          <div class="card-header">
+            <div class="card-title">${columnNames[column]}</div>
+            <div class="badge badge-draft">${tasksByColumn[column].length}</div>
+          </div>
+          <div class="list" data-column="${column}">
+            ${tasksByColumn[column].map(task => `
+              <div class="list-item" draggable="true" data-task-id="${task.id}">
+                <div>
+                  <div>${task.title || 'Untitled'}</div>
+                  <div class="card-subtitle">${task.description || ''}</div>
+                </div>
+                <div class="badge badge-${task.priority || 'medium'}">${task.priority || 'medium'}</div>
+              </div>
+            `).join('')}
+          </div>
+        </div>
+      `).join('');
+    }
+
+    async function loadSystem() {
+      try {
+        const status = await api('/api/status');
+        state.systemStatus = status;
+        renderSystem();
+      } catch (error) {
+        console.error('Error loading system status:', error);
+        showError('Failed to load system status');
+      }
+    }
+
+    function renderSystem() {
+      // Server status
+      const serverContainer = document.getElementById('serverStatus');
+      serverContainer.innerHTML = `
+        <div class="list-item">
+          <div>Status</div>
+          <div class="badge badge-published">Online</div>
+        </div>
+        <div class="list-item">
+          <div>Uptime</div>
+          <div class="badge badge-draft">${state.systemStatus.uptime || 'N/A'}</div>
+        </div>
+        <div class="list-item">
+          <div>Version</div>
+          <div class="badge badge-draft">v1.0.0</div>
+        </div>
+      `;
+      
+      // Services
+      const servicesContainer = document.getElementById('services');
+      const services = [
+        { name: 'API Server', status: 'running' },
+        { name: 'Queue Worker', status: 'running' },
+        { name: 'Database', status: state.systemStatus.database ? 'running' : 'stopped' },
+        { name: 'File Storage', status: 'running' }
+      ];
+      
+      servicesContainer.innerHTML = services.map(service => `
+        <div class="list-item">
+          <div>${service.name}</div>
+          <div class="badge ${service.status === 'running' ? 'badge-published' : 'badge-failed'}">${service.status}</div>
+        </div>
+      `).join('');
+      
+      // System resources
+      const resourcesContainer = document.getElementById('systemResources');
+      resourcesContainer.innerHTML = `
+        <div class="card">
+          <div class="card-title">CPU Usage</div>
+          <div class="stat-number">${state.systemStatus.cpu || '0'}%</div>
+        </div>
+        <div class="card">
+          <div class="card-title">Memory Usage</div>
+          <div class="stat-number">${state.systemStatus.memory || '0'}%</div>
+        </div>
+        <div class="card">
+          <div class="card-title">Disk Usage</div>
+          <div class="stat-number">${state.systemStatus.disk_usage || '0%'}</div>
+        </div>
+      `;
+    }
+
+    // Post details panel
+    function renderMediaPreview(post) {
+      let mediaPaths = [];
+      try {
+        if (post.media_paths && typeof post.media_paths === 'string') {
+          mediaPaths = JSON.parse(post.media_paths);
+        } else if (Array.isArray(post.media_paths)) {
+          mediaPaths = post.media_paths;
+        }
+      } catch(e) {}
+      
+      if (!mediaPaths.length) return '';
+      
+      return `
+        <div style="margin-top: 24px;">
+          <h4>📸 Preview (${mediaPaths.length} ${mediaPaths.length === 1 ? 'file' : 'files'})</h4>
+          <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); gap: 8px; margin-top: 12px;">
+            ${mediaPaths.map((path, i) => {
+              const isVideo = path.endsWith('.mp4');
+              const mediaUrl = '/media/' + path;
+              if (isVideo) {
+                return `<video src="${mediaUrl}" controls style="width:100%; border-radius:8px; border:1px solid var(--glass-border);"></video>`;
+              }
+              return `<img src="${mediaUrl}" alt="Slide ${i+1}" 
+                style="width:100%; border-radius:8px; border:1px solid var(--glass-border); cursor:pointer; transition: transform 0.2s;"
+                onclick="window.open('${mediaUrl}', '_blank')"
+                onmouseover="this.style.transform='scale(1.05)'"
+                onmouseout="this.style.transform='scale(1)'" />`;
+            }).join('')}
+          </div>
+        </div>
+      `;
+    }
+
+    function getPostThumbnail(post) {
+      let mediaPaths = [];
+      try {
+        if (post.media_paths && typeof post.media_paths === 'string') {
+          mediaPaths = JSON.parse(post.media_paths);
+        } else if (Array.isArray(post.media_paths)) {
+          mediaPaths = post.media_paths;
+        }
+      } catch(e) {}
+      if (!mediaPaths.length) return '';
+      const first = mediaPaths[0];
+      if (first.endsWith('.mp4')) return '🎬';
+      return `<img src="/media/${first}" style="width:32px;height:32px;border-radius:4px;object-fit:cover;" />`;
+    }
+
+    function showPostDetails(postId) {
+      const post = state.posts.find(p => p.id === postId);
+      if (!post) return;
+      
+      const panel = document.getElementById('slidePanel');
+      const title = document.getElementById('panelTitle');
+      const content = document.getElementById('panelContent');
+      
+      title.textContent = post.title || 'Untitled Post';
+      
+      content.innerHTML = `
+        <div class="list">
+          <div class="list-item">
+            <div>Platform</div>
+            <div style="display: flex; align-items: center; gap: 8px;">
+              <div class="platform-icon platform-${post.platform}" style="width: 20px; height: 20px; font-size: 12px;">
+                ${getPlatformIcon(post.platform)}
+              </div>
+              ${platforms[post.platform]?.name || post.platform}
+            </div>
+          </div>
+          <div class="list-item">
+            <div>Status</div>
+            <div class="badge ${getStatusBadgeClass(post.status)}">${post.status}</div>
+          </div>
+          <div class="list-item">
+            <div>Content Type</div>
+            <div class="badge badge-draft">${post.content_type || 'post'}</div>
+          </div>
+          <div class="list-item">
+            <div>Scheduled</div>
+            <div>${formatDate(post.scheduled_at)}</div>
+          </div>
+          <div class="list-item">
+            <div>Created</div>
+            <div>${formatDate(post.created_at)}</div>
+          </div>
+        </div>
+        
+        ${post.description ? `
+          <div style="margin-top: 24px;">
+            <h4>Description</h4>
+            <div style="background: var(--glass); padding: 16px; border-radius: 8px; margin-top: 8px;">
+              ${post.description}
+            </div>
+          </div>
+        ` : ''}
+        
+        ${post.caption ? `
+          <div style="margin-top: 24px;">
+            <h4>Caption</h4>
+            <div style="background: var(--glass); padding: 16px; border-radius: 8px; margin-top: 8px;">
+              ${post.caption}
+            </div>
+          </div>
+        ` : ''}
+        
+        ${renderMediaPreview(post)}
+        
+        <div style="margin-top: 24px; display: flex; gap: 12px;">
+          <button class="btn" onclick="editPost('${post.id}')">Edit</button>
+          <button class="btn" onclick="deletePost('${post.id}')" style="background: linear-gradient(135deg, var(--danger), #ff6b7a);">Delete</button>
+        </div>
+      `;
+      
+      panel.classList.add('open');
+    }
+
+    function closePostDetails() {
+      document.getElementById('slidePanel').classList.remove('open');
+    }
+
+    // Quick add post
+    function showQuickAddDialog() {
+      const title = prompt('Post title:');
+      if (!title) return;
+      
+      const platform = prompt('Platform (instagram/twitter/youtube/newsletter/linkedin):');
+      if (!platform || !platforms[platform]) {
+        alert('Invalid platform');
+        return;
+      }
+      
+      const description = prompt('Description (optional):') || '';
+      
+      createPost({ title, platform, description });
+    }
+
+    async function createPost(postData) {
+      try {
+        await api('/api/content/posts', {
+          method: 'POST',
+          body: JSON.stringify({
+            title: postData.title,
+            platform: postData.platform,
+            description: postData.description,
+            status: 'draft',
+            content_type: 'post'
+          })
+        });
+        
+        // Refresh current view
+        await loadSectionData(state.currentSection);
+        
+        showNotification('Post created successfully!');
+      } catch (error) {
+        console.error('Error creating post:', error);
+        showError('Failed to create post');
+      }
+    }
+
+    // Calendar navigation
+    function navigatePreviousWeek() {
+      state.currentWeek.setDate(state.currentWeek.getDate() - 7);
+      renderCalendar();
+    }
+
+    function navigateNextWeek() {
+      state.currentWeek.setDate(state.currentWeek.getDate() + 7);
+      renderCalendar();
+    }
+
+    function navigateToday() {
+      state.currentWeek = new Date();
+      renderCalendar();
+    }
+
+    // Error handling
+    function showError(message) {
+      const errorDiv = document.createElement('div');
+      errorDiv.className = 'error';
+      errorDiv.textContent = message;
+      
+      const main = document.querySelector('.main');
+      main.insertBefore(errorDiv, main.firstChild);
+      
+      setTimeout(() => errorDiv.remove(), 5000);
+    }
+
+    function showNotification(message) {
+      // Simple notification - could be enhanced with a proper toast system
+      const notification = document.createElement('div');
+      notification.style.cssText = `
+        position: fixed;
+        top: 20px;
+        right: 20px;
+        background: var(--green);
+        color: white;
+        padding: 12px 20px;
+        border-radius: 8px;
+        z-index: 10000;
+        font-weight: 500;
+      `;
+      notification.textContent = message;
+      
+      document.body.appendChild(notification);
+      
+      setTimeout(() => notification.remove(), 3000);
+    }
+
+    function showCalendarError() {
+      document.getElementById('calendarGrid').innerHTML = '<div class="loading">Failed to load calendar</div>';
+    }
+
+    function showQueueError() {
+      document.getElementById('queueList').innerHTML = '<div class="loading">Failed to load queue</div>';
+    }
+
+    function showPostsError() {
+      document.getElementById('postsTableBody').innerHTML = '<tr><td colspan="6" class="loading">Failed to load posts</td></tr>';
+    }
+
+    function showStatsError() {
+      document.getElementById('performanceStats').innerHTML = '<div class="loading">Failed to load stats</div>';
+    }
+
+    // Auto-refresh
+    function startAutoRefresh() {
+      setInterval(async () => {
+        if (state.countdown <= 0) {
+          state.countdown = 30;
+          await loadSectionData(state.currentSection);
+          document.getElementById('lastUpdate').textContent = `Updated: ${new Date().toLocaleTimeString()}`;
+        } else {
+          state.countdown--;
+        }
+        document.getElementById('refreshCountdown').textContent = `Next: ${state.countdown}s`;
+      }, 1000);
+
+      // Business metrics auto-refresh every 60s
+      setInterval(() => { loadBusinessMetrics(); }, 60000);
+    }
+
+    // Event listeners
+    function initEventListeners() {
+      // Refresh button
+      document.getElementById('refreshBtn').addEventListener('click', async () => {
+        state.countdown = 30;
+        await loadSectionData(state.currentSection);
+        document.getElementById('lastUpdate').textContent = `Updated: ${new Date().toLocaleTimeString()}`;
+      });
+      
+      // Calendar navigation
+      document.getElementById('prevWeek').addEventListener('click', navigatePreviousWeek);
+      document.getElementById('nextWeek').addEventListener('click', navigateNextWeek);
+      document.getElementById('todayBtn').addEventListener('click', navigateToday);
+      
+      // Panel close
+      document.getElementById('closePanel').addEventListener('click', closePostDetails);
+      
+      // Quick add button
+      document.getElementById('quickAddBtn').addEventListener('click', showQuickAddDialog);
+      
+      // Filter handlers
+      document.getElementById('platformFilter').addEventListener('change', filterPosts);
+      document.getElementById('statusFilter').addEventListener('change', filterPosts);
+      document.getElementById('typeFilter').addEventListener('change', filterPosts);
+    }
+
+    function filterPosts() {
+      // This would filter the posts table based on selected filters
+      // Implementation depends on whether filtering is done client-side or server-side
+      loadPostsView();
+    }
+
+    // Initialize the application
+    async function init() {
+      initNavigation();
+      initEventListeners();
+      startAutoRefresh();
+      
+      // Load initial data
+      await loadSectionData('overview');
+      
+      document.getElementById('lastUpdate').textContent = `Updated: ${new Date().toLocaleTimeString()}`;
+    }
+
+    // Start the app
+    document.addEventListener('DOMContentLoaded', init);
+
+    // Global functions for onclick handlers
+    window.showPostDetails = showPostDetails;
+    window.editPost = function(id) { console.log('Edit post', id); };
+    window.deletePost = function(id) { console.log('Delete post', id); };
   </script>
 </body>
 </html>

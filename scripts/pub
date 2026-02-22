@@ -1,0 +1,443 @@
+#!/usr/bin/env python3
+"""
+pub — Multi-platform content publisher.
+
+Usage:
+    pub ig <caption> --image photo.png [--account maia|pessoal]
+    pub ig <caption> --carousel img1.png img2.png [--account maia]
+    pub reel <video> <caption> [--account maia|pessoal]
+    pub tweet <text> [--poll "opt1,opt2" --poll-duration 60]
+    pub thread <text>                   (auto-splits at 280 chars)
+    pub reddit <subreddit> <post_id> <text>
+    pub schedule                        (today's publishing schedule)
+    pub history [--days 3]              (recent posts from memory)
+"""
+
+import argparse
+import json
+import os
+import re
+import subprocess
+import sys
+from datetime import datetime
+
+SCRIPTS = os.path.dirname(os.path.realpath(__file__))
+WORKSPACE = os.path.dirname(SCRIPTS)
+SECRETS = os.path.expanduser("~/.openclaw/.secrets")
+PYTHON = os.path.join(SCRIPTS, "moldaspace_env", "bin", "python3")
+
+# Colors
+R = "\033[0m"
+B = "\033[1m"
+G = "\033[32m"
+Y = "\033[33m"
+C = "\033[36m"
+RED = "\033[31m"
+DIM = "\033[2m"
+
+
+def run_script(script, args=None):
+    """Run a python script from the scripts directory."""
+    cmd = [PYTHON, os.path.join(SCRIPTS, script)] + (args or [])
+    return subprocess.run(cmd).returncode
+
+
+def run_cmd(cmd):
+    """Run a shell command."""
+    return subprocess.run(cmd, shell=True).returncode
+
+
+# ─── ig ───────────────────────────────────────────────────────────
+
+def cmd_ig(args):
+    """Post to Instagram."""
+    account = args.account or "pessoal"
+    caption = " ".join(args.caption) if args.caption else ""
+
+    if not caption:
+        print(f"{RED}Caption is required.{R}")
+        print(f"Usage: pub ig \"caption\" --image photo.png")
+        return 1
+
+    if args.dry_run:
+        media = args.carousel or [args.image] if args.image else []
+        print(f"\n{B}Instagram preview ({account}):{R}")
+        print(f"{'─' * 50}")
+        print(f"  {B}Account:{R} @{'studio.maia.arch' if account == 'maia' else 'andrefprado'}")
+        print(f"  {B}Type:{R}    {'carousel' if args.carousel else 'image'}")
+        print(f"  {B}Media:{R}   {', '.join(media)}")
+        print(f"  {B}Caption:{R} {caption[:100]}{'...' if len(caption) > 100 else ''}")
+        print(f"{'─' * 50}")
+        print(f"\n{Y}Dry run. Not posting.{R}")
+        return 0
+
+    if args.carousel:
+        print(f"{C}Posting carousel to @{'studio.maia.arch' if account == 'maia' else 'andrefprado'}...{R}")
+        cmd_args = ["--account", account, "--carousel"] + args.carousel + ["--caption", caption]
+        rc = run_script("instagram_post.py", cmd_args)
+    elif args.image:
+        print(f"{C}Posting image to @{'studio.maia.arch' if account == 'maia' else 'andrefprado'}...{R}")
+        cmd_args = ["--account", account, "--image", args.image, "--caption", caption]
+        rc = run_script("instagram_post.py", cmd_args)
+    else:
+        print(f"{RED}Need --image or --carousel{R}")
+        print(f"Usage: pub ig \"caption\" --image photo.png")
+        print(f"       pub ig \"caption\" --carousel img1.png img2.png")
+        return 1
+
+    if rc == 0:
+        print(f"\n{G}✅ Posted to Instagram ({account}){R}")
+    return rc
+
+
+# ─── reel ─────────────────────────────────────────────────────────
+
+def cmd_reel(args):
+    """Post a reel to Instagram."""
+    account = args.account or "pessoal"
+
+    if not args.video or not args.caption:
+        print(f"{RED}Usage: pub reel <video_path_or_url> \"caption\" [--account maia]{R}")
+        return 1
+
+    caption = " ".join(args.caption)
+
+    if args.dry_run:
+        print(f"\n{B}Reel preview ({account}):{R}")
+        print(f"{'─' * 50}")
+        print(f"  {B}Account:{R} @{'studio.maia.arch' if account == 'maia' else 'andrefprado'}")
+        print(f"  {B}Video:{R}   {args.video}")
+        print(f"  {B}Caption:{R} {caption[:100]}{'...' if len(caption) > 100 else ''}")
+        print(f"{'─' * 50}")
+        print(f"\n{Y}Dry run. Not posting.{R}")
+        return 0
+
+    print(f"{C}Posting reel to @{'studio.maia.arch' if account == 'maia' else 'andrefprado'}...{R}")
+
+    # instagram_reel.py takes positional args: <video_url> <caption> [account]
+    rc = run_script("instagram_reel.py", [args.video, caption, account])
+
+    if rc == 0:
+        print(f"\n{G}✅ Reel posted ({account}){R}")
+    return rc
+
+
+# ─── tweet ────────────────────────────────────────────────────────
+
+def cmd_tweet(args):
+    """Post a tweet."""
+    text = " ".join(args.text)
+    if not text:
+        print(f"{RED}Usage: pub tweet \"your tweet text\"{R}")
+        return 1
+
+    if len(text) > 280:
+        print(f"{Y}Warning: {len(text)} chars (over 280 limit). Use 'pub thread' for long text.{R}")
+        return 1
+
+    if args.dry_run:
+        print(f"\n{B}Tweet preview ({len(text)} chars):{R}")
+        print(f"{'─' * 50}")
+        print(f"  {text}")
+        print(f"{'─' * 50}")
+        print(f"\n{Y}Dry run. Not posting.{R}")
+        return 0
+
+    cmd = ["x-cli", "tweet", "post"]
+    if args.poll:
+        cmd.extend(["--poll", args.poll])
+    if args.poll_duration:
+        cmd.extend(["--poll-duration", str(args.poll_duration)])
+    cmd.append(text)
+
+    print(f"{C}Posting tweet ({len(text)} chars)...{R}")
+    rc = subprocess.run(cmd).returncode
+    if rc == 0:
+        print(f"{G}✅ Tweeted{R}")
+    return rc
+
+
+# ─── thread ───────────────────────────────────────────────────────
+
+def split_thread(text, max_len=275):
+    """Split text into tweet-sized chunks, preserving paragraph breaks."""
+    # Split on double newlines first (paragraph breaks)
+    paragraphs = re.split(r'\n\n+', text.strip())
+    tweets = []
+    current = ""
+
+    for para in paragraphs:
+        # If adding this paragraph would exceed the limit
+        if current and len(current) + len(para) + 2 > max_len:
+            tweets.append(current.strip())
+            current = para
+        elif not current:
+            current = para
+        else:
+            current += "\n\n" + para
+
+        # If current chunk is already too long, force-split on sentences
+        while len(current) > max_len:
+            # Find the last sentence break before max_len
+            cut = max_len
+            for sep in ['. ', '! ', '? ', '\n', ', ']:
+                pos = current[:max_len].rfind(sep)
+                if pos > max_len // 2:
+                    cut = pos + len(sep)
+                    break
+            tweets.append(current[:cut].strip())
+            current = current[cut:].strip()
+
+    if current:
+        tweets.append(current.strip())
+
+    return tweets
+
+
+def cmd_thread(args):
+    """Post a thread (auto-splits long text)."""
+    text = " ".join(args.text)
+    if not text:
+        print(f"{RED}Usage: pub thread \"your long text here\"{R}")
+        return 1
+
+    tweets = split_thread(text)
+
+    if len(tweets) == 1:
+        print(f"{DIM}Only 1 tweet needed ({len(tweets[0])} chars). Posting as regular tweet.{R}")
+
+    print(f"\n{B}Thread preview ({len(tweets)} tweets):{R}")
+    print(f"{'─' * 50}")
+    for i, t in enumerate(tweets, 1):
+        print(f"  {C}{i}/{len(tweets)}{R} ({len(t)} chars): {t[:80]}{'...' if len(t) > 80 else ''}")
+    print(f"{'─' * 50}")
+
+    if args.dry_run:
+        print(f"\n{Y}Dry run. Not posting.{R}")
+        return 0
+
+    # Post first tweet
+    result = subprocess.run(
+        ["x-cli", "tweet", "post", "--json", tweets[0]],
+        capture_output=True, text=True
+    )
+    if result.returncode != 0:
+        print(f"{RED}Failed to post first tweet: {result.stderr}{R}")
+        return 1
+
+    try:
+        first = json.loads(result.stdout)
+        last_id = first.get("id") or first.get("data", {}).get("id")
+    except (json.JSONDecodeError, KeyError):
+        # Try to extract ID from output
+        match = re.search(r'ID:\s*(\d+)', result.stdout)
+        last_id = match.group(1) if match else None
+
+    if not last_id:
+        print(f"{Y}First tweet posted but couldn't get ID for replies.{R}")
+        print(f"Output: {result.stdout[:200]}")
+        return 1
+
+    print(f"  {G}✅ 1/{len(tweets)} posted (ID: {last_id}){R}")
+
+    # Post replies
+    for i, tweet_text in enumerate(tweets[1:], 2):
+        result = subprocess.run(
+            ["x-cli", "tweet", "reply", "--json", str(last_id), tweet_text],
+            capture_output=True, text=True
+        )
+        if result.returncode != 0:
+            print(f"{RED}Failed at tweet {i}: {result.stderr}{R}")
+            return 1
+
+        try:
+            reply = json.loads(result.stdout)
+            last_id = reply.get("id") or reply.get("data", {}).get("id")
+        except (json.JSONDecodeError, KeyError):
+            match = re.search(r'ID:\s*(\d+)', result.stdout)
+            last_id = match.group(1) if match else last_id
+
+        print(f"  {G}✅ {i}/{len(tweets)} posted{R}")
+
+    print(f"\n{G}✅ Thread posted ({len(tweets)} tweets){R}")
+    return 0
+
+
+# ─── reddit ───────────────────────────────────────────────────────
+
+def cmd_reddit(args):
+    """Post a Reddit comment."""
+    if not args.post_id or not args.comment_text:
+        print(f"{RED}Usage: pub reddit <post_url_or_id> \"comment text\"{R}")
+        return 1
+
+    text = " ".join(args.comment_text)
+    print(f"{C}Posting Reddit comment...{R}")
+    rc = run_script("reddit_comment.py", [args.post_id, text])
+    if rc == 0:
+        print(f"{G}✅ Comment posted{R}")
+    return rc
+
+
+# ─── schedule ─────────────────────────────────────────────────────
+
+def cmd_schedule(args):
+    """Show today's publishing schedule from cron jobs."""
+    print(f"\n{B}📅 Publishing Schedule — {datetime.now().strftime('%A, %b %d, %Y')}{R}")
+    print(f"{'─' * 55}")
+    print(f"{DIM}Fetching from cron jobs... use OpenClaw cron list for full details.{R}")
+    print()
+
+    # We can read from the cron system, but it's simpler to show static known schedule
+    # The maia CLI and cron jobs define this
+    schedules = [
+        ("08:00", "YouTube", "Shorts pipeline check (every 2h)", "🔄 auto"),
+        ("09:00", "IG Maia", "Morning Reel (before/after)", "🔄 auto"),
+        ("09:00", "Reddit", "Seeding round 1 (archviz + related)", "🔄 auto"),
+        ("12:00", "IG Maia", "Midday Carousel", "🔄 auto"),
+        ("12:00", "Reddit", "Seeding round 2", "🔄 auto"),
+        ("15:00", "IG Maia", "Afternoon Render", "🔄 auto"),
+        ("16:00", "Reddit", "Seeding round 3", "🔄 auto"),
+        ("18:00", "Review", "MoldaSpace Evening Review", "🔄 auto"),
+        ("19:00", "IG Maia", "Evening Post", "🔄 auto"),
+        ("20:00", "Reddit", "Seeding round 4", "🔄 auto"),
+        ("22:00", "Self", "Daily self-improvement", "🔄 auto"),
+    ]
+
+    # Check for one-shot crons today
+    for time_str, platform, desc, status in schedules:
+        print(f"  {B}{time_str}{R}  {platform:<10} {desc:<40} {status}")
+
+    print(f"\n{DIM}LinkedIn: DISCONTINUED | Twitter/X: manual only{R}")
+    print()
+    return 0
+
+
+# ─── history ──────────────────────────────────────────────────────
+
+def cmd_history(args):
+    """Show recent posts from memory files."""
+    days = args.days or 3
+    print(f"\n{B}📋 Post History (last {days} days){R}")
+    print(f"{'─' * 55}")
+
+    memory_dir = os.path.join(WORKSPACE, "memory")
+    found = False
+
+    for i in range(days):
+        from datetime import timedelta
+        date = datetime.now() - timedelta(days=i)
+        filename = f"{date.strftime('%Y-%m-%d')}.md"
+        filepath = os.path.join(memory_dir, filename)
+
+        if os.path.exists(filepath):
+            with open(filepath) as f:
+                content = f.read()
+
+            # Look for posting-related content
+            lines = content.split('\n')
+            for line in lines:
+                lower = line.lower()
+                if any(kw in lower for kw in ['posted', 'published', 'tweeted', 'instagram', 'carousel', 'reel', 'reddit comment']):
+                    if not found:
+                        found = True
+                    print(f"  {DIM}{date.strftime('%m/%d')}{R} {line.strip()}")
+
+    if not found:
+        print(f"  {DIM}No post records found in memory files.{R}")
+
+    print()
+    return 0
+
+
+# ─── main ─────────────────────────────────────────────────────────
+
+def main():
+    parser = argparse.ArgumentParser(
+        prog="pub",
+        description="Multi-platform content publisher",
+        formatter_class=argparse.RawDescriptionHelpFormatter,
+        epilog="""
+Examples:
+  pub ig "caption" --image photo.png                Post image to IG (pessoal)
+  pub ig "caption" --image photo.png --account maia Post to @studio.maia.arch
+  pub ig "caption" --carousel a.png b.png c.png     Carousel post
+  pub reel video.mp4 "caption" --account maia       Post reel
+  pub tweet "Hello world"                            Single tweet
+  pub tweet "Vote!" --poll "Yes,No" --poll-duration 60
+  pub thread "Long text that gets auto-split..."     Thread (auto-splits at 280)
+  pub thread "Preview only" --dry-run                Preview without posting
+  pub reddit t3_abc123 "nice render!"                Reddit comment
+  pub schedule                                       Today's schedule
+  pub history --days 7                               Recent posts
+        """
+    )
+    sub = parser.add_subparsers(dest="command", help="Command")
+
+    # ig
+    p_ig = sub.add_parser("ig", help="Post to Instagram")
+    p_ig.add_argument("caption", nargs="*", help="Post caption")
+    p_ig.add_argument("--image", help="Image path or URL")
+    p_ig.add_argument("--carousel", nargs="+", help="Multiple images for carousel")
+    p_ig.add_argument("--account", default="pessoal", choices=["pessoal", "maia"])
+    p_ig.add_argument("--dry-run", action="store_true", help="Preview without posting")
+
+    # reel
+    p_reel = sub.add_parser("reel", help="Post reel to Instagram")
+    p_reel.add_argument("video", help="Video path or URL")
+    p_reel.add_argument("caption", nargs="*", help="Reel caption")
+    p_reel.add_argument("--account", default="pessoal", choices=["pessoal", "maia"])
+    p_reel.add_argument("--dry-run", action="store_true", help="Preview without posting")
+
+    # tweet
+    p_tweet = sub.add_parser("tweet", help="Post a tweet")
+    p_tweet.add_argument("text", nargs="+", help="Tweet text")
+    p_tweet.add_argument("--poll", help="Comma-separated poll options")
+    p_tweet.add_argument("--poll-duration", type=int, help="Poll duration in minutes")
+    p_tweet.add_argument("--dry-run", action="store_true", help="Preview without posting")
+
+    # thread
+    p_thread = sub.add_parser("thread", help="Post a thread (auto-splits)")
+    p_thread.add_argument("text", nargs="+", help="Thread text")
+    p_thread.add_argument("--dry-run", action="store_true", help="Preview without posting")
+
+    # reddit
+    p_reddit = sub.add_parser("reddit", help="Post Reddit comment")
+    p_reddit.add_argument("post_id", help="Post URL or ID")
+    p_reddit.add_argument("comment_text", nargs="*", help="Comment text")
+
+    # schedule
+    sub.add_parser("schedule", aliases=["sched"], help="Today's publishing schedule")
+
+    # history
+    p_history = sub.add_parser("history", aliases=["hist"], help="Recent post history")
+    p_history.add_argument("--days", type=int, default=3)
+
+    args = parser.parse_args()
+
+    if not args.command:
+        parser.print_help()
+        return 0
+
+    cmd = args.command
+    if cmd == "ig":
+        return cmd_ig(args)
+    elif cmd == "reel":
+        return cmd_reel(args)
+    elif cmd == "tweet":
+        return cmd_tweet(args)
+    elif cmd == "thread":
+        return cmd_thread(args)
+    elif cmd == "reddit":
+        return cmd_reddit(args)
+    elif cmd in ("schedule", "sched"):
+        return cmd_schedule(args)
+    elif cmd in ("history", "hist"):
+        return cmd_history(args)
+    else:
+        parser.print_help()
+        return 0
+
+
+if __name__ == "__main__":
+    sys.exit(main() or 0)

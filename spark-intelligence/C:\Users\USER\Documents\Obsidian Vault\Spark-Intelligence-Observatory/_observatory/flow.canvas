@@ -1,0 +1,255 @@
+{
+  "nodes": [
+    {
+      "id": "capture",
+      "type": "file",
+      "file": "_observatory/stages/01-event-capture.md",
+      "x": 0,
+      "y": 0,
+      "width": 300,
+      "height": 140
+    },
+    {
+      "id": "queue",
+      "type": "file",
+      "file": "_observatory/stages/02-queue.md",
+      "x": 380,
+      "y": 0,
+      "width": 300,
+      "height": 140
+    },
+    {
+      "id": "pipeline",
+      "type": "file",
+      "file": "_observatory/stages/03-pipeline.md",
+      "x": 760,
+      "y": 0,
+      "width": 300,
+      "height": 140,
+      "color": "4"
+    },
+    {
+      "id": "memory",
+      "type": "file",
+      "file": "_observatory/stages/04-memory-capture.md",
+      "x": 380,
+      "y": 220,
+      "width": 300,
+      "height": 140
+    },
+    {
+      "id": "metaralph",
+      "type": "file",
+      "file": "_observatory/stages/05-meta-ralph.md",
+      "x": 760,
+      "y": 220,
+      "width": 300,
+      "height": 140,
+      "color": "2"
+    },
+    {
+      "id": "cognitive",
+      "type": "file",
+      "file": "_observatory/stages/06-cognitive-learner.md",
+      "x": 1140,
+      "y": 220,
+      "width": 300,
+      "height": 140,
+      "color": "4"
+    },
+    {
+      "id": "rejected",
+      "type": "text",
+      "text": "**Rejected**\n_Below threshold_",
+      "x": 760,
+      "y": 440,
+      "width": 220,
+      "height": 80,
+      "color": "1"
+    },
+    {
+      "id": "eidos",
+      "type": "file",
+      "file": "_observatory/stages/07-eidos.md",
+      "x": 1140,
+      "y": -180,
+      "width": 300,
+      "height": 140
+    },
+    {
+      "id": "advisory",
+      "type": "file",
+      "file": "_observatory/stages/08-advisory.md",
+      "x": 1520,
+      "y": 80,
+      "width": 320,
+      "height": 160,
+      "color": "6"
+    },
+    {
+      "id": "chips",
+      "type": "file",
+      "file": "_observatory/stages/10-chips.md",
+      "x": 1140,
+      "y": 440,
+      "width": 300,
+      "height": 140
+    },
+    {
+      "id": "predictions",
+      "type": "file",
+      "file": "_observatory/stages/11-predictions.md",
+      "x": 760,
+      "y": -180,
+      "width": 300,
+      "height": 140
+    },
+    {
+      "id": "promotion",
+      "type": "file",
+      "file": "_observatory/stages/09-promotion.md",
+      "x": 1900,
+      "y": 80,
+      "width": 300,
+      "height": 140,
+      "color": "5"
+    },
+    {
+      "id": "tuneables",
+      "type": "file",
+      "file": "_observatory/stages/12-tuneables.md",
+      "x": 1520,
+      "y": -180,
+      "width": 260,
+      "height": 120
+    },
+    {
+      "id": "flow",
+      "type": "file",
+      "file": "_observatory/flow.md",
+      "x": -300,
+      "y": -100,
+      "width": 240,
+      "height": 100,
+      "color": "4"
+    }
+  ],
+  "edges": [
+    {
+      "id": "e1",
+      "fromNode": "capture",
+      "fromSide": "right",
+      "toNode": "queue",
+      "toSide": "left"
+    },
+    {
+      "id": "e2",
+      "fromNode": "queue",
+      "fromSide": "right",
+      "toNode": "pipeline",
+      "toSide": "left"
+    },
+    {
+      "id": "e3",
+      "fromNode": "pipeline",
+      "fromSide": "bottom",
+      "toNode": "memory",
+      "toSide": "top"
+    },
+    {
+      "id": "e4",
+      "fromNode": "memory",
+      "fromSide": "right",
+      "toNode": "metaralph",
+      "toSide": "left"
+    },
+    {
+      "id": "e5",
+      "fromNode": "metaralph",
+      "fromSide": "right",
+      "toNode": "cognitive",
+      "toSide": "left",
+      "label": "pass"
+    },
+    {
+      "id": "e5b",
+      "fromNode": "metaralph",
+      "fromSide": "bottom",
+      "toNode": "rejected",
+      "toSide": "top",
+      "label": "reject"
+    },
+    {
+      "id": "e6",
+      "fromNode": "pipeline",
+      "fromSide": "top",
+      "toNode": "eidos",
+      "toSide": "left"
+    },
+    {
+      "id": "e7",
+      "fromNode": "cognitive",
+      "fromSide": "right",
+      "toNode": "advisory",
+      "toSide": "left"
+    },
+    {
+      "id": "e8",
+      "fromNode": "eidos",
+      "fromSide": "right",
+      "toNode": "advisory",
+      "toSide": "top"
+    },
+    {
+      "id": "e9",
+      "fromNode": "pipeline",
+      "fromSide": "bottom",
+      "toNode": "chips",
+      "toSide": "left"
+    },
+    {
+      "id": "e10",
+      "fromNode": "chips",
+      "fromSide": "right",
+      "toNode": "advisory",
+      "toSide": "bottom"
+    },
+    {
+      "id": "e11",
+      "fromNode": "pipeline",
+      "fromSide": "top",
+      "toNode": "predictions",
+      "toSide": "bottom"
+    },
+    {
+      "id": "e12",
+      "fromNode": "predictions",
+      "fromSide": "right",
+      "toNode": "eidos",
+      "toSide": "left"
+    },
+    {
+      "id": "e13",
+      "fromNode": "advisory",
+      "fromSide": "right",
+      "toNode": "promotion",
+      "toSide": "left"
+    },
+    {
+      "id": "e14",
+      "fromNode": "tuneables",
+      "fromSide": "bottom",
+      "toNode": "metaralph",
+      "toSide": "top",
+      "label": "configures"
+    },
+    {
+      "id": "e15",
+      "fromNode": "tuneables",
+      "fromSide": "bottom",
+      "toNode": "advisory",
+      "toSide": "top",
+      "label": "configures"
+    }
+  ]
+}

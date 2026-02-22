@@ -1,0 +1,32 @@
+# Reddit Activity Log (maia_archviz)
+
+## 2026-02-13
+
+### Comment #1 — r/archviz "Customer not satisfied"
+- **Post:** https://www.reddit.com/r/archviz/comments/1r3zwlr/customer_not_satisfied/
+- **Permalink:** https://www.reddit.com/r/archviz/comments/1r3zwlr/comment/o592esu/
+- **Time:** ~20:15 BRT
+- **Topic:** Pre-sale real estate render, client gave vague "something feels off" feedback
+- **Comment angle:** Emotional storytelling > technical fixes. Vignette shots, mood references, art direction narrative push.
+- **Status:** ✅ Posted successfully
+- **MoldaSpace mention:** None (karma building phase)
+- **Engagement:** 1 upvote, 1 reply from OP (positive), 48 comment views
+- **OP Reply:** "This is a really helpful way to frame it... Thinking more in terms of small narrative moments, mood, and lived-in details is something I want to explore more..."
+
+## 2026-02-14
+
+### Comment #2 — r/archviz "First time working with interiors. 3ds Max + Corona"
+- **Post:** https://www.reddit.com/r/archviz/comments/1r3z8c4/first_time_working_with_interiors_3ds_max_corona/
+- **Permalink:** https://www.reddit.com/r/archviz/comments/1r3z8c4/comment/o5c12ul/
+- **Time:** ~10:05 BRT (via cron)
+- **Topic:** First interior render, 3ds Max + Corona
+- **Comment angle:** Color temperature mixing (cool daylight vs warm spots), material imperfections for realism
+- **Status:** ✅ Posted successfully via cron
+- **MoldaSpace mention:** None (karma building phase)
+- **Engagement:** 1 view (just posted)
+
+## Camofox Interaction Pattern
+1. Click `comment-composer-host faceplate-textarea-input[data-testid='trigger-button']` to open editor
+2. Type into `comment-composer-host div[contenteditable='true']`
+3. Click `button[type='submit'][slot='submit-button']` to submit
+- ⚠️ Do NOT click the textbox by ref — it focuses the search bar instead
