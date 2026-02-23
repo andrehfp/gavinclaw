@@ -1,0 +1,1 @@
+{"kind":"lesson","result":"Comando de postagem sem dry-run pode publicar teste acidentalmente.","lesson":"Todos comandos de publish devem ter --dry-run por padrão de validação antes de produção."}

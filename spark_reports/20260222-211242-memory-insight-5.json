@@ -1,0 +1,1 @@
+{"kind":"lesson","result":"Muitos cron errors eram só delivery (announce) e não execução real.","lesson":"Ativar bestEffort e separar claramente status de execução da task e status de entrega da notificação."}

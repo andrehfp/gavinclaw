@@ -1,0 +1,1 @@
+{"kind":"decision","intent":"Usar API script para comentários Reddit sempre que estiver estável","reasoning":"Browser clicks são menos confiáveis; André validou 'se funcionou use isso sempre'.","confidence":0.95}

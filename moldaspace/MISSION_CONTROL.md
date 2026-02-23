@@ -47,11 +47,11 @@
 ## 🔥 Reddit (u/maia_archviz)
 
 ### Current Stats
-- **Karma:** 55 comment karma, 1 post karma (total: 56)
+- **Karma:** 58 comment karma, 1 post karma (total: 59)
 - **Age:** 9 days old (created ~Feb 13)
-- **Comments tracked:** 62 total
-- **Subreddit breakdown (sessão 16:00):** r/archviz (2), r/InteriorDesign (2)
-- **Any new replies:** sim — 2 replies handled via API script
+- **Comments tracked:** 65 total
+- **Subreddit breakdown (sessão 20:00):** r/archviz (2), r/InteriorDesign (1)
+- **Any new replies:** sim — 1 reply handled via API script
 
 ---
 
@@ -71,4 +71,4 @@
 
 ---
 
-**Last updated:** February 22, 2026 — 04:03 PM (America/Sao_Paulo)
+**Last updated:** February 22, 2026 — 08:02 PM (America/Sao_Paulo)

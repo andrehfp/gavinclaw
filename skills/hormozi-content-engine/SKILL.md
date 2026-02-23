@@ -2,9 +2,9 @@
 name: hormozi-content-engine
 description: >
   Repurpose YouTube videos into multi-platform content using Alex Hormozi's content machine framework.
-  Use when: user has a YouTube video/transcript to repurpose, wants to generate content from a video, needs to extract posts/tweets from long-form content, or wants to run the full content pipeline (YouTube → LinkedIn + Twitter + Shorts descriptions).
-  Don't use when: writing a single LinkedIn post from scratch without source video (use linkedin-os), brainstorming ideas without existing content (use content-brainstorm), or cutting video into shorts (use viralclaw).
-  Outputs: platform-adapted posts (LinkedIn PT-BR, Twitter EN), short descriptions, CTAs, and content calendar from a single video source.
+  Use when: user has a YouTube video/transcript to repurpose, wants to generate content from a video, needs to extract posts/tweets from long-form content, or wants to run the full content pipeline (YouTube → Twitter/X + Instagram + Shorts descriptions).
+  Don't use when: writing a single post from scratch without source video (use content-brainstorm), brainstorming ideas without existing content (use content-brainstorm), or cutting video into shorts (use viralclaw).
+  Outputs: platform-adapted posts (PT-BR for Instagram, EN for Twitter/X), short descriptions, CTAs, and content calendar from a single video source.
 ---
 
 # Hormozi Content Engine
@@ -28,7 +28,7 @@ YouTube video (source of truth)
   ↓ transcription
 Extract key moments (insights, stories, frameworks, hot takes)
   ↓ contextualize per platform
-LinkedIn (PT-BR) + Twitter (EN) + Short descriptions + Threads
+Twitter/X (EN) + Instagram (PT-BR) + Short descriptions + Threads
   ↓ inject CTAs
 Every piece gets a CTA. No exceptions.
   ↓ distribute
@@ -47,9 +47,9 @@ Accept one of:
 ### Step 2: Extract Content Atoms
 From the transcript, identify:
 
-1. **Hot Takes** — contrarian opinions, bold claims (→ tweets, LinkedIn hooks)
-2. **Stories** — personal experiences with outcomes (→ LinkedIn posts, threads)
-3. **Frameworks** — step-by-step processes, mental models (→ LinkedIn carousels, threads)
+1. **Hot Takes** — contrarian opinions, bold claims (→ tweets, carousel hooks)
+2. **Stories** — personal experiences with outcomes (→ captions, threads)
+3. **Frameworks** — step-by-step processes, mental models (→ Instagram carousels, threads)
 4. **Data Points** — specific numbers, results, evidence (→ tweets, post hooks)
 5. **Quotable Lines** — one-liners that standalone (→ tweets, quote cards)
 
@@ -60,11 +60,10 @@ See [references/content-atoms.md](references/content-atoms.md) for extraction pa
 For each atom, generate adapted versions per platform.
 See [references/platform-rules.md](references/platform-rules.md) for format, tone, and structure per platform.
 
-**LinkedIn (PT-BR)**
-- Storytelling format, Hormozi "damaging admission" style
-- 3-part structure: Hook → Meat → CTA
-- "Você" (never "tu"), informal but professional
-- Reference: linkedin-os skill for copywriting framework
+**Instagram (PT-BR)**
+- Storytelling visual-first (caption + carousel/reel context)
+- Caption structure: Hook → Contexto rápido → Insight prático → CTA
+- "Você" (never "tu"), informal, claro e direto
 
 **Twitter/X (EN)**
 - Provocative, concise, standalone insight
@@ -81,7 +80,7 @@ See [references/platform-rules.md](references/platform-rules.md) for format, ton
 See [references/cta-playbook.md](references/cta-playbook.md).
 
 Every piece MUST have a CTA. Types:
-- **Cross-platform**: "Full video on YouTube" / "More on LinkedIn"
+- **Cross-platform**: "Full video on YouTube" / "Mais no Instagram"
 - **Engagement**: "What's your take?" / "Comment below"
 - **Lead capture**: Link to product, waitlist, lead magnet
 - **Share**: "Repost if you agree"
@@ -130,7 +129,7 @@ Use these as filters when extracting content atoms:
 7. **Adapt, don't copy-paste.** Each platform gets native content, not reposts.
 8. **Give the secrets, sell the implementation.** Free content should be better than competitors' paid content.
 9. **Goodwill compounds.** Don't sell too early. Build trust first, convert later.
-10. **PT-BR for LinkedIn, EN for Twitter.** Always.
+10. **PT-BR for Instagram, EN for Twitter/X.** Always.
 
 ## Approval Flow
 
@@ -143,6 +142,6 @@ When generating batch content from a video:
 ## Integration Points
 
 - **ViralClaw API**: shorts + transcript endpoint
-- **LinkedIn posting**: `scripts/linkedin_post.py`
+- **Instagram posting**: `scripts/instagram_post.py`
 - **Twitter posting**: `scripts/twitter_post.py`
 - **YouTube API**: `scripts/youtube_shorts/` for analytics

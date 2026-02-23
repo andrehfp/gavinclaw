@@ -10,7 +10,7 @@ type: "spark-explorer-index"
 
 | Store | Items Exported | Max | Browse |
 |-------|---------------|-----|--------|
-| Cognitive Insights | 1 pages | 200 | [[cognitive/_index]] |
+| Cognitive Insights | 2 pages | 200 | [[cognitive/_index]] |
 | EIDOS Distillations | 1 pages | 200 | [[distillations/_index]] |
 | EIDOS Episodes | 1 pages | 100 | [[episodes/_index]] |
 | Meta-Ralph Verdicts | 1 pages | 100 | [[verdicts/_index]] |

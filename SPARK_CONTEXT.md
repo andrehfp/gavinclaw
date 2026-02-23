@@ -16,7 +16,7 @@
 <!-- SPARK:BEGIN -->
 ## Spark Bootstrap
 Auto-loaded high-confidence learnings from ~/.spark/cognitive_insights.json
-Last updated: 2026-02-22T17:44:00
+Last updated: 2026-02-22T23:49:12
 
 No validated insights yet.
 

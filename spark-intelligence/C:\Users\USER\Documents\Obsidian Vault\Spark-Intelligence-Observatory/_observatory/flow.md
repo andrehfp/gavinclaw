@@ -1,6 +1,6 @@
 # Spark Intelligence Observatory
 
-> Last generated: 2026-02-22 17:44:00
+> Last generated: 2026-02-22 23:48:12
 > Pipeline: 0 events processed, 0 insights created
 
 ## System Health
@@ -16,7 +16,7 @@
 | Meta-Ralph roasted | 0 | healthy |
 | Meta-Ralph pass rate | 0.0% | CRITICAL |
 | Meta-Ralph avg score | 0.0 | healthy |
-| Cognitive insights | 0 | healthy |
+| Cognitive insights | 1 | healthy |
 | EIDOS episodes | 0 | healthy |
 | EIDOS distillations | 0 | healthy |
 | Advisory given | 0 | healthy |
@@ -50,8 +50,8 @@ flowchart TD
     _0 roasted_`"}
 
     E -->|pass| F["`**Cognitive Learner**
-    0 insights
-    _0 categories_`"]
+    1 insights
+    _1 categories_`"]
 
     E -->|reject| X["`**Rejected**
     _Below threshold_`"]
@@ -77,7 +77,7 @@ flowchart TD
     J --> H
 
     C --> K["`**Predictions**
-    0 outcomes
+    1 outcomes
     _Surprise tracking_`"]
 
     K --> G

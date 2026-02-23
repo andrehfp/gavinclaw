@@ -9,11 +9,15 @@
 
 | Metric | Value | Status |
 |--------|-------|--------|
-| Predictions | ~0 | healthy |
-| Outcomes | ~0 | healthy |
+| Predictions | ~1 | healthy |
+| Outcomes | ~1 | healthy |
 | Outcome links | ~0 | healthy |
 | Link rate | 0% | WARNING |
-| Prediction state keys | 4 | healthy |
+| Prediction state keys | 7 | healthy |
+## Recent Outcomes
+
+1. `{'type': 'agent_feedback', 'result': 'Instagram posts duplicados ocorreram com retry ambíguo.', 'success': None, 'lesson': 'InstaCLI deve ter dedupe nativo e reconciliação de feed antes de novo publis`
+
 ## Source Files
 
 - `hooks/observe.py (prediction logic)` — Core implementation

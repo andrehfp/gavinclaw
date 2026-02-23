@@ -3,7 +3,7 @@
   "total": 627,
   "paying": 29,
   "repeat": 32,
-  "karma": 55,
+  "karma": 58,
   "seo": 3,
   "ig": 1,
   "reddit_posts": [
@@ -706,6 +706,36 @@
       "upvotes": 0,
       "listeners": 0,
       "status": "✅ verified on profile (script returned t1_o6tkjzp)"
+    },
+    {
+      "date": "2026-02-22",
+      "sub": "r/archviz",
+      "post": "Furniture visualization - Critique needed",
+      "url": "https://old.reddit.com/r/archviz/comments/1rbnp1k/furniture_visualization_critique_needed/o6uvk8b/",
+      "angle": "Practical archviz-focused critique: reduce visible edge wear, push realism via micro-roughness and consistent wood scale, plus suggest 2–3 material presets to improve marketplace conversion.",
+      "upvotes": 0,
+      "listeners": 0,
+      "status": "✅ verified on profile (script returned t1_o6uvk8b)"
+    },
+    {
+      "date": "2026-02-22",
+      "sub": "r/InteriorDesign",
+      "post": "Best layout for my home office",
+      "url": "https://old.reddit.com/r/InteriorDesign/comments/1rbfgzx/best_layout_for_my_home_office/o6uvkcm/",
+      "angle": "Recommended layout A with functional tweaks for tight room: shallower storage run for chair clearance, dedicated cable-friendly DIY wall, pegboard, and vertical-first storage strategy.",
+      "upvotes": 0,
+      "listeners": 0,
+      "status": "✅ verified on profile (script returned t1_o6uvkcm)"
+    },
+    {
+      "date": "2026-02-22",
+      "sub": "r/archviz",
+      "post": "REPLY — Am I overdoing the post-production?",
+      "url": "https://old.reddit.com/r/archviz/comments/1rbsxdb/am_i_overdoing_the_postproduction/o6uvnfd/",
+      "angle": "Follow-up troubleshooting: isolate vibrance layer impact from foliage with masking; recommended global vibrance reduction then selective warm-tone recovery via HSL/selective color.",
+      "upvotes": 0,
+      "listeners": 0,
+      "status": "✅ verified on profile (script returned t1_o6uvnfd)"
     }
   ],
   "ig_calendar": [

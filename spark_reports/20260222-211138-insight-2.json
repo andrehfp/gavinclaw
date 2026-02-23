@@ -1,0 +1,1 @@
+{"kind":"lesson","result":"Muitos cron errors eram apenas falha de announce no delivery.","lesson":"Separar status de execução da task e status de entrega da notificação."}

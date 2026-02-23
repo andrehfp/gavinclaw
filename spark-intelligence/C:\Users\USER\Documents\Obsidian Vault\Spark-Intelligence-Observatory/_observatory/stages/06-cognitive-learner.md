@@ -9,9 +9,22 @@
 
 | Metric | Value | Status |
 |--------|-------|--------|
-| Total insights | 0 | healthy |
-| Categories | 0 | healthy |
-| Last updated | never | healthy |
+| Total insights | 1 | healthy |
+| Categories | 1 | healthy |
+| Last updated | 2.6h ago | healthy |
+## Category Distribution
+
+```mermaid
+pie title Insight Categories
+    "wisdom" : 1
+```
+
+## Top Insights (by reliability)
+
+| Key | Category | Reliability | Validations | Promoted | Insight |
+|-----|----------|-------------|-------------|----------|--------|
+| `wisdom:agent_avoids:_estilo_tinysaas_colorido_e` | wisdom | 95% | 0 | — | Agent avoids: Estilo TinySaaS colorido em posts sociais (percepção carnavalesca) |
+
 ## Source Files
 
 - `lib/cognitive_learner.py` — Core implementation

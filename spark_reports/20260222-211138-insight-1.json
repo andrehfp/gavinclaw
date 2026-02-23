@@ -1,0 +1,1 @@
+{"kind":"outcome","result":"Instagram posts duplicados ocorreram com retry ambíguo.","lesson":"InstaCLI deve ter dedupe nativo e reconciliação de feed antes de novo publish."}

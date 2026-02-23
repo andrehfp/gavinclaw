@@ -1,0 +1,152 @@
+{
+  "generated_at": "2026-02-22T19:30:05.355992",
+  "latest_baseline": "/home/andreprado/.openclaw/workspace/moldaspace/skills/seo-agent-stack/reports/baseline_2026-02-22_1726.json",
+  "latest_queue": "/home/andreprado/.openclaw/workspace/moldaspace/skills/seo-agent-stack/reports/publish_queue_2026-02-22_1726.json",
+  "analytics": {
+    "timestamp": "2026-02-22T19:30:20.921944",
+    "days_analyzed": 7,
+    "posthog": {
+      "pageviews_24h": 132,
+      "pageviews_7d": 11525,
+      "unique_visitors_7d": 301,
+      "top_pages": [
+        [
+          "https://www.moldaspace.com/sign-up/consent",
+          4797
+        ],
+        [
+          "https://www.moldaspace.com/sign-up#/?after_sign_in_url=https%3A%2F%2Fwww.moldaspace.com%2Fdashboard&after_sign_up_url=https%3A%2F%2Fwww.moldaspace.com%2Fdashboard&redirect_url=https%3A%2F%2Fwww.moldaspace.com%2Fsign-up%2Fconsent",
+          3953
+        ],
+        [
+          "https://www.moldaspace.com/sign-up#/?sign_up_fallback_redirect_url=https%3A%2F%2Fwww.moldaspace.com%2Fsign-up%2Fconsent&sign_in_fallback_redirect_url=https%3A%2F%2Fwww.moldaspace.com%2Fdashboard&after_sign_in_url=https%3A%2F%2Fwww.moldaspace.com%2Fdashboard&redirect_url=https%3A%2F%2Fwww.moldaspace.com%2Fsign-up%2Fconsent",
+          778
+        ],
+        [
+          "https://www.moldaspace.com/dashboard",
+          230
+        ],
+        [
+          "https://www.moldaspace.com/pt-BR",
+          182
+        ],
+        [
+          "https://www.moldaspace.com/",
+          100
+        ],
+        [
+          "https://www.moldaspace.com/sign-up",
+          99
+        ],
+        [
+          "https://www.moldaspace.com/sign-in",
+          76
+        ],
+        [
+          "https://www.moldaspace.com/es/dashboard",
+          72
+        ],
+        [
+          "https://www.moldaspace.com/pt-BR/dashboard",
+          58
+        ]
+      ],
+      "signups_7d": 3
+    },
+    "google_search_console": {
+      "site_url": "sc-domain:moldaspace.com",
+      "total_clicks": 191,
+      "total_impressions": 322,
+      "avg_ctr": 59.32,
+      "top_queries": [
+        [
+          "moldaspace",
+          162,
+          235
+        ],
+        [
+          "molda space",
+          27,
+          38
+        ],
+        [
+          "ai render sketchup free",
+          1,
+          2
+        ],
+        [
+          "moldaspace ai rendering",
+          1,
+          8
+        ],
+        [
+          "\"3d rendering software for interior design\"",
+          0,
+          18
+        ],
+        [
+          "\"rendering software for interior design\"",
+          0,
+          15
+        ],
+        [
+          "ai sketchup model",
+          0,
+          1
+        ],
+        [
+          "bathroom visualization",
+          0,
+          3
+        ],
+        [
+          "bedroom visualization",
+          0,
+          1
+        ],
+        [
+          "best free ai render for sketchup",
+          0,
+          1
+        ]
+      ]
+    },
+    "database": {
+      "total_users": 871,
+      "new_users_24h": 10,
+      "total_purchases": 63,
+      "revenue_24h": 0.0,
+      "purchases_24h_credits": 0,
+      "mrr_estimate": 423.0,
+      "revenue_7d": 136.29999999999998,
+      "purchases_7d": 8,
+      "revenue_yesterday": 18.799999999999997,
+      "purchases_yesterday": 1,
+      "signups_yesterday": 7,
+      "active_users_7d": 119,
+      "signups_7d": 106,
+      "referrals_total": 3,
+      "referrals_24h": 0,
+      "referrals_7d": 3,
+      "referrals_yesterday": 0
+    },
+    "instagram": {
+      "followers": 6,
+      "media_count": 40,
+      "username": "studio.maia.arch",
+      "recent_posts": 10,
+      "total_likes_recent": 1,
+      "total_comments_recent": 37,
+      "avg_engagement": 3.8,
+      "last_post_date": "2026-02-22T22:02:15+0000",
+      "last_post_likes": 0,
+      "last_post_comments": 0,
+      "last_post_type": "IMAGE"
+    }
+  },
+  "next_actions": [
+    "Publicar 2 páginas BOFU com prova visual + CTA 5 free renders",
+    "Revisar títulos/meta das páginas com maior impressão",
+    "Checar canibalização antes de criar novas URLs"
+  ]
+}

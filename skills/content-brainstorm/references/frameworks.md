@@ -22,7 +22,7 @@
 
 ## Repurposing Matrix
 One idea can become:
-- 1 LinkedIn post (story angle)
+- 1 Instagram caption (story angle)
 - 1 Twitter thread (tactical breakdown)
 - 1 Tweet (hot take / one-liner)
 - 1 Newsletter section (deep dive)

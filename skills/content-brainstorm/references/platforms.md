@@ -1,16 +1,5 @@
 # Platform-Specific Guidelines
 
-## LinkedIn
-- **Tone**: Professional but human. First-person. Storytelling > lecturing
-- **Hook**: First 2 lines MUST stop the scroll. Use pattern interrupts, bold claims, or contrarian takes
-- **Format**: Short paragraphs (1-2 lines). Use line breaks aggressively. 1300 chars ideal, max 3000
-- **Structure**: Hook → Story/Context → Insight/Lesson → CTA or question
-- **What works**: Personal stories with business lessons, contrarian takes, "here's what I learned" posts, numbered lists (5-7 items), before/after transformations
-- **What doesn't**: Corporate jargon, humble brags, "I'm thrilled to announce", walls of text
-- **CTA**: End with a question or invite to comment. Engagement in first hour is critical
-- **Emojis**: Sparingly. 1-2 max per post. Use as visual anchors, not decoration
-- **Hashtags**: 3-5 relevant ones at the end
-
 ## Twitter/X
 - **Tone**: Sharp, concise, witty. Hot takes welcome
 - **Hook**: First tweet must be self-contained and scroll-stopping
