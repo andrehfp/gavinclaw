@@ -17,7 +17,7 @@
 - [ ] Atualizar kanban (tasks.json) com status atual das tasks
 
 ### 🚀 ViralClaw ($10k/month goal) — VPS ONLY, never touch local services
-- [ ] Checar VPS health (`curl -s https://api.viral-claw.com/api/v1/health`)
+- [ ] Checar VPS health (`curl -s https://api.viral-claw.com/health -H 'X-API-Key: <key>'`)
 - [ ] Revisar tasks pendentes e próximos moves no roadmap
 - [ ] Identificar próxima ação de maior impacto pro crescimento
 - [ ] Brainstorm new ideas, channels, partnerships

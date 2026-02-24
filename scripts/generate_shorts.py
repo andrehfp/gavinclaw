@@ -173,12 +173,12 @@ def generate_shorts(api_base: str, video_url: str, style: str, count: int, langu
     if language:
         data["language"] = language
     
-    return api_request_form(api_base, "/api/generate-shorts", data)
+    return api_request_form(api_base, "/api/v1/generate-shorts", data)
 
 
 def get_job_status(api_base: str, job_id: int) -> dict:
     """Get job status."""
-    return api_request_get(api_base, f"/api/jobs/{job_id}")
+    return api_request_get(api_base, f"/api/v1/jobs/{job_id}")
 
 
 def wait_for_job(api_base: str, job_id: int, timeout: int = 600) -> dict:
@@ -206,7 +206,7 @@ def wait_for_job(api_base: str, job_id: int, timeout: int = 600) -> dict:
         time.sleep(5)
     
     print(f"\n⏱️ Timeout after {timeout}s. Job still processing.", file=sys.stderr)
-    print(f"Check status with: curl {api_base}/api/jobs/{job_id}", file=sys.stderr)
+    print(f"Check status with: curl {api_base}/api/v1/jobs/{job_id}", file=sys.stderr)
     sys.exit(1)
 
 
@@ -260,12 +260,12 @@ def main():
             print(json.dumps(final, indent=2))
         else:
             print(f"\n✅ Done!", file=sys.stderr)
-            shorts = final.get("result", {}).get("shorts", [])
+            shorts = final.get("result", {}).get("shorts", []) or final.get("result", {}).get("result", {}).get("shorts", [])
             if shorts:
                 print(f"\n🎬 Generated {len(shorts)} shorts:", file=sys.stderr)
                 for short in shorts:
                     idx = short.get("index", "?")
-                    path = short.get("output_path", "?")
+                    path = short.get("output_path") or short.get("output_url") or "?"
                     duration = short.get("duration", 0)
                     score = short.get("score", 0)
                     reason = short.get("reason", "")[:50]
@@ -279,7 +279,7 @@ def main():
             print(json.dumps(result, indent=2))
         else:
             print(f"\n📋 Check status:", file=sys.stderr)
-            print(f"   curl {api_base}/api/jobs/{job_id} -H 'X-API-Key: $VIRALCLAW_API_KEY'", file=sys.stderr)
+            print(f"   curl {api_base}/api/v1/jobs/{job_id} -H 'X-API-Key: $VIRALCLAW_API_KEY'", file=sys.stderr)
 
 
 if __name__ == "__main__":

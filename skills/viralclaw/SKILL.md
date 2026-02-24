@@ -3,7 +3,7 @@ name: viralclaw
 description: >
   Repurpose long videos into shorts, carousels, threads, quote cards, and audiograms via the ViralClaw API.
   Use when: user wants to create shorts from a video, repurpose video content into multiple formats, submit a ViralClaw job, or check job status.
-  Don't use when: user wants to write text content (use content-brainstorm or linkedin-os), generate images/thumbnails (use nano-banana-pro), or edit existing short videos. Only works with the ViralClaw API — not for generic video editing.
+  Don't use when: user wants to write text content (use content-brainstorm), generate images/thumbnails (use nano-banana-pro), or edit existing short videos. Only works with the ViralClaw API, not for generic video editing.
   Outputs: ViralClaw job submission, status checks, downloadable shorts/carousels/threads.
 metadata:
   openclaw:
@@ -50,7 +50,7 @@ python3 scripts/repurpose.py VIDEO_URL [OPTIONS] --wait
 - `--shorts-style STYLE` — Caption style (default: hormozi)
 - `--carousel-slides N` — Slides per carousel (default: 7)
 - `--carousel-style STYLE` — corporate, minimal, bold, dark (default: corporate)
-- `--thread-platform PLATFORM` — twitter, linkedin, both (default: both)
+- `--thread-platform PLATFORM` — twitter, linkedin, both (default: twitter for André workflows)
 - `--thread-tone TONE` — casual, professional, provocative (default: casual)
 - `--quote-cards-count N` — Number of quote cards (default: 3)
 - `--quote-cards-style STYLE` — gradient, minimal, dark, bold (default: gradient)

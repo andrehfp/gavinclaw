@@ -1,0 +1,75 @@
+{
+  "campaign": "openclaw-week",
+  "account": "@andrefprado",
+  "status": "in_progress",
+  "updated_at": "2026-02-23T15:54:20.273719",
+  "workflow": "generate -> send_to_andre -> approve -> enqueue",
+  "items": [
+    {
+      "id": "ocw-q1",
+      "type": "quote_card",
+      "title": "Você não precisa de 10 agentes",
+      "asset_path": "output/content-batch/openclaw-week/tweet-quote-v4-justin-style.png",
+      "post_title": "[OpenClaw] Você não precisa de 10 agentes, precisa de 1 sistema",
+      "status": "approved_enqueued",
+      "approved_at": "2026-02-23T14:37:34.446724"
+    },
+    {
+      "id": "ocw-c1",
+      "type": "carousel",
+      "title": "Como eu configuro Opus, Haiku e Codex",
+      "status": "approved_enqueued",
+      "generated_note": "next item generated below: carousel-01-modelos",
+      "asset_path": "output/content-batch/openclaw-week/carousel-01-modelos-square-warm/",
+      "approved_at": "2026-02-23T14:51:36.491591"
+    },
+    {
+      "id": "ocw-c2",
+      "type": "infographic",
+      "title": "Como 1 vídeo vira 15+ conteúdos",
+      "status": "approved_enqueued",
+      "asset_path": "output/content-batch/openclaw-week/infografico-video-15-v2.png",
+      "approved_at": "2026-02-23T14:57:23.810869"
+    },
+    {
+      "id": "ocw-i1",
+      "type": "image",
+      "title": "Setup simples, barato e consistente",
+      "status": "approved_enqueued",
+      "asset_path": "output/content-batch/openclaw-week/setup-simples-v1.png",
+      "approved_at": "2026-02-23T15:02:59.862569"
+    },
+    {
+      "id": "ocw-c3",
+      "type": "carousel",
+      "title": "Erros que cometi automatizando conteúdo",
+      "status": "approved_enqueued",
+      "asset_path": "output/content-batch/openclaw-week/carousel-03-erros/",
+      "approved_at": "2026-02-23T15:47:55.433575"
+    },
+    {
+      "id": "ocw-q2",
+      "type": "quote_card",
+      "title": "Sem distribuição, bom conteúdo é hobby",
+      "status": "approved_enqueued",
+      "asset_path": "output/content-batch/openclaw-week/tweet-quote-distribuicao-v1.png",
+      "approved_at": "2026-02-23T15:48:43.387831"
+    },
+    {
+      "id": "ocw-c4",
+      "type": "carousel",
+      "title": "Resumo da semana",
+      "status": "cancelled",
+      "cancelled_at": "2026-02-23T15:54:20.273699",
+      "cancel_reason": "andre said does not make sense"
+    },
+    {
+      "id": "ocw-i2",
+      "type": "image",
+      "title": "-50% no custo, mesma qualidade",
+      "status": "approved_enqueued",
+      "asset_path": "output/content-batch/openclaw-week/corte-custo-50-v1.png",
+      "approved_at": "2026-02-23T15:05:38.538096"
+    }
+  ]
+}

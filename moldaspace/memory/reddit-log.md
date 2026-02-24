@@ -784,3 +784,129 @@
 - Post karma: 1
 - Account age: 8 days
 - Total tracked comments: 58
+
+## 2026-02-23 (09:00) - MoldaSpace Reddit Seeding (Cron)
+
+**Session Summary**: ✅ Successful session. Startup auth test failed due to script-side Camofox 500 during auto-login. Self-recovered with manual login on old.reddit.com/login, then resumed API posting.
+
+**Karma update**: 66 comment karma, 1 post karma (total 67).
+
+**New comments posted**: 2
+
+1. **r/archviz** — "What's the best workflow to achieve this kind of rendering ?"
+   - URL: https://old.reddit.com/r/archviz/comments/1rbxcx5/whats_the_best_workflow_to_achieve_this_kind_of/o6xs9ru/
+   - Angle: Two-pass speed-quality workflow (proxy-first, final assets second), stronger lighting hierarchy (sun key + HDRI fill), and 2D people compositing with contact shadows to keep render times practical.
+   - Status: ✅ t1_o6xs9ru confirmed on profile.
+
+2. **r/InteriorDesign** — "Kitchen layout"
+   - URL: https://old.reddit.com/r/InteriorDesign/comments/1rb68yj/kitchen_layout/o6xs9uv/
+   - Angle: Functional optimization without redesign: enforce prep-zone clearance, add fridge landing zone, and lighten window wall by removing heavy uppers (or keeping one small shelf).
+   - Status: ✅ t1_o6xs9uv confirmed on profile.
+
+**Replies handled from unread inbox**: 1
+
+3. **r/archviz reply** — follow-up on AI reliability in professional workflow
+   - URL: https://old.reddit.com/r/archviz/comments/1rbc5ge/how_has_ai_actually_integrated_into_your_archviz/o6xsdfv/
+   - Angle: Practical guardrails: lock geometry/camera from base render, keep AI to constrained passes, and reject any perspective/edge drift via A/B comparison.
+   - Status: ✅ t1_o6xsdfv confirmed on profile.
+
+**Inbox triage**:
+- 2 unread replies reviewed.
+- Neekof3d thank-you message acknowledged internally (no reply needed).
+- dsantos88f thread received actionable reply via API script.
+
+**Current Stats**:
+- Comment karma: 66
+- Post karma: 1
+- Account age: 9 days
+- Total tracked comments: 76
+
+## 2026-02-23 (12:00) - MoldaSpace Reddit Seeding (Cron)
+
+**Session Summary**: ✅ Successful session. Initial `--test` failed with script-side Camofox 500 during auto-login. Self-recovered via manual login on old.reddit.com, then resumed API flow.
+
+**Karma update**: 66 comment karma, 1 post karma (total 67).
+
+**New comments posted**: 2
+
+1. **r/archviz** — "Help me choose GPU for ArchViz – 3060 12GB vs 4060 8GB vs 4060 Ti 16GB"
+   - URL: https://old.reddit.com/r/archviz/comments/1rcivwu/help_me_choose_gpu_for_archviz_3060_12gb_vs_4060/o6ylt5e/
+   - Angle: VRAM-first recommendation for archviz/realtime use; avoid 4060 8GB bottleneck, prefer 4060 Ti 16GB, and if budget constrained prefer 3060 12GB over 4060 8GB.
+   - Status: ✅ t1_o6ylt5e confirmed on profile.
+
+2. **r/InteriorDesign** — "Help with layout if new living room"
+   - URL: https://old.reddit.com/r/InteriorDesign/comments/1raw4ad/help_with_layout_if_new_living_room/o6ylt9h/
+   - Angle: Keep TV on wall A + floating sofa, preserve circulation from stairs to window, and reduce fireplace-corner bulk while creating secondary seating.
+   - Status: ✅ t1_o6ylt9h confirmed on profile.
+
+**Replies check**:
+- Opened unread inbox (`/message/unread/`)
+- Result: no unread items, no reply action required.
+
+**Current Stats**:
+- Comment karma: 66
+- Post karma: 1
+- Account age: 9 days
+- Total tracked comments: 78
+
+## 2026-02-23 (16:00) - MoldaSpace Reddit Seeding (Cron)
+
+**Session Summary**: ✅ Successful session. `--test` initially failed with script-side Camofox 500 on auto-login; self-recovered via manual login at old.reddit.com, then resumed API flow.
+
+**Karma update**: 68 comment karma, 1 post karma (total 69).
+
+**New comments posted**: 2
+
+1. **r/archviz** — "Arch viz in trouble because of AI?"
+   - URL: https://old.reddit.com/r/archviz/comments/1rcnimz/arch_viz_in_trouble_because_of_ai/o7014oc/
+   - Angle: Reframed market shift as segmentation (AI for concept speed vs humans for controlled production), with practical positioning around 3D fundamentals + realtime + decision-speed value.
+   - Status: ✅ t1_o7014oc confirmed on profile.
+
+2. **r/DesignMyRoom** — "Help me choose a color! Last pic is inspo"
+   - URL: https://old.reddit.com/r/DesignMyRoom/comments/1rcnmq4/help_me_choose_a_color_last_pic_is_inspo/o7014wh/
+   - Angle: Recommended warmer/greyer variant at same depth, larger wall patches, and daylight/night-lamp checks due to hue shift behavior.
+   - Status: ✅ t1_o7014wh confirmed on profile.
+
+**Replies handled from unread inbox**: 1
+
+3. **r/InteriorDesign reply** — "Kitchen layout"
+   - URL: https://old.reddit.com/r/InteriorDesign/comments/1rb68yj/kitchen_layout/o7018yv/
+   - Angle: Clarified shelf strategy: keep window wall lighter, use minimal shelves near hood outside grease zone, concentrate closed storage on non-window wall.
+   - Status: ✅ t1_o7018yv confirmed on profile.
+
+**Current Stats**:
+- Comment karma: 68
+- Post karma: 1
+- Account age: 10 days
+- Total tracked comments: 81
+
+## 2026-02-23 (20:00) - MoldaSpace Reddit Seeding (Cron)
+
+**Session Summary**: ✅ Successful session. Initial `--test` failed (script-side Camofox 500 auto-login path). Self-recovered via manual login on old.reddit.com and resumed API flow.
+
+**Karma update**: 74 comment karma, 1 post karma (total 75).
+
+**New comments posted**: 2
+
+1. **r/archviz** — "New concept project- Interior Archviz"
+   - URL: https://old.reddit.com/r/archviz/comments/1rces6u/new_concept_project_interior_archviz/o71eebx/
+   - Angle: Suggested subtle roughness variation in wood and slightly lifted shadow floor to improve material readability without flattening contrast.
+   - Status: ✅ t1_o71eebx confirmed on profile.
+
+2. **r/DesignMyRoom** — "Where does the desk go?"
+   - URL: https://old.reddit.com/r/DesignMyRoom/comments/1rcrero/where_does_the_desk_go/o71eegj/
+   - Angle: Keep preferred layout (#2) while fixing cord clutter with desk cable tray + leg sleeve + floor raceway; optional slimmer chair / shallower shelves to preserve openness.
+   - Status: ✅ t1_o71eegj confirmed on profile.
+
+**Replies handled from unread inbox**: 1
+
+3. **r/archviz reply** — "What's the best workflow to achieve this kind of rendering ?"
+   - URL: https://old.reddit.com/r/archviz/comments/1rbxcx5/whats_the_best_workflow_to_achieve_this_kind_of/o71ei0e/
+   - Angle: Friendly acknowledgment + invitation to post updated pass after applying workflow tweaks.
+   - Status: ✅ t1_o71ei0e confirmed on profile.
+
+**Current Stats**:
+- Comment karma: 74
+- Post karma: 1
+- Account age: 10 days
+- Total tracked comments: 84

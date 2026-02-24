@@ -1,0 +1,40 @@
+2026-02-22 - Central API security hardening progress
+
+Scope completed:
+- Fixed OAuth callback session-minting bypass in central-api.
+- Reduced process-local state dependency for session/auth and rate limiting.
+
+Implemented changes:
+1) OAuth callback hardening
+- /oauth/callback now performs real OAuth token exchange before issuing a session token.
+- Upstream invalid_grant is mapped to 401 AUTH_REQUIRED.
+- /oauth/start now builds authorize URL from configured OAuth env vars.
+
+2) Process-local state reduction
+- Replaced in-memory session store with signed stateless session tokens (SignedTokenStore).
+- Replaced in-memory OAuth state map with signed expiring OAuth state tokens.
+- Replaced in-memory rate-limit buckets with lock-protected file-backed limiter (FileRateLimiter), configurable by IG_CENTRAL_RATE_LIMIT_FILE.
+
+New/updated modules:
+- apps/central-api/src/services/oauth-client.ts
+- apps/central-api/src/services/rate-limiter.ts
+- apps/central-api/src/services/token-signing.ts
+- apps/central-api/src/services/token-store.ts (SignedTokenStore)
+- apps/central-api/src/routes/index.ts
+- apps/central-api/src/server.ts
+
+Config/docs updates:
+- Added central OAuth + signing/rate-limit env vars to .env.example.
+- Updated README central-api flow to require real OAuth code exchange.
+- Updated pre-production checklist for signing secret and shared rate-limit storage.
+
+Validation run:
+- pnpm --filter @instacli/central-api typecheck (pass)
+- pnpm --filter @instacli/central-api test (pass)
+- pnpm --filter @instacli/central-api build (pass)
+- pnpm --filter @instacli/provider-central typecheck (pass)
+- pnpm --filter @instacli/provider-central test (pass)
+
+Operational notes:
+- IG_CENTRAL_SIGNING_SECRET must be identical across all central-api instances.
+- IG_CENTRAL_RATE_LIMIT_FILE should point to shared durable storage for multi-process deployments; for distributed multi-host deployments, Redis-backed rate limiting is recommended.

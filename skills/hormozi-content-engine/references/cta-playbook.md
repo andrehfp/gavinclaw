@@ -11,9 +11,9 @@ Hormozi foi de 20K → 400K downloads/mês no podcast SÓ adicionando CTAs.
 ### 1. Cross-Platform (redirecionar)
 Manda audiência de uma plataforma pra outra.
 
-**LinkedIn → YouTube:**
-- "Expliquei isso em detalhe no meu último vídeo. Link nos comentários."
-- "Tem um vídeo de 15min onde mostro o passo a passo. Comenta 'LINK' que eu mando."
+**Instagram → YouTube:**
+- "Expliquei isso em detalhe no meu último vídeo. Link na bio."
+- "Tem um vídeo de 15min com passo a passo completo. Comenta 'LINK' que eu te mando."
 
 **Twitter → YouTube:**
 - "Full breakdown in my latest video 👇"
@@ -26,9 +26,9 @@ Manda audiência de uma plataforma pra outra.
 ### 2. Engagement (gerar interação)
 Algoritmo ama comentários. Use perguntas que as pessoas QUEREM responder.
 
-**LinkedIn:**
+**Instagram:**
 - "Qual ferramenta de AI você mais usa? Comenta aí."
-- "Concorda ou sou louco? Me diz."
+- "Concorda ou viajei? Me diz."
 - "Qual desses erros você já cometeu?"
 
 **Twitter:**
@@ -63,11 +63,11 @@ Direcionar pra produto, waitlist, ou lead magnet.
 [CTA final] "Vídeo relacionado aqui + se inscreve"
 ```
 
-### LinkedIn Post
+### Instagram Caption
 ```
 [Conteúdo]
 [Última linha = CTA de engajamento]
-"E você, já passou por isso? Comenta aí 👇"
+"e você, já passou por isso? comenta aí 👇"
 ```
 
 ### Tweet

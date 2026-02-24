@@ -6,6 +6,7 @@ Use this playbook when another AI agent is operating InstaCLI.
 - Always run with `--json --quiet`.
 - Never publish automatically from AI suggestions unless explicitly requested.
 - Validate auth first.
+- Do not run `setup meta-token` on every job. Setup is one-time. Re-run setup only when auth fails (`AUTH_REQUIRED` or invalid token/account).
 
 ## Quick preflight
 ```bash
@@ -13,6 +14,7 @@ ig auth status --json --quiet
 ig media list --limit 1 --json --quiet
 ```
 
+If auth is OK, publish directly. Do not run setup.
 If `AUTH_REQUIRED`, run setup/login before doing anything else.
 
 ## Daily engagement loop

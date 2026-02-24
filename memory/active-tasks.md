@@ -1,5 +1,17 @@
 # Active Tasks
 
+## CURRENT (2026-02-23)
+
+### #Linear - MoldaSpace Ops no Linear
+**Objetivo:** centralizar processos não-dev no Linear e separar de dev (GitHub)
+**Status:** ✅ Integração API ativa + script funcional (`skills/linear-ops/scripts/linear_ops.py`)
+**Regra:** issues não-programação via GH CLI devem virar task no Linear
+**Ritual semanal (segunda):**
+- Revisar Backlog
+- Definir This Week (3-7 itens)
+- Resolver/atribuir Blocked
+- Fechar Done com KPI/resultado
+
 ## CURRENT (2026-02-22)
 
 ### #A - Instagram Ops V1 vendável (beta para leads MoldaSpace)
@@ -13,6 +25,7 @@
 - Scripts: baseline, publish queue, weekly review
 - Crons: baseline (seg 08:15), queue (qua/sex 09:15), review (dom 19:30)
 **Próximo:** plugar secrets KE/DataForSEO para sair do dry-run e rodar live
+**Update 2026-02-23 09:14:** baseline + publish_queue + weekly_review rerodados; stack OK, ainda em dry-run por ausência de `KEYWORDS_EVERYWHERE_API_KEY` e `DATAFORSEO_LOGIN/PASSWORD` no ambiente/secrets.
 
 ## CURRENT (2026-02-21)
 
@@ -25,7 +38,7 @@
 ### #1 - Email Drip (#107)
 **Repo:** andrehfp/moldaspace
 **Objetivo:** Sequência de emails pra users que bateram no paywall e não compraram
-**Status:** Pendente — André precisa confirmar início ou iniciou ele mesmo
+**Status:** ✅ Já foi (confirmado por André em 2026-02-23)
 **PRD:** github.com/andrehfp/moldaspace/issues/107
 
 ### #2 - Maia Assistant MVP (#125)
@@ -35,22 +48,7 @@
 **PRD:** moldaspace/plans/prd-maia-assistant.md
 
 ### #3 - Referral system (#93)
-**Status:** Pendente — André queria discutir estratégia e implementar
-
----
-
-## Content Scheduled (Feb 20-23)
-One-shot crons for @andrefprado pessoal (todos aprovados pelo André):
-- Feb 20 12:00 UTC: Reel Automação Noturna (ced9c749)
-- Feb 20 14:00 UTC: Quote N8N não ficou devagar (774ad274)
-- Feb 20 18:00 UTC: Infographic Pipeline Conteúdo (2f7a7fe8)
-- Feb 21 12:00 UTC: Reel Ferramentas AI (07985ded)
-- Feb 21 14:00 UTC: Quote 3 agentes trabalhando (99dcf43e)
-- Feb 21 18:00 UTC: Infographic Anatomia Agente (28a815a4)
-- Feb 22 12:00 UTC: Carousel Devs têm medo IA (fabb5ce9) + Reel PyAgents (dc543be2)
-- Feb 22 18:00 UTC: Infographic De Ideia a Produto (160ae8b1)
-- Feb 23 12:00 UTC: Reel Agentes Autônomos (7ea4938d)
-- Feb 23 15:00 UTC: Quote "Eu não tava usando uma IA" (c3877229)
+**Status:** ✅ Já foi (confirmado por André em 2026-02-23)
 
 ---
 
@@ -58,7 +56,7 @@ One-shot crons for @andrefprado pessoal (todos aprovados pelo André):
 
 ### Clinic Agent Files
 - clinic-agent-product-doc.md, clinic-agent-research.md, clinic-software-comparison.md
-- **Status:** Aguardando André confirmar se projeto está ativo ou pode arquivar
+- **Status:** Ignorar por ora ("esquece", confirmado por André em 2026-02-23)
 
 ### IG Maia Follow Session
 - Started: 2026-02-17 | Status: Likely completed (30 accounts)

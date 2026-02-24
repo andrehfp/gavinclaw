@@ -105,6 +105,14 @@ node packages/ig-cli/dist/bin.js setup meta-byo \
 | `IG_META_CLIENT_SECRET` | App Dashboard -> `Settings` -> `Basic` -> `App Secret` |
 | `IG_META_REDIRECT_URI` | `Facebook Login` -> `Settings` -> `Valid OAuth Redirect URIs` |
 
+Optional rate-limit guardrails (provider-meta-byo):
+- `IG_META_MIN_REQUEST_INTERVAL_MS` (default `0`)
+- `IG_META_GET_RETRY_MAX` (default `2`, GET-only)
+- `IG_META_GET_CACHE_TTL_MS` (default `3000`)
+- `IG_META_GET_CACHE_MAX_ENTRIES` (default `200`)
+- `IG_META_RETRY_BASE_DELAY_MS` (default `750`)
+- `IG_META_RETRY_MAX_DELAY_MS` (default `20000`)
+
 Use this redirect URI exactly:
 `http://localhost:8788/callback`
 
@@ -149,9 +157,12 @@ pnpm --filter @instacli/central-api dev
 Terminal 2:
 ```bash
 curl -s http://127.0.0.1:8787/health
+START=$(curl -s -X POST http://127.0.0.1:8787/oauth/start)
+STATE=$(echo "$START" | jq -r '.state')
+# Use a real authorization code from your configured OAuth provider:
 TOKEN=$(curl -s -X POST http://127.0.0.1:8787/oauth/callback \
   -H "content-type: application/json" \
-  -d '{"code":"abc","state":"xyz"}' | jq -r '.session_token')
+  -d "{\"code\":\"<oauth-code>\",\"state\":\"$STATE\"}" | jq -r '.session_token')
 
 curl -s -H "Authorization: Bearer $TOKEN" http://127.0.0.1:8787/session
 curl -s -H "Authorization: Bearer $TOKEN" "http://127.0.0.1:8787/media/list?limit=2"
@@ -162,7 +173,7 @@ curl -s -X POST http://127.0.0.1:8787/publish/photo \
 ```
 
 Note:
-- `central` auth login in CLI is scaffold-level (not full real OAuth yet).
+- `central` auth now validates OAuth codes against the configured token endpoint.
 - Real end-to-end publish/auth is via `meta-byo` with real Meta env vars and redirect configuration.
 
 ## Agent mode contract
@@ -170,6 +181,12 @@ Always prefer:
 ```bash
 ig <command> --json --quiet
 ```
+
+Auth policy for agents:
+- Setup is one-time. Do not run `ig setup meta-token` in every cron/job.
+- Before posting, run `ig auth status --json --quiet`.
+- If auth is valid, post directly.
+- Only run setup/login when auth fails (`AUTH_REQUIRED`, invalid token, or account mismatch).
 
 Pagination safety:
 - `ig media list` never returns raw `access_token` in output.

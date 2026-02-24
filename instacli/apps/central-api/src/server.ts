@@ -1,6 +1,6 @@
 import fastify from "fastify";
 import { registerRoutes } from "./routes/index.js";
-import { InMemoryTokenStore } from "./services/token-store.js";
+import { SignedTokenStore } from "./services/token-store.js";
 
 const parseTrustProxy = (): boolean => {
   const raw = process.env.IG_CENTRAL_TRUST_PROXY?.toLowerCase().trim();
@@ -19,9 +19,18 @@ export const buildServer = () => {
     return payload;
   });
 
-  const tokenStore = new InMemoryTokenStore();
-  registerRoutes(app, tokenStore);
+  const signingSecret = parseSigningSecret();
+  const tokenStore = new SignedTokenStore(signingSecret);
+  registerRoutes(app, tokenStore, { signingSecret });
   return app;
+};
+
+const parseSigningSecret = (): string => {
+  const secret = process.env.IG_CENTRAL_SIGNING_SECRET?.trim();
+  if (!secret || secret.length < 32) {
+    throw new Error("IG_CENTRAL_SIGNING_SECRET is required and must be at least 32 characters.");
+  }
+  return secret;
 };
 
 const start = async (): Promise<void> => {

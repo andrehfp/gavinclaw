@@ -9,7 +9,7 @@
 
 | Metric | Value | Status |
 |--------|-------|--------|
-| Predictions | ~1 | healthy |
+| Predictions | ~0 | healthy |
 | Outcomes | ~1 | healthy |
 | Outcome links | ~0 | healthy |
 | Link rate | 0% | WARNING |

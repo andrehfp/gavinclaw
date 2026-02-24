@@ -18,6 +18,7 @@
 | **content-brainstorm** | ✅ Active | Brainstorming post ideas, repurposing across platforms, writing hooks/threads/carousels | Deep video repurposing pipeline (use hormozi-content-engine) |
 | **excalidraw-diagram** | ✅ Active | Architecture visualization, system diagrams, component maps from codebases | Flowcharts of business logic, UML class diagrams, simple text docs |
 | **hormozi-content-engine** | ✅ Active | YouTube video → multi-platform content (Twitter + IG + Shorts). Has reference files for CTAs, platform rules, content atoms | Writing from scratch without source video. Single post (use content-brainstorm) |
+| **hormozi-rich-pricing** | ✅ Active | Definir precificação premium e tier ladder “sell to rich”, com ICP upmarket, oferta high-ticket e testes de close-rate | Estratégia de conteúdo por vídeo (use hormozi-content-engine) |
 | **recursive-processor** | ✅ Active | Input >50k tokens, large files, hierarchical summarization, divide-and-conquer | Input fits in context (<50k), simple summaries, real-time tasks |
 | **tree-of-thoughts** | ✅ Active | Hard decisions with trade-offs, debugging with multiple causes, comparing 3+ approaches | Straightforward answers, quick opinions, routine questions |
 | **viralclaw** | ✅ Active | Creating shorts from video, submitting ViralClaw jobs, checking job status | Text content, image generation, generic video editing |

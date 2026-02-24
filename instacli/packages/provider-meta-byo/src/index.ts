@@ -31,8 +31,22 @@ type MetaEnv = {
 };
 
 type GraphMethod = "GET" | "POST";
+type GraphParams = Record<string, string | number | boolean | undefined>;
+type GraphData = Record<string, unknown>;
+type GraphRequestFn = (
+  accessToken: string,
+  path: string,
+  method: GraphMethod,
+  params: GraphParams
+) => Promise<ToolResult<GraphData>>;
+
 const DEFAULT_FETCH_TIMEOUT_MS = 15_000;
-const INSIGHTS_RETRY_DELAY_MS = 500;
+const DEFAULT_META_MIN_REQUEST_INTERVAL_MS = 0;
+const DEFAULT_META_GET_RETRY_MAX = 2;
+const DEFAULT_META_GET_CACHE_TTL_MS = 3_000;
+const DEFAULT_META_GET_CACHE_MAX_ENTRIES = 200;
+const DEFAULT_META_RETRY_BASE_DELAY_MS = 750;
+const DEFAULT_META_RETRY_MAX_DELAY_MS = 20_000;
 const PUBLISH_RETRY_DELAYS_MS = [15_000, 45_000, 120_000] as const;
 const META_ACTION_BLOCK_SUBCODE = 2_207_051;
 const META_ACTION_BLOCK_RETRY_AFTER_SECONDS = 60 * 60;
@@ -69,6 +83,41 @@ const toQuery = (params: Record<string, string | number | boolean | undefined>):
   }
 
   return search.toString();
+};
+
+const toStableQuery = (params: GraphParams): string => {
+  const search = new URLSearchParams();
+  const entries = Object.entries(params)
+    .filter(([, value]) => value !== undefined)
+    .sort(([left], [right]) => left.localeCompare(right));
+
+  for (const [key, value] of entries) {
+    search.set(key, String(value));
+  }
+
+  return search.toString();
+};
+
+const parseIntEnv = (name: string, fallback: number, options?: { min?: number; max?: number }): number => {
+  const raw = process.env[name];
+  if (!raw) {
+    return fallback;
+  }
+
+  const parsed = Number.parseInt(raw, 10);
+  if (!Number.isInteger(parsed)) {
+    return fallback;
+  }
+
+  if (typeof options?.min === "number" && parsed < options.min) {
+    return fallback;
+  }
+
+  if (typeof options?.max === "number" && parsed > options.max) {
+    return fallback;
+  }
+
+  return parsed;
 };
 
 const parseTimeoutMs = (): number => {
@@ -147,6 +196,79 @@ const toFiniteNumber = (value: unknown): number | undefined => {
   return undefined;
 };
 
+const readMaxNumericValue = (value: unknown): number | undefined => {
+  if (typeof value === "number" && Number.isFinite(value)) {
+    return value;
+  }
+
+  if (typeof value === "string") {
+    const parsed = Number.parseFloat(value);
+    if (Number.isFinite(parsed)) {
+      return parsed;
+    }
+  }
+
+  if (Array.isArray(value)) {
+    let maxValue: number | undefined;
+    for (const entry of value) {
+      const candidate = readMaxNumericValue(entry);
+      if (typeof candidate === "number") {
+        maxValue = typeof maxValue === "number" ? Math.max(maxValue, candidate) : candidate;
+      }
+    }
+    return maxValue;
+  }
+
+  if (isRecord(value)) {
+    let maxValue: number | undefined;
+    for (const entry of Object.values(value)) {
+      const candidate = readMaxNumericValue(entry);
+      if (typeof candidate === "number") {
+        maxValue = typeof maxValue === "number" ? Math.max(maxValue, candidate) : candidate;
+      }
+    }
+    return maxValue;
+  }
+
+  return undefined;
+};
+
+const parseUsagePercentage = (headerValue: string | null): number | undefined => {
+  if (!headerValue) {
+    return undefined;
+  }
+
+  try {
+    const parsed = JSON.parse(headerValue) as unknown;
+    const maxValue = readMaxNumericValue(parsed);
+    if (typeof maxValue !== "number") {
+      return undefined;
+    }
+
+    return Math.max(0, Math.min(100, maxValue));
+  } catch {
+    return undefined;
+  }
+};
+
+const parseRetryAfterMs = (headerValue: string | null): number | undefined => {
+  if (!headerValue) {
+    return undefined;
+  }
+
+  const numericSeconds = Number.parseFloat(headerValue);
+  if (Number.isFinite(numericSeconds) && numericSeconds >= 0) {
+    return Math.round(numericSeconds * 1000);
+  }
+
+  const retryAt = Date.parse(headerValue);
+  if (!Number.isFinite(retryAt)) {
+    return undefined;
+  }
+
+  return Math.max(0, retryAt - Date.now());
+};
+
 const readMetricValue = (data: unknown, metric: string): number | null => {
   if (!Array.isArray(data)) {
     return null;
@@ -198,6 +320,34 @@ const isRateLimitError = (error: ToolError): boolean => {
   }
 
   return graph.code === 4 || graph.code === 17 || graph.code === 32 || graph.code === 613;
+};
+
+const isTransientGraphError = (error: ToolError): boolean => {
+  if (error.error.code !== ERROR_CODES.PROVIDER_ERROR) {
+    return false;
+  }
+
+  const graph = extractGraphError(error);
+  if (graph.status === 429 || graph.status === 500 || graph.status === 502 || graph.status === 503 || graph.status === 504) {
+    return true;
+  }
+
+  return isRateLimitError(error);
+};
+
+const readRetryAfterMsFromError = (error: ToolError): number | undefined => {
+  const details = isRecord(error.error.details) ? error.error.details : undefined;
+  const retryAfterMs = toFiniteNumber(details?.retry_after_ms);
+  if (typeof retryAfterMs === "number" && retryAfterMs >= 0) {
+    return retryAfterMs;
+  }
+
+  const retryAfterSeconds = toFiniteNumber(details?.retry_after_seconds);
+  if (typeof retryAfterSeconds === "number" && retryAfterSeconds >= 0) {
+    return retryAfterSeconds * 1000;
+  }
+
+  return undefined;
 };
 
 const isMetaActionBlockedError = (error: ToolError): boolean => {
@@ -278,58 +428,226 @@ const isUnsupportedMediaMetricError = (error: ToolError): boolean => {
   );
 };
 
-const graphRequest = async (
-  accessToken: string,
-  path: string,
-  method: GraphMethod,
-  params: Record<string, string | number | boolean | undefined>
-): Promise<ToolResult<Record<string, unknown>>> => {
-  const url = new URL(`${GRAPH_BASE}${path}`);
-
-  if (method === "GET") {
-    url.search = toQuery({ ...params, access_token: accessToken });
+const usageCooldownForPercent = (usagePercent: number): number => {
+  if (usagePercent >= 95) {
+    return 30_000;
   }
 
-  let response: Response;
-  try {
-    response = await fetchWithTimeout(url, {
-      method,
-      headers: method === "POST" ? { "Content-Type": "application/x-www-form-urlencoded" } : undefined,
-      body: method === "POST" ? toQuery({ ...params, access_token: accessToken }) : undefined
-    });
-  } catch (error) {
-    return toolError(ERROR_CODES.PROVIDER_ERROR, "Meta Graph API request failed", {
-      status: 0,
-      reason: error instanceof Error ? error.message : String(error)
-    });
+  if (usagePercent >= 90) {
+    return 10_000;
   }
 
-  const parsed = (await parseJsonResponse(response)) as Record<string, unknown> | null;
-
-  if (!response.ok) {
-    return toolError(ERROR_CODES.PROVIDER_ERROR, "Meta Graph API request failed", {
-      status: response.status,
-      body: parsed
-    });
+  if (usagePercent >= 85) {
+    return 3_000;
   }
 
-  return {
-    ok: true,
-    action: "meta.graph.request",
-    data: parsed ?? {}
+  return 0;
+};
+
+const createGraphRequester = (context: ProviderContext): GraphRequestFn => {
+  const minRequestIntervalMs = parseIntEnv("IG_META_MIN_REQUEST_INTERVAL_MS", DEFAULT_META_MIN_REQUEST_INTERVAL_MS, { min: 0 });
+  const getRetryMax = parseIntEnv("IG_META_GET_RETRY_MAX", DEFAULT_META_GET_RETRY_MAX, { min: 0, max: 5 });
+  const getCacheTtlMs = parseIntEnv("IG_META_GET_CACHE_TTL_MS", DEFAULT_META_GET_CACHE_TTL_MS, { min: 0 });
+  const getCacheMaxEntries = parseIntEnv("IG_META_GET_CACHE_MAX_ENTRIES", DEFAULT_META_GET_CACHE_MAX_ENTRIES, { min: 1 });
+  const retryBaseDelayMs = parseIntEnv("IG_META_RETRY_BASE_DELAY_MS", DEFAULT_META_RETRY_BASE_DELAY_MS, { min: 1 });
+  const retryMaxDelayMs = parseIntEnv("IG_META_RETRY_MAX_DELAY_MS", DEFAULT_META_RETRY_MAX_DELAY_MS, { min: retryBaseDelayMs });
+
+  const getCache = new Map<string, { expiresAt: number; data: GraphData }>();
+  const inFlightGet = new Map<string, Promise<ToolResult<GraphData>>>();
+  let nextAllowedAt = 0;
+  let lastUsageLogBucket = 0;
+
+  const scheduleCooldown = (cooldownMs: number): void => {
+    if (cooldownMs <= 0) {
+      return;
+    }
+    const next = Date.now() + cooldownMs;
+    if (next > nextAllowedAt) {
+      nextAllowedAt = next;
+    }
+  };
+
+  const enforceSpacing = async (): Promise<void> => {
+    const now = Date.now();
+    const waitMs = Math.max(0, nextAllowedAt - now);
+    if (waitMs > 0) {
+      await sleep(waitMs);
+    }
+
+    if (minRequestIntervalMs > 0) {
+      nextAllowedAt = Math.max(nextAllowedAt, Date.now()) + minRequestIntervalMs;
+    }
+  };
+
+  const applyResponseSignals = (response: Response): void => {
+    const retryAfterMs = parseRetryAfterMs(response.headers.get("retry-after"));
+    if (typeof retryAfterMs === "number") {
+      scheduleCooldown(retryAfterMs);
+    }
+
+    const maxUsage = Math.max(
+      parseUsagePercentage(response.headers.get("x-app-usage")) ?? 0,
+      parseUsagePercentage(response.headers.get("x-page-usage")) ?? 0,
+      parseUsagePercentage(response.headers.get("x-business-use-case-usage")) ?? 0
+    );
+    const usageCooldownMs = usageCooldownForPercent(maxUsage);
+    scheduleCooldown(usageCooldownMs);
+
+    const usageBucket = maxUsage >= 95 ? 95 : maxUsage >= 90 ? 90 : maxUsage >= 85 ? 85 : 0;
+    if (usageBucket > 0 && usageBucket !== lastUsageLogBucket) {
+      context.logger.warn("Meta API usage high; slowing request pace.", {
+        usage_percent: maxUsage,
+        cooldown_ms: usageCooldownMs
+      });
+      lastUsageLogBucket = usageBucket;
+    }
+
+    if (usageBucket === 0) {
+      lastUsageLogBucket = 0;
+    }
+  };
+
+  const pruneCache = (): void => {
+    if (getCache.size === 0) {
+      return;
+    }
+
+    const now = Date.now();
+    for (const [key, entry] of getCache.entries()) {
+      if (entry.expiresAt <= now) {
+        getCache.delete(key);
+      }
+    }
+
+    while (getCache.size > getCacheMaxEntries) {
+      const firstKey = getCache.keys().next().value;
+      if (typeof firstKey !== "string") {
+        break;
+      }
+      getCache.delete(firstKey);
+    }
+  };
+
+  const requestOnce: GraphRequestFn = async (accessToken, path, method, params) => {
+    const url = new URL(`${GRAPH_BASE}${path}`);
+    if (method === "GET") {
+      url.search = toQuery({ ...params, access_token: accessToken });
+    }
+
+    await enforceSpacing();
+
+    let response: Response;
+    try {
+      response = await fetchWithTimeout(url, {
+        method,
+        headers: method === "POST" ? { "Content-Type": "application/x-www-form-urlencoded" } : undefined,
+        body: method === "POST" ? toQuery({ ...params, access_token: accessToken }) : undefined
+      });
+    } catch (error) {
+      return toolError(ERROR_CODES.PROVIDER_ERROR, "Meta Graph API request failed", {
+        status: 0,
+        reason: error instanceof Error ? error.message : String(error)
+      });
+    }
+
+    applyResponseSignals(response);
+    const parsed = (await parseJsonResponse(response)) as GraphData | null;
+    const retryAfterMs = parseRetryAfterMs(response.headers.get("retry-after"));
+
+    if (!response.ok) {
+      return toolError(ERROR_CODES.PROVIDER_ERROR, "Meta Graph API request failed", {
+        status: response.status,
+        body: parsed,
+        ...(typeof retryAfterMs === "number" ? { retry_after_ms: retryAfterMs } : {})
+      });
+    }
+
+    return {
+      ok: true,
+      action: "meta.graph.request",
+      data: parsed ?? {}
+    };
+  };
+
+  const requestGetWithRetry = async (accessToken: string, path: string, params: GraphParams): Promise<ToolResult<GraphData>> => {
+    let lastError: ToolError | undefined;
+
+    for (let attempt = 0; attempt <= getRetryMax; attempt += 1) {
+      const result = await requestOnce(accessToken, path, "GET", params);
+      if (result.ok) {
+        return result;
+      }
+
+      lastError = result;
+      const canRetry = attempt < getRetryMax;
+      if (!canRetry || !isTransientGraphError(result)) {
+        return result;
+      }
+
+      const retryAfterMs = readRetryAfterMsFromError(result);
+      const baseDelayMs = Math.min(retryMaxDelayMs, retryBaseDelayMs * 2 ** attempt);
+      const jitterMs = Math.round(baseDelayMs * Math.random() * 0.2);
+      const delayMs = Math.min(retryMaxDelayMs, typeof retryAfterMs === "number" ? retryAfterMs : baseDelayMs + jitterMs);
+      await sleep(Math.max(minRequestIntervalMs, delayMs));
+    }
+
+    return (
+      lastError ??
+      toolError(ERROR_CODES.PROVIDER_ERROR, "Meta Graph API request failed", {
+        status: 0,
+        reason: "Unexpected retry flow exit"
+      })
+    );
+  };
+
+  return async (accessToken, path, method, params) => {
+    if (method !== "GET") {
+      return requestOnce(accessToken, path, method, params);
+    }
+
+    const cacheKey = `${path}?${toStableQuery(params)}#${crypto.createHash("sha256").update(accessToken).digest("hex").slice(0, 12)}`;
+    if (getCacheTtlMs > 0) {
+      pruneCache();
+      const cached = getCache.get(cacheKey);
+      if (cached && cached.expiresAt > Date.now()) {
+        return {
+          ok: true,
+          action: "meta.graph.request",
+          data: cached.data
+        };
+      }
+    }
+
+    const inFlightRequest = inFlightGet.get(cacheKey);
+    if (inFlightRequest) {
+      return inFlightRequest;
+    }
+
+    const requestPromise = requestGetWithRetry(accessToken, path, params).then((result) => {
+      if (result.ok && getCacheTtlMs > 0) {
+        getCache.set(cacheKey, {
+          data: result.data,
+          expiresAt: Date.now() + getCacheTtlMs
+        });
+      }
+
+      return result;
+    }).finally(() => {
+      inFlightGet.delete(cacheKey);
+    });
+
+    inFlightGet.set(cacheKey, requestPromise);
+    return requestPromise;
   };
 };
 
 const graphInsightsRequest = async (
+  graphRequest: GraphRequestFn,
   accessToken: string,
   path: string,
-  params: Record<string, string | number | boolean | undefined>
-): Promise<ToolResult<Record<string, unknown>>> => {
-  let response = await graphRequest(accessToken, path, "GET", params);
-  if (!response.ok && isRateLimitError(response)) {
-    await sleep(INSIGHTS_RETRY_DELAY_MS);
-    response = await graphRequest(accessToken, path, "GET", params);
-  }
+  params: GraphParams
+): Promise<ToolResult<GraphData>> => {
+  const response = await graphRequest(accessToken, path, "GET", params);
 
   if (!response.ok && isMissingInsightsScopeError(response)) {
     return toMissingInsightsScopeError();
@@ -385,9 +703,10 @@ const requireAuth = async (context: ProviderContext): Promise<ToolResult<{ acces
 };
 
 const createMediaContainer = async (
+  graphRequest: GraphRequestFn,
   accessToken: string,
   igUserId: string,
-  payload: Record<string, string | number | boolean | undefined>
+  payload: GraphParams
 ): Promise<ToolResult<{ creationId: string }>> => {
   const created = await graphRequest(accessToken, `/${igUserId}/media`, "POST", payload);
   if (!created.ok) {
@@ -413,6 +732,7 @@ const createMediaContainer = async (
 const sleep = (ms: number) => new Promise((resolve) => setTimeout(resolve, ms));
 
 const waitForContainerReady = async (
+  graphRequest: GraphRequestFn,
   accessToken: string,
   creationId: string,
   options?: { maxAttempts?: number; intervalMs?: number }
@@ -457,6 +777,7 @@ const waitForContainerReady = async (
 };
 
 const publishMediaContainer = async (
+  graphRequest: GraphRequestFn,
   accessToken: string,
   igUserId: string,
   creationId: string
@@ -532,10 +853,11 @@ const readMediaInsightsMetrics = (responseData: Record<string, unknown>): MediaI
 });
 
 const fetchMediaInsightsMetrics = async (
+  graphRequest: GraphRequestFn,
   accessToken: string,
   mediaId: string
 ): Promise<ToolResult<MediaInsightsMetrics>> => {
-  const bulk = await graphInsightsRequest(accessToken, `/${mediaId}/insights`, {
+  const bulk = await graphInsightsRequest(graphRequest, accessToken, `/${mediaId}/insights`, {
     metric: MEDIA_INSIGHT_METRICS.join(",")
   });
 
@@ -557,7 +879,7 @@ const fetchMediaInsightsMetrics = async (
 
   const metrics = emptyMediaInsightsMetrics();
   for (const metric of MEDIA_INSIGHT_METRICS) {
-    const single = await graphInsightsRequest(accessToken, `/${mediaId}/insights`, { metric });
+    const single = await graphInsightsRequest(graphRequest, accessToken, `/${mediaId}/insights`, { metric });
     if (!single.ok) {
       if (isMissingInsightsScopeError(single)) {
         return toMissingInsightsScopeError();
@@ -619,6 +941,8 @@ const toAnalyticsMediaEntry = (value: unknown): AnalyticsMediaEntry | undefined 
 };
 
 export const createMetaByoProvider = (context: ProviderContext): Provider => {
+  const graphRequest = createGraphRequester(context);
+
   const authStart = async (input?: AuthStartInput) => {
     const env = ensureMetaEnv();
     if (isToolError(env)) {
@@ -795,7 +1119,7 @@ export const createMetaByoProvider = (context: ProviderContext): Provider => {
       return mediaRef;
     }
 
-    const container = await createMediaContainer(auth.data.accessToken, auth.data.igUserId, {
+    const container = await createMediaContainer(graphRequest, auth.data.accessToken, auth.data.igUserId, {
       image_url: mediaRef.data.mediaUrl,
       caption: normalizeCaption(input.caption)
     });
@@ -803,7 +1127,7 @@ export const createMetaByoProvider = (context: ProviderContext): Provider => {
       return container;
     }
 
-    const published = await publishMediaContainer(auth.data.accessToken, auth.data.igUserId, container.data.creationId);
+    const published = await publishMediaContainer(graphRequest, auth.data.accessToken, auth.data.igUserId, container.data.creationId);
     if (!published.ok) {
       return published;
     }
@@ -834,7 +1158,7 @@ export const createMetaByoProvider = (context: ProviderContext): Provider => {
       return mediaRef;
     }
 
-    const container = await createMediaContainer(auth.data.accessToken, auth.data.igUserId, {
+    const container = await createMediaContainer(graphRequest, auth.data.accessToken, auth.data.igUserId, {
       media_type: "REELS",
       video_url: mediaRef.data.mediaUrl,
       caption: normalizeCaption(input.caption)
@@ -843,12 +1167,12 @@ export const createMetaByoProvider = (context: ProviderContext): Provider => {
       return container;
     }
 
-    const ready = await waitForContainerReady(auth.data.accessToken, container.data.creationId);
+    const ready = await waitForContainerReady(graphRequest, auth.data.accessToken, container.data.creationId);
     if (!ready.ok) {
       return ready;
     }
 
-    const published = await publishMediaContainer(auth.data.accessToken, auth.data.igUserId, container.data.creationId);
+    const published = await publishMediaContainer(graphRequest, auth.data.accessToken, auth.data.igUserId, container.data.creationId);
     if (!published.ok) {
       return published;
     }
@@ -881,7 +1205,7 @@ export const createMetaByoProvider = (context: ProviderContext): Provider => {
         return mediaRef;
       }
 
-      const child = await createMediaContainer(auth.data.accessToken, auth.data.igUserId, {
+      const child = await createMediaContainer(graphRequest, auth.data.accessToken, auth.data.igUserId, {
         image_url: mediaRef.data.mediaUrl,
         is_carousel_item: true
       });
@@ -890,7 +1214,7 @@ export const createMetaByoProvider = (context: ProviderContext): Provider => {
         return child;
       }
 
-      const childReady = await waitForContainerReady(auth.data.accessToken, child.data.creationId);
+      const childReady = await waitForContainerReady(graphRequest, auth.data.accessToken, child.data.creationId);
       if (!childReady.ok) {
         return childReady;
       }
@@ -898,7 +1222,7 @@ export const createMetaByoProvider = (context: ProviderContext): Provider => {
       childIds.push(child.data.creationId);
     }
 
-    const parent = await createMediaContainer(auth.data.accessToken, auth.data.igUserId, {
+    const parent = await createMediaContainer(graphRequest, auth.data.accessToken, auth.data.igUserId, {
       media_type: "CAROUSEL",
       children: childIds.join(","),
       caption: normalizeCaption(input.caption)
@@ -908,12 +1232,12 @@ export const createMetaByoProvider = (context: ProviderContext): Provider => {
       return parent;
     }
 
-    const parentReady = await waitForContainerReady(auth.data.accessToken, parent.data.creationId);
+    const parentReady = await waitForContainerReady(graphRequest, auth.data.accessToken, parent.data.creationId);
     if (!parentReady.ok) {
       return parentReady;
     }
 
-    const published = await publishMediaContainer(auth.data.accessToken, auth.data.igUserId, parent.data.creationId);
+    const published = await publishMediaContainer(graphRequest, auth.data.accessToken, auth.data.igUserId, parent.data.creationId);
     if (!published.ok) {
       return published;
     }
@@ -1014,7 +1338,7 @@ export const createMetaByoProvider = (context: ProviderContext): Provider => {
             ];
 
       for (const params of attempts) {
-        const metricResponse = await graphInsightsRequest(auth.data.accessToken, `/${auth.data.igUserId}/insights`, {
+        const metricResponse = await graphInsightsRequest(graphRequest, auth.data.accessToken, `/${auth.data.igUserId}/insights`, {
           metric,
           ...params
         });
@@ -1120,7 +1444,7 @@ export const createMetaByoProvider = (context: ProviderContext): Provider => {
       return toolError(ERROR_CODES.PROVIDER_ERROR, "Meta media metadata response missing required fields", mediaMetadata.data);
     }
 
-    const mediaInsights = await fetchMediaInsightsMetrics(auth.data.accessToken, mediaId);
+    const mediaInsights = await fetchMediaInsightsMetrics(graphRequest, auth.data.accessToken, mediaId);
     if (!mediaInsights.ok) {
       return mediaInsights;
     }
@@ -1185,7 +1509,7 @@ export const createMetaByoProvider = (context: ProviderContext): Provider => {
 
     const topPosts: TopPostItem[] = [];
     for (const entry of entries) {
-      const mediaInsights = await fetchMediaInsightsMetrics(auth.data.accessToken, entry.id);
+      const mediaInsights = await fetchMediaInsightsMetrics(graphRequest, auth.data.accessToken, entry.id);
       if (!mediaInsights.ok) {
         return mediaInsights;
       }

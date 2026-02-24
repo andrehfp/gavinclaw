@@ -35,3 +35,11 @@
 - Build in public com resultados reais
 - Indie hacker lifestyle (pai de 2, empreendedor)
 - Hot takes sobre AI vs devs tradicionais
+
+## Preferências de Design (aprovadas)
+- Quote cards: usar sempre o modelo estilo "print do X" com:
+  - fundo preto
+  - avatar do André + nome/@handle
+  - texto grande ocupando boa parte da arte (estilo Justin Welsh)
+  - sem métricas inventadas (likes/views/etc.)
+- Texto "gerado com infomygraphic.com": usar somente em infográficos. Não usar em quote/image/carrossel comum.

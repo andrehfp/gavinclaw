@@ -11,7 +11,7 @@
 |--------|-------|--------|
 | Total insights | 1 | healthy |
 | Categories | 1 | healthy |
-| Last updated | 2.6h ago | healthy |
+| Last updated | 1.1d ago | healthy |
 ## Category Distribution
 
 ```mermaid

@@ -365,183 +365,6 @@ const withResult = async (command: Command, fn: () => Promise<ToolResult<unknown
   }
 };
 
-type MediaListItem = {
-  id?: string;
-  caption?: string;
-  permalink?: string;
-  timestamp?: string;
-};
-
-const normalizeCaptionForDedupe = (value: string): string =>
-  value
-    .normalize("NFKC")
-    .toLowerCase()
-    .replace(/\s+/g, " ")
-    .trim();
-
-const parseIsoTimestamp = (value: string | undefined): number | undefined => {
-  if (!value) {
-    return undefined;
-  }
-
-  const parsed = Date.parse(value);
-  return Number.isFinite(parsed) ? parsed : undefined;
-};
-
-const extractMediaItems = (result: ToolResult<unknown>): MediaListItem[] => {
-  if (!result.ok) {
-    return [];
-  }
-
-  const data = result.data as { items?: unknown };
-  if (!Array.isArray(data?.items)) {
-    return [];
-  }
-
-  return data.items.map((item) => {
-    const record = item as Record<string, unknown>;
-    return {
-      id: typeof record.id === "string" ? record.id : undefined,
-      caption: typeof record.caption === "string" ? record.caption : undefined,
-      permalink: typeof record.permalink === "string" ? record.permalink : undefined,
-      timestamp: typeof record.timestamp === "string" ? record.timestamp : undefined
-    };
-  });
-};
-
-const findRecentCaptionMatch = (items: MediaListItem[], caption: string, windowMinutes: number): MediaListItem | undefined => {
-  if (windowMinutes <= 0) {
-    return undefined;
-  }
-
-  const target = normalizeCaptionForDedupe(caption);
-  if (target.length === 0) {
-    return undefined;
-  }
-
-  const now = Date.now();
-  const windowMs = windowMinutes * 60_000;
-
-  return items.find((item) => {
-    const candidate = normalizeCaptionForDedupe(item.caption ?? "");
-    if (candidate.length === 0 || candidate !== target) {
-      return false;
-    }
-
-    const ts = parseIsoTimestamp(item.timestamp);
-    if (ts === undefined) {
-      return true;
-    }
-
-    return now - ts <= windowMs;
-  });
-};
-
-const extractGraphSubcode = (result: ToolResult<unknown>): number | undefined => {
-  if (result.ok) {
-    return undefined;
-  }
-
-  const details = result.error.details as Record<string, unknown> | undefined;
-  const body = details?.body as Record<string, unknown> | undefined;
-  const graphError = body?.error as Record<string, unknown> | undefined;
-  const raw = graphError?.error_subcode;
-
-  if (typeof raw === "number" && Number.isFinite(raw)) {
-    return raw;
-  }
-
-  if (typeof raw === "string") {
-    const parsed = Number(raw);
-    return Number.isFinite(parsed) ? parsed : undefined;
-  }
-
-  return undefined;
-};
-
-const isAmbiguousPublishError = (result: ToolResult<unknown>): boolean => {
-  if (result.ok) {
-    return false;
-  }
-
-  const message = `${result.error.message} ${JSON.stringify(result.error.details ?? {})}`.toLowerCase();
-  const subcode = extractGraphSubcode(result);
-
-  if (subcode === 2207051) {
-    return false;
-  }
-
-  return (
-    message.includes("aborted") ||
-    message.includes("timeout") ||
-    message.includes("timed out") ||
-    message.includes("media is not ready for publishing") ||
-    message.includes("temporarily unavailable") ||
-    message.includes("try again") ||
-    message.includes("oauthexception")
-  );
-};
-
-const checkDuplicateByCaption = async (
-  provider: Provider,
-  publishAction: "publish.photo" | "publish.video" | "publish.carousel",
-  caption: string,
-  windowMinutes: number
-): Promise<ToolResult<{ matched: boolean; item?: MediaListItem }>> => {
-  const recent = await provider.media.list({ limit: 25 });
-  if (!recent.ok) {
-    return toolError(ERROR_CODES.PROVIDER_ERROR, "Duplicate guard failed: unable to list recent media.", {
-      publish_action: publishAction,
-      guard: "caption-dedupe",
-      cause: recent.error
-    });
-  }
-
-  const match = findRecentCaptionMatch(extractMediaItems(recent), caption, windowMinutes);
-  return {
-    ok: true,
-    action: `${publishAction}.dedupe.check`,
-    data: {
-      matched: Boolean(match),
-      ...(match ? { item: match } : {})
-    }
-  };
-};
-
-const reconcilePublishError = async (
-  provider: Provider,
-  publishAction: "publish.photo" | "publish.video" | "publish.carousel",
-  caption: string | undefined,
-  windowMinutes: number,
-  result: ToolResult<unknown>
-): Promise<ToolResult<unknown>> => {
-  if (result.ok || !caption || windowMinutes <= 0 || !isAmbiguousPublishError(result)) {
-    return result;
-  }
-
-  const recent = await provider.media.list({ limit: 25 });
-  if (!recent.ok) {
-    return result;
-  }
-
-  const match = findRecentCaptionMatch(extractMediaItems(recent), caption, windowMinutes);
-  if (!match) {
-    return result;
-  }
-
-  return {
-    ok: true,
-    action: `${publishAction}.reconciled`,
-    data: {
-      status: "published",
-      reconciled: true,
-      media_id: match.id,
-      permalink: match.permalink,
-      timestamp: match.timestamp
-    }
-  };
-};
-
 const maskSecret = (value: string): string => {
   if (value.length <= 4) {
     return "****";
@@ -2253,6 +2076,7 @@ const createProgram = (): Command => {
                 effective_via: "passthrough",
                 status: flags.dryRun ? "dry-run" : "ready",
                 public_url: source.normalized,
+                url: source.normalized,
                 available_via: availableVia,
                 capabilities
               }
@@ -2316,6 +2140,7 @@ const createProgram = (): Command => {
               effective_via: effectiveVia,
               status: "uploaded",
               public_url: uploaded.data.public_url,
+              url: uploaded.data.public_url,
               available_via: availableVia,
               capabilities,
               ...(effectiveVia === "litterbox" ? { litterbox_expiry: parsedLitterboxExpiry.data } : {}),
@@ -2420,85 +2245,31 @@ const createProgram = (): Command => {
       .description("Publish a photo")
       .requiredOption("--file <file>", "Public URL or file path")
       .option("--caption <caption>", "Caption")
-      .option("--dedupe-window-minutes <minutes>", "Skip publish if same caption exists in recent window", "180")
-      .option("--allow-duplicate", "Disable duplicate guard")
       .option("--provider <provider>", "Provider override")
       .option("--confirm-account <username>", "Hard-check expected @username before publish")
-      .action(
-        async (
-          options: {
-            file: string;
-            caption?: string;
-            dedupeWindowMinutes?: string;
-            allowDuplicate?: boolean;
-            confirmAccount?: string;
-          },
-          command: Command
-        ) => {
-          await withResult(command, async () => {
-            const payload = z
-              .object({
-                file: z.string().trim().min(1),
-                caption: z.string().optional(),
-                dedupeWindowMinutes: z.coerce.number().int().min(0).max(1440).default(180),
-                allowDuplicate: z.boolean().optional().default(false)
-              })
-              .safeParse(options);
-            if (!payload.success) {
-              return toolError(ERROR_CODES.VALIDATION_ERROR, "Invalid publish photo payload", payload.error.flatten());
+      .action(async (options: { file: string; caption?: string; confirmAccount?: string }, command: Command) => {
+        await withResult(command, async () => {
+          const payload = z.object({ file: z.string().trim().min(1), caption: z.string().optional() }).safeParse(options);
+          if (!payload.success) {
+            return toolError(ERROR_CODES.VALIDATION_ERROR, "Invalid publish photo payload", payload.error.flatten());
+          }
+
+          const flags = readFlags(command);
+          const resolved = resolveProviderForCommand(store, flags, command.optsWithGlobals<CommandOptions>(), true);
+          if (!resolved.ok) {
+            return resolved;
+          }
+
+          if (resolved.data.providerName === "meta-byo" && resolved.data.accountName) {
+            const guardrails = await ensurePublishAccountGuardrails(store, resolved.data.accountName, options.confirmAccount);
+            if (!guardrails.ok) {
+              return guardrails;
             }
+          }
 
-            const flags = readFlags(command);
-            const resolved = resolveProviderForCommand(store, flags, command.optsWithGlobals<CommandOptions>(), true);
-            if (!resolved.ok) {
-              return resolved;
-            }
-
-            if (resolved.data.providerName === "meta-byo" && resolved.data.accountName) {
-              const guardrails = await ensurePublishAccountGuardrails(store, resolved.data.accountName, options.confirmAccount);
-              if (!guardrails.ok) {
-                return guardrails;
-              }
-            }
-
-            if (!payload.data.allowDuplicate && payload.data.caption) {
-              const dedupe = await checkDuplicateByCaption(
-                resolved.data.provider,
-                "publish.photo",
-                payload.data.caption,
-                payload.data.dedupeWindowMinutes
-              );
-              if (!dedupe.ok) {
-                return dedupe;
-              }
-
-              if (dedupe.data.matched) {
-                return {
-                  ok: true,
-                  action: "publish.photo.skipped_duplicate",
-                  data: {
-                    status: "skipped_duplicate",
-                    reason: "recent_caption_match",
-                    existing: dedupe.data.item
-                  }
-                };
-              }
-            }
-
-            const publishResult = await resolved.data.provider.publish.photo({
-              file: payload.data.file,
-              caption: payload.data.caption
-            });
-            return reconcilePublishError(
-              resolved.data.provider,
-              "publish.photo",
-              payload.data.caption,
-              payload.data.dedupeWindowMinutes,
-              publishResult
-            );
-          });
-        }
-      )
+          return resolved.data.provider.publish.photo(payload.data);
+        });
+      })
   );
 
   addToolingFlags(
@@ -2507,85 +2278,31 @@ const createProgram = (): Command => {
       .description("Publish a video")
       .requiredOption("--file <file>", "Public URL or file path")
       .option("--caption <caption>", "Caption")
-      .option("--dedupe-window-minutes <minutes>", "Skip publish if same caption exists in recent window", "180")
-      .option("--allow-duplicate", "Disable duplicate guard")
       .option("--provider <provider>", "Provider override")
       .option("--confirm-account <username>", "Hard-check expected @username before publish")
-      .action(
-        async (
-          options: {
-            file: string;
-            caption?: string;
-            dedupeWindowMinutes?: string;
-            allowDuplicate?: boolean;
-            confirmAccount?: string;
-          },
-          command: Command
-        ) => {
-          await withResult(command, async () => {
-            const payload = z
-              .object({
-                file: z.string().trim().min(1),
-                caption: z.string().optional(),
-                dedupeWindowMinutes: z.coerce.number().int().min(0).max(1440).default(180),
-                allowDuplicate: z.boolean().optional().default(false)
-              })
-              .safeParse(options);
-            if (!payload.success) {
-              return toolError(ERROR_CODES.VALIDATION_ERROR, "Invalid publish video payload", payload.error.flatten());
+      .action(async (options: { file: string; caption?: string; confirmAccount?: string }, command: Command) => {
+        await withResult(command, async () => {
+          const payload = z.object({ file: z.string().trim().min(1), caption: z.string().optional() }).safeParse(options);
+          if (!payload.success) {
+            return toolError(ERROR_CODES.VALIDATION_ERROR, "Invalid publish video payload", payload.error.flatten());
+          }
+
+          const flags = readFlags(command);
+          const resolved = resolveProviderForCommand(store, flags, command.optsWithGlobals<CommandOptions>(), true);
+          if (!resolved.ok) {
+            return resolved;
+          }
+
+          if (resolved.data.providerName === "meta-byo" && resolved.data.accountName) {
+            const guardrails = await ensurePublishAccountGuardrails(store, resolved.data.accountName, options.confirmAccount);
+            if (!guardrails.ok) {
+              return guardrails;
             }
+          }
 
-            const flags = readFlags(command);
-            const resolved = resolveProviderForCommand(store, flags, command.optsWithGlobals<CommandOptions>(), true);
-            if (!resolved.ok) {
-              return resolved;
-            }
-
-            if (resolved.data.providerName === "meta-byo" && resolved.data.accountName) {
-              const guardrails = await ensurePublishAccountGuardrails(store, resolved.data.accountName, options.confirmAccount);
-              if (!guardrails.ok) {
-                return guardrails;
-              }
-            }
-
-            if (!payload.data.allowDuplicate && payload.data.caption) {
-              const dedupe = await checkDuplicateByCaption(
-                resolved.data.provider,
-                "publish.video",
-                payload.data.caption,
-                payload.data.dedupeWindowMinutes
-              );
-              if (!dedupe.ok) {
-                return dedupe;
-              }
-
-              if (dedupe.data.matched) {
-                return {
-                  ok: true,
-                  action: "publish.video.skipped_duplicate",
-                  data: {
-                    status: "skipped_duplicate",
-                    reason: "recent_caption_match",
-                    existing: dedupe.data.item
-                  }
-                };
-              }
-            }
-
-            const publishResult = await resolved.data.provider.publish.video({
-              file: payload.data.file,
-              caption: payload.data.caption
-            });
-            return reconcilePublishError(
-              resolved.data.provider,
-              "publish.video",
-              payload.data.caption,
-              payload.data.dedupeWindowMinutes,
-              publishResult
-            );
-          });
-        }
-      )
+          return resolved.data.provider.publish.video(payload.data);
+        });
+      })
   );
 
   addToolingFlags(
@@ -2594,85 +2311,33 @@ const createProgram = (): Command => {
       .description("Publish carousel")
       .requiredOption("--files <files...>", "Public URLs or file paths")
       .option("--caption <caption>", "Caption")
-      .option("--dedupe-window-minutes <minutes>", "Skip publish if same caption exists in recent window", "180")
-      .option("--allow-duplicate", "Disable duplicate guard")
       .option("--provider <provider>", "Provider override")
       .option("--confirm-account <username>", "Hard-check expected @username before publish")
-      .action(
-        async (
-          options: {
-            files: string[];
-            caption?: string;
-            dedupeWindowMinutes?: string;
-            allowDuplicate?: boolean;
-            confirmAccount?: string;
-          },
-          command: Command
-        ) => {
-          await withResult(command, async () => {
-            const payload = z
-              .object({
-                files: z.array(z.string().trim().min(1)).min(2),
-                caption: z.string().optional(),
-                dedupeWindowMinutes: z.coerce.number().int().min(0).max(1440).default(180),
-                allowDuplicate: z.boolean().optional().default(false)
-              })
-              .safeParse(options);
-            if (!payload.success) {
-              return toolError(ERROR_CODES.VALIDATION_ERROR, "Invalid publish carousel payload", payload.error.flatten());
+      .action(async (options: { files: string[]; caption?: string; confirmAccount?: string }, command: Command) => {
+        await withResult(command, async () => {
+          const payload = z
+            .object({ files: z.array(z.string().trim().min(1)).min(2), caption: z.string().optional() })
+            .safeParse(options);
+          if (!payload.success) {
+            return toolError(ERROR_CODES.VALIDATION_ERROR, "Invalid publish carousel payload", payload.error.flatten());
+          }
+
+          const flags = readFlags(command);
+          const resolved = resolveProviderForCommand(store, flags, command.optsWithGlobals<CommandOptions>(), true);
+          if (!resolved.ok) {
+            return resolved;
+          }
+
+          if (resolved.data.providerName === "meta-byo" && resolved.data.accountName) {
+            const guardrails = await ensurePublishAccountGuardrails(store, resolved.data.accountName, options.confirmAccount);
+            if (!guardrails.ok) {
+              return guardrails;
             }
+          }
 
-            const flags = readFlags(command);
-            const resolved = resolveProviderForCommand(store, flags, command.optsWithGlobals<CommandOptions>(), true);
-            if (!resolved.ok) {
-              return resolved;
-            }
-
-            if (resolved.data.providerName === "meta-byo" && resolved.data.accountName) {
-              const guardrails = await ensurePublishAccountGuardrails(store, resolved.data.accountName, options.confirmAccount);
-              if (!guardrails.ok) {
-                return guardrails;
-              }
-            }
-
-            if (!payload.data.allowDuplicate && payload.data.caption) {
-              const dedupe = await checkDuplicateByCaption(
-                resolved.data.provider,
-                "publish.carousel",
-                payload.data.caption,
-                payload.data.dedupeWindowMinutes
-              );
-              if (!dedupe.ok) {
-                return dedupe;
-              }
-
-              if (dedupe.data.matched) {
-                return {
-                  ok: true,
-                  action: "publish.carousel.skipped_duplicate",
-                  data: {
-                    status: "skipped_duplicate",
-                    reason: "recent_caption_match",
-                    existing: dedupe.data.item
-                  }
-                };
-              }
-            }
-
-            const publishResult = await resolved.data.provider.publish.carousel({
-              files: payload.data.files,
-              caption: payload.data.caption
-            });
-            return reconcilePublishError(
-              resolved.data.provider,
-              "publish.carousel",
-              payload.data.caption,
-              payload.data.dedupeWindowMinutes,
-              publishResult
-            );
-          });
-        }
-      )
+          return resolved.data.provider.publish.carousel(payload.data);
+        });
+      })
   );
 
   addToolingFlags(

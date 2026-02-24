@@ -3,7 +3,7 @@
   "total": 627,
   "paying": 29,
   "repeat": 32,
-  "karma": 58,
+  "karma": 74,
   "seo": 3,
   "ig": 1,
   "reddit_posts": [
@@ -736,6 +736,116 @@
       "upvotes": 0,
       "listeners": 0,
       "status": "✅ verified on profile (script returned t1_o6uvnfd)"
+    },
+    {
+      "date": "2026-02-23",
+      "sub": "r/archviz",
+      "post": "What's the best workflow to achieve this kind of rendering ?",
+      "url": "https://old.reddit.com/r/archviz/comments/1rbxcx5/whats_the_best_workflow_to_achieve_this_kind_of/o6xs9ru/",
+      "angle": "Hybrid speed-quality workflow: 2-pass process (camera/light with proxies first, final proxies + imperfections second), clear lighting hierarchy (sun key + HDRI fill), and 2D people composited in post with contact shadows to keep render times low while retaining high-end output.",
+      "upvotes": 0,
+      "listeners": 0,
+      "status": "✅ verified on profile (script returned t1_o6xs9ru)"
+    },
+    {
+      "date": "2026-02-23",
+      "sub": "r/InteriorDesign",
+      "post": "Kitchen layout",
+      "url": "https://old.reddit.com/r/InteriorDesign/comments/1rb68yj/kitchen_layout/o6xs9uv/",
+      "angle": "Kept layout but optimized function: enforce ~90cm prep zone between sink and range, create fridge landing zone, and reduce heaviness on window wall by removing full uppers (or keeping only one light shelf near hood side).",
+      "upvotes": 0,
+      "listeners": 0,
+      "status": "✅ verified on profile (script returned t1_o6xs9uv)"
+    },
+    {
+      "date": "2026-02-23",
+      "sub": "r/archviz",
+      "post": "REPLY — How has AI actually integrated into your archviz workflow?",
+      "url": "https://old.reddit.com/r/archviz/comments/1rbc5ge/how_has_ai_actually_integrated_into_your_archviz/o6xsdfv/",
+      "angle": "Reply with operational AI guardrails for pro work: lock geometry/camera from base 3D render, constrain AI to controlled passes, and reject any output that changes perspective/edge logic via strict A/B check.",
+      "upvotes": 0,
+      "listeners": 0,
+      "status": "✅ verified on profile (script returned t1_o6xsdfv)"
+    },
+    {
+      "date": "2026-02-23",
+      "sub": "r/archviz",
+      "post": "Help me choose GPU for ArchViz – 3060 12GB vs 4060 8GB vs 4060 Ti 16GB",
+      "url": "https://old.reddit.com/r/archviz/comments/1rcivwu/help_me_choose_gpu_for_archviz_3060_12gb_vs_4060/o6ylt5e/",
+      "angle": "Practical GPU choice for 2026 archviz: avoid 4060 8GB bottleneck for heavier real-time scenes, prefer 4060 Ti 16GB when possible, and on tighter budget prefer 3060 12GB over 4060 8GB due to VRAM headroom.",
+      "upvotes": 0,
+      "listeners": 0,
+      "status": "✅ verified on profile (script returned t1_o6ylt5e)"
+    },
+    {
+      "date": "2026-02-23",
+      "sub": "r/InteriorDesign",
+      "post": "Help with layout if new living room",
+      "url": "https://old.reddit.com/r/InteriorDesign/comments/1raw4ad/help_with_layout_if_new_living_room/o6ylt9h/",
+      "angle": "Validated TV-on-wall-A plan while improving flow: float sofa opposite, preserve clear stair-to-window circulation path, keep visual openness with low-back sofa, and convert fireplace corner into functional secondary seating.",
+      "upvotes": 0,
+      "listeners": 0,
+      "status": "✅ verified on profile (script returned t1_o6ylt9h)"
+    },
+    {
+      "date": "2026-02-23",
+      "sub": "r/archviz",
+      "post": "Arch viz in trouble because of AI?",
+      "url": "https://old.reddit.com/r/archviz/comments/1rcnimz/arch_viz_in_trouble_because_of_ai/o7014oc/",
+      "angle": "Positioned AI impact as market segmentation: commodity concept images vs high-control, revision-heavy, technically accurate production visuals; advised pairing core 3D fundamentals with realtime tools and value framing around client decision speed.",
+      "upvotes": 0,
+      "listeners": 0,
+      "status": "✅ verified on profile (script returned t1_o7014oc)"
+    },
+    {
+      "date": "2026-02-23",
+      "sub": "r/DesignMyRoom",
+      "post": "Help me choose a color! Last pic is inspo",
+      "url": "https://old.reddit.com/r/DesignMyRoom/comments/1rcnmq4/help_me_choose_a_color_last_pic_is_inspo/o7014wh/",
+      "angle": "Color-correction guidance for mauve bedroom palette: shift warmer/greyer at same value depth, test large wall patches, and compare morning daylight vs lamp-lit night read before final selection.",
+      "upvotes": 0,
+      "listeners": 0,
+      "status": "✅ verified on profile (script returned t1_o7014wh)"
+    },
+    {
+      "date": "2026-02-23",
+      "sub": "r/InteriorDesign",
+      "post": "REPLY — Kitchen layout",
+      "url": "https://old.reddit.com/r/InteriorDesign/comments/1rb68yj/kitchen_layout/o7018yv/",
+      "angle": "Follow-up reply clarifying shelf placement: keep window wall visually light, use limited narrow shelves near hood but outside grease zone, and prioritize closed storage on non-window wall for practical balance.",
+      "upvotes": 0,
+      "listeners": 0,
+      "status": "✅ verified on profile (script returned t1_o7018yv)"
+    },
+    {
+      "date": "2026-02-23",
+      "sub": "r/archviz",
+      "post": "New concept project- Interior Archviz",
+      "url": "https://old.reddit.com/r/archviz/comments/1rces6u/new_concept_project_interior_archviz/o71eebx/",
+      "angle": "Constructive realism feedback on otherwise strong interior render set: introduce subtle roughness variation across wood surfaces and slightly lift crushed shadow regions to preserve contrast while improving material readability.",
+      "upvotes": 0,
+      "listeners": 0,
+      "status": "✅ verified on profile (script returned t1_o71eebx)"
+    },
+    {
+      "date": "2026-02-23",
+      "sub": "r/DesignMyRoom",
+      "post": "Where does the desk go?",
+      "url": "https://old.reddit.com/r/DesignMyRoom/comments/1rcrero/where_does_the_desk_go/o71eegj/",
+      "angle": "Maintained preferred desk orientation while reducing clutter: cable tray + leg sleeve + floor raceway approach, with secondary spatial tweaks (slimmer chair / shallower shelf depth) to recover perceived room size.",
+      "upvotes": 0,
+      "listeners": 0,
+      "status": "✅ verified on profile (script returned t1_o71eegj)"
+    },
+    {
+      "date": "2026-02-23",
+      "sub": "r/archviz",
+      "post": "REPLY — What's the best workflow to achieve this kind of rendering ?",
+      "url": "https://old.reddit.com/r/archviz/comments/1rbxcx5/whats_the_best_workflow_to_achieve_this_kind_of/o71ei0e/",
+      "angle": "Short follow-up reply to keep thread engagement warm and invite iterative update after implementing lighting/material workflow tips.",
+      "upvotes": 0,
+      "listeners": 0,
+      "status": "✅ verified on profile (script returned t1_o71ei0e)"
     }
   ],
   "ig_calendar": [

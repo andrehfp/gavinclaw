@@ -42,6 +42,11 @@ If you want a strict app/page creation walkthrough, start here:
 | `IG_META_CLIENT_SECRET` | App Dashboard -> `Settings` -> `Basic` -> `App Secret` |
 | `IG_META_REDIRECT_URI` | `Facebook Login` -> `Settings` -> `Valid OAuth Redirect URIs` |
 
+Optional rate-limit guardrails:
+- `IG_META_MIN_REQUEST_INTERVAL_MS` (default `0`)
+- `IG_META_GET_RETRY_MAX` (default `2`, GET-only)
+- `IG_META_GET_CACHE_TTL_MS` (default `3000`)
+
 Use this redirect URI unless you need a different port:
 `http://localhost:8788/callback`
 

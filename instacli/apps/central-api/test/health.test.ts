@@ -2,6 +2,7 @@ import { afterAll, beforeAll, describe, expect, it } from "vitest";
 import { buildServer } from "../src/server.js";
 
 describe("central-api", () => {
+  process.env.IG_CENTRAL_SIGNING_SECRET = process.env.IG_CENTRAL_SIGNING_SECRET ?? "0123456789abcdef0123456789abcdef";
   const app = buildServer();
 
   beforeAll(async () => {

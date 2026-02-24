@@ -29,6 +29,23 @@
 - "Por que parei de usar n8n" (depende gravação)
 - "Cortei custos Vercel" (depende dados)
 
+## 🆕 Semana OpenClaw (base: vídeo + Job 60)
+
+| Data | Horário | Formato | Tema | Objetivo |
+|------|---------|---------|------|----------|
+| 24/02 | 09h | Carrossel (7 slides) | "Como configuro meus modelos: Opus, Haiku, Codex" | Educação + autoridade |
+| 24/02 | 20h | Reel | "Economizei 50% no custo de imagem com IA" | Prova de resultado |
+| 25/02 | 09h | Quote Card | "Você não precisa de 10 agentes, precisa de 1 bom sistema" | Alcance + compartilhamento |
+| 25/02 | 20h | Reel | "YouTube → ViralClaw → Shorts → Instagram no automático" | Bastidores/praticidade |
+| 26/02 | 09h | Carrossel (6 slides) | "Como eu transformo 1 vídeo em 15+ conteúdos" | Framework replicável |
+| 26/02 | 20h | Reel | "Dica de ouro: usar Gemini como motor de contexto" | Insight técnico rápido |
+| 27/02 | 09h | Imagem + legenda | "Meu setup de conteúdo: simples, barato e consistente" | Posicionamento |
+| 27/02 | 20h | Reel | "Virada no Instagram com automação" | Prova social |
+| 28/02 | 09h | Carrossel (5 slides) | "Erros que cometi tentando automatizar conteúdo" | Humanização |
+| 28/02 | 20h | Reel | "Terror do LinkedIn" (hook + learnings) | Topo de funil |
+| 01/03 | 09h | Quote Card | "Sem distribuição, bom conteúdo é hobby" | Reforço de tese |
+| 02/03 | 09h | Carrossel (6 slides) | "Resumo da semana: o que performou e por quê" | Fechamento + engajamento |
+
 ## Regras
 - Máx 2 posts/dia, 6h intervalo mínimo
 - Warm Editorial pra carrossel e quote cards
@@ -37,4 +54,4 @@
 - Sempre aprovar com André antes de postar (exceto reels já aprovados)
 
 ---
-*Atualizado: 2026-02-16 10:12*
+*Atualizado: 2026-02-23 14:02*

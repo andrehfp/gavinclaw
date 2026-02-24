@@ -3,20 +3,19 @@
 > "Como você se apresenta diferente numa entrevista de emprego vs num churrasco.
 > Mesma pessoa, contexto diferente." — Hormozi
 
-## LinkedIn 🔵
+## Instagram Feed 📸
 - **Idioma**: PT-BR informal ("você", nunca "tu")
-- **Tom**: Profissional mas humano. Storytelling. Vulnerabilidade calculada.
+- **Tom**: Pessoal, visual e conversacional. Menos corporativo, mais bastidor real.
 - **Formato**:
-  - Hook em 3 linhas (antes do "ver mais")
+  - Primeira linha precisa segurar atenção
   - Parágrafos curtos (1-2 frases)
-  - Muito espaço em branco
-  - 800-1500 caracteres ideal
-  - Sem hashtags no corpo (só no perfil)
-- **Estrutura**: Trailer → Meat → Summary + CTC (call to comment)
-- **O que funciona**: Histórias pessoais, lições aprendidas, bastidores do build, admissões de falha
-- **O que NÃO funciona**: Listas genéricas, conselhos não solicitados, "How To" sem evidência
-- **CTA preferido**: Pergunta que gera comentário ("Qual foi sua experiência com X?")
-- **Frequência**: 3-5 posts/semana
+  - 500-1200 caracteres funciona bem
+  - 5-10 hashtags no fim (ou no 1º comentário)
+- **Estrutura**: Hook → História/insight → Fechamento + CTA
+- **O que funciona**: Bastidores, antes/depois, mini-estudos de caso, erros e aprendizados
+- **O que NÃO funciona**: Texto genérico sem imagem forte, linguagem corporativa, CTA confuso
+- **CTA preferido**: "salva esse post" / "manda pra alguém" / pergunta simples para comentário
+- **Frequência**: 4-7 posts/semana
 
 ## Twitter/X 🐦
 - **Idioma**: English

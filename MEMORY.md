@@ -10,7 +10,10 @@
 - **MoldaSpace is #1 priority.** Other projects (Bboox, ViralClaw, Questiono) come after.
 
 ## Current Blockers
-- **MicroSaaS courses** - transcription pending, needs André's action
+- Nenhum blocker crítico ativo registrado no momento.
+
+## Pausado por decisão do André
+- **MicroSaaS courses** - transcrição adiada ("esquece por agora", 2026-02-23)
 
 ## Cancelled/Dropped
 - ~~OpenNode account~~ - removed from blockers (not related to MoldaSpace)

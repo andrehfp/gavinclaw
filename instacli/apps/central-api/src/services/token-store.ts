@@ -1,4 +1,5 @@
 import crypto from "node:crypto";
+import { createSignedToken, verifySignedToken } from "./token-signing.js";
 
 type SessionData = {
   tenantId: string;
@@ -6,50 +7,41 @@ type SessionData = {
   expiresAt: number;
 };
 
+type SessionClaims = {
+  typ: "session";
+  tenantId: string;
+  iat: number;
+  exp: number;
+  jti: string;
+};
+
 export interface TokenStore {
   createSession(tenantId: string): { sessionToken: string; expiresAt: number };
   getSession(token: string): SessionData | undefined;
 }
 
-export class InMemoryTokenStore implements TokenStore {
-  private readonly sessions = new Map<string, SessionData>();
-  private readonly maxSessions: number;
+const DEFAULT_SESSION_TTL_MS = 1000 * 60 * 60 * 24;
 
-  public constructor(maxSessions = 10_000) {
-    this.maxSessions = Math.max(1, maxSessions);
-  }
+export class SignedTokenStore implements TokenStore {
+  private readonly signingSecret: string;
+  private readonly sessionTtlMs: number;
 
-  private pruneExpired(now = Date.now()): void {
-    for (const [token, session] of this.sessions.entries()) {
-      if (session.expiresAt <= now) {
-        this.sessions.delete(token);
-      }
-    }
-  }
-
-  private trimToLimit(): void {
-    while (this.sessions.size >= this.maxSessions) {
-      const oldestToken = this.sessions.keys().next().value;
-      if (!oldestToken) {
-        break;
-      }
-      this.sessions.delete(oldestToken);
-    }
+  public constructor(signingSecret: string, sessionTtlMs = DEFAULT_SESSION_TTL_MS) {
+    this.signingSecret = signingSecret;
+    this.sessionTtlMs = Math.max(1, sessionTtlMs);
   }
 
   public createSession(tenantId: string): { sessionToken: string; expiresAt: number } {
     const now = Date.now();
-    this.pruneExpired(now);
-    this.trimToLimit();
-
-    const sessionToken = crypto.randomBytes(32).toString("base64url");
-    const expiresAt = now + 1000 * 60 * 60 * 24;
-
-    this.sessions.set(sessionToken, {
+    const expiresAt = now + this.sessionTtlMs;
+    const claims: SessionClaims = {
+      typ: "session",
       tenantId,
-      createdAt: now,
-      expiresAt
-    });
+      iat: now,
+      exp: expiresAt,
+      jti: crypto.randomBytes(24).toString("base64url")
+    };
+    const sessionToken = createSignedToken(claims, this.signingSecret);
 
     return {
       sessionToken,
@@ -58,13 +50,27 @@ export class InMemoryTokenStore implements TokenStore {
   }
 
   public getSession(token: string): SessionData | undefined {
-    this.pruneExpired();
-
-    const session = this.sessions.get(token);
-    if (!session) {
+    const claims = verifySignedToken<SessionClaims>(token, this.signingSecret);
+    if (!claims) {
       return undefined;
     }
 
-    return session;
+    if (claims.typ !== "session" || typeof claims.tenantId !== "string") {
+      return undefined;
+    }
+
+    if (!Number.isFinite(claims.iat) || !Number.isFinite(claims.exp)) {
+      return undefined;
+    }
+
+    if (claims.exp <= Date.now()) {
+      return undefined;
+    }
+
+    return {
+      tenantId: claims.tenantId,
+      createdAt: claims.iat,
+      expiresAt: claims.exp
+    };
   }
 }
