@@ -5,6 +5,17 @@ export const oauthCallbackSchema = z.object({
   state: z.string().min(1)
 });
 
+export const oauthCallbackQuerySchema = z.object({
+  code: z.string().min(1).optional(),
+  state: z.string().min(1).optional(),
+  error: z.string().min(1).optional(),
+  error_description: z.string().min(1).optional()
+});
+
+export const bootstrapExchangeSchema = z.object({
+  bootstrap_code: z.string().min(1)
+});
+
 export const publishPhotoSchema = z.object({
   file: z.string().min(1),
   caption: z.string().optional()

@@ -1,8 +1,17 @@
 import crypto from "node:crypto";
 import type { FastifyInstance, FastifyReply, FastifyRequest } from "fastify";
 import { z } from "zod";
-import { commentsReplySchema, oauthCallbackSchema, publishCarouselSchema, publishPhotoSchema, publishVideoSchema } from "../schemas/common.js";
+import {
+  bootstrapExchangeSchema,
+  commentsReplySchema,
+  oauthCallbackQuerySchema,
+  oauthCallbackSchema,
+  publishCarouselSchema,
+  publishPhotoSchema,
+  publishVideoSchema
+} from "../schemas/common.js";
 import { buildOauthLoginUrl, exchangeOauthCode, readOauthConfig } from "../services/oauth-client.js";
+import { OneTimeBootstrapStore } from "../services/bootstrap-store.js";
 import { FileRateLimiter } from "../services/rate-limiter.js";
 import { createSignedToken, verifySignedToken } from "../services/token-signing.js";
 import type { TokenStore } from "../services/token-store.js";
@@ -22,12 +31,135 @@ type OauthStateClaims = {
   nonce: string;
 };
 
+type BootstrapProfile = {
+  igAccountId: string;
+  igUsername?: string;
+  pageId: string;
+  pageName: string;
+  pageAccessToken: string;
+  discoveredPages: Array<{
+    page_id: string;
+    page_name: string;
+    ig_account_id?: string;
+    ig_username?: string;
+  }>;
+};
+
+const GRAPH_BASE = "https://graph.facebook.com/v20.0";
+
 const parsePositiveInt = (value: string | undefined, fallback: number): number => {
   if (!value) {
     return fallback;
   }
   const parsed = Number.parseInt(value, 10);
   return Number.isInteger(parsed) && parsed > 0 ? parsed : fallback;
+};
+
+const isRecord = (value: unknown): value is Record<string, unknown> => typeof value === "object" && value !== null;
+
+const getString = (value: unknown): string | undefined =>
+  typeof value === "string" && value.trim().length > 0 ? value.trim() : undefined;
+
+const parseJsonRecord = async (response: Response): Promise<Record<string, unknown> | undefined> => {
+  try {
+    const raw = (await response.json()) as unknown;
+    return isRecord(raw) ? raw : undefined;
+  } catch {
+    return undefined;
+  }
+};
+
+const graphGet = async (
+  path: string,
+  accessToken: string
+): Promise<{ ok: true; data: Record<string, unknown> } | { ok: false; status: number; details?: unknown }> => {
+  const url = new URL(`${GRAPH_BASE}${path}`);
+  url.searchParams.set("access_token", accessToken);
+
+  let response: Response;
+  try {
+    response = await fetch(url, { method: "GET", headers: { Accept: "application/json" } });
+  } catch (error) {
+    return {
+      ok: false,
+      status: 502,
+      details: { reason: error instanceof Error ? error.message : String(error) }
+    };
+  }
+
+  const parsed = await parseJsonRecord(response);
+  if (!response.ok) {
+    return { ok: false, status: response.status, details: { status: response.status, body: parsed } };
+  }
+
+  return { ok: true, data: parsed ?? {} };
+};
+
+const discoverBootstrapProfile = async (
+  userAccessToken: string
+): Promise<{ ok: true; profile: BootstrapProfile } | { ok: false; status: number; message: string; details?: unknown }> => {
+  const accounts = await graphGet("/me/accounts?fields=id,name,access_token", userAccessToken);
+  if (!accounts.ok) {
+    return {
+      ok: false,
+      status: accounts.status,
+      message: "Failed to list Facebook Pages for this login.",
+      details: accounts.details
+    };
+  }
+
+  const rows = Array.isArray(accounts.data.data) ? accounts.data.data : [];
+  const discoveredPages: BootstrapProfile["discoveredPages"] = [];
+
+  for (const row of rows) {
+    if (!isRecord(row)) {
+      continue;
+    }
+
+    const pageId = getString(row.id);
+    const pageName = getString(row.name) ?? "Untitled Page";
+    const pageAccessToken = getString(row.access_token);
+    if (!pageId || !pageAccessToken) {
+      continue;
+    }
+
+    const pageInfo = await graphGet(`/${pageId}?fields=instagram_business_account{id,username}`, pageAccessToken);
+    if (!pageInfo.ok) {
+      discoveredPages.push({ page_id: pageId, page_name: pageName });
+      continue;
+    }
+
+    const igNode = isRecord(pageInfo.data.instagram_business_account) ? pageInfo.data.instagram_business_account : undefined;
+    const igAccountId = getString(igNode?.id);
+    const igUsername = getString(igNode?.username);
+    discoveredPages.push({
+      page_id: pageId,
+      page_name: pageName,
+      ...(igAccountId ? { ig_account_id: igAccountId } : {}),
+      ...(igUsername ? { ig_username: igUsername } : {})
+    });
+
+    if (igAccountId) {
+      return {
+        ok: true,
+        profile: {
+          igAccountId,
+          igUsername,
+          pageId,
+          pageName,
+          pageAccessToken,
+          discoveredPages
+        }
+      };
+    }
+  }
+
+  return {
+    ok: false,
+    status: 422,
+    message: "No Facebook Page connected to an Instagram Professional account was found.",
+    details: { discovered_pages: discoveredPages }
+  };
 };
 
 const unauthorized = (reply: FastifyReply) =>
@@ -88,10 +220,16 @@ export const registerRoutes = (
   const rateLimitMax = parsePositiveInt(process.env.IG_CENTRAL_RATE_LIMIT_MAX, 120);
   const rateLimitWindowMs = parsePositiveInt(process.env.IG_CENTRAL_RATE_LIMIT_WINDOW_MS, 60_000);
   const oauthStateTtlMs = parsePositiveInt(process.env.IG_CENTRAL_OAUTH_STATE_TTL_MS, 10 * 60_000);
+  const bootstrapTtlMs = parsePositiveInt(process.env.IG_CENTRAL_BOOTSTRAP_TTL_MS, 5 * 60_000);
+  const bootstrapMaxCodes = parsePositiveInt(process.env.IG_CENTRAL_BOOTSTRAP_MAX_CODES, 10_000);
   const rateLimiter = new FileRateLimiter({
     max: rateLimitMax,
     windowMs: rateLimitWindowMs,
     filePath: process.env.IG_CENTRAL_RATE_LIMIT_FILE
+  });
+  const bootstrapStore = new OneTimeBootstrapStore({
+    ttlMs: bootstrapTtlMs,
+    maxEntries: bootstrapMaxCodes
   });
 
   const issueOauthState = (): string => {
@@ -118,6 +256,85 @@ export const registerRoutes = (
     }
 
     return Number.isFinite(parsed.exp) && parsed.exp > Date.now();
+  };
+
+  const handleOauthCodeExchange = async (
+    payload: z.infer<typeof oauthCallbackSchema>
+  ): Promise<
+    | { ok: true; accessToken: string; accessTokenExpiresAt?: number; tenantId: string }
+    | { ok: false; status: number; code: string; message: string; details?: unknown }
+  > => {
+    if (!isOauthStateValid(payload.state)) {
+      return {
+        ok: false,
+        status: 400,
+        code: "VALIDATION_ERROR",
+        message: "Invalid or expired oauth state"
+      };
+    }
+
+    const oauthConfig = readOauthConfig();
+    if (!oauthConfig.ok) {
+      return {
+        ok: false,
+        status: 503,
+        code: "CONFIG_ERROR",
+        message: oauthConfig.message
+      };
+    }
+
+    const exchanged = await exchangeOauthCode(oauthConfig.config, payload.code);
+    if (!exchanged.ok) {
+      return {
+        ok: false,
+        status: exchanged.status,
+        code: exchanged.status === 401 ? "AUTH_REQUIRED" : "PROVIDER_ERROR",
+        message: exchanged.message,
+        details: exchanged.details
+      };
+    }
+
+    return {
+      ok: true,
+      accessToken: exchanged.accessToken,
+      accessTokenExpiresAt: exchanged.accessTokenExpiresAt,
+      tenantId: exchanged.tenantId
+    };
+  };
+
+  const issueBootstrapCode = async (
+    accessToken: string,
+    tenantId: string
+  ): Promise<
+    | { ok: true; bootstrapCode: string; expiresAt: number; profile: BootstrapProfile }
+    | { ok: false; status: number; code: string; message: string; details?: unknown }
+  > => {
+    const discovered = await discoverBootstrapProfile(accessToken);
+    if (!discovered.ok) {
+      return {
+        ok: false,
+        status: discovered.status,
+        code: "PROVIDER_ERROR",
+        message: discovered.message,
+        details: discovered.details
+      };
+    }
+
+    const issued = bootstrapStore.issue({
+      tenantId,
+      igAccountId: discovered.profile.igAccountId,
+      igUsername: discovered.profile.igUsername,
+      pageId: discovered.profile.pageId,
+      pageName: discovered.profile.pageName,
+      pageAccessToken: discovered.profile.pageAccessToken
+    });
+
+    return {
+      ok: true,
+      bootstrapCode: issued.bootstrapCode,
+      expiresAt: issued.expiresAt,
+      profile: discovered.profile
+    };
   };
 
   app.addHook("onRequest", async (request, reply) => {
@@ -200,47 +417,123 @@ export const registerRoutes = (
       });
     }
 
-    if (!isOauthStateValid(parsed.data.state)) {
-      return reply.status(400).send({
-        ok: false,
-        error: {
-          code: "VALIDATION_ERROR",
-          message: "Invalid or expired oauth state"
-        }
-      });
-    }
-
-    const oauthConfig = readOauthConfig();
-    if (!oauthConfig.ok) {
-      return reply.status(503).send({
-        ok: false,
-        error: {
-          code: "CONFIG_ERROR",
-          message: oauthConfig.message
-        }
-      });
-    }
-
-    const exchanged = await exchangeOauthCode(oauthConfig.config, parsed.data.code);
+    const exchanged = await handleOauthCodeExchange(parsed.data);
     if (!exchanged.ok) {
       return reply.status(exchanged.status).send({
         ok: false,
         error: {
-          code: exchanged.status === 401 ? "AUTH_REQUIRED" : "PROVIDER_ERROR",
+          code: exchanged.code,
           message: exchanged.message,
-          details: exchanged.details
+          ...(exchanged.details ? { details: exchanged.details } : {})
         }
       });
     }
 
     const session = tokenStore.createSession(exchanged.tenantId);
+    const bootstrap = await issueBootstrapCode(exchanged.accessToken, exchanged.tenantId);
 
     return {
       ok: true,
       session_token: session.sessionToken,
       access_token: exchanged.accessToken,
       expires_at: session.expiresAt,
-      access_token_expires_at: exchanged.accessTokenExpiresAt
+      access_token_expires_at: exchanged.accessTokenExpiresAt,
+      ...(bootstrap.ok
+        ? {
+            bootstrap_code: bootstrap.bootstrapCode,
+            bootstrap_expires_at: bootstrap.expiresAt,
+            bootstrap_profile: {
+              ig_account_id: bootstrap.profile.igAccountId,
+              ig_username: bootstrap.profile.igUsername,
+              page_id: bootstrap.profile.pageId,
+              page_name: bootstrap.profile.pageName
+            }
+          }
+        : {})
+    };
+  });
+
+  app.get("/oauth/callback", async (request, reply) => {
+    const parsed = oauthCallbackQuerySchema.safeParse(request.query ?? {});
+    if (!parsed.success) {
+      return reply.type("text/plain; charset=utf-8").status(400).send("Invalid OAuth callback query.");
+    }
+
+    const query = parsed.data;
+    const oauthError = query.error_description ?? query.error;
+    if (oauthError) {
+      return reply.type("text/plain; charset=utf-8").status(400).send(`Facebook login failed: ${oauthError}`);
+    }
+
+    if (!query.code || !query.state) {
+      return reply.type("text/plain; charset=utf-8").status(400).send("Missing OAuth code/state.");
+    }
+
+    const exchanged = await handleOauthCodeExchange({ code: query.code, state: query.state });
+    if (!exchanged.ok) {
+      return reply.type("text/plain; charset=utf-8").status(exchanged.status).send(`Login failed: ${exchanged.message}`);
+    }
+
+    const bootstrap = await issueBootstrapCode(exchanged.accessToken, exchanged.tenantId);
+    if (!bootstrap.ok) {
+      return reply
+        .type("text/plain; charset=utf-8")
+        .status(bootstrap.status)
+        .send(`Login ok, but setup failed: ${bootstrap.message}. Check Instagram/Page linkage and try again.`);
+    }
+
+    const expiresAtIso = new Date(bootstrap.expiresAt).toISOString();
+    return reply
+      .type("text/plain; charset=utf-8")
+      .status(200)
+      .send(
+        [
+          "Login completed.",
+          "",
+          `Bootstrap code: ${bootstrap.bootstrapCode}`,
+          `Expires at: ${expiresAtIso}`,
+          "",
+          "Run this in your agent terminal:",
+          `instacli setup central-bootstrap --code ${bootstrap.bootstrapCode} --json --quiet`
+        ].join("\n")
+      );
+  });
+
+  app.post("/bootstrap/exchange", async (request, reply) => {
+    const parsed = bootstrapExchangeSchema.safeParse(request.body);
+    if (!parsed.success) {
+      return reply.status(400).send({
+        ok: false,
+        error: {
+          code: "VALIDATION_ERROR",
+          message: "Invalid bootstrap exchange payload",
+          details: parsed.error.flatten()
+        }
+      });
+    }
+
+    const bootstrap = bootstrapStore.consume(parsed.data.bootstrap_code);
+    if (!bootstrap) {
+      return reply.status(404).send({
+        ok: false,
+        error: {
+          code: "AUTH_REQUIRED",
+          message: "Invalid, expired, or already used bootstrap code"
+        }
+      });
+    }
+
+    const session = tokenStore.createSession(bootstrap.tenantId);
+    return {
+      ok: true,
+      provider: "meta-byo",
+      ig_account_id: bootstrap.igAccountId,
+      ig_username: bootstrap.igUsername,
+      page_id: bootstrap.pageId,
+      page_name: bootstrap.pageName,
+      page_access_token: bootstrap.pageAccessToken,
+      session_token: session.sessionToken,
+      expires_at: session.expiresAt
     };
   });
 

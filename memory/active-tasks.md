@@ -1,5 +1,17 @@
 # Active Tasks
 
+## CURRENT (2026-02-24)
+
+### #ControlPlane - AI Governance Gateway (novo produto)
+**Objetivo:** validar oportunidade enterprise para governança de chat/agentes IA (controle, policy, HITL, auditoria)
+**Status:** estratégia + pesquisa + PRD + assets comerciais prontos
+**Entregáveis:**
+- `output/MARKET-RESEARCH-PRD-ControlPlane-AI.md`
+- `output/PITCH-ControlPlane-AI.md`
+- `output/TEC-SPEC-ControlPlane-AI-v1.md`
+- `output/controlplane/*` (exec summary, GTM playbook, sales assets, SOW piloto, plano MVP 8 semanas)
+**Próximo:** montar lista de 20 contas Tier A + iniciar outreach para 3 calls de discovery
+
 ## CURRENT (2026-02-23)
 
 ### #Linear - MoldaSpace Ops no Linear

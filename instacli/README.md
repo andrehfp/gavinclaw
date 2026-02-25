@@ -8,6 +8,7 @@ Monorepo `pnpm` + `turbo` for an agent-friendly Instagram CLI.
 - `packages/provider-meta-byo`: direct Meta Graph API provider
 - `packages/provider-central`: provider for central backend
 - `apps/central-api`: minimal Fastify backend scaffold
+- `apps/landing`: lightweight login frontend for Railway
 
 ## Setup
 ```bash
@@ -159,7 +160,7 @@ Terminal 2:
 curl -s http://127.0.0.1:8787/health
 START=$(curl -s -X POST http://127.0.0.1:8787/oauth/start)
 STATE=$(echo "$START" | jq -r '.state')
-# Use a real authorization code from your configured OAuth provider:
+# Use a real authorization code from Facebook Login (default provider):
 TOKEN=$(curl -s -X POST http://127.0.0.1:8787/oauth/callback \
   -H "content-type: application/json" \
   -d "{\"code\":\"<oauth-code>\",\"state\":\"$STATE\"}" | jq -r '.session_token')
@@ -173,8 +174,34 @@ curl -s -X POST http://127.0.0.1:8787/publish/photo \
 ```
 
 Note:
-- `central` auth now validates OAuth codes against the configured token endpoint.
+- `central` auth defaults to Facebook Login (`IG_CENTRAL_OAUTH_PROVIDER=facebook`) and validates OAuth codes against the token endpoint.
+- Set `IG_CENTRAL_OAUTH_PROVIDER=generic` plus OAuth URLs to use another provider.
+- `GET /oauth/callback` now issues one-time `bootstrap_code` values for login-only onboarding.
 - Real end-to-end publish/auth is via `meta-byo` with real Meta env vars and redirect configuration.
+
+### 4. Login-only onboarding with bootstrap code
+1. Send user to your landing login flow (Facebook Login) that ends at `IG_CENTRAL_REDIRECT_URI`.
+2. After successful login, callback page shows:
+   - `Bootstrap code: IGB-...`
+3. In the user's agent terminal:
+```bash
+instacli setup central-bootstrap --code IGB-XXXXXXX --json --quiet
+```
+4. CLI exchanges the code with Central API and writes local `meta-byo` config/token.
+
+### 5. Local landing frontend
+Terminal 1:
+```bash
+pnpm --filter @instacli/central-api dev
+```
+Terminal 2:
+```bash
+LANDING_API_BASE_URL=http://127.0.0.1:8787 pnpm --filter @instacli/landing dev
+```
+Open:
+```text
+http://127.0.0.1:3000
+```
 
 ## Agent mode contract
 Always prefer:
@@ -273,6 +300,8 @@ ig analytics summary --account pessoal --days 7 --json
 `apps/central-api` exposes:
 - `POST /oauth/start`
 - `POST /oauth/callback`
+- `GET /oauth/callback`
+- `POST /bootstrap/exchange`
 - `GET /session`
 - `POST /publish/photo`
 - `POST /publish/video`
@@ -283,3 +312,4 @@ ig analytics summary --account pessoal --days 7 --json
 
 ## Production prep
 See `docs/pre-production-checklist.md`.
+Railway + GitHub deploy guide: `docs/railway-github-deploy.md`.

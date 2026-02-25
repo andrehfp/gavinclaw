@@ -3,17 +3,22 @@
 ## Quick Reference
 - **Human:** André Prado (Telegram: 5911430092)
 - **Location:** Ponta Grossa, PR | TZ: America/Sao_Paulo
+- **YouTube:** @AndrePrado
+- **Histórico:** cofundou a **AIBuilders** com Felipe Raitano e vendeu sua participação por **R$200 mil**.
 - **Server:** mediarr (Ubuntu 24.04)
 - **Reference link (memory):** https://spark.vibeship.co/
 
 ## Key Decisions
-- **MoldaSpace is #1 priority.** Other projects (Bboox, ViralClaw, Questiono) come after.
+- **MoldaSpace is #1 priority.**
+- **Bboox saiu do foco ativo** por decisão do André (2026-02-24).
+- **ViralClaw em banho-maria** até novo sinal (2026-02-24).
 
 ## Current Blockers
 - Nenhum blocker crítico ativo registrado no momento.
 
 ## Pausado por decisão do André
 - **MicroSaaS courses** - transcrição adiada ("esquece por agora", 2026-02-23)
+- **ViralClaw** - banho-maria até novo sinal (2026-02-24)
 
 ## Cancelled/Dropped
 - ~~OpenNode account~~ - removed from blockers (not related to MoldaSpace)
@@ -113,19 +118,9 @@
   - Repo: github.com/andrehfp/instarelay (created 2026-02-21)
   - Status: mantido como referência; não usar como base principal da oferta vendável atual
 
-- **Bboox** - AI Personalized Children's Books — **Gavin has full strategic/marketing ownership**
-  - Repo: github.com/andrehfp/bboox | Telegram topic: 1386 (group -1003702782668)
-  - Stack: Next.js + Convex + WorkOS + fal.ai + OpenRouter
-  - Domain: bboox.io (to register on Cloudflare)
-  - Pricing: R$49.90 digital BR, $9.90 USD, $29.90/$39.90 print (INT only)
-  - Paywall: after full preview, before PDF download
-  - Goal: $10k/month in 6 months
-  - Deliverables in bboox/: GROWTH_PLAN.md, SPECS.md, LANDING_COPY.md, PRODUCT_HUNT_PLAN.md, INFLUENCERS.md, EMAIL_TEMPLATES.md
-  - Issues: #1 preview links, #2 checkout, #3 upsells, #4 image resolution, #5 SEO, #6 termos/privacidade
-  - André handles code, Gavin handles strategy/marketing/issues
-  - Landing page quase pronta, checkout sendo implementado (2026-02-11)
+- **Bboox** - fora do foco ativo (decisão do André em 2026-02-24).
 
-- **ViralClaw SaaS** - Full content repurposing platform for AI agents
+- **ViralClaw SaaS** - Full content repurposing platform for AI agents (**BANHO-MARIA por decisão do André em 2026-02-24**)
   - "One Video. Every Format." — 6 output formats
   - Formats: shorts, carousels, threads, quote cards, audiograms, repurpose (all-in-one)
   - Credit-based pricing: $29/200 credits, 3 free on signup

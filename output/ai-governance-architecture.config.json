@@ -1,0 +1,57 @@
+{
+  "metadata": {
+    "title": "AI Governance Architecture (Enterprise)",
+    "description": "Chat and AI agents with control, security and auditability"
+  },
+  "layout": {
+    "type": "hierarchical",
+    "direction": "top-down",
+    "spacing": { "horizontal": 220, "vertical": 130 }
+  },
+  "components": [
+    { "id": "users", "type": "frontend", "name": "Internal Users", "description": "Employees / Teams", "layer": 0, "position": 1 },
+    { "id": "channels", "type": "frontend", "name": "Chat Channels", "description": "Web Chat, Slack, Teams, API", "layer": 1, "position": 1 },
+
+    { "id": "identity", "type": "gateway", "name": "Identity & Access", "description": "SSO + RBAC/ABAC", "layer": 2, "position": 0 },
+    { "id": "gateway", "type": "gateway", "name": "AI Gateway", "description": "Routing, quotas, budgets, model policy", "layer": 2, "position": 1 },
+    { "id": "policy", "type": "service", "name": "Policy Engine", "description": "DLP, PII masking, prompt guardrails", "layer": 2, "position": 2 },
+
+    { "id": "rag", "type": "service", "name": "RAG Layer", "description": "Retrieval with ACL", "layer": 3, "position": 0 },
+    { "id": "vector", "type": "database", "name": "Vector DB", "description": "Embeddings + indexed corp docs", "layer": 4, "position": 0 },
+
+    { "id": "router", "type": "service", "name": "Model Router", "description": "OpenAI, Anthropic, Azure, Local", "layer": 3, "position": 1 },
+    { "id": "runtime", "type": "service", "name": "Agent Runtime", "description": "Tools, sandbox, HITL approval", "layer": 3, "position": 2 },
+
+    { "id": "systems", "type": "external", "name": "Enterprise Systems", "description": "CRM, ERP, SharePoint, Notion", "layer": 4, "position": 2 },
+
+    { "id": "obs", "type": "service", "name": "Observability", "description": "Cost, latency, quality, traces", "layer": 5, "position": 0 },
+    { "id": "audit", "type": "database", "name": "Immutable Audit Log", "description": "Who did what, when, why", "layer": 5, "position": 1 },
+    { "id": "console", "type": "frontend", "name": "Governance Console", "description": "Security, IT, Legal dashboards", "layer": 6, "position": 1 }
+  ],
+  "connections": [
+    { "from": "users", "to": "channels", "type": "sync", "label": "Ask / Action" },
+
+    { "from": "channels", "to": "identity", "type": "sync", "label": "AuthN/AuthZ" },
+    { "from": "channels", "to": "gateway", "type": "sync", "label": "Prompt / Request" },
+
+    { "from": "identity", "to": "gateway", "type": "sync", "label": "User context" },
+    { "from": "gateway", "to": "policy", "type": "sync", "label": "Pre-check" },
+
+    { "from": "policy", "to": "rag", "type": "sync", "label": "Allow + filtered context" },
+    { "from": "rag", "to": "vector", "type": "data", "label": "Retrieve" },
+
+    { "from": "policy", "to": "router", "type": "sync", "label": "Risk profile" },
+    { "from": "router", "to": "runtime", "type": "sync", "label": "Model output" },
+    { "from": "runtime", "to": "systems", "type": "sync", "label": "Tool actions" },
+
+    { "from": "gateway", "to": "obs", "type": "data", "label": "Telemetry" },
+    { "from": "gateway", "to": "audit", "type": "data", "label": "Event log" },
+    { "from": "obs", "to": "console", "type": "sync", "label": "Metrics" },
+    { "from": "audit", "to": "console", "type": "sync", "label": "Audit trails" }
+  ],
+  "groups": [
+    { "id": "control-plane", "name": "Control Plane", "componentIds": ["identity", "gateway", "policy"] },
+    { "id": "execution-plane", "name": "Execution Plane", "componentIds": ["rag", "router", "runtime", "vector", "systems"] },
+    { "id": "governance-plane", "name": "Governance Plane", "componentIds": ["obs", "audit", "console"] }
+  ]
+}

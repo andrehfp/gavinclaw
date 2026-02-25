@@ -10,6 +10,7 @@ Monorepo managed by `pnpm` + `turbo`.
 
 ## Apps
 - `apps/central-api`: Fastify scaffold with auth/session/publish/media/comments endpoints
+- `apps/landing`: minimal frontend that starts Facebook login via central-api
 
 ## Tooling Contract
 Every command supports:

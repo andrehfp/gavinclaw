@@ -5,27 +5,27 @@
 
 ## 📊 KPIs (atualizar diariamente via `moldaspace_analytics.py`)
 
-| Métrica | Current (Feb 23) | Target (30d) | Target (90d) | $10k |
+| Métrica | Current (Feb 24) | Target (30d) | Target (90d) | $10k |
 |---------|---------|-------------|-------------|------|
-| MRR (30d revenue) | **$455.90** | $800 | $3,000 | $10,000 |
-| Total users | **875** | 900 | 1,500 | 5,000 |
-| Signups/semana | **103** | 80 | 200 | 600 |
-| Active users (7d) | **116** | 200 | 400 | 1,000 |
-| Purchases (7d) | **10** | 15 | 40 | 150 |
-| Trial→Paid % | **9.7%** | 10% | 12% | 15% |
+| MRR (30d revenue) | **$451.20** | $800 | $3,000 | $10,000 |
+| Total users | **888** | 900 | 1,500 | 5,000 |
+| Signups/semana | **87** | 80 | 200 | 600 |
+| Active users (7d) | **100** | 200 | 400 | 1,000 |
+| Purchases (7d) | **8** | 15 | 40 | 150 |
+| Trial→Paid % | **7.3%** | 10% | 12% | 15% |
 | Non-brand SEO traffic | **~1%** | 15% | 40% | 60% |
-| Reddit karma (maia_archviz) | **75** | 200 | 1,000 | 5,000 |
-| Instagram followers (Maia) | **6** | 100 | 500 | 5,000 |
-| Instagram posts | **40** | 130 | 370 | 500 |
-| Instagram avg engagement | **3.8** | 10 | 50 | 200 |
+| Reddit karma (maia_archviz) | **83** | 200 | 1,000 | 5,000 |
+| Instagram followers (Maia) | **5** | 100 | 500 | 5,000 |
+| Instagram posts | **45** | 130 | 370 | 500 |
+| Instagram avg engagement | **3.0** | 10 | 50 | 200 |
 
-## 📅 Yesterday's Snapshot (Feb 22)
+## 📅 Yesterday's Snapshot (Feb 23)
 | Métrica | Valor |
 |---------|-------|
 | Revenue | **$18.80** |
 | Purchases | **1** |
-| New signups | **9** |
-| Credit wall hits (24h) | **2** |
+| New signups | **16** |
+| Credit wall hits (24h) | **4** |
 
 ---
 
@@ -47,11 +47,11 @@
 ## 🔥 Reddit (u/maia_archviz)
 
 ### Current Stats
-- **Karma:** 74 comment karma, 1 post karma (total: 75)
-- **Age:** 10 days old (created ~Feb 13)
-- **Comments tracked:** 84 total
-- **Subreddit breakdown (sessão 20:00):** r/archviz (1 + 1 reply), r/DesignMyRoom (1)
-- **Any new replies:** sim — 1 unread reply handled via API script (thank-you follow-up)
+- **Karma:** 82 comment karma, 1 post karma (total: 83)
+- **Age:** 11 days old (created ~Feb 13)
+- **Comments tracked:** 96 total
+- **Subreddit breakdown (sessão 20:00):** r/archviz (1 comment), r/DesignMyRoom (1 comment)
+- **Any new replies:** não — none found in profile/inbox check this run
 
 ---
 
@@ -71,4 +71,4 @@
 
 ---
 
-**Last updated:** February 23, 2026 — 08:00 PM (America/Sao_Paulo)
+**Last updated:** February 24, 2026 — 8:00 PM (America/Sao_Paulo)

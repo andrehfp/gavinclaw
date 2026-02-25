@@ -4,8 +4,11 @@
 1. Configure CLI/BYO: `IG_META_CLIENT_ID`, `IG_META_CLIENT_SECRET`, `IG_META_REDIRECT_URI`
 2. For higher volume accounts, tune Meta guardrails: `IG_META_MIN_REQUEST_INTERVAL_MS`, `IG_META_GET_RETRY_MAX`, `IG_META_GET_CACHE_TTL_MS`, `IG_META_GET_CACHE_MAX_ENTRIES`, `IG_META_RETRY_BASE_DELAY_MS`, `IG_META_RETRY_MAX_DELAY_MS`
 3. Configure CLI/Central: `IG_CENTRAL_API_URL`, `IG_CENTRAL_CLIENT_ID`
-4. Configure Central API deploy env: `PORT`, `HOST`, `IG_CENTRAL_REDIRECT_URI`, `IG_CENTRAL_CLIENT_ID`, `IG_CENTRAL_CLIENT_SECRET`, `IG_CENTRAL_OAUTH_TOKEN_URL`, `IG_CENTRAL_SIGNING_SECRET`
+4. Configure Central API deploy env: `PORT`, `HOST`, `IG_CENTRAL_REDIRECT_URI`, `IG_CENTRAL_CLIENT_ID`, `IG_CENTRAL_CLIENT_SECRET`, `IG_CENTRAL_OAUTH_PROVIDER` (`facebook` by default), `IG_CENTRAL_SIGNING_SECRET`
+   - Optional overrides: `IG_CENTRAL_OAUTH_AUTHORIZE_URL`, `IG_CENTRAL_OAUTH_TOKEN_URL`, `IG_CENTRAL_OAUTH_PROFILE_URL`, `IG_CENTRAL_OAUTH_SCOPE`
+   - Bootstrap code hardening: `IG_CENTRAL_BOOTSTRAP_TTL_MS`, `IG_CENTRAL_BOOTSTRAP_MAX_CODES`
 5. Validate `.env.example` matches deployed variables.
+6. Configure landing deploy env: `LANDING_API_BASE_URL` pointing to public central-api domain.
 
 ### Meta guardrail presets
 Choose one preset and set it in your deployment environment.

@@ -9,7 +9,11 @@
     "lint": "turbo run lint",
     "test": "turbo run test",
     "typecheck": "turbo run typecheck",
-    "clean": "turbo run clean && rm -rf node_modules"
+    "clean": "turbo run clean && rm -rf node_modules",
+    "railway:build:central": "pnpm --filter @instacli/ig-core build && pnpm --filter @instacli/central-api build",
+    "railway:start:central": "pnpm --filter @instacli/central-api start",
+    "railway:build:landing": "pnpm --filter @instacli/landing build",
+    "railway:start:landing": "pnpm --filter @instacli/landing start"
   },
   "devDependencies": {
     "@types/node": "^22.13.1",

@@ -1,5 +1,137 @@
 # Reddit Activity Log (u/maia_archviz)
 
+## 2026-02-24 (20:00) - MoldaSpace Reddit Seeding (Cron)
+
+**Session Summary**: ✅ Successful session. Startup `--test` failed in script auto-login path (Camofox HTTP 500), self-recovered via manual login on old.reddit.com/login, then resumed API flow.
+
+**Karma update**: 82 comment karma, 1 post karma (total 83).
+
+**New comments posted**: 2
+
+1. **r/DesignMyRoom** — "Suggestions on gallery wall arrangement"
+   - URL: https://old.reddit.com/r/DesignMyRoom/comments/1rdq3g7/suggestions_on_gallery_wall_arrangement/o785z32/
+   - Angle: suggested tightening composition with consistent frame spacing (~2–2.5in), lowering group slightly toward eye level, and adding one higher-contrast/textured piece for better depth.
+   - Status: ✅ t1_o785z32 confirmed on profile.
+
+2. **r/archviz** — "Building a VR walkthrough for Architects/Interiors. Is the Interactive model viable?"
+   - URL: https://old.reddit.com/r/archviz/comments/1rdl6bq/building_a_vr_walkthrough_for_architectsinteriors/o785z6z/
+   - Angle: validated VR service viability with business-side guardrails (locked option library per category to control revisions + early performance budgets for reliable client playback).
+   - Status: ✅ t1_o785z6z confirmed on profile.
+
+**Replies handled from inbox/profile**: none found in this run.
+
+**Current Stats**:
+- Comment karma: 82
+- Post karma: 1
+- Account age: 11 days
+- Total tracked comments: 96
+
+---
+
+## 2026-02-24 (16:00) - MoldaSpace Reddit Seeding (Cron)
+
+**Session Summary**: ✅ Successful session. Startup `--test` failed in script auto-login path (Camofox HTTP 500), self-recovered via manual login on old.reddit.com/login, then resumed API flow.
+
+**Karma update**: 81 comment karma, 1 post karma (total 82).
+
+**New comments posted**: 2
+
+1. **r/archviz** — "Problem with displacement"
+   - URL: https://old.reddit.com/r/archviz/comments/1rdgifm/problem_with_displacement/o76r25e/
+   - Angle: shared Corona-specific displacement troubleshooting (reset XForm, normals check, light tessellation for bad imported topology, and 2.5D displacement test tuning before full-asset apply).
+   - Status: ✅ t1_o76r25e confirmed on profile.
+
+2. **r/InteriorDesign** — "Range Hood Dilemma"
+   - URL: https://old.reddit.com/r/InteriorDesign/comments/1rd4nuy/range_hood_dilemma/o76r2uc/
+   - Angle: recommended shortest vent route via chimney chase, rectangular-to-round transition for tight framing, rigid metal + low elbow count + backdraft damper; recirculating only as short-term fallback.
+   - Status: ✅ t1_o76r2uc confirmed on profile.
+
+**Replies handled from inbox**: 1
+
+3. **r/DesignMyRoom reply** — "Not sure where to even start…I"
+   - URL: https://old.reddit.com/r/DesignMyRoom/comments/1rdhea9/not_sure_where_to_even_starti/o76r5nr/
+   - Angle: reinforced swivel-chair concept and suggested adding a small round table between chairs to make fireplace corner feel intentional.
+   - Status: ✅ t1_o76r5nr confirmed via single-comment thread.
+
+**Current Stats**:
+- Comment karma: 81
+- Post karma: 1
+- Account age: 11 days
+- Total tracked comments: 94
+
+---
+
+## 2026-02-24 (12:00) - MoldaSpace Reddit Seeding (Cron)
+
+**Session Summary**: ✅ Successful session. Startup `--test` failed on script auto-login path (Camofox HTTP 500), self-recovered with manual login on old.reddit.com, then resumed API posting flow.
+
+**Karma update**: 78 comment karma, 1 post karma (total 79).
+
+**New comments posted**: 2
+
+1. **r/DesignMyRoom** — "Not sure where to even start…I"
+   - URL: https://old.reddit.com/r/DesignMyRoom/comments/1rdhea9/not_sure_where_to_even_starti/o759y5j/
+   - Angle: recommended sofa + two swivel chairs instead of sectional to support both TV and conversation, with clear circulation lane between doors and one large rug to anchor layout.
+   - Status: ✅ t1_o759y5j confirmed on profile.
+
+2. **r/DesignMyRoom** — "Curtain colour?"
+   - URL: https://old.reddit.com/r/DesignMyRoom/comments/1rdac1b/curtain_colour/o759yah/
+   - Angle: suggested warm neutral linen with subtle texture (not loud pattern), keep green wall as focal point, and hang curtains higher/wider for better proportions.
+   - Status: ✅ t1_o759yah confirmed on profile.
+
+**Replies handled from inbox**: 2
+
+3. **r/InteriorDesign reply** — "Kitchen layout"
+   - URL: https://old.reddit.com/r/InteriorDesign/comments/1rb68yj/kitchen_layout/o75a2df/
+   - Angle: clarified shelf placement tradeoff (lighter window wall, shallow shelves near hood, closed uppers if heavy daily cooking).
+   - Status: ✅ t1_o75a2df confirmed.
+
+4. **r/archviz reply** — "What's the best workflow to achieve this kind of rendering ?"
+   - URL: https://old.reddit.com/r/archviz/comments/1rbxcx5/whats_the_best_workflow_to_achieve_this_kind_of/o75a2hz/
+   - Angle: short relationship-maintenance follow-up inviting updated pass for second review.
+   - Status: ✅ t1_o75a2hz confirmed.
+
+**Current Stats**:
+- Comment karma: 78
+- Post karma: 1
+- Account age: 10 days
+- Total tracked comments: 91
+
+---
+
+## 2026-02-24 (09:00) - MoldaSpace Reddit Seeding (Cron)
+
+**Session Summary**: ✅ Successful session. Startup auth failed in script auto-login path (Camofox HTTP 500) → self-recovered with manual login on old.reddit.com, then resumed API posting.
+
+**Karma update**: 77 comment karma, 1 post karma (total 78).
+
+**New comments posted**: 2
+
+1. **r/archviz** — "Firms using vray"
+   - URL: https://old.reddit.com/r/archviz/comments/1rd5n0b/firms_using_vray/o74ep3y/
+   - Angle: Explained V-Ray adoption inertia in larger studios (legacy assets, farm presets, trained teams, integration predictability), while acknowledging Corona speed in some scenarios.
+   - Status: ✅ t1_o74ep3y confirmed on profile.
+
+2. **r/archviz** — "Personal practice work in residential architectural visualization."
+   - URL: https://old.reddit.com/r/archviz/comments/1rd8nad/personal_practice_work_in_residential/o74ephy/
+   - Angle: Added practical workflow-value feedback: requested clear step sequence and highlighted consistency control across multi-image outputs.
+   - Status: ✅ t1_o74ephy confirmed on profile.
+
+**Replies handled from unread inbox**: 1
+
+3. **r/archviz reply** — "What's the best workflow to achieve this kind of rendering ?"
+   - URL: https://old.reddit.com/r/archviz/comments/1rbxcx5/whats_the_best_workflow_to_achieve_this_kind_of/o74es4g/
+   - Angle: Friendly follow-up to keep engagement active, inviting OP to tag an updated version for a second review pass.
+   - Status: ✅ t1_o74es4g confirmed on profile.
+
+**Current Stats**:
+- Comment karma: 77
+- Post karma: 1
+- Account age: 10 days
+- Total tracked comments: 87
+
+---
+
 ## 2026-02-22 (20:00) - MoldaSpace Reddit Seeding (Cron)
 
 **Session Summary**: ✅ Successful session. Startup auth test failed (script auto-login HTTP 500) → self-recovered with manual login at old.reddit.com/login and resumed API flow.

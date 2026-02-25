@@ -1,0 +1,103 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ControlPlane AI - War Room</title>
+  <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+  <style>
+    :root{--bg:#0b1020;--panel:#121a33;--text:#e7ecff;--muted:#9fb0de;--accent:#6ea8fe;--border:#243057}
+    *{box-sizing:border-box}
+    body{margin:0;font-family:Inter,system-ui,Arial;background:var(--bg);color:var(--text)}
+    .wrap{display:grid;grid-template-columns:320px 1fr;min-height:100vh}
+    .sidebar{background:var(--panel);border-right:1px solid var(--border);padding:16px;overflow:auto}
+    .main{padding:24px;overflow:auto}
+
+    @media (max-width: 1100px){
+      .wrap{grid-template-columns:1fr}
+      .sidebar{border-right:none;border-bottom:1px solid var(--border);max-height:48vh}
+      .main{padding:14px}
+      .md{max-width:100%}
+    }
+    h1{font-size:18px;margin:0 0 8px}
+    .muted{color:var(--muted);font-size:13px;margin-bottom:16px}
+    .item{display:block;width:100%;text-align:left;background:transparent;color:var(--text);border:1px solid var(--border);padding:10px 12px;border-radius:10px;margin:8px 0;cursor:pointer}
+    .item:hover{border-color:var(--accent);color:#fff}
+    .item.active{background:#1b2750;border-color:var(--accent)}
+    .topbar{display:flex;gap:8px;align-items:center;margin-bottom:16px}
+    input{width:100%;padding:10px 12px;border-radius:10px;border:1px solid var(--border);background:#0e1530;color:var(--text)}
+    .md{max-width:980px;line-height:1.55}
+    .md h1,.md h2,.md h3{margin-top:1.2em}
+    .md code{background:#111a3b;padding:2px 6px;border-radius:6px}
+    .md pre{background:#0d1430;border:1px solid var(--border);padding:12px;border-radius:10px;overflow:auto}
+    .meta{font-size:12px;color:var(--muted);margin-bottom:14px}
+    a{color:#9bc2ff}
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <aside class="sidebar">
+      <h1>ControlPlane AI</h1>
+      <div class="muted">War Room Docs</div>
+      <input id="search" placeholder="Filtrar docs..." />
+      <div id="list"></div>
+    </aside>
+    <main class="main">
+      <div class="topbar">
+        <strong id="title">Selecione um documento</strong>
+      </div>
+      <div class="meta" id="meta"></div>
+      <article class="md" id="content">Carregando...</article>
+    </main>
+  </div>
+
+<script>
+const docs = [
+  {name:'Executive Summary', path:'./00-EXECUTIVE-SUMMARY.md'},
+  {name:'GTM Playbook', path:'./01-GTM-PLAYBOOK.md'},
+  {name:'Sales Assets', path:'./02-SALES-ASSETS.md'},
+  {name:'Pilot SOW 45D', path:'./03-PILOT-SOW-45D.md'},
+  {name:'MVP Build Plan 8W', path:'./04-MVP-BUILD-PLAN-8W.md'},
+  {name:'Pesquisa + PRD Consolidado', path:'../MARKET-RESEARCH-PRD-ControlPlane-AI.md'},
+  {name:'Pitch Comercial', path:'../PITCH-ControlPlane-AI.md'},
+  {name:'Versão Técnica v1', path:'../TEC-SPEC-ControlPlane-AI-v1.md'},
+  {name:'PRD AI Governance Gateway', path:'../PRD-AI-Governance-Gateway.md'}
+];
+
+const list = document.getElementById('list');
+const content = document.getElementById('content');
+const title = document.getElementById('title');
+const meta = document.getElementById('meta');
+const search = document.getElementById('search');
+
+function renderList(filter=''){
+  list.innerHTML='';
+  docs.filter(d=>d.name.toLowerCase().includes(filter.toLowerCase())).forEach((d,i)=>{
+    const b=document.createElement('button');
+    b.className='item';
+    b.textContent=d.name;
+    b.onclick=()=>loadDoc(d.path,d.name,b);
+    list.appendChild(b);
+    if(i===0 && !filter) loadDoc(d.path,d.name,b);
+  });
+}
+
+async function loadDoc(path,name,btn){
+  document.querySelectorAll('.item').forEach(x=>x.classList.remove('active'));
+  if(btn) btn.classList.add('active');
+  title.textContent=name;
+  meta.textContent=path;
+  try{
+    const res=await fetch(path);
+    const txt=await res.text();
+    content.innerHTML=marked.parse(txt);
+  }catch(e){
+    content.textContent='Erro ao carregar arquivo: '+e.message;
+  }
+}
+
+search.addEventListener('input',e=>renderList(e.target.value));
+renderList();
+</script>
+</body>
+</html>

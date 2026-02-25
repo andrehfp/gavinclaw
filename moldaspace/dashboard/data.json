@@ -3,7 +3,7 @@
   "total": 627,
   "paying": 29,
   "repeat": 32,
-  "karma": 74,
+  "karma": 82,
   "seo": 3,
   "ig": 1,
   "reddit_posts": [
@@ -846,6 +846,126 @@
       "upvotes": 0,
       "listeners": 0,
       "status": "✅ verified on profile (script returned t1_o71ei0e)"
+    },
+    {
+      "date": "2026-02-24",
+      "sub": "r/archviz",
+      "post": "Firms using vray",
+      "url": "https://old.reddit.com/r/archviz/comments/1rd5n0b/firms_using_vray/o74ep3y/",
+      "angle": "Explained why top studios still stick with V-Ray despite Corona speed perception: deep pipeline inertia (legacy assets/material libraries, farm presets, trained teams), switching cost, and broader enterprise-grade integration/predictability advantages.",
+      "upvotes": 0,
+      "listeners": 0,
+      "status": "✅ verified on profile (script returned t1_o74ep3y)"
+    },
+    {
+      "date": "2026-02-24",
+      "sub": "r/archviz",
+      "post": "Personal practice work in residential architectural visualization.",
+      "url": "https://old.reddit.com/r/archviz/comments/1rd8nad/personal_practice_work_in_residential/o74ephy/",
+      "angle": "Added constructive workflow-focused feedback: encouraged sharing step-by-step pipeline (blockout→camera→materials→lighting→polish) and asked about post-fix strategy for edge/window consistency across multi-image sets.",
+      "upvotes": 0,
+      "listeners": 0,
+      "status": "✅ verified on profile (script returned t1_o74ephy)"
+    },
+    {
+      "date": "2026-02-24",
+      "sub": "r/archviz",
+      "post": "REPLY — What's the best workflow to achieve this kind of rendering ?",
+      "url": "https://old.reddit.com/r/archviz/comments/1rbxcx5/whats_the_best_workflow_to_achieve_this_kind_of/o74es4g/",
+      "angle": "Engagement follow-up reply to prior thank-you: invited OP to tag future update for a second feedback pass, keeping thread relationship warm.",
+      "upvotes": 0,
+      "listeners": 0,
+      "status": "✅ verified on profile (script returned t1_o74es4g)"
+    },
+    {
+      "date": "2026-02-24",
+      "sub": "r/DesignMyRoom",
+      "post": "Not sure where to even start…I",
+      "url": "https://old.reddit.com/r/DesignMyRoom/comments/1rdhea9/not_sure_where_to_even_starti/o759y5j/",
+      "angle": "Suggested layout strategy for dual-purpose living room: skip sectional, use sofa + two swivel chairs to serve TV + conversation, preserve clear circulation between two door entries, and anchor plan with one large rug.",
+      "upvotes": 0,
+      "listeners": 0,
+      "status": "✅ verified on profile (script returned t1_o759y5j)"
+    },
+    {
+      "date": "2026-02-24",
+      "sub": "r/DesignMyRoom",
+      "post": "Curtain colour?",
+      "url": "https://old.reddit.com/r/DesignMyRoom/comments/1rdac1b/curtain_colour/o759yah/",
+      "angle": "Recommended warm neutral linen curtain approach with subtle stripe texture to avoid visual noise, keep green accent wall as focal point, and improve proportions by hanging curtains higher/wider than window.",
+      "upvotes": 0,
+      "listeners": 0,
+      "status": "✅ verified on profile (script returned t1_o759yah)"
+    },
+    {
+      "date": "2026-02-24",
+      "sub": "r/InteriorDesign",
+      "post": "REPLY — Kitchen layout",
+      "url": "https://old.reddit.com/r/InteriorDesign/comments/1rb68yj/kitchen_layout/o75a2df/",
+      "angle": "Follow-up clarification on shelf strategy: keep window wall visually light, use only shallow shelves near hood and away from splatter zone, and favor closed uppers if heavy daily cooking requires easier maintenance.",
+      "upvotes": 0,
+      "listeners": 0,
+      "status": "✅ verified on profile (script returned t1_o75a2df)"
+    },
+    {
+      "date": "2026-02-24",
+      "sub": "r/archviz",
+      "post": "REPLY — What's the best workflow to achieve this kind of rendering ?",
+      "url": "https://old.reddit.com/r/archviz/comments/1rbxcx5/whats_the_best_workflow_to_achieve_this_kind_of/o75a2hz/",
+      "angle": "Short relationship-building follow-up after OP thank-you, inviting future update for a second feedback pass.",
+      "upvotes": 0,
+      "listeners": 0,
+      "status": "✅ verified on profile (script returned t1_o75a2hz)"
+    },
+    {
+      "date": "2026-02-24",
+      "sub": "r/archviz",
+      "post": "Problem with displacement",
+      "url": "https://old.reddit.com/r/archviz/comments/1rdgifm/problem_with_displacement/o76r25e/",
+      "angle": "Added Corona-specific troubleshooting path for broken displacement on imported Revit/Archicad meshes: reset XForm, verify normals, even out topology via light tessellation/subdiv, and test 2.5D Corona displacement with controlled max level/screen size before applying to full asset.",
+      "upvotes": 0,
+      "listeners": 0,
+      "status": "✅ verified on profile (script returned t1_o76r25e)"
+    },
+    {
+      "date": "2026-02-24",
+      "sub": "r/InteriorDesign",
+      "post": "Range Hood Dilemma",
+      "url": "https://old.reddit.com/r/InteriorDesign/comments/1rd4nuy/range_hood_dilemma/o76r2uc/",
+      "angle": "Recommended shortest vertical vent route through chimney chase, with rectangular-to-round duct transition strategy for tight framing, plus rigid metal + minimal elbows + backdraft damper to improve long-term performance (especially for gas cooking).",
+      "upvotes": 0,
+      "listeners": 0,
+      "status": "✅ verified on profile (script returned t1_o76r2uc)"
+    },
+    {
+      "date": "2026-02-24",
+      "sub": "r/DesignMyRoom",
+      "post": "REPLY — Not sure where to even start…I",
+      "url": "https://old.reddit.com/r/DesignMyRoom/comments/1rdhea9/not_sure_where_to_even_starti/o76r5nr/",
+      "angle": "Follow-up reply to engaged user: reinforced swivel-chair conversation zone concept and suggested adding a small round table between chairs to make fireplace corner read intentional.",
+      "upvotes": 0,
+      "listeners": 0,
+      "status": "✅ verified (script returned t1_o76r5nr; confirmed via single-comment thread)."
+    },
+    {
+      "date": "2026-02-24",
+      "sub": "r/DesignMyRoom",
+      "post": "Suggestions on gallery wall arrangement",
+      "url": "https://old.reddit.com/r/DesignMyRoom/comments/1rdq3g7/suggestions_on_gallery_wall_arrangement/o785z32/",
+      "angle": "Practical gallery-wall refinement: enforce one consistent frame gap (~2–2.5in), lower composition slightly toward eye level, and introduce one higher-contrast/textured piece so arrangement reads with more depth from distance.",
+      "upvotes": 0,
+      "listeners": 0,
+      "status": "✅ verified on profile (script returned t1_o785z32)"
+    },
+    {
+      "date": "2026-02-24",
+      "sub": "r/archviz",
+      "post": "Building a VR walkthrough for Architects/Interiors. Is the Interactive model viable?",
+      "url": "https://old.reddit.com/r/archviz/comments/1rdl6bq/building_a_vr_walkthrough_for_architectsinteriors/o785z6z/",
+      "angle": "Validated VR walkthrough viability while adding operational guardrails: lock a finite options library per category to prevent revision explosion and define performance budgets early (polycount/texture/lighting) so client-side playback remains smooth.",
+      "upvotes": 0,
+      "listeners": 0,
+      "status": "✅ verified on profile (script returned t1_o785z6z)"
     }
   ],
   "ig_calendar": [

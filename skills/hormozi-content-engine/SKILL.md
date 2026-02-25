@@ -112,11 +112,13 @@ Use these as filters when extracting content atoms:
 4. **Anti-Conventional** — challenging dev culture, hiring norms, tool worship
 5. **Indie Hacker Life** — balancing family (2 kids), business, sanity
 
-## André's Active Products (for CTAs)
+## André's Products for CTA (priority order)
 
-- **ViralClaw** — viral-claw.com — video repurposing SaaS
-- **Bboox** — bboox.io — AI personalized children's books
-- **MoldaSpace** — moldaspace.com — already generating revenue
+- **MoldaSpace** — moldaspace.com — principal foco atual
+- **InfoMyGraphic** — infomygraphic.com — bom para conteúdo visual/infográficos
+- **Questiono** — produto ativo quando o conteúdo for aderente ao nicho
+
+Evitar CTA de projetos em pausa (ex: ViralClaw em banho-maria, Bboox fora de foco), a menos que André peça explicitamente.
 
 ## Rules
 

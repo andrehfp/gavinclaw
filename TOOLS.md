@@ -2,6 +2,19 @@
 
 Skills define _how_ tools work. This file is for _your_ specifics — the stuff that's unique to your setup.
 
+## OpenClaw Cron Debug (quick commands)
+
+```bash
+openclaw cron list
+openclaw cron runs --id <UUID> --limit 5
+openclaw cron edit <UUID> --best-effort-deliver
+openclaw cron edit <UUID> --message "novo prompt"
+```
+
+Notas:
+- `cron runs` exige `--id` (não aceita ID posicional).
+- Se aparecer warning de config (`memory-lancedb disabled`, `channels.whatsapp.enabled unknown`), não quebra execução dos crons, mas vale rodar manutenção com `openclaw doctor --fix` em janela controlada.
+
 ## Maia CLI (MoldaSpace Unified)
 
 ```bash

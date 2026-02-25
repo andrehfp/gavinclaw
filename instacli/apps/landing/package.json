@@ -1,0 +1,14 @@
+{
+  "name": "@instacli/landing",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "node src/server.mjs",
+    "start": "node src/server.mjs",
+    "build": "node -e \"console.log('landing build: no-op')\"",
+    "typecheck": "node -e \"console.log('landing typecheck: no-op')\"",
+    "lint": "node -e \"console.log('landing lint: no-op')\"",
+    "test": "node -e \"console.log('landing test: no-op')\""
+  }
+}

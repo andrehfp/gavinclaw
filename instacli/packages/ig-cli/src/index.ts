@@ -14,6 +14,7 @@ import {
   providerNameSchema,
   toolError,
   type GlobalFlags,
+  type ErrorCode,
   type Provider,
   type ProviderName,
   type ToolResult
@@ -45,6 +46,11 @@ type SetupMetaTokenOptions = {
   pageAccessToken?: string;
   igUsername?: string;
   userAccessToken?: string;
+};
+
+type SetupCentralBootstrapOptions = {
+  code?: string;
+  account?: string;
 };
 
 type OnboardingOptions = {
@@ -125,6 +131,9 @@ const META_PAGE_CREATION_STEPS = [
 const UGUU_UPLOAD_URL = "https://uguu.se/upload.php";
 const LITTERBOX_UPLOAD_URL = "https://litterbox.catbox.moe/resources/internals/api.php";
 const DEFAULT_UPLOAD_TIMEOUT_MS = 20_000;
+const DEFAULT_CENTRAL_API_URL = "http://127.0.0.1:8787";
+const DEFAULT_CENTRAL_FETCH_TIMEOUT_MS = 15_000;
+const CENTRAL_LOCALHOST_HOSTS = new Set(["127.0.0.1", "localhost", "::1"]);
 const uploadViaSchema = z.enum(["auto", "passthrough", "uguu", "litterbox"]);
 const litterboxExpirySchema = z.enum(["1h", "12h", "24h", "72h"]);
 
@@ -423,6 +432,147 @@ const parseUploadTimeoutMs = (): number => {
 
   const parsed = Number.parseInt(raw, 10);
   return Number.isInteger(parsed) && parsed > 0 ? parsed : DEFAULT_UPLOAD_TIMEOUT_MS;
+};
+
+const parseCentralFetchTimeoutMs = (): number => {
+  const raw = process.env.IG_CENTRAL_FETCH_TIMEOUT_MS;
+  if (!raw) {
+    return DEFAULT_CENTRAL_FETCH_TIMEOUT_MS;
+  }
+
+  const parsed = Number.parseInt(raw, 10);
+  return Number.isInteger(parsed) && parsed > 0 ? parsed : DEFAULT_CENTRAL_FETCH_TIMEOUT_MS;
+};
+
+const toErrorCode = (value: unknown): ErrorCode => {
+  if (typeof value === "string" && Object.values(ERROR_CODES).includes(value as ErrorCode)) {
+    return value as ErrorCode;
+  }
+
+  return ERROR_CODES.PROVIDER_ERROR;
+};
+
+const resolveCentralApiUrl = (): ToolResult<URL> => {
+  const raw = process.env.IG_CENTRAL_API_URL ?? DEFAULT_CENTRAL_API_URL;
+  let url: URL;
+
+  try {
+    url = new URL(raw);
+  } catch {
+    return toolError(ERROR_CODES.CONFIG_ERROR, "Invalid IG_CENTRAL_API_URL. Provide a valid absolute URL.");
+  }
+
+  if (!["http:", "https:"].includes(url.protocol)) {
+    return toolError(ERROR_CODES.CONFIG_ERROR, "IG_CENTRAL_API_URL must use http:// or https://.");
+  }
+
+  const isLocalhost = CENTRAL_LOCALHOST_HOSTS.has(url.hostname);
+  if (url.protocol !== "https:" && !isLocalhost) {
+    return toolError(ERROR_CODES.CONFIG_ERROR, "IG_CENTRAL_API_URL must use https:// for non-localhost hosts.", {
+      url: raw
+    });
+  }
+
+  return {
+    ok: true,
+    action: "setup.central-bootstrap.base-url",
+    data: url
+  };
+};
+
+const centralFetchWithTimeout = async (url: URL, init: RequestInit): Promise<Response> => {
+  const timeoutMs = parseCentralFetchTimeoutMs();
+  const controller = new AbortController();
+  const timeout = setTimeout(() => controller.abort(), timeoutMs);
+
+  try {
+    return await fetch(url, { ...init, signal: controller.signal });
+  } finally {
+    clearTimeout(timeout);
+  }
+};
+
+const exchangeCentralBootstrapCode = async (
+  bootstrapCode: string
+): Promise<
+  ToolResult<{
+    ig_account_id: string;
+    ig_username?: string;
+    page_id: string;
+    page_name: string;
+    page_access_token: string;
+    session_token?: string;
+    expires_at?: number;
+  }>
+> => {
+  const base = resolveCentralApiUrl();
+  if (!base.ok) {
+    return base;
+  }
+
+  const url = new URL("/bootstrap/exchange", base.data);
+  let response: Response;
+  try {
+    response = await centralFetchWithTimeout(url, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Accept: "application/json"
+      },
+      body: JSON.stringify({ bootstrap_code: bootstrapCode })
+    });
+  } catch (error) {
+    return toolError(ERROR_CODES.PROVIDER_ERROR, "Central API bootstrap exchange failed.", {
+      reason: error instanceof Error ? error.message : String(error)
+    });
+  }
+
+  const parsed = (await response.json().catch(() => null)) as
+    | {
+        ok?: boolean;
+        error?: {
+          code?: string;
+          message?: string;
+          details?: unknown;
+        };
+        ig_account_id?: unknown;
+        ig_username?: unknown;
+        page_id?: unknown;
+        page_name?: unknown;
+        page_access_token?: unknown;
+        session_token?: unknown;
+        expires_at?: unknown;
+      }
+    | null;
+
+  if (!response.ok) {
+    const errorCode = toErrorCode(parsed?.error?.code);
+    const message = typeof parsed?.error?.message === "string" ? parsed.error.message : "Central API bootstrap exchange failed.";
+    return toolError(errorCode, message, parsed?.error?.details ?? { status: response.status, body: parsed });
+  }
+
+  if (
+    typeof parsed?.ig_account_id !== "string" ||
+    typeof parsed?.page_id !== "string" ||
+    typeof parsed?.page_name !== "string" ||
+    typeof parsed?.page_access_token !== "string"
+  ) {
+    return toolError(ERROR_CODES.PROVIDER_ERROR, "Central API bootstrap exchange returned invalid payload.", parsed);
+  }
+
+  return {
+    ok: true,
+    action: "setup.central-bootstrap.exchange",
+    data: {
+      ig_account_id: parsed.ig_account_id,
+      ...(typeof parsed.ig_username === "string" ? { ig_username: parsed.ig_username } : {}),
+      page_id: parsed.page_id,
+      page_name: parsed.page_name,
+      page_access_token: parsed.page_access_token,
+      ...(typeof parsed.session_token === "string" ? { session_token: parsed.session_token } : {}),
+      ...(typeof parsed.expires_at === "number" ? { expires_at: parsed.expires_at } : {})
+    }
+  };
 };
 
 const isUrlLikeInput = (value: string): boolean => /^[a-zA-Z][a-zA-Z\d+\-.]*:\/\//.test(value);
@@ -1690,6 +1840,94 @@ const createProgram = (): Command => {
               next_steps: [
                 "instacli auth status --json --quiet",
                 "instacli media list --json --quiet --dry-run"
+              ]
+            }
+          } as const;
+        });
+      })
+  );
+
+  addToolingFlags(
+    setup
+      .command("central-bootstrap")
+      .description("Consume a one-time bootstrap code from Central API and configure Meta BYO")
+      .requiredOption("--code <code>", "One-time bootstrap code received after Facebook login")
+      .action(async (options: SetupCentralBootstrapOptions, command: Command) => {
+        await withResult(command, async () => {
+          const flags = readFlags(command);
+          const globals = command.optsWithGlobals<CommandOptions>();
+          const parsedCode = z.object({ code: z.string().trim().min(1) }).safeParse(options);
+          if (!parsedCode.success) {
+            return toolError(ERROR_CODES.VALIDATION_ERROR, "Invalid bootstrap code.", parsedCode.error.flatten());
+          }
+
+          const requestedAccount = options.account ?? globals.account;
+          const parsedAccount =
+            requestedAccount === undefined ? undefined : accountNameSchema.safeParse(requestedAccount);
+          if (parsedAccount && !parsedAccount.success) {
+            return toolError(ERROR_CODES.VALIDATION_ERROR, "Invalid --account value.", parsedAccount.error.flatten());
+          }
+          const accountName = parsedAccount?.success ? parsedAccount.data : undefined;
+
+          if (flags.dryRun) {
+            return {
+              ok: true,
+              action: "setup.central-bootstrap",
+              data: {
+                wrote: false,
+                bootstrap_code: parsedCode.data.code,
+                ...(accountName ? { account_name: accountName } : {}),
+                status: "dry-run"
+              }
+            } as const;
+          }
+
+          const exchanged = await exchangeCentralBootstrapCode(parsedCode.data.code);
+          if (!exchanged.ok) {
+            return exchanged;
+          }
+
+          await store.setSecret("meta-byo", "accessToken", exchanged.data.page_access_token, accountName);
+          store.setMetaByoConfig(
+            {
+              hasAccessToken: true,
+              igUserId: exchanged.data.ig_account_id,
+              igAccountId: exchanged.data.ig_account_id,
+              igUsername: exchanged.data.ig_username
+            },
+            accountName
+          );
+          if (accountName) {
+            store.setDefaultAccount(accountName, "meta-byo");
+          }
+
+          if (exchanged.data.session_token) {
+            await store.setSecret("central", "sessionToken", exchanged.data.session_token);
+            store.setCentralConfig({
+              hasSessionToken: true,
+              expiresAt: exchanged.data.expires_at
+            });
+          }
+
+          store.setDefaultProvider("meta-byo");
+
+          return {
+            ok: true,
+            action: "setup.central-bootstrap",
+            data: {
+              wrote: true,
+              provider: "meta-byo",
+              ...(accountName ? { account_name: accountName } : {}),
+              profile: {
+                ig_account_id: exchanged.data.ig_account_id,
+                ig_username: exchanged.data.ig_username,
+                page_id: exchanged.data.page_id,
+                page_name: exchanged.data.page_name,
+                page_access_token: maskSecret(exchanged.data.page_access_token)
+              },
+              next_steps: [
+                "instacli auth status --json --quiet",
+                "instacli media list --json --quiet"
               ]
             }
           } as const;
