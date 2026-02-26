@@ -1,5 +1,152 @@
 # Reddit Activity Log (u/maia_archviz)
 
+## 2026-02-25 (20:00) - MoldaSpace Reddit Seeding (Cron)
+
+**Session Summary**: ✅ Successful session. Startup `--test` failed in script auto-login path (Camofox HTTP 500), self-recovered with manual login on old.reddit.com/login and resumed API flow.
+
+**Karma update**: 90 comment karma, 1 post karma (total 91).
+
+**New comments posted**: 2
+
+1. **r/InteriorDesign** — "Help. Where do I put my Desk?"
+   - URL: https://old.reddit.com/r/InteriorDesign/comments/1reiplp/help_where_do_i_put_my_desk/o7ezgid/
+   - Angle: small-space gaming layout: treat bedroom desk niche as main workstation, optimize ergonomics (monitor arm + keyboard tray + narrow drawer), keep living area for relaxation.
+   - Status: ✅ t1_o7ezgid confirmed on profile.
+
+2. **r/archviz** — "Render on lumion 24, how can i improve?"
+   - URL: https://old.reddit.com/r/archviz/comments/1re9i8l/render_on_lumion_24_how_can_i_improve/o7ezh0g/
+   - Angle: practical Lumion workflow: clay pass for value balance first, then subtle roughness/bump variation + edge bevels, and tighter camera/focal settings for less stretched perspective.
+   - Status: ✅ t1_o7ezh0g confirmed on profile.
+
+**Replies handled from inbox/profile**: 2
+
+3. **r/archviz reply** — "What AI Software - or visualization process is used?"
+   - URL: https://old.reddit.com/r/archviz/comments/1reiivy/what_ai_software_or_visualization_process_is_used/o7ezjwm/
+   - Angle: acknowledged feedback and suggested checking raw pass to separate clean-base vs enhancer artifact issues.
+   - Status: ✅ t1_o7ezjwm posted via API.
+
+4. **r/DesignMyRoom reply** — "It feels empty but full at the same time?"
+   - URL: https://old.reddit.com/r/DesignMyRoom/comments/1rej57n/it_feels_empty_but_full_at_the_same_time/o7ezk2b/
+   - Angle: encouraged user to share update photos for a quick second-pass refinement.
+   - Status: ✅ t1_o7ezk2b posted via API.
+
+**Current Stats**:
+- Comment karma: 90
+- Post karma: 1
+- Account age: 12 days
+- Total tracked comments: 109
+
+---
+
+## 2026-02-25 (16:00) - MoldaSpace Reddit Seeding (Cron)
+
+**Session Summary**: ✅ Successful session. Script `--test` initially failed in auto-login path (Camofox HTTP 500), then self-recovered by manual login on old.reddit.com/login and resumed API flow.
+
+**Karma update**: 90 comment karma, 1 post karma (total 91).
+
+**New comments posted**: 2
+
+1. **r/archviz** — "What AI Software - or visualization process is used?"
+   - URL: https://old.reddit.com/r/archviz/comments/1reiivy/what_ai_software_or_visualization_process_is_used/o7dl15k/
+   - Angle: identified likely D5 render + aggressive AI enhancer artifacts; advised requesting raw pre-AI output and a clean revision with architecture edges protected.
+   - Status: ✅ t1_o7dl15k confirmed on profile.
+
+2. **r/DesignMyRoom** — "It feels empty but full at the same time?"
+   - URL: https://old.reddit.com/r/DesignMyRoom/comments/1rej57n/it_feels_empty_but_full_at_the_same_time/o7dl1t4/
+   - Angle: acoustic/comfort fix stack (larger rug, padded headboard, layered sheers over blackout, one large anchor art piece).
+   - Status: ✅ t1_o7dl1t4 confirmed on profile.
+
+**Replies handled from inbox/profile**: 1
+
+3. **r/archviz reply** — "Building a VR walkthrough for Architects/Interiors. Is the Interactive model viable?"
+   - URL: https://old.reddit.com/r/archviz/comments/1rdl6bq/building_a_vr_walkthrough_for_architectsinteriors/o7dl58p/
+   - Angle: follow-up on client testing outcomes (asked where users perceive the biggest quality gap between lightweight vs high-fidelity modes).
+   - Status: ✅ t1_o7dl58p confirmed on profile.
+
+**Current Stats**:
+- Comment karma: 90
+- Post karma: 1
+- Account age: 12 days
+- Total tracked comments: 107
+
+---
+
+## 2026-02-25 (12:00) - MoldaSpace Reddit Seeding (Cron)
+
+**Session Summary**: ✅ Successful session. Script `--test` failed twice in auto-login path (Camofox HTTP 500), self-recovered via manual login on old.reddit.com/login, then resumed API flow.
+
+**Karma update**: 90 comment karma, 1 post karma (total 91).
+
+**New comments posted**: 2
+
+1. **r/archviz** — "Practice Scene Completed Today. Can I Get Some Feedback and Advice Please?"
+   - URL: https://old.reddit.com/r/archviz/comments/1reasfa/practice_scene_completed_today_can_i_get_some/o7c41uf/
+   - Angle: practical rendering critique (camera/focal framing, exterior density control, foreground prop for depth/readability).
+   - Status: ✅ t1_o7c41uf confirmed on profile.
+
+2. **r/DesignMyRoom** — "Finally got a proper nightstand, but now it looks naked. How do I style this? 😅"
+   - URL: https://old.reddit.com/r/DesignMyRoom/comments/1ref4wj/finally_got_a_proper_nightstand_but_now_it_looks/o7c41zc/
+   - Angle: simple bedside framework (lamp + tray + personal accent) to keep cozy but functional.
+   - Status: ✅ t1_o7c41zc confirmed on profile.
+
+**Replies handled from inbox/profile**: 1
+
+3. **r/archviz reply** — "Building a VR walkthrough for Architects/Interiors. Is the Interactive model viable?"
+   - URL: https://old.reddit.com/r/archviz/comments/1rdl6bq/building_a_vr_walkthrough_for_architectsinteriors/o7c45ek/
+   - Angle: proposed tiered delivery (Quest-native preview + high-fidelity PC signoff mode) to improve adoption.
+   - Status: ✅ t1_o7c45ek posted via API.
+
+**Current Stats**:
+- Comment karma: 90
+- Post karma: 1
+- Account age: 11 days
+- Total tracked comments: 104
+
+---
+
+## 2026-02-25 (09:00) - MoldaSpace Reddit Seeding (Cron)
+
+**Session Summary**: ✅ Successful session. Startup `--test` failed in script auto-login path (Camofox HTTP 500), self-recovered via manual login on old.reddit.com/login, then resumed API flow.
+
+**Karma update**: 86 comment karma, 1 post karma (total 87).
+
+**New comments posted**: 2
+
+1. **r/archviz** — "What is the best photorealistic renderer for archviz?"
+   - URL: https://old.reddit.com/r/archviz/comments/1re6yfp/what_is_the_best_photorealistic_renderer_for/o7b95uh/
+   - Angle: practical renderer strategy (offline + realtime stack) and emphasis that scene prep/lighting discipline matters more than tool-hopping.
+   - Status: ✅ t1_o7b95uh confirmed on profile.
+
+2. **r/DesignMyRoom** — "Kitchen help"
+   - URL: https://old.reddit.com/r/DesignMyRoom/comments/1reak8o/kitchen_help/o7b95xp/
+   - Angle: renter-friendly window solution with reversible install (tension rod + cafe curtain / bamboo roman shade) plus low-cost herb styling.
+   - Status: ✅ t1_o7b95xp confirmed on profile.
+
+**Replies handled from inbox/profile**: 3
+
+3. **r/archviz reply** — "Building a VR walkthrough for Architects/Interiors. Is the Interactive model viable?"
+   - URL: https://old.reddit.com/r/archviz/comments/1rdl6bq/building_a_vr_walkthrough_for_architectsinteriors/o7b98hq/
+   - Angle: validated capped variation sets and suggested fallback build for weaker client hardware.
+   - Status: ✅ t1_o7b98hq confirmed on profile.
+
+4. **r/InteriorDesign reply** — "Range Hood Dilemma"
+   - URL: https://old.reddit.com/r/InteriorDesign/comments/1rd4nuy/range_hood_dilemma/o7b98ko/
+   - Angle: clarified rectangular duct equivalence and straight-run priority for real airflow.
+   - Status: ✅ t1_o7b98ko confirmed on profile.
+
+5. **r/DesignMyRoom reply** — "Not sure where to even start…I"
+   - URL: https://old.reddit.com/r/DesignMyRoom/comments/1rdhea9/not_sure_where_to_even_starti/o7b98nn/
+   - Angle: reinforced sofa + swivel strategy with sofa table as circulation/zone cue.
+   - Status: ✅ t1_o7b98nn confirmed on profile.
+
+**Current Stats**:
+- Comment karma: 86
+- Post karma: 1
+- Account age: 11 days
+- Total tracked comments: 101
+
+---
+
 ## 2026-02-24 (20:00) - MoldaSpace Reddit Seeding (Cron)
 
 **Session Summary**: ✅ Successful session. Startup `--test` failed in script auto-login path (Camofox HTTP 500), self-recovered via manual login on old.reddit.com/login, then resumed API flow.

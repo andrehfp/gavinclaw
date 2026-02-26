@@ -149,7 +149,7 @@
   - Status: André said "pode parar" — waiting for go-ahead
 
 ## Social Media Pipeline (established 2026-02-12)
-- **LinkedIn:** DISCONTINUED — André decided to stop (2026-02-14)
+- **LinkedIn:** REACTIVATED (2026-02-25) via local scripts (`scripts/linkedin_post.py`, `scripts/linkedin_reader.py`), write scope active (`w_member_social`), read/analytics scope still missing (`r_member_social`)
 - **Twitter/X:** EN, brain dump style, `scripts/twitter_post.py` (threads auto for >280 chars)
 - **Instagram:** Warm Editorial style, `scripts/instagram_post.py` (needs public URLs → imgur)
 - **Image Gen:** KIE.ai Nano Banana Pro (`scripts/kie_generate.py`)

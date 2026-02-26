@@ -273,7 +273,12 @@ Evitar: bullets, bold, parecer robô ou propaganda.
 
 ## Social Media Posting
 
-**LINKEDIN: DISCONTINUED** (Feb 14, 2026)
+**LinkedIn:** ACTIVE (manual scripts) — `scripts/linkedin_post.py`, `scripts/linkedin_reader.py`, `scripts/linkedin_auth.py`
+- API base: `https://api.linkedin.com/rest/*` (Posts API v2 is deprecated)
+- Required headers: `Linkedin-Version: 202602` + `X-Restli-Protocol-Version: 2.0.0`
+- Current token scope: `w_member_social` (write enabled)
+- Analytics/read (`r_member_social`) ainda não está liberado neste app/token
+
 **Twitter/X:** English | Token: `~/.openclaw/.secrets/twitter_credentials.json`
 **Instagram:** Warm Editorial style | Token: `~/.openclaw/.secrets/instagram_maia_api.json` (Maia account)
 

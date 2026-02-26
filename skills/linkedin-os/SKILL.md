@@ -1,10 +1,10 @@
 ---
 name: linkedin-os
 description: >
-  [DISCONTINUED as of Feb 14, 2026] Previously generated LinkedIn posts using Justin Welsh's methodology.
-  André decided to stop LinkedIn posting to focus on Twitter/X and Instagram.
-  Use content-brainstorm or other skills for cross-platform content instead.
-  Outputs: N/A (skill archived).
+  Generate LinkedIn posts using a Justin Welsh-style framework.
+  Use when creating LinkedIn content strategy, drafting posts, optimizing profile positioning,
+  or planning growth/engagement loops specifically for LinkedIn.
+  Outputs: post ideas, ready-to-publish drafts, profile optimization suggestions, and engagement tactics.
 ---
 
 # LinkedIn Operating System

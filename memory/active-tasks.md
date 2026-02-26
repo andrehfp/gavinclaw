@@ -72,3 +72,10 @@
 
 ### IG Maia Follow Session
 - Started: 2026-02-17 | Status: Likely completed (30 accounts)
+
+### Maintenance
+- 2026-02-25: erro de edição automática no `active-tasks.md` corrigido manualmente.
+
+### #Cron - Reddit Seeding MoldaSpace (96968210-50a4-41b6-9621-db95b04df9fb)
+**Objetivo:** rodar sessão de seeding no Reddit com comentários via API, verificar no perfil e atualizar dashboard/mission control.
+**Status:** ✅ Concluído (2026-02-25 16:00 BRT)

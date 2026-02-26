@@ -1,5 +1,5 @@
 # SKILLS MANIFEST
-> Gavin's Standard Operating Procedure. Updated: 2026-02-15.
+> Gavin's Standard Operating Procedure. Updated: 2026-02-25.
 
 ## Execution Rules
 
@@ -19,17 +19,20 @@
 | **excalidraw-diagram** | ✅ Active | Architecture visualization, system diagrams, component maps from codebases | Flowcharts of business logic, UML class diagrams, simple text docs |
 | **hormozi-content-engine** | ✅ Active | YouTube video → multi-platform content (Twitter + IG + Shorts). Has reference files for CTAs, platform rules, content atoms | Writing from scratch without source video. Single post (use content-brainstorm) |
 | **hormozi-rich-pricing** | ✅ Active | Definir precificação premium e tier ladder “sell to rich”, com ICP upmarket, oferta high-ticket e testes de close-rate | Estratégia de conteúdo por vídeo (use hormozi-content-engine) |
+| **humanizer** | ✅ Active | Polir texto para soar humano, direto e menos “AI-like” | Quando precisão técnica literal é mais importante que tom |
+| **linear-ops** | ✅ Active | Operar backlog/processos no Linear (não-dev ops) via scripts | Desenvolvimento/código em issues do GitHub |
+| **linkedin-os** | ✅ Active (reactivado 2026-02-25) | Estratégia e copy para LinkedIn + operação via scripts locais REST | Analytics avançado enquanto `r_member_social` não estiver liberado |
 | **recursive-processor** | ✅ Active | Input >50k tokens, large files, hierarchical summarization, divide-and-conquer | Input fits in context (<50k), simple summaries, real-time tasks |
+| **social-media-poster** | ✅ Active | Cross-platform posting (Twitter, Instagram, Facebook opcional). Has scripts for each platform | Never post without André's approval in Telegram/Discord flows |
+| **startup-moat** | ✅ Active | Estratégia de defensibilidade, competição e vantagem de produto | Tarefas puramente operacionais sem decisão estratégica |
 | **tree-of-thoughts** | ✅ Active | Hard decisions with trade-offs, debugging with multiple causes, comparing 3+ approaches | Straightforward answers, quick opinions, routine questions |
-| **viralclaw** | ✅ Active | Creating shorts from video, submitting ViralClaw jobs, checking job status | Text content, image generation, generic video editing |
+| **viral-reels** | ✅ Active | Ideação/produção de reels de crescimento para MoldaSpace/maia | Jobs de repurpose completo de vídeo longo (use viralclaw) |
+| **viralclaw** | ✅ Active (produto em banho-maria) | Criar/revisar pipeline de repurpose quando houver demanda explícita | Uso contínuo diário sem sinal do André |
 | **youtube-thumbs** | ⏸️ Paused | YouTube thumbnail generation. André said "pode parar" | Currently paused — wait for go-ahead |
-| **social-media-poster** | ✅ Active | Cross-platform posting (Twitter, Instagram). Has scripts for each platform | Never post without André's approval in Telegram topic 1691 |
 
 ## Deprecated Skills
 
-| Skill | Status | Reason |
-|---|---|---|
-| **linkedin-os** | ❌ Discontinued (2026-02-14) | André decided to stop LinkedIn. Focus on Twitter/X + Instagram |
+No deprecated skills at this time.
 
 ## Built-in Skills (OpenClaw native)
 

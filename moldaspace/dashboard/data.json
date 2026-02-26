@@ -3,7 +3,7 @@
   "total": 627,
   "paying": 29,
   "repeat": 32,
-  "karma": 82,
+  "karma": 90,
   "seo": 3,
   "ig": 1,
   "reddit_posts": [
@@ -966,6 +966,136 @@
       "upvotes": 0,
       "listeners": 0,
       "status": "✅ verified on profile (script returned t1_o785z6z)"
+    },
+    {
+      "date": "2026-02-25",
+      "sub": "r/archviz",
+      "post": "What is the best photorealistic renderer for archviz?",
+      "url": "https://old.reddit.com/r/archviz/comments/1re6yfp/what_is_the_best_photorealistic_renderer_for/o7b95uh/",
+      "angle": "Balanced renderer decision framework: stop chasing a single 'best', pair one offline engine (Corona/V-Ray quality) with one realtime engine (D5/Unreal speed), and prioritize scene prep + lighting discipline as the true quality driver across tools.",
+      "upvotes": 0,
+      "listeners": 0,
+      "status": "✅ verified on profile (script returned t1_o7b95uh)"
+    },
+    {
+      "date": "2026-02-25",
+      "sub": "r/DesignMyRoom",
+      "post": "Kitchen help",
+      "url": "https://old.reddit.com/r/DesignMyRoom/comments/1reak8o/kitchen_help/o7b95xp/",
+      "angle": "Rental-safe window treatment guidance: reversible tension rod + light cafe curtain for privacy/daylight balance, bamboo roman shade as cleaner alternative, plus herbs on sill for low-cost intentional styling.",
+      "upvotes": 0,
+      "listeners": 0,
+      "status": "✅ verified on profile (script returned t1_o7b95xp)"
+    },
+    {
+      "date": "2026-02-25",
+      "sub": "r/archviz",
+      "post": "REPLY — Building a VR walkthrough for Architects/Interiors. Is the Interactive model viable?",
+      "url": "https://old.reddit.com/r/archviz/comments/1rdl6bq/building_a_vr_walkthrough_for_architectsinteriors/o7b98hq/",
+      "angle": "Follow-up on VR workflow constraints: validated 3-5 material swap cap and recommended maintaining a lighter fallback build to reduce client-side hardware friction from 3090-level requirements.",
+      "upvotes": 0,
+      "listeners": 0,
+      "status": "✅ verified on profile (script returned t1_o7b98hq)"
+    },
+    {
+      "date": "2026-02-25",
+      "sub": "r/InteriorDesign",
+      "post": "REPLY — Range Hood Dilemma",
+      "url": "https://old.reddit.com/r/InteriorDesign/comments/1rd4nuy/range_hood_dilemma/o7b98ko/",
+      "angle": "Follow-up ducting clarification for electric setup: 3.25x10 rectangular is roughly equivalent to 6in round and easier through framing; emphasized straight duct runs to improve real-world airflow efficiency.",
+      "upvotes": 0,
+      "listeners": 0,
+      "status": "✅ verified on profile (script returned t1_o7b98ko)"
+    },
+    {
+      "date": "2026-02-25",
+      "sub": "r/DesignMyRoom",
+      "post": "REPLY — Not sure where to even start…I",
+      "url": "https://old.reddit.com/r/DesignMyRoom/comments/1rdhea9/not_sure_where_to_even_starti/o7b98nn/",
+      "angle": "Follow-up reinforcement of the sofa + swivel plan: confirmed dual-use (TV + conversation) layout and added sofa table as wayfinding/zone-definition element to make circulation feel intentional.",
+      "upvotes": 0,
+      "listeners": 0,
+      "status": "✅ verified on profile (script returned t1_o7b98nn)"
+    },
+    {
+      "date": "2026-02-25",
+      "sub": "r/archviz",
+      "post": "Practice Scene Completed Today. Can I Get Some Feedback and Advice Please?",
+      "url": "https://old.reddit.com/r/archviz/comments/1reasfa/practice_scene_completed_today_can_i_get_some/o7c41uf/",
+      "angle": "Targeted archviz critique: praised clean lighting/material response, then suggested stronger hero framing (lower camera + tighter focal length), reducing tree density at the window, and adding one foreground prop to break scene emptiness.",
+      "upvotes": 0,
+      "listeners": 0,
+      "status": "✅ verified on profile (script returned t1_o7c41uf)"
+    },
+    {
+      "date": "2026-02-25",
+      "sub": "r/DesignMyRoom",
+      "post": "Finally got a proper nightstand, but now it looks naked. How do I style this? 😅",
+      "url": "https://old.reddit.com/r/DesignMyRoom/comments/1ref4wj/finally_got_a_proper_nightstand_but_now_it_looks/o7c41zc/",
+      "angle": "Nightstand styling framework with low-clutter utility: one tall lamp for vertical balance, one tray for cable/clutter control, and one personal soft accent (plant/photo) using a simple light+utility+personal rule of 3.",
+      "upvotes": 0,
+      "listeners": 0,
+      "status": "✅ verified on profile (script returned t1_o7c41zc)"
+    },
+    {
+      "date": "2026-02-25",
+      "sub": "r/archviz",
+      "post": "REPLY — Building a VR walkthrough for Architects/Interiors. Is the Interactive model viable?",
+      "url": "https://old.reddit.com/r/archviz/comments/1rdl6bq/building_a_vr_walkthrough_for_architectsinteriors/o7c45ek/",
+      "angle": "Follow-up reply to engaged user: endorsed Quest-native tier for adoption and proposed two-tier delivery (standalone preview + high-fidelity PC mode for final signoff).",
+      "upvotes": 0,
+      "listeners": 1,
+      "status": "✅ verified — script returned t1_o7c45ek"
+    },
+    {
+      "date": "2026-02-25",
+      "sub": "r/archviz",
+      "post": "What AI Software - or visualization process is used?",
+      "url": "https://old.reddit.com/r/archviz/comments/1reiivy/what_ai_software_or_visualization_process_is_used/o7dl15k/",
+      "angle": "Likely D5 base render overprocessed by AI enhancer/upscale; advised requesting raw pre-AI D5 output and a clean revision with architecture edges protected from enhancement. Framed missing raw pass as practical red flag for quality control.",
+      "upvotes": 0,
+      "listeners": 0,
+      "status": "✅ verified on profile (script returned t1_o7dl15k)"
+    },
+    {
+      "date": "2026-02-25",
+      "sub": "r/DesignMyRoom",
+      "post": "It feels empty but full at the same time?",
+      "url": "https://old.reddit.com/r/DesignMyRoom/comments/1rej57n/it_feels_empty_but_full_at_the_same_time/o7dl1t4/",
+      "angle": "Suggested acoustics-first bedroom fix: larger rug footprint, padded headboard in muted Monet palette, layered sheers with existing blackout curtains, and one large art anchor above bed to unify the room.",
+      "upvotes": 0,
+      "listeners": 0,
+      "status": "✅ verified on profile (script returned t1_o7dl1t4)"
+    },
+    {
+      "date": "2026-02-25",
+      "sub": "r/archviz",
+      "post": "REPLY — Building a VR walkthrough for Architects/Interiors. Is the Interactive model viable?",
+      "url": "https://old.reddit.com/r/archviz/comments/1rdl6bq/building_a_vr_walkthrough_for_architectsinteriors/o7dl58p/",
+      "angle": "Follow-up to inbound reply: encouraged field feedback on where clients perceive the largest quality gap between standalone and high-fidelity modes, keeping engagement active without pushing product mentions.",
+      "upvotes": 0,
+      "listeners": 1,
+      "status": "✅ verified on profile (script returned t1_o7dl58p)"
+    },
+    {
+      "date": "2026-02-25",
+      "sub": "r/InteriorDesign",
+      "post": "Help. Where do I put my Desk?",
+      "url": "https://old.reddit.com/r/InteriorDesign/comments/1reiplp/help_where_do_i_put_my_desk/o7ezgid/",
+      "angle": "Small-space workstation strategy for gamer layout: keep bedroom desk niche as primary setup, optimize ergonomics with monitor arm + keyboard tray + narrow storage, and preserve living room as separate relaxation zone.",
+      "upvotes": 0,
+      "listeners": 0,
+      "status": "✅ verified on profile (script returned t1_o7ezgid)"
+    },
+    {
+      "date": "2026-02-25",
+      "sub": "r/archviz",
+      "post": "Render on lumion 24, how can i improve?",
+      "url": "https://old.reddit.com/r/archviz/comments/1re9i8l/render_on_lumion_24_how_can_i_improve/o7ezh0g/",
+      "angle": "Actionable Lumion improvement workflow: dial lighting first with clay pass, then add subtle roughness/bump imperfection maps, keep bevels on edges, and tighten camera/focal setup to avoid stretched perspective.",
+      "upvotes": 0,
+      "listeners": 0,
+      "status": "✅ verified on profile (script returned t1_o7ezh0g)"
     }
   ],
   "ig_calendar": [

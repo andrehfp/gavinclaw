@@ -48,7 +48,7 @@ auth_url = (
 )
 
 print(f"\n🔗 Abre este link no browser:\n\n{auth_url}\n")
-print("Aguardando callback em http://localhost:8585/callback ...\n")
+print("Aguardando callback em http://localhost:3000/callback ...\n")
 
 server = HTTPServer(("0.0.0.0", 3000), CallbackHandler)
 server.timeout = 300

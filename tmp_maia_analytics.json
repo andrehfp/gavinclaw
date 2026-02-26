@@ -1,0 +1,142 @@
+{
+  "timestamp": "2026-02-25T03:24:10.599515",
+  "days_analyzed": 7,
+  "posthog": {
+    "pageviews_24h": 118,
+    "pageviews_7d": 10994,
+    "unique_visitors_7d": 257,
+    "top_pages": [
+      [
+        "https://www.moldaspace.com/sign-up/consent",
+        4797
+      ],
+      [
+        "https://www.moldaspace.com/sign-up#/?after_sign_in_url=https%3A%2F%2Fwww.moldaspace.com%2Fdashboard&after_sign_up_url=https%3A%2F%2Fwww.moldaspace.com%2Fdashboard&redirect_url=https%3A%2F%2Fwww.moldaspace.com%2Fsign-up%2Fconsent",
+        3953
+      ],
+      [
+        "https://www.moldaspace.com/sign-up#/?sign_up_fallback_redirect_url=https%3A%2F%2Fwww.moldaspace.com%2Fsign-up%2Fconsent&sign_in_fallback_redirect_url=https%3A%2F%2Fwww.moldaspace.com%2Fdashboard&after_sign_in_url=https%3A%2F%2Fwww.moldaspace.com%2Fdashboard&redirect_url=https%3A%2F%2Fwww.moldaspace.com%2Fsign-up%2Fconsent",
+        778
+      ],
+      [
+        "https://www.moldaspace.com/dashboard",
+        136
+      ],
+      [
+        "https://www.moldaspace.com/pt-BR",
+        134
+      ],
+      [
+        "https://www.moldaspace.com/",
+        97
+      ],
+      [
+        "https://www.moldaspace.com/sign-up",
+        91
+      ],
+      [
+        "https://www.moldaspace.com/sign-in",
+        54
+      ],
+      [
+        "https://www.moldaspace.com/pt-BR/dashboard",
+        53
+      ],
+      [
+        "https://www.moldaspace.com/sign-up#/?sign_up_fallback_redirect_url=https%3A%2F%2Fwww.moldaspace.com%2F%2522%2Fsign-up%2Fconsent%2522&sign_in_fallback_redirect_url=https%3A%2F%2Fwww.moldaspace.com%2F%2522%2Fdashboard%2522&redirect_url=https%3A%2F%2Fwww.moldaspace.com%2Fsign-up%2Fconsent",
+        51
+      ]
+    ],
+    "signups_7d": 31
+  },
+  "google_search_console": {
+    "site_url": "sc-domain:moldaspace.com",
+    "total_clicks": 157,
+    "total_impressions": 263,
+    "avg_ctr": 59.7,
+    "top_queries": [
+      [
+        "moldaspace",
+        137,
+        198
+      ],
+      [
+        "molda space",
+        19,
+        30
+      ],
+      [
+        "moldaspace ai",
+        1,
+        2
+      ],
+      [
+        "\"3d rendering software for interior design\"",
+        0,
+        12
+      ],
+      [
+        "\"interior design rendering software\"",
+        0,
+        2
+      ],
+      [
+        "\"rendering software for interior design\"",
+        0,
+        13
+      ],
+      [
+        "ai for interior design rendering",
+        0,
+        1
+      ],
+      [
+        "ai render for sketchup",
+        0,
+        1
+      ],
+      [
+        "bathroom visualization",
+        0,
+        3
+      ],
+      [
+        "bedroom visualization",
+        0,
+        1
+      ]
+    ]
+  },
+  "database": {
+    "total_users": 900,
+    "new_users_24h": 12,
+    "total_purchases": 67,
+    "revenue_24h": 23.5,
+    "purchases_24h_credits": 50,
+    "mrr_estimate": 455.9,
+    "revenue_7d": 117.5,
+    "purchases_7d": 7,
+    "revenue_yesterday": 0.0,
+    "purchases_yesterday": 0,
+    "signups_yesterday": 8,
+    "active_users_7d": 91,
+    "signups_7d": 82,
+    "referrals_total": 3,
+    "referrals_24h": 0,
+    "referrals_7d": 3,
+    "referrals_yesterday": 0
+  },
+  "instagram": {
+    "followers": 6,
+    "media_count": 49,
+    "username": "studio.maia.arch",
+    "recent_posts": 10,
+    "total_likes_recent": 2,
+    "total_comments_recent": 24,
+    "avg_engagement": 2.6,
+    "last_post_date": "2026-02-24T22:01:41+0000",
+    "last_post_likes": 0,
+    "last_post_comments": 2,
+    "last_post_type": "IMAGE"
+  }
+}

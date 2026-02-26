@@ -5,53 +5,56 @@
 
 ## 📊 KPIs (atualizar diariamente via `moldaspace_analytics.py`)
 
-| Métrica | Current (Feb 24) | Target (30d) | Target (90d) | $10k |
+| Métrica | Current (Feb 25) | Target (30d) | Target (90d) | $10k |
 |---------|---------|-------------|-------------|------|
-| MRR (30d revenue) | **$451.20** | $800 | $3,000 | $10,000 |
-| Total users | **888** | 900 | 1,500 | 5,000 |
-| Signups/semana | **87** | 80 | 200 | 600 |
-| Active users (7d) | **100** | 200 | 400 | 1,000 |
-| Purchases (7d) | **8** | 15 | 40 | 150 |
-| Trial→Paid % | **7.3%** | 10% | 12% | 15% |
+| MRR (30d revenue) | **$455.90** | $800 | $3,000 | $10,000 |
+| Total users | **901** | 900 | 1,500 | 5,000 |
+| Signups/semana | **82** | 80 | 200 | 600 |
+| Active users (7d) | **91** | 200 | 400 | 1,000 |
+| Purchases (7d) | **7** | 15 | 40 | 150 |
+| Trial→Paid % | **7.4%** | 10% | 12% | 15% |
 | Non-brand SEO traffic | **~1%** | 15% | 40% | 60% |
-| Reddit karma (maia_archviz) | **83** | 200 | 1,000 | 5,000 |
-| Instagram followers (Maia) | **5** | 100 | 500 | 5,000 |
-| Instagram posts | **45** | 130 | 370 | 500 |
-| Instagram avg engagement | **3.0** | 10 | 50 | 200 |
+| Reddit karma (maia_archviz) | **91** | 200 | 1,000 | 5,000 |
+| Instagram followers (Maia) | **6** | 100 | 500 | 5,000 |
+| Instagram posts | **49** | 130 | 370 | 500 |
+| Instagram avg engagement | **2.6** | 10 | 50 | 200 |
 
-## 📅 Yesterday's Snapshot (Feb 23)
+## 📅 Yesterday's Snapshot (Feb 24)
 | Métrica | Valor |
 |---------|-------|
-| Revenue | **$18.80** |
-| Purchases | **1** |
-| New signups | **16** |
-| Credit wall hits (24h) | **4** |
+| Revenue | **$0.00** |
+| Purchases | **0** |
+| New signups | **8** |
+| Credit wall hits (24h) | **5** |
 
 ---
 
-## 🧭 Sprint Status (Semana 16-22/Fev)
-- ✅ **#107** Email drip zero-credit users — **CLOSED** (Feb 18)
-- ✅ **#93** Referral system (invite = 5 credits) — **CLOSED** (Feb 20)
-- ✅ **#100** SEO programmatic pages (style × room) — **CLOSED** (Feb 22)
-- ✅ **#99** Blog posts SEO — **CLOSED** (Feb 22)
-- ✅ **#113** Remove unsafe-inline CSP — **CLOSED** (Feb 17)
+## 🧭 Sprint Status (Semana 23/Fev a 01/Mar)
+**Plano ativo:** `moldaspace/plans/weekly-sprint-2026-02-23.md`
 
-**Resumo:** 5/5 prioridades fechadas; próximo foco é execução e distribuição das entregas SEO publicadas.
+### Foco da semana (Moat Execution)
+- Posicionamento: sair de "render tool" para "workflow de aprovação"
+- Ativação: corrigir gargalo no signup/consent
+- Switching costs: iniciar camada de Projeto + Versões + Presets
+- Distribuição: conteúdo comparativo + prova social com dores reais
 
-### SEO Agent Stack (novo track aprovado)
-- Stack: `moldaspace/skills/seo-agent-stack`
-- Status: CLIs (`seo-keywords`, `seo-serp`) implementados e testados em dry-run
-- Estratégia: MCP-to-CLI (sem MCP full)
-- Próximo gate: plugar credenciais KE/DataForSEO e rodar baseline live
+### Entregas críticas desta semana
+- [ ] Landing BOFU "AI render for SketchUp/interiores" com CTA de **5 free renders**
+- [ ] Mapeamento completo do funil signup -> first render -> purchase
+- [ ] Spec curta de stickiness (Projeto/Versões/Presets)
+- [ ] 3 conteúdos comparativos para aquisição qualificada
+
+### Meta principal
+Subir Trial -> Paid de **7.4%** para **8.5%** ainda nesta semana.
 
 ## 🔥 Reddit (u/maia_archviz)
 
 ### Current Stats
-- **Karma:** 82 comment karma, 1 post karma (total: 83)
-- **Age:** 11 days old (created ~Feb 13)
-- **Comments tracked:** 96 total
-- **Subreddit breakdown (sessão 20:00):** r/archviz (1 comment), r/DesignMyRoom (1 comment)
-- **Any new replies:** não — none found in profile/inbox check this run
+- **Karma:** 90 comment karma, 1 post karma (total: 91)
+- **Age:** 12 days old (created ~Feb 13)
+- **Comments tracked:** 109 total
+- **Subreddit breakdown (sessão 20:00):** r/InteriorDesign (1 new comment), r/archviz (1 new comment + 1 reply), r/DesignMyRoom (1 reply)
+- **Any new replies:** sim — 2 replies handled via API
 
 ---
 
@@ -71,4 +74,4 @@
 
 ---
 
-**Last updated:** February 24, 2026 — 8:00 PM (America/Sao_Paulo)
+**Last updated:** February 25, 2026, 8:56 PM (America/Sao_Paulo)

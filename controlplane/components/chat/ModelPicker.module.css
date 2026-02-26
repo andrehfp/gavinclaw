@@ -1,0 +1,374 @@
+.root,
+.dropdownContent {
+  --picker-border: var(--sidebar-border, var(--border));
+  --picker-surface: var(--surface, var(--popover, var(--background)));
+  --picker-surface-alt: var(--surface-strong, var(--muted, var(--accent)));
+  --picker-text: var(--text, var(--popover-foreground, var(--foreground)));
+  --picker-muted: var(--muted-foreground, var(--muted));
+  --picker-accent: var(--accent, var(--primary, var(--ring)));
+  --picker-accent-ink: var(--accent-foreground, var(--picker-text));
+  --picker-accent-soft: var(--accent-soft, color-mix(in srgb, var(--picker-accent) 18%, var(--picker-surface)));
+  --picker-accent-border: var(--accent-border, color-mix(in srgb, var(--picker-accent) 48%, var(--picker-border)));
+  --picker-search-surface: var(--composer-bg, var(--picker-surface-alt));
+  --picker-option-hover: var(--surface-hover, var(--picker-surface-alt));
+  --picker-option-active: var(--picker-accent-soft);
+  --picker-shadow: 0 24px 44px -28px rgba(0, 0, 0, 0.55);
+}
+
+.root {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  min-width: 0;
+}
+
+.root[data-density='compact'] {
+  gap: 6px;
+}
+
+.label {
+  color: var(--picker-muted);
+  font-size: 0.63rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  font-family: var(--font-ibm-plex-mono), monospace;
+}
+
+.triggerButton {
+  min-width: 216px;
+  max-width: min(100%, 320px);
+  min-height: 32px;
+  border-radius: 11px;
+  border: 1px solid var(--picker-border);
+  background: var(--picker-surface);
+  color: var(--picker-text);
+  padding: 0 10px;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.74rem;
+  transition:
+    border-color 140ms ease,
+    background 140ms ease,
+    color 140ms ease;
+}
+
+.triggerButton:hover:not(:disabled) {
+  border-color: var(--picker-accent-border);
+}
+
+.triggerButton:disabled {
+  opacity: 0.55;
+}
+
+.triggerProvider {
+  min-width: 56px;
+  border-radius: 8px;
+  border: 1px solid var(--picker-border);
+  background: var(--picker-surface-alt);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+  padding: 3px 7px;
+}
+
+.triggerProviderLogo {
+  width: 12px;
+  height: 12px;
+  object-fit: contain;
+}
+
+.triggerProviderText {
+  font-size: 0.58rem;
+  line-height: 1;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  font-family: var(--font-ibm-plex-mono), monospace;
+}
+
+.triggerText {
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  text-align: left;
+  flex: 1;
+}
+
+.triggerChevron {
+  width: 14px;
+  height: 14px;
+  color: var(--picker-muted);
+  transition: transform 150ms ease;
+  flex-shrink: 0;
+}
+
+.triggerChevronOpen {
+  transform: rotate(180deg);
+}
+
+.dropdownContent {
+  padding: 0 !important;
+  border: 0 !important;
+  background: transparent !important;
+  box-shadow: none !important;
+  min-width: 0 !important;
+  overflow: visible !important;
+}
+
+.panel {
+  width: min(560px, calc(100vw - 24px));
+  display: grid;
+  grid-template-columns: 84px minmax(0, 1fr);
+  border-radius: 18px;
+  border: 1px solid var(--picker-border);
+  background: var(--picker-surface);
+  color: var(--picker-text);
+  overflow: hidden;
+  box-shadow: var(--picker-shadow);
+}
+
+.providerRail {
+  background: var(--picker-surface-alt);
+  border-right: 1px solid var(--picker-border);
+  padding: 8px;
+  display: grid;
+  align-content: start;
+  gap: 6px;
+}
+
+.providerButton {
+  width: 100%;
+  min-height: 54px;
+  border-radius: 11px;
+  border: 1px solid transparent;
+  background: transparent;
+  color: var(--picker-muted);
+  display: grid;
+  place-content: center;
+  gap: 4px;
+  transition:
+    color 130ms ease,
+    border-color 130ms ease,
+    background 130ms ease;
+}
+
+.providerButton:hover {
+  border-color: var(--picker-border);
+  color: var(--picker-text);
+}
+
+.providerButtonActive {
+  color: var(--picker-text);
+  border-color: var(--picker-accent-border);
+  background: var(--picker-accent-soft);
+}
+
+.providerLogo {
+  width: 16px;
+  height: 16px;
+  margin: 0 auto;
+  object-fit: contain;
+}
+
+.monochromeLogo {
+  filter: none;
+}
+
+:global(.dark) .monochromeLogo,
+:global([data-theme='dark']) .monochromeLogo {
+  filter: brightness(0) saturate(100%) invert(93%);
+}
+
+.providerName {
+  font-family: var(--font-ibm-plex-mono), monospace;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  font-size: 0.55rem;
+}
+
+.modelPane {
+  padding: 10px 10px 10px 12px;
+  display: grid;
+  gap: 8px;
+  min-width: 0;
+}
+
+.searchBox {
+  min-height: 36px;
+  border-radius: 10px;
+  border: 1px solid var(--picker-border);
+  background: var(--picker-search-surface);
+  padding: 0 10px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.searchIcon {
+  width: 14px;
+  height: 14px;
+  color: var(--picker-muted);
+  flex-shrink: 0;
+}
+
+.searchInput {
+  border: 0;
+  background: transparent;
+  color: var(--picker-text);
+  width: 100%;
+  min-width: 0;
+  font-size: 0.75rem;
+  font-family: var(--font-ibm-plex-mono), monospace;
+}
+
+.searchInput::placeholder {
+  color: var(--picker-muted);
+  opacity: 0.92;
+}
+
+.searchInput:focus {
+  outline: none;
+}
+
+.modelList {
+  display: grid;
+  gap: 5px;
+  max-height: 292px;
+  overflow-y: auto;
+  padding-right: 2px;
+}
+
+.modelList::-webkit-scrollbar {
+  width: 7px;
+}
+
+.modelList::-webkit-scrollbar-thumb {
+  background: var(--picker-muted);
+  border-radius: 999px;
+}
+
+.modelOption {
+  width: 100%;
+  border-radius: 11px;
+  border: 1px solid transparent;
+  background: transparent;
+  color: inherit;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  align-items: center;
+  gap: 8px;
+  text-align: left;
+  padding: 8px 10px;
+  transition:
+    border-color 130ms ease,
+    background 130ms ease;
+}
+
+.modelOption:hover {
+  border-color: var(--picker-border);
+  background: var(--picker-option-hover);
+}
+
+.modelOptionActive {
+  border-color: var(--picker-accent-border);
+  background: var(--picker-option-active);
+}
+
+.modelText {
+  min-width: 0;
+  display: grid;
+  gap: 4px;
+}
+
+.modelName {
+  font-size: 0.8rem;
+  line-height: 1.2;
+  font-weight: 600;
+  color: var(--picker-text);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.modelMeta {
+  font-size: 0.62rem;
+  color: var(--picker-muted);
+  font-family: var(--font-ibm-plex-mono), monospace;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.modelCapabilityRow {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px;
+}
+
+.modelCapabilityBadge {
+  display: inline-flex;
+  align-items: center;
+  gap: 3px;
+  border-radius: 999px;
+  padding: 2px 6px;
+  font-size: 0.55rem;
+  line-height: 1;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  font-family: var(--font-ibm-plex-mono), monospace;
+  font-weight: 600;
+  border: 1px solid transparent;
+}
+
+.modelCapabilityBadgeEnabled {
+  background: var(--picker-accent-soft);
+  border-color: var(--picker-accent-border);
+  color: var(--picker-accent-ink);
+}
+
+.modelCapabilityBadgeDisabled {
+  background: var(--picker-surface-alt);
+  border-color: var(--picker-border);
+  color: var(--picker-muted);
+}
+
+.modelCapabilityIcon {
+  width: 10px;
+  height: 10px;
+  flex-shrink: 0;
+}
+
+.modelCheck {
+  width: 14px;
+  height: 14px;
+  color: var(--picker-accent-ink);
+  flex-shrink: 0;
+}
+
+.emptyState {
+  margin: 0;
+  padding: 12px 10px;
+  color: var(--picker-muted);
+  font-size: 0.7rem;
+  font-family: var(--font-ibm-plex-mono), monospace;
+}
+
+.root[data-density='compact'] .triggerButton {
+  min-height: 30px;
+  min-width: 200px;
+  max-width: min(100%, 260px);
+  font-size: 0.72rem;
+}
+
+.root[data-density='compact'] .triggerProvider {
+  min-width: 48px;
+}
+
+@media (max-width: 640px) {
+  .panel {
+    width: min(520px, calc(100vw - 16px));
+    grid-template-columns: 72px minmax(0, 1fr);
+  }
+}

@@ -308,7 +308,7 @@ def cmd_schedule(args):
     for time_str, platform, desc, status in schedules:
         print(f"  {B}{time_str}{R}  {platform:<10} {desc:<40} {status}")
 
-    print(f"\n{DIM}LinkedIn: DISCONTINUED | Twitter/X: manual only{R}")
+    print(f"\n{DIM}LinkedIn: manual via scripts/linkedin_post.py | Twitter/X: manual only{R}")
     print()
     return 0
 
