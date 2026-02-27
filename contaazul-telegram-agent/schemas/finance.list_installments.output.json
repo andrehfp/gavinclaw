@@ -1,0 +1,1 @@
+{"type":"object","required":["ok","items"],"properties":{"ok":{"type":"boolean"},"total_items":{"type":"integer"},"items":{"type":"array","items":{"type":"object"}},"raw":{"type":"object"}}}

@@ -1,0 +1,1 @@
+{"type":"object","required":["name","agency","account","bank_code","initial_balance","confirm","idempotency_key"],"properties":{"name":{"type":"string"},"agency":{"type":"string"},"account":{"type":"string"},"bank_code":{"type":"integer"},"initial_balance":{"type":"number"},"confirm":{"type":"boolean"},"idempotency_key":{"type":"string"}}}

@@ -1,0 +1,1 @@
+{"type":"object","required":["ok"],"properties":{"ok":{"type":"boolean"},"financial_account_id":{"type":"string"},"raw":{"type":"object"}}}

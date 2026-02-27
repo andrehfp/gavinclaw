@@ -1,0 +1,21 @@
+{
+  "type": "object",
+  "required": ["count", "people"],
+  "properties": {
+    "count": { "type": "integer" },
+    "people": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "id": { "type": "string" },
+          "name": { "type": "string" },
+          "document": { "type": "string" },
+          "active": { "type": "boolean" },
+          "personType": { "type": "string" },
+          "profiles": { "type": "array", "items": { "type": "string" } }
+        }
+      }
+    }
+  }
+}

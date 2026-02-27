@@ -1,0 +1,11 @@
+{
+  "type": "object",
+  "required": ["ok", "total_items", "items"],
+  "properties": {
+    "ok": { "type": "boolean" },
+    "total_items": { "type": "integer" },
+    "totals": { "type": "object" },
+    "items": { "type": "array", "items": { "type": "object" } },
+    "raw": { "type": "object" }
+  }
+}

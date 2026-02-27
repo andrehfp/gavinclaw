@@ -1,0 +1,1 @@
+{"type":"object","required":["installment_id","financial_account_id","amount","confirm","idempotency_key"],"properties":{"installment_id":{"type":"string"},"financial_account_id":{"type":"string"},"amount":{"type":"number"},"date":{"type":"string"},"confirm":{"type":"boolean"},"idempotency_key":{"type":"string"}}}

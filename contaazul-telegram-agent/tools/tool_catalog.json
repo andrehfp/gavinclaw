@@ -1,0 +1,14 @@
+{
+  "version": "v1",
+  "tools": [
+    {"name": "crm.create_client", "input_schema": "schemas/crm.create_client.input.json", "output_schema": "schemas/crm.create_client.output.json", "risk": "write"},
+    {"name": "crm.list_people", "input_schema": "schemas/crm.list_people.input.json", "output_schema": "schemas/crm.list_people.output.json", "risk": "read"},
+    {"name": "finance.create_financial_account", "input_schema": "schemas/finance.create_financial_account.input.json", "output_schema": "schemas/finance.create_financial_account.output.json", "risk": "write"},
+    {"name": "finance.create_receivable", "input_schema": "schemas/finance.create_receivable.input.json", "output_schema": "schemas/finance.create_receivable.output.json", "risk": "write"},
+    {"name": "finance.create_payable", "input_schema": "schemas/finance.create_payable.input.json", "output_schema": "schemas/finance.create_payable.output.json", "risk": "write"},
+    {"name": "finance.list_installments", "input_schema": "schemas/finance.list_installments.input.json", "output_schema": "schemas/finance.list_installments.output.json", "risk": "read"},
+    {"name": "finance.get_statement", "input_schema": "schemas/finance.get_statement.input.json", "output_schema": "schemas/finance.get_statement.output.json", "risk": "read"},
+    {"name": "finance.acquit_installment", "input_schema": "schemas/finance.acquit_installment.input.json", "output_schema": "schemas/finance.acquit_installment.output.json", "risk": "write"},
+    {"name": "finance.get_receipt", "input_schema": "schemas/finance.get_receipt.input.json", "output_schema": "schemas/finance.get_receipt.output.json", "risk": "read"}
+  ]
+}

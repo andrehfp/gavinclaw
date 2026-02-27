@@ -142,8 +142,8 @@
   - Fixed split_video.py for screencast_webcam layout
   - Telegram topic: channelId -1003702782668, threadId 19
 
-- **yt-thumb Skill** - YouTube thumbnail generation (PAUSED)
-  - Location: `~/.openclaw/workspace/skills/yt-thumb/`
+- **youtube-thumbs Skill** - YouTube thumbnail generation (PAUSED)
+  - Location: `~/.openclaw/workspace/skills/youtube-thumbs/`
   - OpenRouter integration for Gemini 3 Pro
   - Spec: 1280x720, 2 variations
   - Status: André said "pode parar" — waiting for go-ahead

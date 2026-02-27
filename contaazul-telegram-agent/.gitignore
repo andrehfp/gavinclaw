@@ -1,0 +1,4 @@
+*.har
+.env
+*.pdf
+.DS_Store

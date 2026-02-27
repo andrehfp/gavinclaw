@@ -1,0 +1,1 @@
+{"type":"object","required":["installment_id"],"properties":{"installment_id":{"type":"string"}}}

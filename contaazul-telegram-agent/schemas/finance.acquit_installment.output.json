@@ -1,0 +1,1 @@
+{"type":"object","required":["ok"],"properties":{"ok":{"type":"boolean"},"acquittance_id":{"type":"string"},"installment_status":{"type":"string"},"raw":{"type":"object"}}}

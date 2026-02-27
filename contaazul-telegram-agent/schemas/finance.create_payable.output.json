@@ -1,0 +1,1 @@
+{"type":"object","required":["ok"],"properties":{"ok":{"type":"boolean"},"event_id":{"type":"string"},"installment_ids":{"type":"array","items":{"type":"string"}},"raw":{"type":"object"}}}

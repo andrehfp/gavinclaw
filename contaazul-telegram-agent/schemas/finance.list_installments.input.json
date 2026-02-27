@@ -1,0 +1,1 @@
+{"type":"object","required":["type","due_from","due_to"],"properties":{"type":{"type":"string","enum":["REVENUE","EXPENSE"]},"due_from":{"type":"string"},"due_to":{"type":"string"},"search":{"type":"string"},"page":{"type":"integer"},"page_size":{"type":"integer"}}}

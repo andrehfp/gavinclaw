@@ -451,10 +451,10 @@ python3 scripts/moldaspace_reel.py "luxury bathroom" \
 **André's personal:** +5542999240229
 **Allowlist:** André, Priscila (+5542998386267), Lilian (+5542999051127)
 
-## yt-thumb Skill (PAUSED)
+## youtube-thumbs Skill (PAUSED)
 
 **Status:** 🛑 Paused by André (Feb 2026)  
-**Location:** `~/.openclaw/workspace/skills/yt-thumb/`
+**Location:** `~/.openclaw/workspace/skills/youtube-thumbs/`
 **Reason:** "pode parar" — waiting for go-ahead to resume
 **Function:** YouTube thumbnail generation via OpenRouter/Gemini
 

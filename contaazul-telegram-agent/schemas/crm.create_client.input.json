@@ -1,0 +1,1 @@
+{"type":"object","required":["name","cpf","confirm","idempotency_key"],"properties":{"name":{"type":"string"},"cpf":{"type":"string"},"email":{"type":"string"},"confirm":{"type":"boolean"},"idempotency_key":{"type":"string"}}}

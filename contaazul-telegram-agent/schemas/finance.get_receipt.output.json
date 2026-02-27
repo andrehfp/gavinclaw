@@ -1,0 +1,1 @@
+{"type":"object","required":["ok","content_type"],"properties":{"ok":{"type":"boolean"},"content_type":{"type":"string"},"bytes_base64":{"type":"string"}}}
