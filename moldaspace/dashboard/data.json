@@ -3,7 +3,7 @@
   "total": 627,
   "paying": 29,
   "repeat": 32,
-  "karma": 90,
+  "karma": 97,
   "seo": 3,
   "ig": 1,
   "reddit_posts": [
@@ -1096,6 +1096,106 @@
       "upvotes": 0,
       "listeners": 0,
       "status": "✅ verified on profile (script returned t1_o7ezh0g)"
+    },
+    {
+      "date": "2026-02-27",
+      "sub": "r/archviz",
+      "post": "D5 Renders After Feedback - thoughts?",
+      "url": "https://old.reddit.com/r/archviz/comments/1rfj9uf/d5_renders_after_feedback_thoughts/o7or8h1/",
+      "angle": "Acknowledged visible improvement while adding actionable polish: reduce bloom and DOF in shot 2 to preserve facade readability, and refine storefront glass tint/reflection balance for more physical realism.",
+      "upvotes": 0,
+      "listeners": 0,
+      "status": "✅ verified on profile (script returned t1_o7or8h1)"
+    },
+    {
+      "date": "2026-02-27",
+      "sub": "r/InteriorDesign",
+      "post": "Absolutely inscrutable living/dining/kitchen area layout with open floor; need help!",
+      "url": "https://old.reddit.com/r/InteriorDesign/comments/1rezxfz/absolutely_inscrutable_livingdiningkitchen_area/o7or8vr/",
+      "angle": "Proposed zoning framework (entry drop zone + conversation + dining), prioritize clear circulation from kitchen to backyard, and suggested L-sectional + round dining table + single large rug to reduce crowding.",
+      "upvotes": 0,
+      "listeners": 0,
+      "status": "✅ verified on profile (script returned t1_o7or8vr)"
+    },
+    {
+      "date": "2026-02-27",
+      "sub": "r/archviz",
+      "post": "REPLY — Arch viz in trouble because of AI?",
+      "url": "https://old.reddit.com/r/archviz/comments/1rcnimz/arch_viz_in_trouble_because_of_ai/o7orbie/",
+      "angle": "Handled direct comment-reply with calm tone; acknowledged writing-style perception and reframed point on AI pressure being stronger in commodity work than high-control tailored projects.",
+      "upvotes": 0,
+      "listeners": 1,
+      "status": "✅ verified on profile (script returned t1_o7orbie)"
+    },
+    {
+      "date": "2026-02-27",
+      "sub": "r/InteriorDesign",
+      "post": "Placement of stove/hood on peninsula in open space kitchen",
+      "url": "https://old.reddit.com/r/InteriorDesign/comments/1rfkifl/placement_of_stovehood_on_peninsula_in_open_space/o7pli1w/",
+      "angle": "Balanced practical tradeoff: peninsula cooktop can work socially if extraction is strong and both-side landing space is respected; highlighted odor/splatter risks in open plans and when wall placement is preferable for heavy high-heat cooking.",
+      "upvotes": 0,
+      "listeners": 0,
+      "status": "✅ verified on profile (script returned t1_o7pli1w)"
+    },
+    {
+      "date": "2026-02-27",
+      "sub": "r/DesignMyRoom",
+      "post": "Room too beige. Help??",
+      "url": "https://old.reddit.com/r/DesignMyRoom/comments/1rfzg4w/room_too_beige_help/o7pli6e/",
+      "angle": "Reframed issue as visual busyness + uniform value rather than 'too beige'; advised decluttering into closed bins, adding one strong warm anchor element, and repeating a limited accent-color set for cohesion without repainting.",
+      "upvotes": 0,
+      "listeners": 0,
+      "status": "✅ verified on profile (script returned t1_o7pli6e)"
+    },
+    {
+      "date": "2026-02-27",
+      "sub": "r/archviz",
+      "post": "REPLY — D5 Renders After Feedback - thoughts?",
+      "url": "https://old.reddit.com/r/archviz/comments/1rfj9uf/d5_renders_after_feedback_thoughts/o7plkmd/",
+      "angle": "Handled inbound appreciation reply to keep thread warm; reinforced visible quality improvement in latest pass with supportive, non-promotional follow-up.",
+      "upvotes": 0,
+      "listeners": 1,
+      "status": "✅ verified on profile (script returned t1_o7plkmd)"
+    },
+    {
+      "date": "2026-02-27",
+      "sub": "r/archviz",
+      "post": "What rendering software you use and why? (Corona, V-ray, D5, UE…)",
+      "url": "https://old.reddit.com/r/archviz/comments/1rg8qm2/what_rendering_software_you_use_and_why_corona/o7r02jl/",
+      "angle": "Shared hybrid workflow: D5 for fast camera/mood iteration and Corona/V-Ray for final hero-shot polish, framing speed-vs-quality as a practical combo instead of tool tribalism.",
+      "upvotes": 0,
+      "listeners": 0,
+      "status": "✅ verified on profile (script returned t1_o7r02jl)"
+    },
+    {
+      "date": "2026-02-27",
+      "sub": "r/InteriorDesign",
+      "post": "REPLY — Placement of stove/hood on peninsula in open space kitchen",
+      "url": "https://old.reddit.com/r/InteriorDesign/comments/1rfkifl/placement_of_stovehood_on_peninsula_in_open_space/o7r0387/",
+      "angle": "Replied to OP's follow-up on aesthetics: make peninsula hood feel intentional via slim profile, alignment with pendants, repeated finish language, and slightly deeper rear worktop for cleaner living-side view.",
+      "upvotes": 0,
+      "listeners": 1,
+      "status": "✅ verified on profile (script returned t1_o7r0387)"
+    },
+    {
+      "date": "2026-02-27",
+      "sub": "r/archviz",
+      "post": "Community comparison challenge exercise?",
+      "url": "https://old.reddit.com/r/archviz/comments/1rgbqhe/community_comparison_challenge_exercise/o7sbe72/",
+      "angle": "Supported cross-engine benchmark idea with practical normalization protocol: lock camera/exposure/white balance/sun-HDR plus shared mini material set (matte paint, glossy wood, brushed metal, glass, fabric) and compare both raw beauty + lightly graded outputs for fair engine vs workflow evaluation.",
+      "upvotes": 0,
+      "listeners": 0,
+      "status": "✅ verified on profile (script returned t1_o7sbe72)"
+    },
+    {
+      "date": "2026-02-27",
+      "sub": "r/DesignMyRoom",
+      "post": "Need help decorating staircase walls",
+      "url": "https://old.reddit.com/r/DesignMyRoom/comments/1rgjata/need_help_decorating_staircase_walls/o7sbgcp/",
+      "angle": "Recommended hierarchy to avoid visual clutter: make black wall the focal point with 3 larger coordinated family frames, keep staircase wall minimal (or 2-3 pieces following stair angle), and avoid gallery walls on both surfaces in the same sightline.",
+      "upvotes": 0,
+      "listeners": 0,
+      "status": "✅ verified on profile (script returned t1_o7sbgcp)"
     }
   ],
   "ig_calendar": [

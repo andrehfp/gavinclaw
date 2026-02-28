@@ -13,13 +13,13 @@
 | Insights created | 0 | healthy |
 | Processing rate | 0.0 ev/s | healthy |
 | Last batch size | 200 | healthy |
-| Empty cycles | 6,321 | WARNING |
+| Empty cycles | 7,759 | WARNING |
 | Last cycle | never | healthy |
 ## Recent Cycles
 
 | Duration | Events | Insights | Patterns | Rate | Health |
 |----------|--------|----------|----------|------|--------|
-| 0ms | 0 | 0 | 0 | 0 ev/s | healthy |
+| 1ms | 0 | 0 | 0 | 0 ev/s | healthy |
 | 0ms | 0 | 0 | 0 | 0 ev/s | healthy |
 | 0ms | 0 | 0 | 0 | 0 ev/s | healthy |
 | 0ms | 0 | 0 | 0 | 0 ev/s | healthy |

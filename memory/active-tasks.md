@@ -1,5 +1,12 @@
 # Active Tasks
 
+## CURRENT (2026-02-27)
+
+### #Newsletter - Postar carrossel IA hoje
+**Objetivo:** publicar ainda hoje o carrossel da newsletter (tema: IA na operação vs estratégia)
+**Assets:** `output/carousel-ia-estrategia-nb2/slide-01.png` ... `slide-07.png`
+**Status:** aguardando aprovação final + publicação
+
 ## CURRENT (2026-02-24)
 
 ### #ControlPlane - AI Governance Gateway (novo produto)

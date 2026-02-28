@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Generate images via KIE.ai API (Nano Banana Pro, GPT Image, etc.)"""
+"""Generate images via KIE.ai API (Nano Banana 2, GPT Image, etc.)"""
 import json, sys, time, urllib.request, urllib.parse, os
 
 API_KEY = open(os.path.expanduser("~/.openclaw/.secrets/kie_api_key")).read().strip()
@@ -11,10 +11,10 @@ def _req(method, url, data=None):
     resp = urllib.request.urlopen(req)
     return json.loads(resp.read())
 
-def generate_nano_banana_pro(prompt, output_path, aspect_ratio="1:1", resolution="1K", image_inputs=None):
-    """Generate image using Nano Banana Pro via KIE Market API"""
+def generate_nano_banana_2(prompt, output_path, aspect_ratio="1:1", resolution="1K", image_inputs=None):
+    """Generate image using Nano Banana 2 via KIE Market API"""
     payload = {
-        "model": "nano-banana-pro",
+        "model": "nano-banana-2",
         "input": {
             "prompt": prompt,
             "image_input": image_inputs or [],
@@ -78,14 +78,14 @@ def generate_gpt_image(prompt, output_path, size="1:1"):
 if __name__ == "__main__":
     import argparse
     p = argparse.ArgumentParser()
-    p.add_argument("--model", default="nano-banana-pro", choices=["nano-banana-pro", "gpt-image"])
+    p.add_argument("--model", default="nano-banana-2", choices=["nano-banana-2", "nano-banana-pro", "gpt-image"])
     p.add_argument("--prompt", required=True)
     p.add_argument("--output", required=True)
     p.add_argument("--aspect", default="1:1")
     p.add_argument("--resolution", default="1K")
     args = p.parse_args()
 
-    if args.model == "nano-banana-pro":
-        generate_nano_banana_pro(args.prompt, args.output, args.aspect, args.resolution)
+    if args.model in ("nano-banana-2", "nano-banana-pro"):
+        generate_nano_banana_2(args.prompt, args.output, args.aspect, args.resolution)
     else:
         generate_gpt_image(args.prompt, args.output, args.aspect)

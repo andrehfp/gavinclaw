@@ -203,14 +203,14 @@ Usar pra: research, scraping, content pipeline, sub-agents. Sempre mais barato q
 - Catalog: `/mnt/ssd/fs42/`
 - Rebuild: `cd /home/andreprado/FieldStation42 && python3 station_42.py --rebuild_catalog --schedule`
 
-## Nano Banana Pro (Image Generation)
+## Nano Banana 2 (Instagram image generation)
 
 ```bash
-uv run /home/andreprado/.npm-global/lib/node_modules/openclaw/skills/nano-banana-pro/scripts/generate_image.py \
+python3 scripts/kie_generate.py \
+  --model nano-banana-2 \
   --prompt "description" \
-  --filename output.png \
-  --resolution 2K \
-  -i input1.png -i input2.png  # Optional input images
+  --output output.png \
+  --resolution 2K
 ```
 
 ## YouTube Analytics

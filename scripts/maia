@@ -306,8 +306,8 @@ def cmd_post(args):
         output = f"/tmp/maia-render-{datetime.now().strftime('%Y%m%d-%H%M')}.png"
         resolution = args.resolution or "2K"
         prompt = f"Photorealistic interior render, {scene}, natural lighting, architectural photography, 8K quality, warm tones"
-        nbp_script = os.path.expanduser("~/.npm-global/lib/node_modules/openclaw/skills/nano-banana-pro/scripts/generate_image.py")
-        cmd = ["uv", "run", nbp_script, "--prompt", prompt, "--filename", output, "--resolution", resolution]
+        kie_script = os.path.expanduser("~/.openclaw/workspace/scripts/kie_generate.py")
+        cmd = ["python3", kie_script, "--model", "nano-banana-pro", "--prompt", prompt, "--output", output, "--resolution", resolution]
         print(f"{C}Generating render: {scene}{R}")
         rc = subprocess.run(cmd).returncode
         if rc != 0:

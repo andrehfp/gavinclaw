@@ -5,27 +5,27 @@
 
 ## 📊 KPIs (atualizar diariamente via `moldaspace_analytics.py`)
 
-| Métrica | Current (Feb 26) | Target (30d) | Target (90d) | $10k |
+| Métrica | Current (Feb 27) | Target (30d) | Target (90d) | $10k |
 |---------|---------|-------------|-------------|------|
-| MRR (30d revenue) | **$408.90** | $800 | $3,000 | $10,000 |
-| Total users | **910** | 900 | 1,500 | 5,000 |
-| Signups/semana | **80** | 80 | 200 | 600 |
-| Active users (7d) | **91** | 200 | 400 | 1,000 |
+| MRR (30d revenue) | **$404.20** | $800 | $3,000 | $10,000 |
+| Total users | **926** | 900 | 1,500 | 5,000 |
+| Signups/semana | **84** | 80 | 200 | 600 |
+| Active users (7d) | **94** | 200 | 400 | 1,000 |
 | Purchases (7d) | **5** | 15 | 40 | 150 |
-| Trial→Paid % | **7.4%** | 10% | 12% | 15% |
+| Trial→Paid % | **7.2%** | 10% | 12% | 15% |
 | Non-brand SEO traffic | **~1%** | 15% | 40% | 60% |
-| Reddit karma (maia_archviz) | **91** | 200 | 1,000 | 5,000 |
+| Reddit karma (maia_archviz) | **97** | 200 | 1,000 | 5,000 |
 | Instagram followers (Maia) | **7** | 100 | 500 | 5,000 |
-| Instagram posts | **53** | 130 | 370 | 500 |
-| Instagram avg engagement | **1.4** | 10 | 50 | 200 |
+| Instagram posts | **55** | 130 | 370 | 500 |
+| Instagram avg engagement | **1.2** | 10 | 50 | 200 |
 
-## 📅 Yesterday's Snapshot (Feb 25)
+## 📅 Yesterday's Snapshot (Feb 26)
 | Métrica | Valor |
 |---------|-------|
-| Revenue | **$23.50** |
-| Purchases | **2** |
-| New signups | **12** |
-| Credit wall hits (24h) | **2** |
+| Revenue | **$0.00** |
+| Purchases | **0** |
+| New signups | **11** |
+| Credit wall hits (24h) | **7** |
 
 ---
 
@@ -50,11 +50,11 @@ Subir Trial -> Paid de **7.4%** para **8.5%** ainda nesta semana.
 ## 🔥 Reddit (u/maia_archviz)
 
 ### Current Stats
-- **Karma:** 90 comment karma, 1 post karma (total: 91)
-- **Age:** 12 days old (created ~Feb 13)
-- **Comments tracked:** 109 total
-- **Subreddit breakdown (sessão 20:00):** r/InteriorDesign (1 new comment), r/archviz (1 new comment + 1 reply), r/DesignMyRoom (1 reply)
-- **Any new replies:** sim — 2 replies handled via API
+- **Karma:** 97 comment karma, 1 post karma (total: 98)
+- **Age:** 14 days old (created ~Feb 13)
+- **Comments tracked:** 119 total
+- **Subreddit breakdown (sessão 20:00):** r/archviz (1 new comment), r/DesignMyRoom (1 new comment)
+- **Any new replies:** não — inbox/profile reviewed, no action needed
 
 ---
 
@@ -74,4 +74,4 @@ Subir Trial -> Paid de **7.4%** para **8.5%** ainda nesta semana.
 
 ---
 
-**Last updated:** February 26, 2026, 6:04 AM (America/Sao_Paulo)
+**Last updated:** February 27, 2026, 8:00 PM (America/Sao_Paulo)

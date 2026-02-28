@@ -16,16 +16,12 @@
 - [ ] Se um Codex morreu (signal 9, timeout): **respawnar imediatamente** com o mesmo task
 - [ ] Atualizar kanban (tasks.json) com status atual das tasks
 
-### 🚀 ViralClaw ($10k/month goal) — VPS ONLY, never touch local services
-- [ ] Checar VPS health (`curl -s https://api.viral-claw.com/health -H 'X-API-Key: <key>'`)
-- [ ] Revisar tasks pendentes e próximos moves no roadmap
-- [ ] Identificar próxima ação de maior impacto pro crescimento
-- [ ] Brainstorm new ideas, channels, partnerships
-- [ ] Update strategy doc (`memory/viralclaw-strategy.md`)
-- [ ] Open new issues if needed (andrehfp/viralclaw-api)
-- [ ] Report findings to André in Telegram topic 1482 (group -1003702782668)
+### 🚀 ViralClaw (banho-maria)
+- [ ] Só checar health 1x por dia (`curl -s https://api.viral-claw.com/health -H 'X-API-Key: <key>'`)
+- [ ] Não abrir frente nova sem sinal explícito do André
+- [ ] Se cair serviço/erro crítico, avisar no Telegram topic 1482
 
-### 🏠 MoldaSpace ($10k/month goal — Full Strategic Ownership)
+### 🏠 MoldaSpace ($10k/month goal - Full Strategic Ownership)
 - [ ] Reddit seeding: comentar em 3-5 posts (conta maia_archviz via Camofox)
 - [ ] Checar métricas (PostHog, GSC, Neon DB)
 - [ ] Instagram Maia: verificar comments, postar se tiver conteúdo ready
@@ -33,14 +29,8 @@
 - [ ] Monitorar threads Reddit com oportunidades de resposta
 - [ ] Report no Telegram topic 2265
 
-### 📚 Bboox (Strategic Ownership)
-- [ ] Checar estado do repo (issues, PRs, commits recentes)
-- [ ] Analisar o que falta pro lançamento
-- [ ] Cobrar André no tópico 1386 se algo tá travado
-- [ ] Criar issues no GitHub pra qualquer coisa técnica
-- [ ] Planejar próximos moves de marketing/growth
-- [ ] Pesquisar mercado, concorrentes, oportunidades
-- [ ] Preparar materiais (copy, emails, posts, ads)
+### 📚 Bboox
+- [ ] Pausado por decisão do André (não gastar ciclos até novo sinal)
 
 ### 🐦 Twitter/X Monitoring
 - [ ] Checar mentions (`x-cli me mentions --max 10`)

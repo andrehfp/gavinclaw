@@ -1,0 +1,70 @@
+{
+  "generated_at": "2026-02-27T09:15:02.797143",
+  "from": "/home/andreprado/.openclaw/workspace/moldaspace/skills/seo-agent-stack/reports/baseline_2026-02-23_0914.json",
+  "queue": [
+    {
+      "keyword": "lumion alternative",
+      "slug": "/lumion-alternative",
+      "intent": "bofu",
+      "priority": "high",
+      "cta": "5 free renders",
+      "status": "ready_for_draft"
+    },
+    {
+      "keyword": "best lumion alternative",
+      "slug": "/best-lumion-alternative",
+      "intent": "bofu",
+      "priority": "high",
+      "cta": "5 free renders",
+      "status": "ready_for_draft"
+    },
+    {
+      "keyword": "lumion alternative for architects",
+      "slug": "/lumion-alternative-for-architects",
+      "intent": "bofu",
+      "priority": "high",
+      "cta": "5 free renders",
+      "status": "ready_for_draft"
+    },
+    {
+      "keyword": "lumion alternative pricing",
+      "slug": "/lumion-alternative-pricing",
+      "intent": "bofu",
+      "priority": "high",
+      "cta": "5 free renders",
+      "status": "ready_for_draft"
+    },
+    {
+      "keyword": "lumion alternative vs enscape",
+      "slug": "/lumion-alternative-vs-enscape",
+      "intent": "bofu",
+      "priority": "high",
+      "cta": "5 free renders",
+      "status": "ready_for_draft"
+    },
+    {
+      "keyword": "d5 render alternative",
+      "slug": "/d5-render-alternative",
+      "intent": "bofu",
+      "priority": "high",
+      "cta": "5 free renders",
+      "status": "ready_for_draft"
+    },
+    {
+      "keyword": "best d5 render alternative",
+      "slug": "/best-d5-render-alternative",
+      "intent": "bofu",
+      "priority": "high",
+      "cta": "5 free renders",
+      "status": "ready_for_draft"
+    },
+    {
+      "keyword": "d5 render alternative for architects",
+      "slug": "/d5-render-alternative-for-architects",
+      "intent": "bofu",
+      "priority": "high",
+      "cta": "5 free renders",
+      "status": "ready_for_draft"
+    }
+  ]
+}

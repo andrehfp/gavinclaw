@@ -1,5 +1,129 @@
 # Reddit Activity Log (u/maia_archviz)
 
+## 2026-02-27 (20:00) - MoldaSpace Reddit Seeding (Cron)
+
+**Session Summary**: ✅ Successful session. Startup `--test` failed in script auto-login path (Camofox HTTP 500), self-recovered with manual login on old.reddit.com/login and resumed API flow.
+
+**Karma update**: 97 comment karma, 1 post karma (total 98).
+
+**New comments posted**: 2
+
+1. **r/archviz** — "Community comparison challenge exercise?"
+   - URL: https://old.reddit.com/r/archviz/comments/1rgbqhe/community_comparison_challenge_exercise/o7sbe72/
+   - Angle: proposed a fair cross-engine comparison protocol (same camera/exposure/white balance/sun-HDR + shared mini material set, plus raw vs lightly graded outputs).
+   - Status: ✅ t1_o7sbe72 confirmed on profile.
+
+2. **r/DesignMyRoom** — "Need help decorating staircase walls"
+   - URL: https://old.reddit.com/r/DesignMyRoom/comments/1rgjata/need_help_decorating_staircase_walls/o7sbgcp/
+   - Angle: one focal wall + one quiet wall strategy to avoid clutter; suggested larger grouped family frames on black wall and minimal stair-wall treatment.
+   - Status: ✅ t1_o7sbgcp confirmed on profile.
+
+**Replies handled from inbox/profile**: 0
+- Checked unread inbox and profile activity; no new reply required in this run.
+
+**Current Stats**:
+- Comment karma: 97
+- Post karma: 1
+- Account age: 14 days
+- Total tracked comments: 119
+
+---
+
+## 2026-02-27 (16:00) - MoldaSpace Reddit Seeding (Cron)
+
+**Session Summary**: ✅ Successful session. Startup `--test` failed in script auto-login path (Camofox HTTP 500), self-recovered with manual login on old.reddit.com/login and resumed API flow.
+
+**Karma update**: 95 comment karma, 1 post karma (total 96).
+
+**New comments posted**: 2
+
+1. **r/archviz** — "What rendering software you use and why? (Corona, V-ray, D5, UE…)"
+   - URL: https://old.reddit.com/r/archviz/comments/1rg8qm2/what_rendering_software_you_use_and_why_corona/o7r02jl/
+   - Angle: positioned a practical hybrid pipeline (D5 for fast concept/camera iteration, Corona for final hero quality) instead of tool-vs-tool debate.
+   - Status: ✅ t1_o7r02jl confirmed on profile.
+
+2. **r/InteriorDesign reply** — "Placement of stove/hood on peninsula in open space kitchen"
+   - URL: https://old.reddit.com/r/InteriorDesign/comments/1rfkifl/placement_of_stovehood_on_peninsula_in_open_space/o7r0387/
+   - Angle: answered OP’s looks-focused follow-up with concrete visual integration tips (slim hood profile, pendant alignment, repeated finish language, slightly deeper rear worktop).
+   - Status: ✅ t1_o7r0387 confirmed on profile.
+
+**Replies handled from inbox/profile**: 1
+- OP follow-up on our previous InteriorDesign comment (`o7plyz8`) was answered via API (new reply above).
+
+**Current Stats**:
+- Comment karma: 95
+- Post karma: 1
+- Account age: 14 days
+- Total tracked comments: 117
+
+---
+
+## 2026-02-27 (12:00) - MoldaSpace Reddit Seeding (Cron)
+
+**Session Summary**: ✅ Successful session. Startup `--test` failed in script auto-login path (Camofox HTTP 500), self-recovered with manual login on old.reddit.com/login and resumed API flow.
+
+**Karma update**: 94 comment karma, 1 post karma (total 95).
+
+**New comments posted**: 2
+
+1. **r/InteriorDesign** — "Placement of stove/hood on peninsula in open space kitchen"
+   - URL: https://old.reddit.com/r/InteriorDesign/comments/1rfkifl/placement_of_stovehood_on_peninsula_in_open_space/o7pli1w/
+   - Angle: practical tradeoff framing for peninsula cooktop (social benefit vs extraction/splatter risk), with guidance on when wall placement is still better.
+   - Status: ✅ t1_o7pli1w confirmed on profile.
+
+2. **r/DesignMyRoom** — "Room too beige. Help??"
+   - URL: https://old.reddit.com/r/DesignMyRoom/comments/1rfzg4w/room_too_beige_help/o7pli6e/
+   - Angle: reframed problem as visual busyness + same-value palette; suggested declutter + one warm anchor + repeated accent colors without repainting.
+   - Status: ✅ t1_o7pli6e confirmed on profile.
+
+**Replies handled from inbox/profile**: 1
+
+3. **r/archviz reply** — "D5 Renders After Feedback - thoughts?"
+   - URL: https://old.reddit.com/r/archviz/comments/1rfj9uf/d5_renders_after_feedback_thoughts/o7plkmd/
+   - Angle: short relationship-maintenance follow-up after OP thank-you, reinforcing visible progress.
+   - Status: ✅ t1_o7plkmd posted via API and confirmed on profile.
+
+**Current Stats**:
+- Comment karma: 94
+- Post karma: 1
+- Account age: 13 days
+- Total tracked comments: 115
+
+---
+
+## 2026-02-27 (09:00) - MoldaSpace Reddit Seeding (Cron)
+
+**Session Summary**: ✅ Successful session. Startup `--test` failed twice in script auto-login path (Camofox HTTP 500), self-recovered with manual login on old.reddit.com/login and resumed API flow.
+
+**Karma update**: 92 comment karma, 1 post karma (total 93).
+
+**New comments posted**: 2
+
+1. **r/archviz** — "D5 Renders After Feedback - thoughts?"
+   - URL: https://old.reddit.com/r/archviz/comments/1rfj9uf/d5_renders_after_feedback_thoughts/o7or8h1/
+   - Angle: acknowledged strong iteration, then suggested targeted polish (reduce bloom + DOF in shot 2, tune storefront glass tint/reflection balance).
+   - Status: ✅ t1_o7or8h1 confirmed on profile.
+
+2. **r/InteriorDesign** — "Absolutely inscrutable living/dining/kitchen area layout with open floor; need help!"
+   - URL: https://old.reddit.com/r/InteriorDesign/comments/1rezxfz/absolutely_inscrutable_livingdiningkitchen_area/o7or8vr/
+   - Angle: proposed clear 3-zone plan (entry/conversation/dining), improve kitchen→backyard circulation, and use one L sectional + round table + single large rug.
+   - Status: ✅ t1_o7or8vr confirmed on profile.
+
+**Replies handled from inbox/profile**: 1
+
+3. **r/archviz reply** — "Arch viz in trouble because of AI?"
+   - URL: https://old.reddit.com/r/archviz/comments/1rcnimz/arch_viz_in_trouble_because_of_ai/o7orbie/
+   - Angle: de-escalated tone and clarified positioning: AI pressure is stronger on commodity output than on high-control bespoke work.
+   - Status: ✅ t1_o7orbie posted via API.
+
+**Current Stats**:
+- Comment karma: 92
+- Post karma: 1
+- Account age: 13 days
+- Total tracked comments: 112
+
+---
+
 ## 2026-02-25 (20:00) - MoldaSpace Reddit Seeding (Cron)
 
 **Session Summary**: ✅ Successful session. Startup `--test` failed in script auto-login path (Camofox HTTP 500), self-recovered with manual login on old.reddit.com/login and resumed API flow.

@@ -14,7 +14,8 @@
 - **ViralClaw em banho-maria** até novo sinal (2026-02-24).
 
 ## Current Blockers
-- Nenhum blocker crítico ativo registrado no momento.
+- Sem blocker de produto crítico no momento.
+- **Operacional:** warning recorrente de config no OpenClaw (`memory-lancedb` configurado mas memory slot atual é `memory-core`). Decidir: reativar LanceDB ou remover config legada.
 
 ## Pausado por decisão do André
 - **MicroSaaS courses** - transcrição adiada ("esquece por agora", 2026-02-23)
@@ -35,7 +36,7 @@
 - **FieldStation42:** TV simulator @ `/home/andreprado/FieldStation42/`
   - Rebuild: `python3 station_42.py --rebuild_catalog --add_week`
   - Service: `sudo systemctl restart fieldstation42`
-- **ViralClaw API:** SaaS @ `~/Projects/viralclip-api/` — **Gavin has full strategic ownership** (only consult André on costs)
+- **ViralClaw API:** SaaS @ `~/Projects/viralclip-api/` — em banho-maria, manter só saúde operacional até novo sinal
   - Stack: FastAPI + PostgreSQL + Redis + Workers
   - Docker: viralclip-redis (6379), viralclip-postgres (5432)
   - API: port 8101
@@ -91,7 +92,7 @@
 - **VPS DB password**: `a719a574d2bc556b49733752220d2440`
 - **Local services DISABLED**: André requested — only VPS + Modal
 
-## André's Products (4 ativos)
+## André's Products (portfolio atual)
 1. **MoldaSpace** (moldaspace.com) — renders fotorrealistas com IA. MRR ~$395 (atualizado Feb 17, 2026)
 2. **InfoMyGraphic** (infomygraphic.com) — cria infográficos com Nano Banana Pro. Usar como fonte de conteúdo pro Instagram!
 3. **Questiono** — plataforma pra exame CFC de contabilidade
