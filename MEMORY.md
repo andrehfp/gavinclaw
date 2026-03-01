@@ -16,6 +16,7 @@
 ## Current Blockers
 - Sem blocker de produto crítico no momento.
 - **Operacional:** warning recorrente de config no OpenClaw (`memory-lancedb` configurado mas memory slot atual é `memory-core`). Decidir: reativar LanceDB ou remover config legada.
+- **Operacional:** warning `channels.whatsapp.enabled unknown` continua aparecendo no CLI mesmo após `openclaw doctor --fix` (aparenta ser ruído de validação, não quebra cron).
 
 ## Pausado por decisão do André
 - **MicroSaaS courses** - transcrição adiada ("esquece por agora", 2026-02-23)

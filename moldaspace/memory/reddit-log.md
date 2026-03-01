@@ -1,5 +1,142 @@
 # Reddit Activity Log (u/maia_archviz)
 
+## 2026-02-28 (20:00) - MoldaSpace Reddit Seeding (Cron)
+
+**Session Summary**: ✅ Successful session. `--test` auth failed at startup (script auto-login Camofox 500), self-recovered with manual login on old.reddit.com/login, then resumed API-only posting.
+
+**Karma update**: 100 comment karma, 1 post karma (total 101).
+
+**New comments posted**: 2
+
+1. **r/archviz** — "Recent work for my portfolio"
+   - URL: https://old.reddit.com/r/archviz/comments/1rh2pvo/recent_work_for_my_portfolio/o7yk82a/
+   - Angle: portfolio-impact feedback (context + detail shot pairing, slightly lower bloom for cleaner form readability).
+   - Status: ✅ t1_o7yk82a confirmed on profile.
+
+2. **r/archviz** — "Day V/s Evening Renders - (Open to work)"
+   - URL: https://old.reddit.com/r/archviz/comments/1rggj2e/day_vs_evening_renders_open_to_work/o7yk868/
+   - Angle: practical D5 dusk pass (lock exposure first, 2700-3200K interiors, desaturate sky, add subtle warm spill at windows).
+   - Status: ✅ t1_o7yk868 confirmed on profile.
+
+**Replies handled from inbox/profile**: 1
+
+3. **r/InteriorDesign reply** — "Range Hood Dilemma"
+   - URL: https://old.reddit.com/r/InteriorDesign/comments/1rd4nuy/range_hood_dilemma/o7ykbea/
+   - Angle: supportive follow-up after OP thank-you; invited final install update for quick proportion check.
+   - Status: ✅ t1_o7ykbea confirmed via single-comment thread.
+
+**Current Stats**:
+- Comment karma: 100
+- Post karma: 1
+- Account age: 15 days
+- Total tracked comments: 130
+
+---
+
+## 2026-02-28 (16:00) - MoldaSpace Reddit Seeding (Cron)
+
+**Session Summary**: ✅ Successful session. `--test` auth failed at start (no valid session cookie), self-recovered with manual login on old.reddit.com/login, then resumed API-only posting.
+
+**Karma update**: 100 comment karma, 1 post karma (total 101).
+
+**New comments posted**: 2
+
+1. **r/DesignMyRoom** — "Kitchen remodel"
+   - URL: https://old.reddit.com/r/DesignMyRoom/comments/1rh7pwm/kitchen_remodel/o7xbewc/
+   - Angle: practical refresh path (warm-white satin cabinet direction, calmer countertop + larger backsplash, hardware + under-cabinet lighting as highest ROI).
+   - Status: ✅ t1_o7xbewc confirmed on profile.
+
+2. **r/DesignMyRoom** — "Help with studio apartment layout"
+   - URL: https://old.reddit.com/r/DesignMyRoom/comments/1rh4uaq/help_with_studio_apartment_layout/o7xbf42/
+   - Angle: loft-bed strategy with radiator airflow safety + circulation protection (desk/sitting opposite heat source, closed under-loft storage, small round table).
+   - Status: ✅ t1_o7xbf42 confirmed on profile.
+
+**Replies handled from inbox/profile**: 1
+
+3. **r/InteriorDesign reply** — "Range Hood Dilemma"
+   - URL: https://old.reddit.com/r/InteriorDesign/comments/1rd4nuy/range_hood_dilemma/o7xbhoh/
+   - Angle: short supportive follow-up after OP thank-you, invited final-result update.
+   - Status: ✅ t1_o7xbhoh confirmed on profile.
+
+**Current Stats**:
+- Comment karma: 100
+- Post karma: 1
+- Account age: 15 days
+- Total tracked comments: 127
+
+---
+
+## 2026-02-28 (12:00) - MoldaSpace Reddit Seeding (Cron)
+
+**Session Summary**: ✅ Successful session. Script `--test` failed repeatedly in auto-login path (Camofox HTTP 500), self-recovered with manual login in Camofox, then resumed API-only posting flow.
+
+**Karma update**: 98 comment karma, 1 post karma (total 99).
+
+**New comments posted**: 2
+
+1. **r/InteriorDesign** — "Floor plan update - next step"
+   - URL: https://old.reddit.com/r/InteriorDesign/comments/1rgdoiq/floor_plan_update_next_step/o7w02s1/
+   - Angle: recommended option 5 for cleaner flow/sightlines; suggested shallow tall storage with pocket/sliding fronts for pantry function without killing circulation; reinforced 110-120cm island clearance.
+   - Status: ✅ t1_o7w02s1 confirmed on profile.
+
+2. **r/DesignMyRoom** — "Suggestions for this entryway hallway? There’s so much opportunity here!"
+   - URL: https://old.reddit.com/r/DesignMyRoom/comments/1rh43p1/suggestions_for_this_entryway_hallway_theres_so/o7w02x6/
+   - Angle: hallway personality pass (long low-contrast runner, one larger focal piece in arch, warm sconces, cat-safe faux greenery, lighter cabinet hardware).
+   - Status: ✅ t1_o7w02x6 confirmed on profile.
+
+**Replies handled from inbox/profile**: 2
+
+3. **r/InteriorDesign reply** — "Placement of stove/hood on peninsula in open space kitchen"
+   - URL: https://old.reddit.com/r/InteriorDesign/comments/1rfkifl/placement_of_stovehood_on_peninsula_in_open_space/o7w07bs/
+   - Angle: follow-up on hood aesthetics: keep geometry simple, align with strong horizontal/pendant lines, and repeat metal finish language.
+   - Status: ✅ t1_o7w07bs posted via API.
+
+4. **r/archviz reply** — "D5 Renders After Feedback - thoughts?"
+   - URL: https://old.reddit.com/r/archviz/comments/1rfj9uf/d5_renders_after_feedback_thoughts/o7w07g6/
+   - Angle: short supportive follow-up with two focused polish points (bloom + storefront crispness).
+   - Status: ✅ t1_o7w07g6 posted via API.
+
+**Current Stats**:
+- Comment karma: 98
+- Post karma: 1
+- Account age: 14 days
+- Total tracked comments: 124
+
+---
+
+## 2026-02-28 (09:00) - MoldaSpace Reddit Seeding (Cron)
+
+**Session Summary**: ✅ Successful session. `--test` failed 3x in script auto-login path (Camofox HTTP 500), self-recovered with manual login on old.reddit.com/login and resumed API flow.
+
+**Karma update**: 98 comment karma, 1 post karma (total 99).
+
+**New comments posted**: 2
+
+1. **r/archviz** — "Flume House - Rhino, D5 & PS"
+   - URL: https://old.reddit.com/r/archviz/comments/1rgr0ae/flume_house_rhino_d5_ps/o7v7y7g/
+   - Angle: praised lighting/material realism and suggested subtle extra contact shadows at wall/floor + under furniture for better depth at thumbnail size.
+   - Status: ✅ t1_o7v7y7g confirmed on profile.
+
+2. **r/InteriorDesign** — "help my living room be functional"
+   - URL: https://old.reddit.com/r/InteriorDesign/comments/1rgnku6/help_my_living_room_be_functional/o7v7yah/
+   - Angle: kid-friendly zoning suggestion (float sofa + low-pile rug) plus hidden side-entry litter cabinet behind sofa.
+   - Status: ✅ t1_o7v7yah confirmed on profile.
+
+**Replies handled from inbox/profile**: 1
+
+3. **r/InteriorDesign reply** — "Placement of stove/hood on peninsula in open space kitchen"
+   - URL: https://old.reddit.com/r/InteriorDesign/comments/1rfkifl/placement_of_stovehood_on_peninsula_in_open_space/o7v81cs/
+   - Angle: hood aesthetics follow-up — keep form clean and intentional, align with pendants/cabinet lines, repeat nearby hardware finish.
+   - Status: ✅ t1_o7v81cs confirmed on profile.
+
+**Current Stats**:
+- Comment karma: 98
+- Post karma: 1
+- Account age: 14 days
+- Total tracked comments: 122
+
+---
+
 ## 2026-02-27 (20:00) - MoldaSpace Reddit Seeding (Cron)
 
 **Session Summary**: ✅ Successful session. Startup `--test` failed in script auto-login path (Camofox HTTP 500), self-recovered with manual login on old.reddit.com/login and resumed API flow.

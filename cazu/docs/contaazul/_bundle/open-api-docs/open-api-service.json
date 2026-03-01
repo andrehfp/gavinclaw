@@ -1,0 +1,724 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "description": "A API de Serviços (v1) tem como objetivo permitir que sistemas externos gerenciem e integrem o catálogo de serviços da empresa, ou operações de serviço (como ordens de serviço, contratos de serviço, ou prestação contínua) de forma automatizada. Por meio dessa API, é possível criar, listar, consultar e ajustar os serviços cadastrados.\n\nSe desejar aprofundar o entendimento das regras de negócio aplicadas pelo ERP, recomendamos, de forma opcional a consulta à nossa Central de Ajuda:\n\n[https://ajuda.contaazul.com/hc/pt-br/articles/7538793724301-Serviços-como-cadastrar](https://ajuda.contaazul.com/hc/pt-br/articles/7538793724301-Servi%C3%A7os-como-cadastrar)",
+    "title": "Serviços",
+    "contact": {},
+    "version": "v1"
+  },
+  "paths": {
+    "/v1/servicos": {
+      "get": {
+        "security": [
+          {
+            "BearerAuth": []
+          }
+        ],
+        "description": "Permite listar os serviços cadastrados, com suporte a filtros como página, tamanho de página, busca por nome ou código. Ideal para sincronização de catálogo de serviços.",
+        "tags": [
+          "v1"
+        ],
+        "summary": "Retornar os serviços por filtro",
+        "operationId": "obterServicosPorFiltro",
+        "parameters": [
+          {
+            "description": "Página",
+            "name": "pagina",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "default": 1
+            }
+          },
+          {
+            "description": "Tamanho da página",
+            "name": "tamanho_pagina",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "default": 10
+            }
+          },
+          {
+            "description": "Busca textual por nome, código ou descrição do serviço",
+            "name": "busca_textual",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/ServicosPorFiltro"
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErroAPI"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErroAPI"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErroAPI"
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "security": [
+          {
+            "BearerAuth": []
+          }
+        ],
+        "description": "Permite criar um novo serviço, informando dados como código interno, descrição, tipo de serviço, preço, status (ativo/inativo), entre outros. Ideal para cadastro automatizado de serviços em sistemas externos.",
+        "tags": [
+          "v1"
+        ],
+        "summary": "Criar um novo serviço",
+        "operationId": "criarServico",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CriarServico"
+              }
+            }
+          },
+          "description": "Dados do serviço a ser criado",
+          "required": true
+        },
+        "responses": {
+          "201": {
+            "description": "Created",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Servico"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErroAPI"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErroAPI"
+                }
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "security": [
+          {
+            "BearerAuth": []
+          }
+        ],
+        "description": "Permite remover um serviço existente pelo seu identificador. Essa ação deve ser usada com cautela, pois pode impactar vendas ou contratos em uso.",
+        "tags": [
+          "v1"
+        ],
+        "summary": "Deletar serviços em lote",
+        "operationId": "deletarServicosEmLote",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ParametrosParaDeletarServicosEmLote"
+              }
+            }
+          },
+          "description": "IDs dos serviços a serem deletados",
+          "required": true
+        },
+        "responses": {
+          "204": {
+            "description": "No Content"
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErroAPI"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErroAPI"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErroAPI"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v1/servicos/{id}": {
+      "get": {
+        "security": [
+          {
+            "BearerAuth": []
+          }
+        ],
+        "description": "Permite consultar os detalhes de um serviço específico pelo seu identificador (id). A resposta inclui campos como nome, código, descrição, preço, status, parâmetros de serviço, entre outros.",
+        "tags": [
+          "v1"
+        ],
+        "summary": "Retornar o serviço por id",
+        "operationId": "obterServicoPorId",
+        "parameters": [
+          {
+            "description": "id do serviço",
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Servico"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErroAPI"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErroAPI"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErroAPI"
+                }
+              }
+            }
+          }
+        }
+      },
+      "patch": {
+        "security": [
+          {
+            "BearerAuth": []
+          }
+        ],
+        "description": "Permite atualizar parcialmente um serviço existente, como alterar o preço, descrição, status, ou outras propriedades que mudaram. Permite ajustes rápidos sem necessidade de substituir o objeto completo.",
+        "tags": [
+          "v1"
+        ],
+        "summary": "Atualizar parcialmente um serviço por id",
+        "operationId": "atualizarServicoParcialmente",
+        "parameters": [
+          {
+            "description": "id do serviço",
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/AtualizacaoParcialServico"
+              }
+            }
+          },
+          "description": "Dados do serviço a ser atualizado parcialmente",
+          "required": true
+        },
+        "responses": {
+          "204": {
+            "description": "No Content"
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErroAPI"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErroAPI"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "tags": [
+    {
+      "description": "Operações relacionadas a serviços",
+      "name": "v1"
+    }
+  ],
+  "servers": [
+    {
+      "url": "https://api-v2.contaazul.com"
+    }
+  ],
+  "components": {
+    "securitySchemes": {
+      "BearerAuth": {
+        "description": "Digite **'Bearer &lt;JWT&gt;'**, onde JWT é o access_token recebido no login (passo 2 do fluxo de autenticação).",
+        "type": "apiKey",
+        "name": "Authorization",
+        "in": "header"
+      }
+    },
+    "schemas": {
+      "AtualizacaoParcialServico": {
+        "description": "Modelo de atualização parcial de serviço",
+        "type": "object",
+        "properties": {
+          "codigo": {
+            "description": "Código interno do serviço",
+            "type": "string",
+            "maxLength": 20,
+            "example": "SERV001"
+          },
+          "custo": {
+            "description": "Custo do serviço",
+            "type": "number",
+            "minimum": 0,
+            "example": 50
+          },
+          "descricao": {
+            "description": "Descrição do serviço",
+            "type": "string",
+            "maxLength": 100,
+            "example": "Serviço de consultoria"
+          },
+          "preco": {
+            "description": "Preço de venda do serviço",
+            "type": "number",
+            "minimum": 0,
+            "example": 100
+          },
+          "tipo_servico": {
+            "description": "Tipo do serviço conforme (PRESTADO, TOMADO, AMBOS)",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/TipoDeServico"
+              }
+            ],
+            "example": "PRESTADO"
+          }
+        }
+      },
+      "CenarioDeTributacaoDoServico": {
+        "description": "Modelo de resposta para o cenário de tributação do serviço",
+        "type": "object",
+        "properties": {
+          "id": {
+            "description": "ID do cenário de tributação",
+            "type": "string",
+            "example": "cenario_001"
+          },
+          "inss_aliquota": {
+            "description": "Alíquota do INSS",
+            "type": "number",
+            "example": 11
+          },
+          "iss_aliquota": {
+            "description": "Alíquota do ISS",
+            "type": "number",
+            "example": 5
+          },
+          "iss_retido": {
+            "description": "Indica se o ISS é retido",
+            "type": "boolean",
+            "example": false
+          },
+          "municipio": {
+            "description": "Cidade do cenário de tributação",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/CidadeDoServico"
+              }
+            ]
+          },
+          "nome_usuario": {
+            "description": "Nome do usuário que criou o cenário",
+            "type": "string",
+            "example": "João Silva"
+          },
+          "ultima_atualizacao": {
+            "description": "Data e hora da última atualização do cenário",
+            "type": "string",
+            "example": "2024-01-15T10:30:00Z"
+          }
+        }
+      },
+      "CidadeDoServico": {
+        "description": "Modelo de resposta para a cidade do serviço",
+        "type": "object",
+        "properties": {
+          "codigo": {
+            "description": "Código do município",
+            "type": "integer",
+            "example": 3550308
+          },
+          "nome": {
+            "description": "Nome do município",
+            "type": "string",
+            "example": "São Paulo"
+          },
+          "uf": {
+            "description": "Sigla do estado",
+            "type": "string",
+            "example": "SP"
+          }
+        }
+      },
+      "CriarServico": {
+        "description": "Modelo de criação de serviço",
+        "type": "object",
+        "required": [
+          "descricao"
+        ],
+        "properties": {
+          "codigo": {
+            "description": "Código interno do serviço",
+            "type": "string",
+            "maxLength": 20,
+            "example": "SERV001"
+          },
+          "custo": {
+            "description": "Custo do serviço",
+            "type": "number",
+            "example": 250
+          },
+          "descricao": {
+            "description": "Descrição do serviço",
+            "type": "string",
+            "maxLength": 100,
+            "minLength": 1,
+            "example": "Serviço de consultoria técnica"
+          },
+          "preco": {
+            "description": "Preço de venda do serviço",
+            "type": "number",
+            "example": 500
+          },
+          "status": {
+            "description": "Status atual do serviço (ATIVO/INATIVO)",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/StatusDoServico"
+              }
+            ],
+            "example": "ATIVO"
+          },
+          "tipo_servico": {
+            "description": "Tipo do serviço conforme (PRESTADO, TOMADO, AMBOS)",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/TipoDeServico"
+              }
+            ],
+            "example": "PRESTADO"
+          }
+        }
+      },
+      "ErroAPI": {
+        "description": "Modelo de resposta para erros da API",
+        "type": "object",
+        "properties": {
+          "error": {
+            "description": "Mensagem de erro",
+            "type": "string",
+            "example": "Mensagem de erro detalhada"
+          }
+        }
+      },
+      "NaturezaOperacionalDoServico": {
+        "description": "Modelo de resposta para a natureza operacional do serviço",
+        "type": "object",
+        "properties": {
+          "id": {
+            "description": "ID da natureza operacional",
+            "type": "string",
+            "example": "natureza_001"
+          }
+        }
+      },
+      "Paginacao": {
+        "description": "Modelo de resposta para paginação dos resultados",
+        "type": "object",
+        "properties": {
+          "pagina_atual": {
+            "description": "Página atual",
+            "type": "integer",
+            "example": 1
+          },
+          "tamanho_pagina": {
+            "description": "Tamanho da página",
+            "type": "integer",
+            "example": 10
+          },
+          "total_itens": {
+            "description": "Total de itens",
+            "type": "integer",
+            "example": 50
+          },
+          "total_paginas": {
+            "description": "Total de páginas",
+            "type": "integer",
+            "example": 5
+          }
+        }
+      },
+      "ParametrosParaDeletarServicosEmLote": {
+        "description": "Parâmetros para deletar serviços em lote'",
+        "type": "object",
+        "required": [
+          "ids"
+        ],
+        "properties": {
+          "ids": {
+            "description": "IDs dos serviços a serem deletados",
+            "type": "array",
+            "items": {
+              "type": "integer"
+            },
+            "example": [
+              73233,
+              73234,
+              73235
+            ]
+          }
+        }
+      },
+      "Servico": {
+        "description": "Modelo de resposta para o serviço contendo todas as informações necessárias",
+        "type": "object",
+        "properties": {
+          "codigo": {
+            "description": "Código interno do serviço",
+            "type": "string",
+            "example": "SERV001"
+          },
+          "codigo_cnae": {
+            "description": "Código CNAE do serviço",
+            "type": "string",
+            "example": "6201500"
+          },
+          "codigo_municipio_servico": {
+            "description": "Código do município onde o serviço é prestado",
+            "type": "string",
+            "example": "3550308"
+          },
+          "custo": {
+            "description": "Custo do serviço",
+            "type": "number",
+            "example": 250
+          },
+          "descricao": {
+            "description": "Descrição detalhada do serviço",
+            "type": "string",
+            "example": "Serviço de consultoria técnica"
+          },
+          "id": {
+            "description": "ID (uuid) do serviço",
+            "type": "string",
+            "example": "e7090261-9978-4d37-86f8-0800851da683"
+          },
+          "id_externo": {
+            "description": "ID externo do serviço",
+            "type": "string",
+            "example": "EXT123"
+          },
+          "id_servico": {
+            "description": "ID do serviço no sistema legado",
+            "type": "integer",
+            "example": 73233
+          },
+          "lei_116": {
+            "description": "Lei 116 associada ao serviço",
+            "type": "string",
+            "example": "116/03"
+          },
+          "lista_cenario_tributario": {
+            "description": "Lista de cenários de tributação do serviço",
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/CenarioDeTributacaoDoServico"
+            }
+          },
+          "natureza_operacional": {
+            "description": "Natureza operacional do serviço",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/NaturezaOperacionalDoServico"
+              }
+            ]
+          },
+          "preco": {
+            "description": "Preço de venda do serviço",
+            "type": "number",
+            "example": 500
+          },
+          "status": {
+            "description": "Status atual do serviço (ATIVO/INATIVO)",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/StatusDoServico"
+              }
+            ],
+            "example": "ATIVO"
+          },
+          "tipo_servico": {
+            "description": "Tipo do serviço conforme enum",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/TipoDeServico"
+              }
+            ],
+            "example": "PRESTADO"
+          }
+        }
+      },
+      "ServicosPorFiltro": {
+        "description": "Modelo de resposta para os serviços contendo todas as informações necessárias",
+        "type": "object",
+        "properties": {
+          "itens": {
+            "description": "Lista de serviços",
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Servico"
+            }
+          },
+          "paginacao": {
+            "description": "Paginação",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/Paginacao"
+              }
+            ]
+          }
+        }
+      },
+      "StatusDoServico": {
+        "description": "Enum de status do serviço",
+        "type": "string",
+        "enum": [
+          "ATIVO",
+          "INATIVO"
+        ],
+        "x-enum-varnames": [
+          "ENABLED",
+          "DISABLED"
+        ]
+      },
+      "TipoDeServico": {
+        "description": "Enum de tipo de serviço",
+        "type": "string",
+        "enum": [
+          "PRESTADO",
+          "TOMADO",
+          "AMBOS"
+        ],
+        "x-enum-varnames": [
+          "PROVIDED",
+          "TAKEN",
+          "BOTH"
+        ]
+      }
+    }
+  }
+}

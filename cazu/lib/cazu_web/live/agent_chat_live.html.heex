@@ -1,0 +1,281 @@
+<Layouts.app
+  flash={@flash}
+  show_header={false}
+  main_class="px-2 py-2 sm:px-3 lg:px-4"
+  container_class="agent-chat-container"
+>
+  <section
+    id="agent-console-shell"
+    class="agent-console"
+  >
+    <div class="agent-console-grid">
+      <aside class="agent-sidebar">
+        <div class="agent-card">
+          <p class="agent-eyebrow">Local Sandbox</p>
+          <p class="agent-title">Agent Operations Console</p>
+          <p class="agent-mono agent-subtle">chat: {@chat_id}</p>
+        </div>
+
+        <div class="agent-status-row">
+          <span class={[
+            "agent-pill",
+            if(@integration_connected?,
+              do: "agent-pill-connected",
+              else: "agent-pill-disconnected"
+            )
+          ]}>
+            <%= if @integration_connected? do %>
+              connected
+            <% else %>
+              disconnected
+            <% end %>
+          </span>
+        </div>
+
+        <.form
+          for={@session_form}
+          id="agent-chat-session-form"
+          phx-submit="switch_session"
+          class="agent-form"
+        >
+          <.input
+            field={@session_form[:chat_id]}
+            id="agent-chat-chat-id"
+            type="text"
+            label="Chat ID"
+            class="agent-input-control"
+          />
+
+          <.input
+            field={@session_form[:telegram_user_id]}
+            id="agent-chat-user-id"
+            type="text"
+            label="Telegram User ID"
+            class="agent-input-control"
+          />
+
+          <button
+            type="submit"
+            class="agent-btn agent-btn-secondary"
+          >
+            Switch Session
+          </button>
+        </.form>
+
+        <div class="agent-card">
+          <h2 class="agent-eyebrow">Conta Azul</h2>
+
+          <dl class="agent-metrics">
+            <div class="agent-metric-row">
+              <dt>Status</dt>
+              <dd id="agent-chat-integration-status" class="agent-mono">
+                {if(@integration, do: @integration.status, else: "missing")}
+              </dd>
+            </div>
+            <div class="agent-metric-row">
+              <dt>Workspace</dt>
+              <dd
+                id="agent-chat-workspace-id"
+                class="agent-mono agent-metric-workspace"
+              >
+                {if(@integration, do: @integration.external_workspace_id || "-", else: "-")}
+              </dd>
+            </div>
+            <div class="agent-metric-row">
+              <dt>Token expires</dt>
+              <dd id="agent-chat-token-expires" class="agent-mono">
+                {if(@integration, do: @integration.token_expires_at || "-", else: "-")}
+              </dd>
+            </div>
+          </dl>
+
+          <a
+            id="agent-chat-conta-azul-connect"
+            class="agent-btn agent-btn-primary agent-link-btn"
+            href={~p"/auth/conta-azul/start?chat_id=#{@chat_id}"}
+          >
+            <%= if @integration_connected? do %>
+              Reconnect Conta Azul
+            <% else %>
+              Connect Conta Azul
+            <% end %>
+          </a>
+        </div>
+      </aside>
+
+      <section class="agent-main">
+        <header class="agent-main-header">
+          <div class="agent-main-header-inner">
+            <div>
+              <p class="agent-main-title">Agent Chat</p>
+              <p class="agent-main-subtitle">Telegram user: {@telegram_user_id}</p>
+            </div>
+
+            <div
+              :if={@message_count > 0 and (@typing || @pending_jobs?)}
+              class="agent-pill agent-pill-pending"
+            >
+              <span class="agent-pulse-dot"></span> Processing
+            </div>
+
+            <button
+              id="agent-chat-clear-thread"
+              type="button"
+              phx-click="clear_thread"
+              class="agent-btn agent-btn-secondary"
+            >
+              Clear thread
+            </button>
+          </div>
+        </header>
+
+        <div id="agent-thread-wrap" class="agent-thread-wrap" phx-hook="AutoScrollThread">
+          <div class="agent-thread">
+            <div
+              :if={@message_count == 0 and is_nil(@typing)}
+              class="agent-empty-state"
+            >
+              Send a message to start testing the agent flow.
+            </div>
+
+            <div id="agent-chat-messages" phx-update="stream" class="agent-messages">
+              <article
+                :for={{dom_id, msg} <- @streams.messages}
+                id={dom_id}
+                class={[
+                  "agent-message-row",
+                  msg.role == "user" && "agent-message-user",
+                  msg.role == "tool" && "agent-message-tool",
+                  msg.role != "user" && "agent-message-assistant"
+                ]}
+              >
+                <div class={[
+                  "agent-bubble",
+                  msg.role == "user" && "agent-bubble-user",
+                  msg.role == "tool" && "agent-bubble-runtime",
+                  msg.role != "user" && "agent-bubble-assistant",
+                  msg.action == "tool_result" && "agent-bubble-tool-result",
+                  msg.level == "success" && "agent-bubble-runtime-success",
+                  msg.level == "warn" && "agent-bubble-runtime-warn",
+                  msg.level == "error" && "agent-bubble-runtime-error",
+                  msg.action in ["tool_execution_failed", "llm_error", "fallback_tool_error"] &&
+                    "agent-bubble-error"
+                ]}>
+                  <div class="agent-bubble-meta">
+                    <span>
+                      {if msg.role == "user",
+                        do: "you",
+                        else: if(msg.role == "tool", do: "runtime", else: "assistant")}
+                    </span>
+                  </div>
+
+                  <%= if msg.role in ["user", "tool"] do %>
+                    <p class="agent-bubble-content">{msg.content}</p>
+                  <% else %>
+                    <p
+                      class="agent-bubble-content"
+                      data-markdown="true"
+                      data-markdown-source={msg.content}
+                    >
+                    </p>
+                  <% end %>
+                  <p class="agent-bubble-time">{msg.at}</p>
+                </div>
+              </article>
+            </div>
+
+            <article :if={@typing} class="agent-message-row agent-message-assistant">
+              <div class="agent-bubble agent-bubble-assistant">
+                <div class="agent-bubble-meta">
+                  <span>assistant</span>
+                </div>
+
+                <p class="agent-bubble-content">
+                  {@typing.visible_content}<span class="animate-pulse">▋</span>
+                </p>
+                <p class="agent-bubble-time">{@typing.entry.at}</p>
+              </div>
+            </article>
+
+            <article :if={@assistant_streaming} class="agent-message-row agent-message-assistant">
+              <div class="agent-bubble agent-bubble-assistant">
+                <div class="agent-bubble-meta">
+                  <span>assistant</span>
+                </div>
+
+                <p class="agent-bubble-content">
+                  {@assistant_streaming.content}<span class="animate-pulse">▋</span>
+                </p>
+                <p class="agent-bubble-time">{@assistant_streaming.at}</p>
+              </div>
+            </article>
+
+            <article
+              :if={
+                !@typing && is_nil(@assistant_streaming) && @assistant_thinking? &&
+                  @message_count > 0
+              }
+              class="agent-message-row agent-message-assistant"
+              id="agent-thinking-bubble"
+            >
+              <div class="agent-bubble agent-bubble-assistant">
+                <div class="agent-bubble-meta">
+                  <span>assistant</span>
+                </div>
+
+                <p class="agent-bubble-content">
+                  typing
+                  <span class="animate-pulse">.</span><span class="animate-pulse">.</span><span class="animate-pulse">.</span>
+                </p>
+              </div>
+            </article>
+          </div>
+        </div>
+
+        <footer class="agent-composer">
+          <div class="agent-composer-inner">
+            <.form
+              for={@chat_form}
+              id="agent-chat-form"
+              phx-submit="send_message"
+              action={~p"/agent/chat/send"}
+              method="post"
+            >
+              <input type="hidden" name="chat[chat_id]" value={@chat_id} />
+              <input type="hidden" name="chat[telegram_user_id]" value={@telegram_user_id} />
+
+              <div class="agent-composer-card">
+                <.input
+                  field={@chat_form[:text]}
+                  id="agent-chat-text"
+                  type="textarea"
+                  phx-hook="ClearOnSend"
+                  onkeydown="if(event.key==='Enter' && !event.shiftKey && !event.isComposing){event.preventDefault(); this.form && this.form.requestSubmit();}"
+                  label="Message"
+                  placeholder="Message Agent Console..."
+                  rows={3}
+                  class="agent-input-control agent-textarea"
+                />
+
+                <div class="agent-composer-row">
+                  <p class="agent-flow-note">
+                    Real-time agent chat
+                  </p>
+
+                  <button
+                    id="agent-chat-submit"
+                    type="submit"
+                    class="agent-btn agent-btn-primary"
+                    disabled={!@integration_connected?}
+                  >
+                    Send message
+                  </button>
+                </div>
+              </div>
+            </.form>
+          </div>
+        </footer>
+      </section>
+    </div>
+  </section>
+</Layouts.app>

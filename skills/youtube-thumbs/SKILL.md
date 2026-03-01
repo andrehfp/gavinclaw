@@ -15,6 +15,8 @@ metadata:
 
 # YouTube Thumbs 🎨
 
+⚠️ Status operacional: **PAUSADO** por decisão do André (Feb/2026). Só usar se ele pedir explicitamente para reativar.
+
 Generate YouTube thumbnail variations for André's channel.
 
 ## Workflow

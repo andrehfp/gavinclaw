@@ -1,0 +1,41 @@
+<Layouts.flash_group flash={@flash} />
+
+<div class="mx-auto max-w-3xl px-4 py-12">
+  <h1 class="text-2xl font-semibold">Connect Conta Azul</h1>
+  <p class="mt-2 text-sm text-base-content/70">Peace of mind from prototype to production.</p>
+  <p class="mt-2 text-sm text-base-content/70">
+    Authenticate with your Conta Azul account to generate and store tokens in `tenant_integrations`.
+  </p>
+
+  <div class="mt-6 rounded-lg border border-base-300 bg-base-100 p-6">
+    <.form
+      for={@auth_form}
+      id="conta-azul-auth-form"
+      action={~p"/auth/conta-azul/start"}
+      method="get"
+    >
+      <div class="grid gap-4">
+        <.input
+          field={@auth_form[:tenant_id]}
+          id="auth-tenant-id"
+          type="text"
+          label="Tenant ID (optional)"
+          placeholder="Leave blank to use Conta Azul identity"
+        />
+
+        <button id="auth-submit" type="submit" class="btn btn-primary w-full sm:w-auto">
+          Connect with Conta Azul
+        </button>
+      </div>
+    </.form>
+  </div>
+
+  <%= if @connected do %>
+    <div
+      id="oauth-success-state"
+      class="mt-4 rounded-md border border-emerald-300 bg-emerald-50 p-3 text-sm text-emerald-800"
+    >
+      OAuth callback completed and tokens were saved.
+    </div>
+  <% end %>
+</div>

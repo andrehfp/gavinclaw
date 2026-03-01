@@ -1,0 +1,287 @@
+{
+  "openapi": "3.0.1",
+  "info": {
+    "title": "Cobranças",
+    "version": "v1",
+    "description": "A API de Cobranças tem como objetivo automatizar e centralizar o processo de emissão, consulta e acompanhamento de solicitações de cobrança. Por meio dessa funcionalidade, sistemas externos conseguem integrar-se de forma eficiente com a plataforma para gerir todo o ciclo de cobranças de clientes, melhorando a visibilidade, reduzindo erros e acelerando o processo financeiro.\n\nSe desejar aprofundar o entendimento das regras de negócio aplicadas pelo ERP, recomendamos, de forma opcional a consulta à nossa Central de Ajuda:\n\n**Cobranças:**  \n[https://ajuda.contaazul.com/hc/pt-br/sections/19712368690189-Cobran%C3%A7as](https://ajuda.contaazul.com/hc/pt-br/sections/19712368690189-Cobran%C3%A7as)\n\n**Lançamentos Financeiros:**  \n[https://ajuda.contaazul.com/hc/pt-br/sections/20564397198989-Lan%C3%A7amentos-financeiros-contas-a-receber-e-a-pagar](https://ajuda.contaazul.com/hc/pt-br/sections/20564397198989-Lan%C3%A7amentos-financeiros-contas-a-receber-e-a-pagar)\n"
+  },
+  "servers": [
+    {
+      "url": "https://api-v2.contaazul.com",
+      "description": "Servidor de produção"
+    }
+  ],
+  "tags": [
+    {
+      "name": "v1",
+      "description": "Conjunto de recursos para acompanhar e administrar operações relacionadas a cobranças - esses recursos incluem retornar a cobrança por id, deletar cobrança por id e criar uma nova cobrança"
+    }
+  ],
+  "security": [
+    {
+      "BearerAuth": []
+    }
+  ],
+  "paths": {
+    "/v1/financeiro/eventos-financeiros/contas-a-receber/cobranca/{id_cobranca}": {
+      "get": {
+        "summary": "Retornar a cobrança por id",
+        "operationId": "buscarCobrancaPorId",
+        "description": "Permite consultar os detalhes de uma cobrança específica utilizando seu identificador único (id_cobranca).",
+        "tags": [
+          "v1"
+        ],
+        "parameters": [
+          {
+            "name": "id_cobranca",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            },
+            "description": "Identificador único da cobrança"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GerarCobrancaResponseDto"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "404": {
+            "description": "Not Found"
+          },
+          "429": {
+            "description": "Too Many Requests"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      },
+      "delete": {
+        "summary": "Deletar cobrança por id",
+        "operationId": "deletarCobrancaPorId",
+        "description": "Permite cancelar uma cobrança existente identificada por id_cobranca. É recomendada apenas quando a cobrança foi gerada incorretamente ou precisa ser invalidada antes de seu pagamento.",
+        "tags": [
+          "v1"
+        ],
+        "parameters": [
+          {
+            "name": "id_cobranca",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            },
+            "description": "Identificador único da cobrança"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "404": {
+            "description": "Not Found"
+          },
+          "429": {
+            "description": "Too Many Requests"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
+    "/v1/financeiro/eventos-financeiros/contas-a-receber/gerar-cobranca": {
+      "post": {
+        "summary": "Criar uma nova cobrança",
+        "operationId": "criarCobranca",
+        "description": "Permite criar uma nova cobrança, por meio desse endpoint, é possível informar o valor, data de vencimento, descrição da fatura e demais parâmetros que definem a cobrança. Essa funcionalidade facilita a geração automatizada de cobranças.",
+        "tags": [
+          "v1"
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/GerarCobrancaRequestDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GerarCobrancaResponseDto"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "429": {
+            "description": "Too Many Requests"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "securitySchemes": {
+      "BearerAuth": {
+        "type": "http",
+        "scheme": "bearer",
+        "bearerFormat": "JWT",
+        "description": "Token de autorização Bearer JWT"
+      }
+    },
+    "schemas": {
+      "GerarCobrancaRequestDto": {
+        "type": "object",
+        "required": [
+          "conta_bancaria",
+          "descricao_fatura",
+          "id_parcela",
+          "data_vencimento",
+          "tipo"
+        ],
+        "properties": {
+          "conta_bancaria": {
+            "type": "string",
+            "format": "uuid",
+            "example": "35473eec-4e74-11ee-b500-9f61de8a8b8b",
+            "description": "Identificador único para a conta bancária. A conta deve ser do tipo \"COBRANCAS_CONTA_AZUL(CAPAYMENTSACCOUNT)\""
+          },
+          "descricao_fatura": {
+            "type": "string",
+            "example": "Pagamento da fatura #1234",
+            "description": "Descrição da fatura"
+          },
+          "id_parcela": {
+            "type": "string",
+            "format": "uuid",
+            "example": "35473eec-4e74-11ee-b500-9f61de8a8b8b",
+            "description": "Identificador único para a parcela"
+          },
+          "data_vencimento": {
+            "type": "string",
+            "format": "date",
+            "example": "2023-10-10",
+            "description": "Data de vencimento da cobrança"
+          },
+          "tipo": {
+            "type": "string",
+            "example": "LINK_PAGAMENTO",
+            "description": "Tipo da cobrança",
+            "enum": [
+              "LINK_PAGAMENTO",
+              "PIX_COBRANCA",
+              "BOLETO"
+            ]
+          },
+          "atributos": {
+            "$ref": "#/components/schemas/GerarCobrancaRequestAtributosDto"
+          }
+        }
+      },
+      "GerarCobrancaRequestAtributosDto": {
+        "type": "object",
+        "properties": {
+          "desconto_antecipado": {
+            "$ref": "#/components/schemas/GerarCobrancaRequestAtributosDescontoAntecipado"
+          }
+        }
+      },
+      "GerarCobrancaRequestAtributosDescontoAntecipado": {
+        "type": "object",
+        "description": "Deverá ser informado apenas um dos campos: valor ou percentual",
+        "properties": {
+          "valor": {
+            "type": "number",
+            "format": "double",
+            "example": 10,
+            "description": "Quando informado, o campo \"percentual\" deve ser omitido"
+          },
+          "percentual": {
+            "type": "number",
+            "format": "double",
+            "example": 10,
+            "description": "Quando informado, o campo \"valor\" deve ser omitido"
+          },
+          "dias_antes_vencer": {
+            "type": "integer",
+            "example": 10,
+            "description": "Dias antes do vencimento para aplicar o desconto antecipado"
+          }
+        }
+      },
+      "GerarCobrancaResponseDto": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid",
+            "example": "35473eec-4e74-11ee-b500-9f61de8a8b8b",
+            "description": "Identificador único da cobrança"
+          },
+          "url": {
+            "type": "string",
+            "example": "http://www.exemplo.com.br",
+            "description": "URL da cobrança"
+          },
+          "status": {
+            "type": "string",
+            "example": "AGUARDANDO_CONFIRMACAO",
+            "enum": [
+              "AGUARDANDO_CONFIRMACAO",
+              "EM_CANCELAMENTO",
+              "REGISTRADO",
+              "QUITADO",
+              "CANCELADO",
+              "INVALIDO",
+              "EXPIRADO",
+              "FALHA_EMISSAO",
+              "FALHA_CANCELAR",
+              "REMESSA_GERADO",
+              "REMESSA_PENDENTE",
+              "PAGO",
+              "EXTORNADO"
+            ],
+            "description": "Status da cobrança"
+          }
+        }
+      }
+    }
+  }
+}

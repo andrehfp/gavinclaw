@@ -3,7 +3,7 @@
   "total": 627,
   "paying": 29,
   "repeat": 32,
-  "karma": 97,
+  "karma": 100,
   "seo": 3,
   "ig": 1,
   "reddit_posts": [
@@ -1196,6 +1196,116 @@
       "upvotes": 0,
       "listeners": 0,
       "status": "✅ verified on profile (script returned t1_o7sbgcp)"
+    },
+    {
+      "date": "2026-02-28",
+      "sub": "r/archviz",
+      "post": "Flume House - Rhino, D5 & PS",
+      "url": "https://old.reddit.com/r/archviz/comments/1rgr0ae/flume_house_rhino_d5_ps/o7v7y7g/",
+      "angle": "Positive technical feedback on otherwise strong render: praised lighting/material naturalness and suggested subtle extra contact shadows at wall-floor and furniture grounding points to improve thumbnail/readability depth.",
+      "upvotes": 0,
+      "listeners": 0,
+      "status": "✅ verified on profile (script returned t1_o7v7y7g)"
+    },
+    {
+      "date": "2026-02-28",
+      "sub": "r/InteriorDesign",
+      "post": "help my living room be functional",
+      "url": "https://old.reddit.com/r/InteriorDesign/comments/1rgnku6/help_my_living_room_be_functional/o7v7yah/",
+      "angle": "Kid-friendly layout guidance: float sofa to create one clear play zone, define with low-pile rug for easier cleanup, and use slim side-entry litter cabinet behind sofa to hide box without moving it to bedroom.",
+      "upvotes": 0,
+      "listeners": 0,
+      "status": "✅ verified on profile (script returned t1_o7v7yah)"
+    },
+    {
+      "date": "2026-02-28",
+      "sub": "r/InteriorDesign",
+      "post": "REPLY — Placement of stove/hood on peninsula in open space kitchen",
+      "url": "https://old.reddit.com/r/InteriorDesign/comments/1rfkifl/placement_of_stovehood_on_peninsula_in_open_space/o7v81cs/",
+      "angle": "Follow-up aesthetics reply: keep hood visually intentional via clean form, alignment with pendants/cabinet lines, and repeating nearby hardware finish to integrate with the overall kitchen language.",
+      "upvotes": 0,
+      "listeners": 1,
+      "status": "✅ verified on profile (script returned t1_o7v81cs)"
+    },
+    {
+      "date": "2026-02-28",
+      "sub": "r/InteriorDesign",
+      "post": "Floor plan update - next step",
+      "url": "https://old.reddit.com/r/InteriorDesign/comments/1rgdoiq/floor_plan_update_next_step/o7w02s1/",
+      "angle": "Chose option 5 for cleaner circulation/sightlines; suggested shallow tall storage with pocket/sliding fronts to keep pantry function without compromising flow; reinforced ~110-120cm island clearance.",
+      "upvotes": 0,
+      "listeners": 0,
+      "status": "✅ verified on profile (script returned t1_o7w02s1)"
+    },
+    {
+      "date": "2026-02-28",
+      "sub": "r/DesignMyRoom",
+      "post": "Suggestions for this entryway hallway? There’s so much opportunity here!",
+      "url": "https://old.reddit.com/r/DesignMyRoom/comments/1rh43p1/suggestions_for_this_entryway_hallway_theres_so/o7w02x6/",
+      "angle": "Entryway refresh plan: long low-contrast runner, one larger focal piece inside arch, warm sconces for overcast days, cat-safe faux greenery, and lighter cabinet hardware for brightness without repainting.",
+      "upvotes": 0,
+      "listeners": 0,
+      "status": "✅ verified on profile (script returned t1_o7w02x6)"
+    },
+    {
+      "date": "2026-02-28",
+      "sub": "r/DesignMyRoom",
+      "post": "Kitchen remodel",
+      "url": "https://old.reddit.com/r/DesignMyRoom/comments/1rh7pwm/kitchen_remodel/o7xbewc/",
+      "angle": "Kept renovation advice practical and budget-aware: avoid stark white, use warm-white satin cabinetry for cleanability, pair with calmer countertop + larger-format backsplash, and prioritize hardware + under-cabinet lighting as highest visual ROI updates.",
+      "upvotes": 0,
+      "listeners": 0,
+      "status": "✅ verified on profile (script returned t1_o7xbewc)"
+    },
+    {
+      "date": "2026-02-28",
+      "sub": "r/DesignMyRoom",
+      "post": "Help with studio apartment layout",
+      "url": "https://old.reddit.com/r/DesignMyRoom/comments/1rh4uaq/help_with_studio_apartment_layout/o7xbf42/",
+      "angle": "Supported loft-bed direction with safety/flow constraints: preserve radiator air gap, zone desk/sitting opposite heat source, add closed storage under loft, and use a small round table to keep circulation open in tight studio footprint.",
+      "upvotes": 0,
+      "listeners": 0,
+      "status": "✅ verified on profile (script returned t1_o7xbf42)"
+    },
+    {
+      "date": "2026-02-28",
+      "sub": "r/InteriorDesign",
+      "post": "REPLY — Range Hood Dilemma",
+      "url": "https://old.reddit.com/r/InteriorDesign/comments/1rd4nuy/range_hood_dilemma/o7xbhoh/",
+      "angle": "Handled positive OP follow-up to keep thread warm without promo; brief supportive reply inviting final-result update after implementation.",
+      "upvotes": 0,
+      "listeners": 1,
+      "status": "✅ verified on profile (script returned t1_o7xbhoh)"
+    },
+    {
+      "date": "2026-02-28",
+      "sub": "r/archviz",
+      "post": "Recent work for my portfolio",
+      "url": "https://old.reddit.com/r/archviz/comments/1rh2pvo/recent_work_for_my_portfolio/o7yk82a/",
+      "angle": "Portfolio-focused feedback: highlighted strong mosaic-glass detail and suggested pairing wider contextual shots with close material crops; advised reducing highlight bloom slightly for cleaner form readability.",
+      "upvotes": 0,
+      "listeners": 0,
+      "status": "✅ verified on profile (script returned t1_o7yk82a)"
+    },
+    {
+      "date": "2026-02-28",
+      "sub": "r/archviz",
+      "post": "Day V/s Evening Renders - (Open to work)",
+      "url": "https://old.reddit.com/r/archviz/comments/1rggj2e/day_vs_evening_renders_open_to_work/o7yk868/",
+      "angle": "Actionable D5 dusk-lighting advice: lock exposure first, set interior lights around 2700–3200K, reduce sky saturation, and add subtle warm spill near windows to sell transition mood.",
+      "upvotes": 0,
+      "listeners": 0,
+      "status": "✅ verified on profile (script returned t1_o7yk868)"
+    },
+    {
+      "date": "2026-02-28",
+      "sub": "r/InteriorDesign",
+      "post": "REPLY — Range Hood Dilemma",
+      "url": "https://old.reddit.com/r/InteriorDesign/comments/1rd4nuy/range_hood_dilemma/o7ykbea/",
+      "angle": "Follow-up reply after OP thank-you: supportive closeout and invite to share final install photo for proportion sanity-check.",
+      "upvotes": 0,
+      "listeners": 1,
+      "status": "✅ verified (script returned t1_o7ykbea; confirmed via single-comment thread in Camofox)"
     }
   ],
   "ig_calendar": [

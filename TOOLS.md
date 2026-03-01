@@ -13,7 +13,8 @@ openclaw cron edit <UUID> --message "novo prompt"
 
 Notas:
 - `cron runs` exige `--id` (não aceita ID posicional).
-- Se aparecer warning de config (`memory-lancedb disabled`, `channels.whatsapp.enabled unknown`), não quebra execução dos crons, mas vale rodar manutenção com `openclaw doctor --fix` em janela controlada.
+- Warning `memory-lancedb disabled` é esperado enquanto o slot de memória for `memory-core`.
+- Warning `channels.whatsapp.enabled unknown` pode reaparecer mesmo após `openclaw doctor --fix` (aparenta ser ruído de validação no CLI). Não bloqueia execução dos crons.
 
 ## Maia CLI (MoldaSpace Unified)
 

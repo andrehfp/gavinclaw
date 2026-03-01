@@ -8,7 +8,7 @@ Unified cross-platform social media posting skill. Supports simultaneous or sele
 - Instagram (Warm Editorial style)
 - Facebook (optional)
 
-LinkedIn is discontinued (Feb 14, 2026) and should not be used.
+LinkedIn is handled via dedicated scripts (`scripts/linkedin_post.py`, `scripts/linkedin_reader.py`) and is intentionally outside this unified poster skill.
 
 ## Usage
 ```python

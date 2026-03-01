@@ -1,0 +1,695 @@
+{
+  "openapi": "3.0.1",
+  "info": {
+    "title": "Baixas",
+    "version": "v1",
+    "description": "A API de Baixas tem como objetivo automatizar e simplificar o processo de conciliação financeira, permitindo o registro e o acompanhamento de pagamentos recebidos. Com ela, é possível criar uma nova baixa, retornar as baixas pelo id da parcela, atualizar parcialmente uma baixa, deletar uma baixa e retornar a baixa, garantindo que o status financeiro das cobranças seja atualizado de maneira precisa e em tempo real, reduzindo o retrabalho e evitando inconsistências entre sistemas.\n\nSe desejar aprofundar o entendimento das regras de negócio aplicadas pelo ERP, recomendamos, de forma opcional a consulta à nossa Central de Ajuda:\n\n**Lançamentos Financeiros:**  \n[https://ajuda.contaazul.com/hc/pt-br/sections/20564397198989-Lan%C3%A7amentos-financeiros-contas-a-receber-e-a-pagar](https://ajuda.contaazul.com/hc/pt-br/sections/20564397198989-Lan%C3%A7amentos-financeiros-contas-a-receber-e-a-pagar)\n"
+  },
+  "servers": [
+    {
+      "url": "https://api-v2.contaazul.com",
+      "description": "Servidor de produção"
+    }
+  ],
+  "tags": [
+    {
+      "name": "v1",
+      "description": "Conjunto de recursos para acompanhar e administrar operações relacionadas ao gerenciamento de baixas - esses recursos incluem criar uma nova baixa, retornar as baixas pelo id da parcela, atualizar parcialmente uma baixa por id, deletar baixa por id e retornar a baixa por id"
+    }
+  ],
+  "security": [
+    {
+      "BearerAuth": []
+    }
+  ],
+  "paths": {
+    "/v1/financeiro/eventos-financeiros/parcelas/{parcela_id}/baixa": {
+      "post": {
+        "summary": "Criar uma nova baixa",
+        "operationId": "criarBaixa",
+        "description": "Permite registrar uma nova baixa vinculada a uma parcela específica. Por meio desse endpoint, é possível informar os dados do pagamento, como data, valor, juros, multa, descontos e método de pagamento. Ao registrar a baixa, o sistema atualiza automaticamente o status da parcela refletindo a quitação realizada.",
+        "tags": [
+          "v1"
+        ],
+        "parameters": [
+          {
+            "name": "parcela_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            },
+            "example": "35473eec-4e74-11ee-b500-9f61de8a8b8b"
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/BaixaCriacaoRequestDTO"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/BaixaCriacaoResponseDTO"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "429": {
+            "description": "Too Many Requests"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      },
+      "get": {
+        "summary": "Retornar as baixas pelo id da parcela",
+        "operationId": "listarBaixas",
+        "description": "Permite consultar todas as baixas associadas a uma determinada parcela. Essa funcionalidade possibilita o acompanhamento detalhado de pagamentos realizados, facilitando a auditoria e o controle financeiro.",
+        "tags": [
+          "v1"
+        ],
+        "parameters": [
+          {
+            "name": "parcela_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            },
+            "example": "35473eec-4e74-11ee-b500-9f61de8a8b8b"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/BaixaResponseDTO"
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "429": {
+            "description": "Too Many Requests"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
+    "/v1/financeiro/eventos-financeiros/parcelas/baixa/{baixa_id}": {
+      "patch": {
+        "summary": "Atualizar parcialmente uma baixa por id",
+        "operationId": "atualizarBaixa",
+        "description": "Permite atualizar parcialmente as informações de uma baixa. Use a baixa parcial quando houver pagamento ou recebimento parcial de uma fatura, seja por negociação com cliente/fornecedor ou em situações de inadimplência parcial. Por meio desse endpoint, é possível corrigir dados como valor, conta financeira, data de pagamento ou observações, mantendo o controle de versão para evitar conflitos de atualização.",
+        "tags": [
+          "v1"
+        ],
+        "parameters": [
+          {
+            "name": "baixa_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            },
+            "example": "35473eec-4e74-11ee-b500-9f61de8a8b8b"
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/BaixaAtualizacaoRequestDTO"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/BaixaCriacaoResponseDTO"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "429": {
+            "description": "Too Many Requests"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      },
+      "delete": {
+        "summary": "Deletar baixa por id",
+        "operationId": "deletarBaixa",
+        "description": "Permite excluir uma baixa existente do sistema. Esse endpoint deve ser utilizado com cautela, pois a exclusão impacta diretamente o saldo e o histórico financeiro da parcela associada.",
+        "tags": [
+          "v1"
+        ],
+        "parameters": [
+          {
+            "name": "baixa_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            },
+            "example": "35473eec-4e74-11ee-b500-9f61de8a8b8b"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "404": {
+            "description": "Not Found"
+          },
+          "429": {
+            "description": "Too Many Requests"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      },
+      "get": {
+        "summary": "Retornar a baixa por id",
+        "operationId": "buscarBaixa",
+        "description": "Permite consultar os detalhes de uma baixa específica a partir do seu identificador único (baixa_id). O retorno inclui informações completas sobre a baixa, como data de pagamento, valores envolvidos, conta financeira utilizada, método de pagamento e observações registradas.",
+        "tags": [
+          "v1"
+        ],
+        "parameters": [
+          {
+            "name": "baixa_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            },
+            "example": "35473eec-4e74-11ee-b500-9f61de8a8b8b"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/BaixaResponseDTO"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "404": {
+            "description": "Not Found"
+          },
+          "429": {
+            "description": "Too Many Requests"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "securitySchemes": {
+      "BearerAuth": {
+        "type": "http",
+        "scheme": "bearer",
+        "bearerFormat": "JWT",
+        "description": "Token de autorização Bearer JWT"
+      }
+    },
+    "schemas": {
+      "BaixaCriacaoRequestDTO": {
+        "type": "object",
+        "required": [
+          "data_pagamento",
+          "conta_financeira",
+          "composicao_valor"
+        ],
+        "properties": {
+          "data_pagamento": {
+            "type": "string",
+            "format": "date",
+            "example": "2023-10-01",
+            "description": "Data do pagamento"
+          },
+          "composicao_valor": {
+            "$ref": "#/components/schemas/ValorComposicaoDTO"
+          },
+          "conta_financeira": {
+            "type": "string",
+            "format": "uuid",
+            "example": "35473eec-4e74-11ee-b500-9f61de8a8b8b",
+            "description": "Identificador único da conta financeira"
+          },
+          "metodo_pagamento": {
+            "type": "string",
+            "example": "CARTAO_CREDITO",
+            "description": "Método de pagamento",
+            "enum": [
+              "DINHEIRO",
+              "CARTAO_CREDITO",
+              "BOLETO_BANCARIO",
+              "CARTAO_CREDITO_VIA_LINK",
+              "CHEQUE",
+              "CARTAO_DEBITO",
+              "TRANSFERENCIA_BANCARIA",
+              "OUTRO",
+              "CARTEIRA_DIGITAL",
+              "CASHBACK",
+              "CREDITO_LOJA",
+              "CREDITO_VIRTUAL",
+              "DEPOSITO_BANCARIO",
+              "PIX_PAGAMENTO_INSTANTANEO"
+            ]
+          },
+          "observacao": {
+            "type": "string",
+            "example": "Pagamento referente à fatura #1234.",
+            "description": "Observação"
+          },
+          "nsu": {
+            "type": "string",
+            "example": "1234567890",
+            "description": "Número sequencial único"
+          }
+        }
+      },
+      "BaixaCriacaoResponseDTO": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid",
+            "example": "35473eec-4e74-11ee-b500-9f61de8a8b8b",
+            "description": "Identificador único gerado automaticamente após a criação"
+          },
+          "versao": {
+            "type": "integer",
+            "format": "int64",
+            "example": 1,
+            "description": "Versão da baixa"
+          },
+          "data_pagamento": {
+            "type": "string",
+            "format": "date",
+            "example": "2023-10-01",
+            "description": "Data do pagamento"
+          },
+          "composicao_valor": {
+            "$ref": "#/components/schemas/ValorComposicaoDTO"
+          },
+          "conta_financeira": {
+            "type": "string",
+            "format": "uuid",
+            "example": "35473eec-4e74-11ee-b500-9f61de8a8b8b",
+            "description": "Identificador único da conta financeira"
+          },
+          "metodo_pagamento": {
+            "type": "string",
+            "example": "CARTAO_CREDITO",
+            "description": "Método de pagamento",
+            "enum": [
+              "DINHEIRO",
+              "CARTAO_CREDITO",
+              "BOLETO_BANCARIO",
+              "CARTAO_CREDITO_VIA_LINK",
+              "CHEQUE",
+              "CARTAO_DEBITO",
+              "TRANSFERENCIA_BANCARIA",
+              "OUTRO",
+              "CARTEIRA_DIGITAL",
+              "CASHBACK",
+              "CREDITO_LOJA",
+              "CREDITO_VIRTUAL",
+              "DEPOSITO_BANCARIO",
+              "PIX_PAGAMENTO_INSTANTANEO"
+            ]
+          },
+          "observacao": {
+            "type": "string",
+            "example": "Pagamento referente à fatura #1234.",
+            "description": "Observação"
+          },
+          "nsu": {
+            "type": "string",
+            "example": "1234567890",
+            "description": "Número sequencial único"
+          }
+        }
+      },
+      "BaixaResponseDTO": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid",
+            "example": "35473eec-4e74-11ee-b500-9f61de8a8b8b",
+            "description": "Identificador único da baixa"
+          },
+          "versao": {
+            "type": "integer",
+            "format": "int64",
+            "example": 1,
+            "description": "Versão da baixa"
+          },
+          "data_pagamento": {
+            "type": "string",
+            "format": "date",
+            "example": "2023-10-01",
+            "description": "Data do pagamento"
+          },
+          "valor_composicao": {
+            "$ref": "#/components/schemas/ValorComposicaoDTO"
+          },
+          "conta_financeira": {
+            "type": "string",
+            "format": "uuid",
+            "example": "35473eec-4e74-11ee-b500-9f61de8a8b8b",
+            "description": "Identificador único da conta financeira"
+          },
+          "id_reconciliacao": {
+            "type": "string",
+            "format": "uuid",
+            "example": "35473eec-4e74-11ee-b500-9f61de8a8b8b",
+            "description": "Identificador único da reconciliação"
+          },
+          "id_parcela": {
+            "type": "string",
+            "format": "uuid",
+            "example": "35473eec-4e74-11ee-b500-9f61de8a8b8b",
+            "description": "Identificador único da parcela"
+          },
+          "id_solicitacao_cobranca": {
+            "type": "string",
+            "format": "uuid",
+            "example": "35473eec-4e74-11ee-b500-9f61de8a8b8b",
+            "description": "Identificador único da solicitação de cobrança"
+          },
+          "observacao": {
+            "type": "string",
+            "example": "Pagamento referente à fatura #1234.",
+            "description": "Observação"
+          },
+          "metodo_pagamento": {
+            "type": "string",
+            "example": "CARTAO_CREDITO",
+            "description": "Método de pagamento",
+            "enum": [
+              "DINHEIRO",
+              "CARTAO_CREDITO",
+              "BOLETO_BANCARIO",
+              "CARTAO_CREDITO_VIA_LINK",
+              "CHEQUE",
+              "CARTAO_DEBITO",
+              "TRANSFERENCIA_BANCARIA",
+              "OUTRO",
+              "CARTEIRA_DIGITAL",
+              "CASHBACK",
+              "CREDITO_LOJA",
+              "CREDITO_VIRTUA",
+              "DEPOSITO_BANCARIO",
+              "PIX_PAGAMENTO_INSTANTANEO",
+              "PROGRAMA_FIDELIDADE",
+              "SEM_PAGAMENTO",
+              "VALE_ALIMENTACAO",
+              "VALE_COMBUSTIVEL",
+              "VALE_PRESENTE",
+              "VALE_REFEICAO",
+              "PIX_COBRANCA",
+              "DEBITO_AUTOMATICO"
+            ]
+          },
+          "origem": {
+            "type": "string",
+            "example": "SALDO_CONTA_BANCARIA",
+            "description": "Origem",
+            "enum": [
+              "LANCAMENTO_FINANCEIRO",
+              "DAS",
+              "FOLHA",
+              "TRANSFERENCIA",
+              "SALDO_CONTA_BANCARIA",
+              "VENDA",
+              "COMPRA",
+              "VENDA_AGENDADA",
+              "COMPRA_AGENDADA",
+              "IMPORTACAO_DOCUMENTO",
+              "IMPOSTO_RETIDO",
+              "SIC",
+              "NOTA_COMPRA",
+              "ANTECIPACAO",
+              "RENEGOCIACAO",
+              "HONORARIOS_CONTABEIS"
+            ]
+          },
+          "id_recibo_digital": {
+            "type": "string",
+            "format": "uuid",
+            "example": "35473eec-4e74-11ee-b500-9f61de8a8b8b",
+            "description": "Identificador único do recibo digital"
+          },
+          "tipo_evento_financeiro": {
+            "type": "string",
+            "example": "RECEITA",
+            "description": "Tipo de evento financeiro",
+            "enum": [
+              "RECEITA",
+              "DESPESA"
+            ]
+          },
+          "nsu": {
+            "type": "string",
+            "example": "1234567890",
+            "description": "Número sequencial único"
+          },
+          "id_referencia": {
+            "type": "string",
+            "example": "REF1234",
+            "description": "Identificador único da referência"
+          },
+          "atualizado_em": {
+            "type": "string",
+            "format": "date-time",
+            "example": "2023-10-01T12:00:00Z",
+            "description": "Data de atualização"
+          },
+          "anexos": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/AnexoBaixaResponseDTO"
+            }
+          }
+        }
+      },
+      "AnexoBaixaResponseDTO": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid",
+            "example": "35473eec-4e74-11ee-b500-9f61de8a8b8b",
+            "description": "Identificador único do anexo"
+          },
+          "referencia": {
+            "type": "string",
+            "example": "REF1234",
+            "description": "Referência associada ao anexo"
+          },
+          "nome": {
+            "type": "string",
+            "example": "pagamento_recibo.pdf",
+            "description": "Nome do anexo"
+          },
+          "descricao": {
+            "type": "string",
+            "example": "Recibo de pagamento referente à fatura #1234.",
+            "description": "Descrição detalhada do anexo"
+          },
+          "tipo": {
+            "type": "string",
+            "example": "RECIBO_DIGITAL",
+            "description": "Tipo do anexo",
+            "enum": [
+              "RECIBO_DIGITAL",
+              "RECIBO"
+            ]
+          },
+          "tipo_conteudo": {
+            "type": "string",
+            "example": "FILE",
+            "description": "Tipo de conteúdo do anexo",
+            "enum": [
+              "FILE",
+              "URL"
+            ]
+          },
+          "url": {
+            "type": "string",
+            "example": "https://example.com/attachment.pdf",
+            "description": "URL do anexo"
+          }
+        }
+      },
+      "ValorComposicaoDTO": {
+        "type": "object",
+        "required": [
+          "valor_bruto"
+        ],
+        "properties": {
+          "multa": {
+            "type": "number",
+            "format": "double",
+            "example": 5,
+            "description": "Valor da multa, deve ser maior ou igual a zero"
+          },
+          "juros": {
+            "type": "number",
+            "format": "double",
+            "example": 2.5,
+            "description": "Valor dos juros, deve ser maior ou igual a zero"
+          },
+          "valor_bruto": {
+            "type": "number",
+            "format": "double",
+            "example": 150,
+            "description": "Valor bruto, deve ser informado e maior ou igual a zero"
+          },
+          "desconto": {
+            "type": "number",
+            "format": "double",
+            "example": 10,
+            "description": "Valor do desconto, deve ser maior ou igual a zero"
+          },
+          "taxa": {
+            "type": "number",
+            "format": "double",
+            "example": 3.75,
+            "description": "Valor da taxa, deve ser maior ou igual a zero"
+          }
+        }
+      },
+      "BaixaAtualizacaoRequestDTO": {
+        "type": "object",
+        "required": [
+          "versao"
+        ],
+        "properties": {
+          "versao": {
+            "type": "integer",
+            "format": "int64",
+            "example": 1,
+            "description": "Versão atual do registro. Este valor será incrementado após sucesso na atualização"
+          },
+          "data_pagamento": {
+            "type": "string",
+            "format": "date",
+            "example": "2023-10-01",
+            "description": "Data do pagamento"
+          },
+          "composicao_valor": {
+            "$ref": "#/components/schemas/ValorComposicaoDTO"
+          },
+          "conta_financeira": {
+            "type": "string",
+            "format": "uuid",
+            "example": "35473eec-4e74-11ee-b500-9f61de8a8b8b",
+            "description": "Identificador único da conta financeira"
+          },
+          "metodo_pagamento": {
+            "type": "string",
+            "example": "CARTAO_CREDITO",
+            "description": "Método de pagamento",
+            "enum": [
+              "DINHEIRO",
+              "CARTAO_CREDITO",
+              "BOLETO_BANCARIO",
+              "CARTAO_CREDITO_VIA_LINK",
+              "CHEQUE",
+              "CARTAO_DEBITO",
+              "TRANSFERENCIA_BANCARIA",
+              "OUTRO",
+              "CARTEIRA_DIGITAL",
+              "CASHBACK",
+              "CREDITO_LOJA",
+              "CREDITO_VIRTUA",
+              "DEPOSITO_BANCARIO",
+              "PIX_PAGAMENTO_INSTANTANEO"
+            ]
+          },
+          "observacao": {
+            "type": "string",
+            "example": "Pagamento referente à fatura #1234.",
+            "description": "Observação adicional"
+          },
+          "nsu": {
+            "type": "string",
+            "example": "1234567890",
+            "description": "Número sequencial único"
+          }
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,265 @@
+<div
+  id="agent-chat-root"
+  data-pending-jobs={to_string(@pending_jobs?)}
+  data-refresh-ms="2500"
+  class="min-h-screen bg-[radial-gradient(circle_at_top,_#e2f3ff,_#f8fafc_40%,_#f3f4f6)]"
+>
+  <div class="mx-auto max-w-7xl px-4 py-8 sm:px-6 lg:px-8">
+    <div class="mb-6 flex flex-wrap items-start justify-between gap-4">
+      <div>
+        <h1 class="text-2xl font-semibold text-slate-900">Agent Chat</h1>
+        <p class="mt-1 text-sm text-slate-600">
+          Sandbox conectado ao mesmo pipeline de fila usado no Telegram.
+        </p>
+      </div>
+
+      <div class="flex items-center gap-2">
+        <span
+          id="agent-chat-conta-azul-status"
+          class={[
+            "inline-flex items-center rounded-full border px-3 py-1 text-xs font-semibold uppercase tracking-wide",
+            @integration_connected? && "border-emerald-200 bg-emerald-50 text-emerald-700",
+            !@integration_connected? && "border-rose-200 bg-rose-50 text-rose-700"
+          ]}
+        >
+          <%= if @integration_connected? do %>
+            Conta Azul connected
+          <% else %>
+            Conta Azul disconnected
+          <% end %>
+        </span>
+
+        <a
+          class="btn btn-sm"
+          href={~p"/agent/chat?chat_id=#{@chat_id}&telegram_user_id=#{@telegram_user_id}"}
+        >
+          Refresh
+        </a>
+      </div>
+    </div>
+
+    <div class="grid gap-6 lg:grid-cols-[1.8fr_1fr]">
+      <section class="flex min-h-[72vh] flex-col overflow-hidden rounded-2xl border border-slate-200 bg-white shadow-sm">
+        <header class="flex items-center justify-between border-b border-slate-200 px-4 py-3">
+          <div>
+            <p class="text-sm font-semibold text-slate-900">Conversation</p>
+            <p class="text-xs text-slate-500">chat_id: {@chat_id}</p>
+          </div>
+
+          <%= if @pending_jobs? do %>
+            <p
+              id="agent-chat-processing"
+              class="flex items-center gap-2 text-xs font-medium text-amber-700"
+            >
+              <span class="inline-block h-2 w-2 animate-pulse rounded-full bg-amber-500"></span>
+              Processing jobs...
+            </p>
+          <% end %>
+        </header>
+
+        <div id="agent-chat-messages" class="flex-1 space-y-3 overflow-y-auto bg-slate-50/80 p-4">
+          <%= if @conversation do %>
+            <% messages = Map.get(@conversation.metadata || %{}, "messages", []) %>
+
+            <div
+              :if={messages == []}
+              class="rounded-xl border border-dashed border-slate-300 bg-white p-4 text-sm text-slate-600"
+            >
+              Nenhuma mensagem ainda. Envie um prompt para iniciar.
+            </div>
+
+            <article
+              :for={msg <- messages}
+              class={[
+                "flex",
+                msg["role"] == "user" && "justify-end",
+                msg["role"] != "user" && "justify-start"
+              ]}
+            >
+              <div class={[
+                "max-w-[90%] rounded-2xl border px-4 py-3 text-sm shadow-sm sm:max-w-[82%]",
+                if(msg["role"] == "user",
+                  do: "border-blue-200 bg-blue-600 text-white"
+                ),
+                if(msg["role"] != "user",
+                  do: "border-slate-200 bg-white text-slate-900"
+                ),
+                if(msg["action"] == "tool_result",
+                  do: "border-emerald-200 bg-emerald-50 text-emerald-900"
+                ),
+                if(msg["action"] in ["llm_error", "tool_execution_failed", "fallback_tool_error"],
+                  do: "border-rose-200 bg-rose-50 text-rose-900"
+                )
+              ]}>
+                <div class="flex flex-wrap items-center gap-2 text-[11px] font-semibold uppercase tracking-wide opacity-80">
+                  <span>{msg["role"] || "message"}</span>
+                  <span :if={msg["action"]}>action: {msg["action"]}</span>
+                  <span :if={msg["tool_name"]}>tool: {msg["tool_name"]}</span>
+                </div>
+
+                <p class="mt-2 whitespace-pre-wrap break-words">{msg["content"] || "-"}</p>
+
+                <p :if={msg["at"]} class="mt-2 text-[10px] opacity-70">{msg["at"]}</p>
+              </div>
+            </article>
+          <% else %>
+            <p
+              id="agent-chat-no-conversation"
+              class="rounded-xl border border-dashed border-slate-300 bg-white p-4 text-sm text-slate-600"
+            >
+              Nenhuma conversa criada ainda para este chat.
+            </p>
+          <% end %>
+        </div>
+
+        <footer class="border-t border-slate-200 bg-white p-4">
+          <.form for={@chat_form} id="agent-chat-form" action={~p"/agent/chat/send"} method="post">
+            <input type="hidden" name="chat[chat_id]" value={@chat_id} />
+            <input type="hidden" name="chat[telegram_user_id]" value={@telegram_user_id} />
+
+            <div class="grid gap-3">
+              <.input
+                field={@chat_form[:text]}
+                id="agent-chat-text"
+                type="textarea"
+                label="Mensagem"
+                placeholder="Ex.: liste as pessoas com nome Ana"
+              />
+
+              <div class="flex items-center justify-between gap-3">
+                <p class="text-xs text-slate-500">
+                  Fluxo: LLM - Oban - Conta Azul API - resposta no chat.
+                </p>
+
+                <button
+                  id="agent-chat-submit"
+                  type="submit"
+                  class="btn btn-primary"
+                  disabled={!@integration_connected?}
+                >
+                  Send
+                </button>
+              </div>
+            </div>
+          </.form>
+        </footer>
+      </section>
+
+      <aside class="space-y-6">
+        <section class="rounded-2xl border border-slate-200 bg-white p-5 shadow-sm">
+          <h2 class="text-sm font-semibold uppercase tracking-wide text-slate-700">Session</h2>
+
+          <.form
+            for={@chat_form}
+            id="agent-chat-session-form"
+            action={~p"/agent/chat"}
+            method="get"
+            class="mt-3 space-y-3"
+          >
+            <.input
+              field={@chat_form[:chat_id]}
+              id="agent-chat-chat-id"
+              type="text"
+              label="Chat ID"
+            />
+
+            <.input
+              field={@chat_form[:telegram_user_id]}
+              id="agent-chat-user-id"
+              type="text"
+              label="Telegram User ID"
+            />
+
+            <button type="submit" class="btn btn-outline btn-sm w-full">Switch session</button>
+          </.form>
+        </section>
+
+        <section class="rounded-2xl border border-slate-200 bg-white p-5 shadow-sm">
+          <h2 class="text-sm font-semibold uppercase tracking-wide text-slate-700">Conta Azul</h2>
+
+          <dl class="mt-3 space-y-2 text-sm">
+            <div class="flex items-start justify-between gap-2">
+              <dt class="text-slate-500">Status</dt>
+              <dd id="agent-chat-integration-status" class="font-medium">
+                {if(@integration, do: @integration.status, else: "missing")}
+              </dd>
+            </div>
+            <div class="flex items-start justify-between gap-2">
+              <dt class="text-slate-500">Workspace</dt>
+              <dd
+                id="agent-chat-workspace-id"
+                class="max-w-[13rem] break-all text-right font-medium"
+              >
+                {if(@integration, do: @integration.external_workspace_id || "-", else: "-")}
+              </dd>
+            </div>
+            <div class="flex items-start justify-between gap-2">
+              <dt class="text-slate-500">Token expires</dt>
+              <dd id="agent-chat-token-expires" class="font-medium">
+                {if(@integration, do: @integration.token_expires_at || "-", else: "-")}
+              </dd>
+            </div>
+          </dl>
+
+          <a
+            id="agent-chat-conta-azul-connect"
+            class="btn btn-sm mt-4 w-full"
+            href={~p"/auth/conta-azul/start?chat_id=#{@chat_id}"}
+          >
+            <%= if @integration_connected? do %>
+              Reconnect Conta Azul
+            <% else %>
+              Connect Conta Azul
+            <% end %>
+          </a>
+        </section>
+
+        <section class="rounded-2xl border border-slate-200 bg-white p-5 shadow-sm">
+          <h2 class="text-sm font-semibold uppercase tracking-wide text-slate-700">Jobs</h2>
+
+          <%= if @jobs == [] do %>
+            <p id="agent-chat-no-jobs" class="mt-3 text-sm text-slate-500">No jobs yet.</p>
+          <% else %>
+            <div id="agent-chat-jobs" class="mt-3 space-y-3">
+              <article
+                :for={job <- @jobs}
+                id={"agent-chat-job-#{job.id}"}
+                class="rounded-xl border border-slate-200 bg-slate-50 p-3"
+              >
+                <p class="text-xs font-semibold uppercase tracking-wide text-slate-700">
+                  #{job.id} - {job.intent}
+                </p>
+                <p class="mt-1 text-xs text-slate-600">status: {job.status}</p>
+                <p class="text-[11px] text-slate-500">inserted_at: {job.inserted_at}</p>
+
+                <p
+                  :for={tool_call <- job.tool_calls}
+                  id={"agent-chat-tool-call-#{tool_call.id}"}
+                  class="mt-1 text-[11px] text-slate-600"
+                >
+                  tool_call #{tool_call.id}: {tool_call.name} ({tool_call.status})
+                </p>
+              </article>
+            </div>
+          <% end %>
+        </section>
+      </aside>
+    </div>
+  </div>
+</div>
+
+<script>
+  (() => {
+    const root = document.getElementById("agent-chat-root");
+    if (!root) return;
+
+    const pendingJobs = root.dataset.pendingJobs === "true";
+    if (!pendingJobs) return;
+
+    const refreshMs = Number(root.dataset.refreshMs || "2500");
+
+    window.setTimeout(() => {
+      window.location.reload();
+    }, refreshMs);
+  })();
+</script>
