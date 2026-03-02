@@ -1,0 +1,10 @@
+{
+  "version": 1,
+  "budgetByTaskType": {
+    "heartbeat": 1200,
+    "ops": 2000,
+    "analysis": 4000,
+    "execution": 5000,
+    "strategy": 6500
+  }
+}

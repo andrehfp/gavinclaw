@@ -365,10 +365,10 @@ def get_neon_data(days: int) -> Dict[str, Any]:
         # Yesterday's revenue and purchases
         try:
             cur.execute("""
-                SELECT COALESCE(SUM(amount), 0), COUNT(*) FROM credit_transactions 
-                WHERE type='purchase' 
-                AND created_at >= (CURRENT_DATE - INTERVAL '1 day')
-                AND created_at < CURRENT_DATE
+                SELECT COALESCE(SUM(amount), 0), COUNT(*) FROM credit_transactions
+                WHERE type='purchase'
+                  AND ((created_at AT TIME ZONE 'UTC') AT TIME ZONE 'America/Sao_Paulo')::date =
+                      ((NOW() AT TIME ZONE 'America/Sao_Paulo')::date - INTERVAL '1 day')::date
             """)
             row = cur.fetchone()
             results['revenue_yesterday'] = float(row[0]) * PRICE_PER_CREDIT
@@ -380,9 +380,9 @@ def get_neon_data(days: int) -> Dict[str, Any]:
         # Yesterday's new signups
         try:
             cur.execute("""
-                SELECT COUNT(*) FROM user_credits 
-                WHERE signup_date >= (CURRENT_DATE - INTERVAL '1 day')
-                AND signup_date < CURRENT_DATE
+                SELECT COUNT(*) FROM user_credits
+                WHERE ((signup_date AT TIME ZONE 'UTC') AT TIME ZONE 'America/Sao_Paulo')::date =
+                      ((NOW() AT TIME ZONE 'America/Sao_Paulo')::date - INTERVAL '1 day')::date
             """)
             results['signups_yesterday'] = cur.fetchone()[0]
         except Exception as e:
@@ -442,8 +442,8 @@ def get_neon_data(days: int) -> Dict[str, Any]:
 
                 cur.execute(f"""
                     SELECT COUNT(*) FROM referrals
-                    WHERE {ts_col} >= (CURRENT_DATE - INTERVAL '1 day')
-                      AND {ts_col} < CURRENT_DATE
+                    WHERE (({ts_col} AT TIME ZONE 'UTC') AT TIME ZONE 'America/Sao_Paulo')::date =
+                          ((NOW() AT TIME ZONE 'America/Sao_Paulo')::date - INTERVAL '1 day')::date
                 """)
                 results['referrals_yesterday'] = cur.fetchone()[0]
             else:

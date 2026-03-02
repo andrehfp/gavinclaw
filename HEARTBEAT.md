@@ -2,6 +2,11 @@
 
 ## Tarefas (rotacionar entre elas)
 
+### 🧠 Context Logging (AFS-lite)
+- [ ] Início do heartbeat: `gctx begin heartbeat "Heartbeat HH:MM"`
+- [ ] Durante checks importantes: `gctx event <phase> "nota"`
+- [ ] Final do heartbeat: `gctx end ok 0.9 "resumo"` (ou `partial/fail`)
+
 ### 🖥️ Sistema
 - [ ] Checar espaço em disco (`df -h /mnt/ssd`)
 - [ ] Verificar se re-encode está rodando (`ps aux | grep ffmpeg`)
@@ -33,9 +38,7 @@
 - [ ] Pausado por decisão do André (não gastar ciclos até novo sinal)
 
 ### 🐦 Twitter/X Monitoring
-- [ ] Checar mentions (`x-cli me mentions --max 10`)
-- [ ] Search keywords relevantes (`x-cli tweet search "andrehfp OR moldaspace OR viralclaw" --max 10`)
-- [ ] Se mention relevante: reportar no Telegram
+- [ ] **PAUSADO por decisão do André (2026-03-01)** — não checar mentions/search até novo sinal
 
 ### 📝 Proatividade
 - Se encoding terminou: notificar André com resultados

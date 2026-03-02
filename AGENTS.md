@@ -161,6 +161,27 @@ On restart → read this file first and resume anything incomplete.
 
 No more "what were we doing?" — figure it out from the file.
 
+## 🧠 AFS-lite Context Logging (mandatory for complex tasks)
+
+Use `gctx` for turn-level traceability:
+
+```bash
+# start
+gctx begin execution "Objective here"
+
+# during execution
+gctx event implementation "what happened"
+
+# finish
+gctx end ok 0.9 "outcome"
+```
+
+Rules:
+- Use for any complex analysis/execution task.
+- Use for every heartbeat run (`task_type=heartbeat`).
+- Keep notes short and factual.
+- If task fails, end with `status=fail` + concise reason.
+
 ## 🚨 ZERO TOLERANCE: Never Wait Patiently on Errors
 
 **CRITICAL RULE:** When a cron job or any automated task fails, NEVER:

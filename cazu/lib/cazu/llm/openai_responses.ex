@@ -19,6 +19,8 @@ defmodule Cazu.LLM.OpenAIResponses do
     "finance" =>
       ~w(financeiro financeira financeiros lancamento pagar receber vencimento parcela extrato
          categoria rateio despesa receita aluguel pagamento recebimento contas conta),
+    "acquittance" =>
+      ~w(baixa baixar baixar baixado baixada liquidar liquidacao quitacao quitar quitada quitado),
     "crm" =>
       ~w(cliente clientes fornecedor fornecedores pessoa pessoas contato contatos cpf cnpj email),
     "invoice" => ~w(nota notas fiscal fiscais nfe nfse fatura faturas),
@@ -30,7 +32,8 @@ defmodule Cazu.LLM.OpenAIResponses do
 
   # When a namespace is matched, also include these companions
   @namespace_companions %{
-    "finance" => ["crm"],
+    "finance" => ["crm", "acquittance"],
+    "acquittance" => ["finance", "crm"],
     "sales" => ["crm", "inventory"],
     "service" => ["crm"]
   }
@@ -927,6 +930,11 @@ defmodule Cazu.LLM.OpenAIResponses do
       - "2k", "4k", "R$ 2.500" -> numeric "valor"
       - "dia 5 de março", "05/03" -> ISO date in "competenceDate" (YYYY-MM-DD)
       - payment purpose like "aluguel" -> "descricao"
+    - For acquittance.create (baixa), always send:
+      "parcela_id", "data_pagamento" (YYYY-MM-DD), "conta_financeira" (account id), and
+      "composicao_valor.valor_bruto".
+      If the user provides account by name, resolve it with finance.list_financial_accounts before acquittance.create.
+      If parcela_id is missing, first fetch installments/payables/receivables and only ask the user when there is ambiguity.
     - Use canonical Conta Azul keys for finance creation when applicable:
       "valor", "competenceDate", "descricao", "rateio", "opcao_condicao_pagamento", "condicao_pagamento".
     - For CRM person creation/update, use canonical person payload fields:

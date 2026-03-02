@@ -5,27 +5,27 @@
 
 ## 📊 KPIs (atualizar diariamente via `moldaspace_analytics.py`)
 
-| Métrica | Current (Feb 28) | Target (30d) | Target (90d) | $10k |
+| Métrica | Current (Mar 01) | Target (30d) | Target (90d) | $10k |
 |---------|---------|-------------|-------------|------|
-| MRR (30d revenue) | **$376.00** | $800 | $3,000 | $10,000 |
-| Total users | **931** | 900 | 1,500 | 5,000 |
-| Signups/semana | **73** | 80 | 200 | 600 |
-| Active users (7d) | **87** | 200 | 400 | 1,000 |
+| MRR (30d revenue) | **$333.70** | $800 | $3,000 | $10,000 |
+| Total users | **939** | 900 | 1,500 | 5,000 |
+| Signups/semana | **72** | 80 | 200 | 600 |
+| Active users (7d) | **88** | 200 | 400 | 1,000 |
 | Purchases (7d) | **5** | 15 | 40 | 150 |
-| Trial→Paid % | **7.3%** | 10% | 12% | 15% |
+| Trial→Paid % | **4.0%** | 10% | 12% | 15% |
 | Non-brand SEO traffic | **~1%** | 15% | 40% | 60% |
-| Reddit karma (maia_archviz) | **98** | 200 | 1,000 | 5,000 |
+| Reddit karma (maia_archviz) | **106** | 200 | 1,000 | 5,000 |
 | Instagram followers (Maia) | **7** | 100 | 500 | 5,000 |
-| Instagram posts | **58** | 130 | 370 | 500 |
+| Instagram posts | **62** | 130 | 370 | 500 |
 | Instagram avg engagement | **0.6** | 10 | 50 | 200 |
 
-## 📅 Yesterday's Snapshot (Feb 27)
+## 📅 Yesterday's Snapshot (Feb 28)
 | Métrica | Valor |
 |---------|-------|
-| Revenue | **$0.00** |
-| Purchases | **0** |
+| Revenue | **$18.80** |
+| Purchases | **1** |
 | New signups | **9** |
-| Credit wall hits (24h) | **2** |
+| Credit wall hits (24h) | **3** |
 
 ---
 
@@ -50,21 +50,21 @@ Subir Trial -> Paid de **7.4%** para **8.5%** ainda nesta semana.
 ## 🔥 Reddit (u/maia_archviz)
 
 ### Current Stats
-- **Karma:** 100 comment karma, 1 post karma (total: 101)
-- **Age:** 15 days old (created ~Feb 13)
-- **Comments tracked:** 130 total
-- **Subreddit breakdown (sessão 20:00):** r/archviz (2 new comments), r/InteriorDesign (1 reply)
-- **Any new replies:** sim — 1 reply posted (o7ykbea) after inbox check
+- **Karma:** 106 comment karma, 1 post karma (total: 107)
+- **Age:** 16 days old (created ~Feb 13)
+- **Comments tracked:** 142 total
+- **Subreddit breakdown (sessão 20:00):** r/DesignMyRoom (1 new comment), r/InteriorDesign (1 new comment), r/archviz (2 replies)
+- **Any new replies:** sim — 2 replies posted (o84wms1, o84wmwl) after inbox check
 
 ---
 
 ## 📱 Instagram (@studio.maia.arch)
 
 ### Current Stats
-- **Followers:** 6
-- **Posts:** 36
-- **Avg Engagement:** 3.4
-- **Last Post:** Feb 21, 2026 (IMAGE)
+- **Followers:** 7
+- **Posts:** 62
+- **Avg Engagement:** 0.6
+- **Last Post:** Feb 28, 2026 (IMAGE)
 - **Content Strategy:** Sketch→Render transformations, design tips
 
 ### Content Calendar
@@ -74,4 +74,4 @@ Subir Trial -> Paid de **7.4%** para **8.5%** ainda nesta semana.
 
 ---
 
-**Last updated:** February 28, 2026, 8:00 PM (America/Sao_Paulo)
+**Last updated:** March 1, 2026, 8:00 PM (America/Sao_Paulo)

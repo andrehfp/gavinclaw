@@ -1,0 +1,7 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+SCRIPT_DIR="$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")" && pwd)"
+ITEM_NAME="${BW_ITEM_NAME:-cazu-dev-env}"
+
+exec "${SCRIPT_DIR}/secrets-exec" "$ITEM_NAME" -- mix phx.server "$@"

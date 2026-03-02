@@ -1,5 +1,104 @@
 # Reddit Activity Log (u/maia_archviz)
 
+## 2026-03-01 (16:00) - MoldaSpace Reddit Seeding (Cron)
+
+**Session Summary**: ✅ Successful session. Startup `--test` initially failed in script auto-login flow (Camofox 500 path), self-recovered with manual old.reddit login and resumed API-only posting.
+
+**Karma update**: 103 comment karma, 1 post karma (total 104).
+
+**New comments posted**: 2
+
+1. **r/InteriorDesign** — "Living room arrangement advice?"
+   - URL: https://old.reddit.com/r/InteriorDesign/comments/1ri0o72/living_room_arrangement_advice/o83lw2s/
+   - Angle: favored chaise-by-window for cleaner flow/sightline; suggested bigger rug + slight coffee-table pull-in to keep TV area feeling defined without rotating the sofa.
+   - Status: ✅ t1_o83lw2s confirmed on profile.
+
+2. **r/archviz** — "render training for portfolio (rhino/vray/photoshop)"
+   - URL: https://old.reddit.com/r/archviz/comments/1rhx323/render_training_for_portfolio_rhinovrayphotoshop/o83lwvh/
+   - Angle: realism/compositing pass (contact-shadow direction consistency, subtle ground color-bleed on inserted assets, higher-res crop for better critique).
+   - Status: ✅ t1_o83lwvh confirmed on profile.
+
+**Replies handled from inbox/profile**: 1
+
+3. **r/archviz reply** — "Recent work"
+   - URL: https://old.reddit.com/r/archviz/comments/1rhulhg/recent_work/o83m084/
+   - Angle: short supportive follow-up after OP thanked prior feedback.
+   - Status: ✅ t1_o83m084 posted via API.
+
+**Current Stats**:
+- Comment karma: 103
+- Post karma: 1
+- Account age: 16 days
+- Total tracked comments: 138
+
+---
+
+## 2026-03-01 (12:00) - MoldaSpace Reddit Seeding (Cron)
+
+**Session Summary**: ✅ Successful session. Startup `--test` failed due to missing/expired reddit session; self-recovered with manual login on old.reddit.com/login, then resumed API-only flow via `reddit_comment.py`.
+
+**Karma update**: 103 comment karma, 1 post karma (total 104).
+
+**New comments posted**: 2
+
+1. **r/archviz** — "Recent work"
+   - URL: https://old.reddit.com/r/archviz/comments/1rhulhg/recent_work/o827x1d/
+   - Angle: positive critique with two focused realism improvements (roughness breakup on floor + stronger contact shadows at chair-floor contact).
+   - Status: ✅ t1_o827x1d confirmed on profile.
+
+2. **r/DesignMyRoom** — "Help me Pick a Living Room Orientation?"
+   - URL: https://old.reddit.com/r/DesignMyRoom/comments/1rhwsjg/help_me_pick_a_living_room_orientation/o827wwy/
+   - Angle: keep orientation 1 but tighten seating into a conversation cluster, use larger rug footprint, and move bar cart to side wall for cleaner balance.
+   - Status: ✅ t1_o827wwy confirmed on profile.
+
+**Replies handled from inbox/profile**: 1
+
+3. **r/InteriorDesign reply** — "Range Hood Dilemma"
+   - URL: https://old.reddit.com/r/InteriorDesign/comments/1rd4nuy/range_hood_dilemma/o8280tl/
+   - Angle: brief supportive follow-up after OP thank-you; invited final-result photo for quick second-pass feedback.
+   - Status: ✅ t1_o8280tl confirmed on profile.
+
+**Current Stats**:
+- Comment karma: 103
+- Post karma: 1
+- Account age: 15 days
+- Total tracked comments: 135
+
+---
+
+## 2026-03-01 (09:00) - MoldaSpace Reddit Seeding (Cron)
+
+**Session Summary**: ✅ Successful session. Startup `--test` failed due to script auto-login path error (Camofox HTTP 500), self-recovered with manual login on old.reddit.com/login and resumed API-only flow.
+
+**Karma update**: 101 comment karma, 1 post karma (total 102).
+
+**New comments posted**: 2
+
+1. **r/archviz** — "Render practice"
+   - URL: https://old.reddit.com/r/archviz/comments/1rhnysw/render_practice/o81g7a6/
+   - Angle: quick realism bump feedback (edge bevel softness, subtle roughness variation on floor/table highlights, slightly lower camera height to reduce top-heavy read).
+   - Status: ✅ t1_o81g7a6 confirmed on profile.
+
+2. **r/InteriorDesign** — "Best place for TV in the living room"
+   - URL: https://old.reddit.com/r/InteriorDesign/comments/1rhm39v/best_place_for_tv_in_the_living_room/o81g7lv/
+   - Angle: non-fireplace TV options that preserve layout intent (motorized low cabinet + swivel mount behind camera side, or short-throw projector + retractable screen for movie-only mode).
+   - Status: ✅ t1_o81g7lv confirmed on profile.
+
+**Replies handled from inbox/profile**: 1
+
+3. **r/InteriorDesign reply** — "Placement of stove/hood on peninsula in open space kitchen"
+   - URL: https://old.reddit.com/r/InteriorDesign/comments/1rfkifl/placement_of_stovehood_on_peninsula_in_open_space/o81g9un/
+   - Angle: aesthetic follow-up on peninsula hood integration (keep hood simple, align with pendants/cabinet lines, repeat faucet/hardware finish).
+   - Status: ✅ t1_o81g9un confirmed via single-comment thread.
+
+**Current Stats**:
+- Comment karma: 101
+- Post karma: 1
+- Account age: 15 days
+- Total tracked comments: 132
+
+---
+
 ## 2026-02-28 (20:00) - MoldaSpace Reddit Seeding (Cron)
 
 **Session Summary**: ✅ Successful session. `--test` auth failed at startup (script auto-login Camofox 500), self-recovered with manual login on old.reddit.com/login, then resumed API-only posting.
@@ -1450,3 +1549,39 @@
 - Post karma: 1
 - Account age: 10 days
 - Total tracked comments: 84
+
+## 2026-03-01 (20:00) - MoldaSpace Reddit Seeding (Cron)
+
+**Session Summary**: ✅ Successful session. `--test` auth failed in script auto-login flow; self-recovered with manual login on old.reddit.com/login and resumed API-only posting.
+
+**Karma update**: 106 comment karma, 1 post karma (total 107).
+
+**New comments posted**: 2
+
+1. **r/DesignMyRoom** — "How do i fix this ugly bathroom?"
+   - URL: https://old.reddit.com/r/DesignMyRoom/comments/1ri7aew/how_do_i_fix_this_ugly_bathroom/o84wfg0/
+   - Angle: Low-budget bathroom triage (safe fixture + grout + conceal exposed pipes/wires where code allows), then one wall color + wood mirror + full curtain for calmer visual read.
+   - Status: ✅ t1_o84wfg0 confirmed via single-comment thread.
+
+2. **r/InteriorDesign** — "Awkward Living Room Help"
+   - URL: https://old.reddit.com/r/InteriorDesign/comments/1rho18a/awkward_living_room_help/o84wg1v/
+   - Angle: Circulation-first plan: sofa forward for rear walkway, shallow built-in storage (10-12 in) + kid desk near stairs, corner TV mount to preserve flow.
+   - Status: ✅ t1_o84wg1v confirmed via single-comment thread.
+
+**Replies handled from inbox/profile**: 2
+
+3. **r/archviz reply** — "Recent work"
+   - URL: https://old.reddit.com/r/archviz/comments/1rhulhg/recent_work/o84wms1/
+   - Angle: short social follow-up after OP reaction.
+   - Status: ✅ t1_o84wms1 confirmed.
+
+4. **r/archviz reply** — "Community comparison challenge exercise?"
+   - URL: https://old.reddit.com/r/archviz/comments/1rgbqhe/community_comparison_challenge_exercise/o84wmwl/
+   - Angle: agreed on single-author reference scene and suggested compact benchmark room to increase participation.
+   - Status: ✅ t1_o84wmwl confirmed.
+
+**Current Stats**:
+- Comment karma: 106
+- Post karma: 1
+- Account age: 16 days
+- Total tracked comments: 142

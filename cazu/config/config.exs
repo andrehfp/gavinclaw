@@ -24,12 +24,19 @@ config :cazu, :conta_azul,
 
 config :cazu, :telegram, api_base_url: "https://api.telegram.org"
 
+config :cazu, :llm,
+  provider: :openai,
+  websocket_mode_enabled: false
+
 config :cazu, :openai,
   model: "gpt-5.2",
   primary_model: "gpt-5.2",
   router_model: "gpt-5-mini",
   base_url: "https://api.openai.com/v1",
+  websocket_base_url: "wss://api.openai.com/v1/responses",
   timeout_ms: 30_000,
+  websocket_timeout_ms: 30_000,
+  websocket_beta_header: nil,
   model_prices: %{}
 
 config :cazu, :tool_retrieval,
@@ -45,6 +52,17 @@ config :cazu, :tool_retrieval,
 config :cazu, :agent_trace,
   enabled: false,
   path: "output/agent_trace.jsonl"
+
+config :cazu, :agent_governance, require_write_confirmation: false
+
+config :cazu, :agent_runtime,
+  legacy_command_fallback_enabled: false,
+  conversation_agent_idle_timeout_ms: 5 * 60 * 1000,
+  conversation_agent_prune_interval_ms: 60_000
+
+config :cazu, Cazu.Jido,
+  max_tasks: 1000,
+  agent_pools: []
 
 # Configure the endpoint
 config :cazu, CazuWeb.Endpoint,

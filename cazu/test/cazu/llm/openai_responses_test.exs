@@ -303,6 +303,52 @@ defmodule Cazu.LLM.OpenAIResponsesTest do
     assert openai_people_tool_name in selected_tool_names
   end
 
+  test "select_next_action/3 keyword routing keeps acquittance tools for baixa intents" do
+    [acquittance_spec] = OpenAIResponses.build_tool_specs(["acquittance.create"])
+    openai_acquittance_tool_name = acquittance_spec["name"]
+
+    %{base_url: base_url, agent: agent} =
+      start_stub_server([
+        %{
+          status: 200,
+          body: %{
+            "id" => "resp_6b",
+            "output" => [
+              %{
+                "type" => "message",
+                "content" => [
+                  %{"type" => "output_text", "text" => "ok"}
+                ]
+              }
+            ]
+          }
+        }
+      ])
+
+    Application.put_env(:cazu, :openai,
+      api_key: "test-key",
+      model: "gpt-4.1-mini",
+      base_url: base_url,
+      timeout_ms: 1000
+    )
+
+    Application.put_env(:cazu, :tool_retrieval, strategy: :keyword, embeddings_enabled: false)
+
+    conversation = conversation_fixture()
+
+    assert {:ok, {:no_tool, "ok", "resp_6b"}} =
+             OpenAIResponses.select_next_action(
+               conversation,
+               "pode dar baixa na parcela 123 hoje?"
+             )
+
+    [request] = Cazu.TestHTTPStub.requests(agent)
+    request_body = Jason.decode!(request.raw_body)
+    selected_tool_names = Enum.map(request_body["tools"], & &1["name"])
+
+    assert openai_acquittance_tool_name in selected_tool_names
+  end
+
   test "select_next_action/3 hybrid strategy uses embeddings candidates when confidence is high" do
     [people_spec] = OpenAIResponses.build_tool_specs(["crm.list_people"])
     openai_people_tool_name = people_spec["name"]

@@ -1,0 +1,135 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+ROOT="/home/andreprado/.openclaw/workspace"
+STATE_FILE="$ROOT/memory/gavin-context/current_turn_id"
+
+usage() {
+  cat <<'EOF'
+Usage:
+  gctx begin <task_type> <objective text...>
+  gctx event <phase> <note text...>
+  gctx end <status> <confidence> <outcome text...>
+  gctx show
+  gctx report [YYYY-MM-DD]
+  gctx clear
+
+Examples:
+  gctx begin heartbeat "Heartbeat checks 15:00"
+  gctx event check "Disk and services verified"
+  gctx end ok 0.9 "No urgent items"
+  gctx report
+  gctx report 2026-03-01
+EOF
+}
+
+ensure_state_dir() {
+  mkdir -p "$(dirname "$STATE_FILE")"
+}
+
+require_turn_id() {
+  if [[ ! -f "$STATE_FILE" ]]; then
+    echo "No active turn_id. Run: gctx begin ..." >&2
+    exit 1
+  fi
+  local turn_id
+  turn_id="$(cat "$STATE_FILE")"
+  if [[ -z "$turn_id" ]]; then
+    echo "Empty turn_id in state file. Run: gctx begin ..." >&2
+    exit 1
+  fi
+  printf '%s' "$turn_id"
+}
+
+cmd_begin() {
+  local task_type="${1:-analysis}"
+  shift || true
+  local objective="${*:-Task}"
+  ensure_state_dir
+
+  local turn_id
+  turn_id="$(gavin-context manifest \
+    --objective "$objective" \
+    --task-type "$task_type" \
+    --source "runtime:gctx auto begin:200")"
+
+  echo "$turn_id" > "$STATE_FILE"
+  echo "$turn_id"
+}
+
+cmd_event() {
+  local phase="${1:-implementation}"
+  shift || true
+  local note="${*:-event}"
+  local turn_id
+  turn_id="$(require_turn_id)"
+  gavin-context event --turn-id "$turn_id" --phase "$phase" --note "$note" >/dev/null
+  echo "ok"
+}
+
+cmd_end() {
+  local status="${1:-ok}"
+  local confidence="${2:-0.8}"
+  shift 2 || true
+  local outcome="${*:-done}"
+  local turn_id
+  turn_id="$(require_turn_id)"
+
+  gavin-context eval \
+    --turn-id "$turn_id" \
+    --status "$status" \
+    --confidence "$confidence" \
+    --outcome "$outcome" >/dev/null
+
+  rm -f "$STATE_FILE"
+  echo "ok"
+}
+
+cmd_show() {
+  local turn_id
+  turn_id="$(require_turn_id)"
+  gavin-context replay --turn-id "$turn_id"
+}
+
+cmd_report() {
+  local date_arg="${1:-}"
+  local out_path="memory/gavin-context/reports/${date_arg:-$(date +%F)}.md"
+
+  if [[ -n "$date_arg" ]]; then
+    gavin-context report --date "$date_arg" --tz "America/Sao_Paulo" --out "$out_path"
+  else
+    gavin-context report --tz "America/Sao_Paulo" --out "$out_path"
+  fi
+}
+
+cmd_clear() {
+  rm -f "$STATE_FILE"
+  echo "ok"
+}
+
+main() {
+  if [[ $# -lt 1 ]]; then
+    usage
+    exit 1
+  fi
+
+  local cmd="$1"
+  shift || true
+
+  case "$cmd" in
+    begin) cmd_begin "$@" ;;
+    event) cmd_event "$@" ;;
+    end) cmd_end "$@" ;;
+    show) cmd_show "$@" ;;
+    report) cmd_report "$@" ;;
+    clear) cmd_clear ;;
+    -h|--help|help) usage ;;
+    *)
+      echo "Unknown command: $cmd" >&2
+      usage
+      exit 1
+      ;;
+  esac
+}
+
+main "$@"

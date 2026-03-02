@@ -37,6 +37,12 @@ openai_timeout_ms =
     _ -> 30_000
   end
 
+openai_websocket_timeout_ms =
+  case Integer.parse(System.get_env("OPENAI_WEBSOCKET_TIMEOUT_MS", "30000")) do
+    {value, ""} when value > 0 -> value
+    _ -> 30_000
+  end
+
 parse_model_price_value = fn
   value when is_number(value) ->
     {:ok, value / 1}
@@ -113,8 +119,27 @@ config :cazu, :openai,
     System.get_env("OPENAI_PRIMARY_MODEL", System.get_env("OPENAI_MODEL", "gpt-5.2")),
   router_model: System.get_env("OPENAI_ROUTER_MODEL", "gpt-5-mini"),
   base_url: System.get_env("OPENAI_BASE_URL", "https://api.openai.com/v1"),
+  websocket_base_url:
+    System.get_env("OPENAI_WEBSOCKET_BASE_URL", "wss://api.openai.com/v1/responses"),
+  websocket_timeout_ms: openai_websocket_timeout_ms,
+  websocket_beta_header: System.get_env("OPENAI_WEBSOCKET_BETA_HEADER"),
   timeout_ms: openai_timeout_ms,
   model_prices: openai_model_prices
+
+llm_provider =
+  case String.downcase(System.get_env("LLM_PROVIDER", "openai")) do
+    "openai" -> :openai
+    _ -> :openai
+  end
+
+llm_websocket_mode_enabled? =
+  System.get_env("LLM_WEBSOCKET_MODE_ENABLED", "false")
+  |> String.downcase()
+  |> then(&(&1 in ["1", "true", "yes", "on"]))
+
+config :cazu, :llm,
+  provider: llm_provider,
+  websocket_mode_enabled: llm_websocket_mode_enabled?
 
 # Optional OpenAI model prices in USD per 1M tokens.
 # Expected JSON shape:
@@ -180,6 +205,35 @@ agent_trace_enabled? =
 config :cazu, :agent_trace,
   enabled: agent_trace_enabled?,
   path: System.get_env("AGENT_TRACE_PATH", "output/agent_trace.jsonl")
+
+require_write_confirmation? =
+  System.get_env("AGENT_REQUIRE_WRITE_CONFIRMATION", "false")
+  |> String.downcase()
+  |> then(&(&1 in ["1", "true", "yes", "on"]))
+
+config :cazu, :agent_governance, require_write_confirmation: require_write_confirmation?
+
+legacy_command_fallback_enabled? =
+  System.get_env("AGENT_LEGACY_COMMAND_FALLBACK_ENABLED", "false")
+  |> String.downcase()
+  |> then(&(&1 in ["1", "true", "yes", "on"]))
+
+conversation_agent_idle_timeout_ms =
+  case Integer.parse(System.get_env("AGENT_CONVERSATION_IDLE_TIMEOUT_MS", "300000")) do
+    {value, ""} when value > 0 -> value
+    _ -> 300_000
+  end
+
+conversation_agent_prune_interval_ms =
+  case Integer.parse(System.get_env("AGENT_CONVERSATION_PRUNE_INTERVAL_MS", "60000")) do
+    {value, ""} when value > 0 -> value
+    _ -> 60_000
+  end
+
+config :cazu, :agent_runtime,
+  legacy_command_fallback_enabled: legacy_command_fallback_enabled?,
+  conversation_agent_idle_timeout_ms: conversation_agent_idle_timeout_ms,
+  conversation_agent_prune_interval_ms: conversation_agent_prune_interval_ms
 
 if config_env() == :prod do
   database_url =

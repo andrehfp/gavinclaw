@@ -37,6 +37,25 @@ defmodule Cazu.Tools.Specs do
     })
   end
 
+  defp acquittance_payment_method_enum do
+    [
+      "DINHEIRO",
+      "CARTAO_CREDITO",
+      "BOLETO_BANCARIO",
+      "CARTAO_CREDITO_VIA_LINK",
+      "CHEQUE",
+      "CARTAO_DEBITO",
+      "TRANSFERENCIA_BANCARIA",
+      "OUTRO",
+      "CARTEIRA_DIGITAL",
+      "CASHBACK",
+      "CREDITO_LOJA",
+      "CREDITO_VIRTUAL",
+      "DEPOSITO_BANCARIO",
+      "PIX_PAGAMENTO_INSTANTANEO"
+    ]
+  end
+
   defp finance_creation_params do
     open_object(%{
       "additionalProperties" => false,
@@ -634,7 +653,12 @@ defmodule Cazu.Tools.Specs do
                 },
                 "required" => ["valor_bruto"]
               },
-              "metodo_pagamento" => %{"type" => "string"},
+              "metodo_pagamento" => %{
+                "type" => "string",
+                "enum" => acquittance_payment_method_enum(),
+                "description" =>
+                  "Payment method enum. Common aliases (e.g. pix, depósito, cartão) are normalized by the tool."
+              },
               "observacao" => %{"type" => "string"},
               "nsu" => %{"type" => "string"}
             },
@@ -675,7 +699,12 @@ defmodule Cazu.Tools.Specs do
                   "taxa" => %{"type" => "number"}
                 }
               },
-              "metodo_pagamento" => %{"type" => "string"},
+              "metodo_pagamento" => %{
+                "type" => "string",
+                "enum" => acquittance_payment_method_enum(),
+                "description" =>
+                  "Payment method enum. Common aliases (e.g. pix, depósito, cartão) are normalized by the tool."
+              },
               "observacao" => %{"type" => "string"},
               "nsu" => %{"type" => "string"}
             },

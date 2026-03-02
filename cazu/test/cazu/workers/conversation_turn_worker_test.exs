@@ -11,10 +11,21 @@ defmodule Cazu.Workers.ConversationTurnWorkerTest do
   alias Cazu.Workers.ConversationTurnWorker
 
   setup do
-    original_config = Application.get_env(:cazu, :openai, [])
+    original_openai_config = Application.get_env(:cazu, :openai, [])
+    original_agent_runtime_config = Application.get_env(:cazu, :agent_runtime, [])
+    original_llm_config = Application.get_env(:cazu, :llm, [])
+
+    original_fake_provider_config =
+      Application.get_env(:cazu, Cazu.TestSupport.FakeLLMProvider, [])
+
+    Application.put_env(:cazu, :agent_runtime, legacy_command_fallback_enabled: false)
+    Application.put_env(:cazu, :llm, provider: :openai)
 
     on_exit(fn ->
-      Application.put_env(:cazu, :openai, original_config)
+      Application.put_env(:cazu, :openai, original_openai_config)
+      Application.put_env(:cazu, :agent_runtime, original_agent_runtime_config)
+      Application.put_env(:cazu, :llm, original_llm_config)
+      Application.put_env(:cazu, Cazu.TestSupport.FakeLLMProvider, original_fake_provider_config)
     end)
 
     :ok
@@ -66,6 +77,33 @@ defmodule Cazu.Workers.ConversationTurnWorkerTest do
     assert conversation.metadata["last_action"] == "no_tool"
     assert conversation.metadata["last_assistant_message"] == "Preciso de mais detalhes."
     assert [%{"role" => "user"}, %{"role" => "assistant"}] = conversation.metadata["messages"]
+  end
+
+  test "perform/1 uses configured provider abstraction for action selection" do
+    Application.put_env(:cazu, :llm, provider: Cazu.TestSupport.FakeLLMProvider)
+
+    Application.put_env(:cazu, Cazu.TestSupport.FakeLLMProvider,
+      select_next_action:
+        {:ok, {:tool, "crm.list_people", %{"busca" => "Ana"}, "resp_fake_1", nil, "call_fake_1"}}
+    )
+
+    tenant = tenant_fixture()
+    user = user_fixture(tenant)
+
+    assert :ok =
+             ConversationTurnWorker.perform(%Oban.Job{
+               args: %{
+                 "tenant_id" => tenant.id,
+                 "user_id" => user.id,
+                 "chat_id" => "chat-provider-abstraction",
+                 "telegram_user_id" => "tg-user-provider-abstraction",
+                 "message_text" => "listar pessoas ana",
+                 "telegram_update_id" => "upd-provider-1"
+               }
+             })
+
+    assert %ToolCall{name: "crm.list_people", arguments: %{"busca" => "Ana"}} =
+             Repo.get_by!(ToolCall, tenant_id: tenant.id, name: "crm.list_people")
   end
 
   test "perform/1 enqueues a fresh read tool call when a previous turn already succeeded" do
@@ -172,7 +210,7 @@ defmodule Cazu.Workers.ConversationTurnWorkerTest do
     assert Enum.at(tool_calls, 0).idempotency_key != Enum.at(tool_calls, 1).idempotency_key
   end
 
-  test "perform/1 falls back to legacy command parsing when llm is unavailable" do
+  test "perform/1 does not use legacy command parsing when llm is unavailable by default" do
     Application.put_env(:cazu, :openai,
       api_key: nil,
       model: "gpt-4.1-mini",
@@ -192,6 +230,34 @@ defmodule Cazu.Workers.ConversationTurnWorkerTest do
                  "telegram_user_id" => "tg-user-fallback",
                  "message_text" => "/crm.list_people {\"name\":\"Ana\"}",
                  "telegram_update_id" => "upd-2"
+               }
+             })
+
+    assert Repo.get_by(ToolCall, tenant_id: tenant.id, name: "crm.list_people") == nil
+  end
+
+  test "perform/1 falls back to legacy command parsing only when explicitly enabled" do
+    Application.put_env(:cazu, :openai,
+      api_key: nil,
+      model: "gpt-4.1-mini",
+      base_url: "http://127.0.0.1:9999",
+      timeout_ms: 100
+    )
+
+    Application.put_env(:cazu, :agent_runtime, legacy_command_fallback_enabled: true)
+
+    tenant = tenant_fixture()
+    user = user_fixture(tenant)
+
+    assert :ok =
+             ConversationTurnWorker.perform(%Oban.Job{
+               args: %{
+                 "tenant_id" => tenant.id,
+                 "user_id" => user.id,
+                 "chat_id" => "chat-fallback-enabled",
+                 "telegram_user_id" => "tg-user-fallback-enabled",
+                 "message_text" => "/crm.list_people {\"name\":\"Ana\"}",
+                 "telegram_update_id" => "upd-2b"
                }
              })
 

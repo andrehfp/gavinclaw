@@ -10,8 +10,13 @@ defmodule Cazu.Workers.ConversationTurnWorker do
 
   alias Cazu.AgentTrace
   alias Cazu.AgentChatStream
+  alias Cazu.Agents.ChatAgent
+  alias Cazu.Agents.ConversationAgentServer
+  alias Cazu.Agents.Directives.AskForConfirmation
+  alias Cazu.Agents.Directives.EnqueueToolCall
+  alias Cazu.Agents.RuntimeAdapter
   alias Cazu.Conversations
-  alias Cazu.LLM.OpenAIResponses
+  alias Cazu.LLM.Provider
   alias Cazu.Operations
   alias Cazu.Operations.Job
   alias Cazu.Orchestrator
@@ -200,105 +205,16 @@ defmodule Cazu.Workers.ConversationTurnWorker do
         llm_tool_call_id: llm_tool_call_id
       })
 
-    enriched_arguments = enrich_tool_arguments(tool_name, arguments, context.message_text)
-
-    with {:ok, _conversation} <-
-           put_ui_metadata(conversation, %{
-             "last_user_message" => context.message_text,
-             "last_assistant_message" => nil,
-             "last_action" => "tool_selected",
-             "last_tool_name" => tool_name,
-             "pending_confirmation" => nil
-           }),
-         %User{} = user <- Tenancy.get_user(context.user_id),
-         :ok <- Policies.validate_tool_call(user, tool_name, enriched_arguments),
-         :ok <-
-           Orchestrator.enqueue_tool_call(
-             context.tenant_id,
-             context.user_id,
-             context.chat_id,
-             tool_name,
-             enriched_arguments,
-             %{
-               "llm_response_id" => response_id,
-               "llm_tool_call_id" => llm_tool_call_id
-             }
-           ) do
-      :ok
-    else
-      nil ->
-        {:cancel, :user_not_found}
-
-      {:error, :confirmation_required} ->
-        _ =
-          AgentTrace.log("turn.confirmation_required", %{
-            tenant_id: context.tenant_id,
-            chat_id: context.chat_id,
-            tool_name: tool_name,
-            arguments: enriched_arguments
-          })
-
-        _ =
-          put_ui_metadata(conversation, %{
-            "last_user_message" => context.message_text,
-            "last_assistant_message" =>
-              "This command changes data. Please send it with \"confirm\": true.",
-            "last_action" => "confirmation_required",
-            "last_tool_name" => tool_name,
-            "pending_confirmation" => build_pending_confirmation(tool_name, enriched_arguments)
-          })
-
-        _ =
-          Telegram.send_message(
-            context.chat_id,
-            "This command changes data. Please send it with \"confirm\": true."
-          )
-
-        _ =
-          broadcast_assistant(
-            context,
-            "This command changes data. Please send it with \"confirm\": true.",
-            "confirmation_required",
-            tool_name
-          )
-
-        _ = broadcast_idle(context)
-
-        :ok
-
-      {:error, reason} ->
-        _ =
-          AgentTrace.log("turn.tool_enqueue_error", %{
-            tenant_id: context.tenant_id,
-            chat_id: context.chat_id,
-            tool_name: tool_name,
-            reason: inspect(reason)
-          })
-
-        _ =
-          put_ui_metadata(conversation, %{
-            "last_user_message" => context.message_text,
-            "last_assistant_message" => @default_error_message,
-            "last_action" => "tool_selection_error",
-            "last_tool_name" => tool_name,
-            "last_error_reason" => inspect(reason)
-          })
-
-        _ =
-          Telegram.send_message(context.chat_id, "Could not process request: #{inspect(reason)}")
-
-        _ =
-          broadcast_assistant(
-            context,
-            @default_error_message,
-            "tool_selection_error",
-            tool_name
-          )
-
-        _ = broadcast_idle(context)
-
-        :ok
-    end
+    apply_tool_decision(
+      conversation,
+      context,
+      tool_name,
+      arguments,
+      %{
+        "llm_response_id" => response_id,
+        "llm_tool_call_id" => llm_tool_call_id
+      }
+    )
   end
 
   defp handle_action({:no_tool, assistant_message, response_id}, conversation, context) do
@@ -328,6 +244,184 @@ defmodule Cazu.Workers.ConversationTurnWorker do
     end
   end
 
+  defp apply_tool_decision(
+         conversation,
+         context,
+         tool_name,
+         arguments,
+         execution_meta,
+         opts \\ []
+       ) do
+    enriched_arguments = enrich_tool_arguments(tool_name, arguments, context.message_text)
+    error_action = Keyword.get(opts, :error_action, "tool_selection_error")
+    decision_source = Keyword.get(opts, :decision_source, "llm")
+
+    with %User{} = user <- Tenancy.get_user(context.user_id),
+         :ok <- Policies.validate_tool_call(user, tool_name, enriched_arguments),
+         {:ok, next_state, directives} <-
+           decide_tool_directives(
+             conversation,
+             context,
+             tool_name,
+             enriched_arguments,
+             execution_meta
+           ),
+         :ok <-
+           persist_tool_decision_metadata(
+             conversation,
+             context,
+             tool_name,
+             next_state,
+             directives,
+             decision_source
+           ),
+         :ok <-
+           RuntimeAdapter.execute(directives, %{
+             tenant_id: context.tenant_id,
+             user_id: context.user_id,
+             chat_id: context.chat_id,
+             channel: "telegram"
+           }) do
+      if asks_confirmation?(directives), do: broadcast_idle(context)
+      :ok
+    else
+      nil ->
+        {:cancel, :user_not_found}
+
+      {:error, reason} ->
+        handle_tool_decision_error(conversation, context, tool_name, reason, error_action)
+    end
+  end
+
+  defp decide_tool_directives(
+         conversation,
+         context,
+         tool_name,
+         enriched_arguments,
+         execution_meta
+       ) do
+    initial_state = build_agent_state(conversation, context)
+
+    ConversationAgentServer.apply_action(%{
+      tenant_id: context.tenant_id,
+      conversation_id: context.chat_id,
+      user_id: context.user_id,
+      initial_state: initial_state,
+      action:
+        ChatAgent.user_message_action(%{
+          message_text: context.message_text,
+          tool_name: tool_name,
+          arguments: enriched_arguments,
+          execution_meta: execution_meta,
+          require_confirmation: Policies.require_confirmation_for_tool?(tool_name),
+          confirmation_message:
+            "This command changes data. Please send it with \"confirm\": true."
+        })
+    })
+  end
+
+  defp persist_tool_decision_metadata(
+         conversation,
+         context,
+         tool_name,
+         next_state,
+         directives,
+         decision_source
+       ) do
+    latest_conversation =
+      Conversations.get_conversation(context.tenant_id, context.chat_id) || conversation
+
+    metadata =
+      tool_decision_metadata(context.message_text, tool_name, next_state, directives)
+      |> Map.put("decision_source", decision_source)
+
+    case maybe_put_ui_metadata(latest_conversation, metadata) do
+      {:ok, _updated_conversation} -> :ok
+      :ok -> :ok
+      {:error, reason} -> {:error, reason}
+    end
+  end
+
+  defp handle_tool_decision_error(conversation, context, tool_name, reason, error_action) do
+    _ =
+      AgentTrace.log("turn.tool_enqueue_error", %{
+        tenant_id: context.tenant_id,
+        chat_id: context.chat_id,
+        tool_name: tool_name,
+        reason: inspect(reason),
+        action: error_action
+      })
+
+    _ =
+      maybe_put_ui_metadata(conversation, %{
+        "last_user_message" => context.message_text,
+        "last_assistant_message" => @default_error_message,
+        "last_action" => error_action,
+        "last_tool_name" => tool_name,
+        "last_error_reason" => inspect(reason)
+      })
+
+    _ = Telegram.send_message(context.chat_id, "Could not process request: #{inspect(reason)}")
+
+    _ = broadcast_assistant(context, @default_error_message, error_action, tool_name)
+
+    _ = broadcast_idle(context)
+
+    :ok
+  end
+
+  defp build_agent_state(nil, context) do
+    %{
+      tenant_id: context.tenant_id,
+      conversation_id: context.chat_id,
+      user_id: context.user_id,
+      integration_status: :unknown,
+      pending_confirmation: nil,
+      last_tool_calls: [],
+      policy_flags: %{},
+      memory_window_ref: nil
+    }
+  end
+
+  defp build_agent_state(conversation, context) do
+    metadata = normalize_metadata(conversation.metadata)
+
+    %{
+      tenant_id: context.tenant_id,
+      conversation_id: context.chat_id,
+      user_id: context.user_id,
+      integration_status: Map.get(metadata, "integration_status", "unknown"),
+      pending_confirmation: Map.get(metadata, "pending_confirmation"),
+      last_tool_calls: Map.get(metadata, "agent_last_tool_calls", []),
+      policy_flags: Map.get(metadata, "policy_flags", %{}),
+      memory_window_ref: Map.get(metadata, "memory_window_ref")
+    }
+  end
+
+  defp tool_decision_metadata(message_text, tool_name, next_state, directives) do
+    {last_action, last_assistant_message} = decision_feedback(directives)
+
+    %{
+      "last_user_message" => message_text,
+      "last_assistant_message" => last_assistant_message,
+      "last_action" => last_action,
+      "last_tool_name" => tool_name,
+      "pending_confirmation" => next_state.pending_confirmation,
+      "agent_last_tool_calls" => next_state.last_tool_calls,
+      "integration_status" => to_string(next_state.integration_status)
+    }
+  end
+
+  defp decision_feedback([%AskForConfirmation{message: message} | _]),
+    do: {"confirmation_required", message}
+
+  defp decision_feedback([%EnqueueToolCall{} | _]), do: {"tool_selected", nil}
+
+  defp decision_feedback(_directives), do: {"tool_selected", nil}
+
+  defp asks_confirmation?(directives),
+    do: Enum.any?(directives, &match?(%AskForConfirmation{}, &1))
+
   defp handle_llm_error(reason, args, attempt, max_attempts) do
     _ =
       AgentTrace.log("turn.llm_error", %{
@@ -350,111 +444,62 @@ defmodule Cazu.Workers.ConversationTurnWorker do
   end
 
   defp handle_llm_error_with_context(reason, context, retryable_transient?) do
-    case Orchestrator.parse_legacy_tool_command(context.message_text) do
-      {:ok, tool_name, arguments} ->
-        conversation = load_or_nil_conversation(context)
-        _ = maybe_put_ui_metadata(conversation, fallback_metadata(context, tool_name))
-
-        with %User{} = user <- Tenancy.get_user(context.user_id),
-             :ok <- Policies.validate_tool_call(user, tool_name, arguments),
-             :ok <-
-               Orchestrator.enqueue_tool_call(
-                 context.tenant_id,
-                 context.user_id,
-                 context.chat_id,
-                 tool_name,
-                 arguments
-               ) do
-          :ok
-        else
-          nil ->
-            {:cancel, :user_not_found}
-
-          {:error, :confirmation_required} ->
-            _ =
-              maybe_put_ui_metadata(conversation, %{
-                "last_user_message" => context.message_text,
-                "last_assistant_message" =>
-                  "This command changes data. Please send it with \"confirm\": true.",
-                "last_action" => "confirmation_required",
-                "last_tool_name" => tool_name,
-                "pending_confirmation" => build_pending_confirmation(tool_name, arguments)
-              })
-
-            _ =
-              Telegram.send_message(
-                context.chat_id,
-                "This command changes data. Please send it with \"confirm\": true."
-              )
-
-            _ =
-              broadcast_assistant(
-                context,
-                "This command changes data. Please send it with \"confirm\": true.",
-                "confirmation_required",
-                tool_name
-              )
-
-            _ = broadcast_idle(context)
-
-            :ok
-
-          {:error, error} ->
-            _ =
-              maybe_put_ui_metadata(conversation, %{
-                "last_user_message" => context.message_text,
-                "last_assistant_message" => @default_error_message,
-                "last_action" => "fallback_tool_error",
-                "last_tool_name" => tool_name,
-                "last_error_reason" => inspect(error)
-              })
-
-            _ =
-              Telegram.send_message(
-                context.chat_id,
-                "Could not process request: #{inspect(error)}"
-              )
-
-            _ =
-              broadcast_assistant(
-                context,
-                @default_error_message,
-                "fallback_tool_error",
-                tool_name
-              )
-
-            _ = broadcast_idle(context)
-
-            :ok
-        end
-
-      {:error, _unsupported} ->
-        if retryable_transient? do
-          {:error, reason}
-        else
+    if legacy_command_fallback_enabled?() do
+      case Orchestrator.parse_legacy_tool_command(context.message_text) do
+        {:ok, tool_name, arguments} ->
           conversation = load_or_nil_conversation(context)
 
-          message =
-            if transient_llm_error?(reason) do
-              "A integração de IA está instável no momento e não consegui responder agora. Pode tentar novamente em alguns segundos?"
-            else
-              @default_error_message
-            end
+          apply_tool_decision(
+            conversation,
+            context,
+            tool_name,
+            arguments,
+            %{},
+            error_action: "fallback_tool_error",
+            decision_source: "legacy_fallback"
+          )
 
-          _ =
-            maybe_put_ui_metadata(conversation, %{
-              "last_user_message" => context.message_text,
-              "last_assistant_message" => message,
-              "last_action" => "llm_error",
-              "last_tool_name" => nil,
-              "last_error_reason" => inspect(reason)
-            })
+        {:error, _unsupported} ->
+          handle_llm_error_without_fallback(reason, context, retryable_transient?)
+      end
+    else
+      _ =
+        AgentTrace.log("turn.legacy_fallback_skipped", %{
+          tenant_id: context.tenant_id,
+          chat_id: context.chat_id,
+          reason: inspect(reason)
+        })
 
-          _ = Telegram.send_message(context.chat_id, message)
-          _ = broadcast_assistant(context, message, "llm_error", nil)
-          _ = broadcast_idle(context)
-          :ok
+      handle_llm_error_without_fallback(reason, context, retryable_transient?)
+    end
+  end
+
+  defp handle_llm_error_without_fallback(reason, context, retryable_transient?) do
+    if retryable_transient? do
+      {:error, reason}
+    else
+      conversation = load_or_nil_conversation(context)
+
+      message =
+        if transient_llm_error?(reason) do
+          "A integração de IA está instável no momento e não consegui responder agora. Pode tentar novamente em alguns segundos?"
+        else
+          @default_error_message
         end
+
+      _ =
+        maybe_put_ui_metadata(conversation, %{
+          "last_user_message" => context.message_text,
+          "last_assistant_message" => message,
+          "last_action" => "llm_error",
+          "last_tool_name" => nil,
+          "last_error_reason" => inspect(reason)
+        })
+
+      _ = Telegram.send_message(context.chat_id, message)
+      _ = broadcast_assistant(context, message, "llm_error", nil)
+      _ = broadcast_idle(context)
+      :ok
     end
   end
 
@@ -470,6 +515,12 @@ defmodule Cazu.Workers.ConversationTurnWorker do
     with {:ok, context} <- parse_context(args) do
       {:ok, context}
     end
+  end
+
+  defp legacy_command_fallback_enabled? do
+    :cazu
+    |> Application.get_env(:agent_runtime, [])
+    |> Keyword.get(:legacy_command_fallback_enabled, false)
   end
 
   defp normalize_no_tool_message(message) when is_binary(message) do
@@ -497,15 +548,6 @@ defmodule Cazu.Workers.ConversationTurnWorker do
 
   defp load_or_nil_conversation(context) do
     Conversations.get_conversation(context.tenant_id, context.chat_id)
-  end
-
-  defp fallback_metadata(context, tool_name) do
-    %{
-      "last_user_message" => context.message_text,
-      "last_assistant_message" => "Processed in fallback mode.",
-      "last_action" => "fallback_legacy_command",
-      "last_tool_name" => tool_name
-    }
   end
 
   defp normalize_metadata(metadata) when is_map(metadata),
@@ -562,6 +604,7 @@ defmodule Cazu.Workers.ConversationTurnWorker do
     arguments
     |> normalize_finance_period_aliases()
     |> maybe_add_default_finance_period(message_text)
+    |> sanitize_finance_search_filters(message_text)
   end
 
   defp enrich_tool_arguments(tool_name, arguments, message_text)
@@ -571,6 +614,7 @@ defmodule Cazu.Workers.ConversationTurnWorker do
     |> normalize_finance_period_aliases()
     |> maybe_add_default_finance_type(message_text)
     |> maybe_add_default_finance_period(message_text)
+    |> sanitize_finance_search_filters(message_text)
   end
 
   defp enrich_tool_arguments(_tool_name, arguments, _message_text), do: arguments
@@ -637,6 +681,67 @@ defmodule Cazu.Workers.ConversationTurnWorker do
         type -> Map.put(arguments, "type", type)
       end
     end
+  end
+
+  defp sanitize_finance_search_filters(arguments, message_text) do
+    normalized_message = normalize_query(message_text)
+
+    Enum.reduce(arguments, %{}, fn {key, value}, acc ->
+      key_string = to_string(key)
+
+      cond do
+        blank_filter_value?(value) ->
+          acc
+
+        key_string in ["data_pagamento_de", "data_pagamento_ate"] and
+            not payment_filter_requested?(normalized_message) ->
+          acc
+
+        key_string in ["data_alteracao_de", "data_alteracao_ate"] and
+            not alteration_filter_requested?(normalized_message) ->
+          acc
+
+        key_string in ["data_competencia_de", "data_competencia_ate"] and
+            not competence_filter_requested?(normalized_message) ->
+          acc
+
+        key_string in ["valor_de", "valor_ate"] and
+            not amount_filter_requested?(normalized_message) ->
+          acc
+
+        true ->
+          Map.put(acc, key_string, value)
+      end
+    end)
+  end
+
+  defp blank_filter_value?(nil), do: true
+  defp blank_filter_value?(""), do: true
+  defp blank_filter_value?(value) when is_binary(value), do: String.trim(value) == ""
+  defp blank_filter_value?(value) when is_list(value), do: value == []
+  defp blank_filter_value?(_value), do: false
+
+  defp payment_filter_requested?(normalized_message) when is_binary(normalized_message) do
+    Enum.any?(
+      ["pagamento", "pago", "pagos", "recebida", "recebidas", "baixad", "liquid"],
+      &String.contains?(normalized_message, &1)
+    )
+  end
+
+  defp alteration_filter_requested?(normalized_message) when is_binary(normalized_message) do
+    String.contains?(normalized_message, "alteracao") or
+      String.contains?(normalized_message, "atualiza")
+  end
+
+  defp competence_filter_requested?(normalized_message) when is_binary(normalized_message) do
+    String.contains?(normalized_message, "competencia")
+  end
+
+  defp amount_filter_requested?(normalized_message) when is_binary(normalized_message) do
+    Enum.any?(
+      ["valor", "acima", "abaixo", "ate", "entre", "maior", "menor", "faixa", "preco"],
+      &String.contains?(normalized_message, &1)
+    )
   end
 
   defp maybe_handle_status_inquiry(context) do
@@ -798,13 +903,6 @@ defmodule Cazu.Workers.ConversationTurnWorker do
   defp blank_to_nil(""), do: nil
   defp blank_to_nil(value), do: value
 
-  defp build_pending_confirmation(tool_name, arguments) do
-    %{
-      "tool_name" => tool_name,
-      "arguments" => Map.new(arguments || %{}, fn {key, value} -> {to_string(key), value} end)
-    }
-  end
-
   defp broadcast_assistant(context, content, action, tool_name) do
     AgentChatStream.broadcast_assistant_message(context.tenant_id, context.chat_id, %{
       content: content,
@@ -872,9 +970,9 @@ defmodule Cazu.Workers.ConversationTurnWorker do
 
     initial_result =
       if stream? do
-        OpenAIResponses.select_next_action_stream(conversation, message_text, on_delta, call_opts)
+        Provider.select_next_action_stream(conversation, message_text, on_delta, call_opts)
       else
-        OpenAIResponses.select_next_action(conversation, message_text, call_opts)
+        Provider.select_next_action(conversation, message_text, call_opts)
       end
 
     case initial_result do
@@ -882,14 +980,14 @@ defmodule Cazu.Workers.ConversationTurnWorker do
         with {:ok, cleared_conversation} <-
                Conversations.touch_last_message(conversation, %{"previous_response_id" => nil}) do
           if stream? do
-            OpenAIResponses.select_next_action_stream(
+            Provider.select_next_action_stream(
               cleared_conversation,
               message_text,
               on_delta,
               call_opts
             )
           else
-            OpenAIResponses.select_next_action(cleared_conversation, message_text, call_opts)
+            Provider.select_next_action(cleared_conversation, message_text, call_opts)
           end
         end
 

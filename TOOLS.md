@@ -115,6 +115,36 @@ scripts/spark-openclaw down          # stop services
 **Repo:** `~/.openclaw/workspace/spark-intelligence`  
 **Important env:** `SPARK_WORKSPACE=/home/andreprado/.openclaw/workspace` (set inside wrapper)
 
+## Gavin Context Ops (AFS-lite)
+
+```bash
+# Create per-turn manifest (returns turn_id)
+gavin-context manifest --objective "..." --task-type execution \
+  --source "workspace:arquivos locais:1200" \
+  --source "memory_search:decisões prévias:500"
+
+# Append execution events
+gavin-context event --turn-id <TURN_ID> --phase implementation --note "..."
+
+# Final evaluation
+gavin-context eval --turn-id <TURN_ID> --status ok --confidence 0.9 --outcome "..."
+
+# Replay full chain
+gavin-context replay --turn-id <TURN_ID>
+
+# Daily report
+gavin-context report --tz America/Sao_Paulo --out memory/gavin-context/reports/$(date +%F).md
+
+# Wrapper
+gctx report
+gctx report 2026-03-01
+```
+
+**Script:** `scripts/gavin_context.py` (symlink: `~/.local/bin/gavin-context`)  
+**Wrapper:** `scripts/gctx` (symlink: `~/.local/bin/gctx`)  
+**Storage:** `memory/gavin-context/*.jsonl`  
+**Policy:** `memory/gavin-context/policy.json`
+
 ## RLM Scripts (Recursive Language Model)
 
 For processing long inputs without filling context:

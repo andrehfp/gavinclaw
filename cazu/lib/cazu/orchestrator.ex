@@ -9,40 +9,37 @@ defmodule Cazu.Orchestrator do
   alias Cazu.Operations
   alias Cazu.Operations.Job
   alias Cazu.Operations.ToolCall
-  alias Cazu.Policies
   alias Cazu.Repo
   alias Cazu.Telegram
   alias Cazu.Tenancy
   alias Cazu.Tools
+  alias Cazu.Workers.ConversationTurnWorker
   alias Cazu.Workers.ToolExecutionWorker
   alias Ecto.Multi
 
   def handle_telegram_update(payload) when is_map(payload) do
     with {:ok, update} <- Telegram.parse_update(payload),
-         {:ok, tool_name, arguments} <- parse_legacy_tool_command(update.text),
          {:ok, tenant} <- Tenancy.get_or_create_telegram_tenant(update.chat_id),
          {:ok, user} <-
            Tenancy.get_or_create_telegram_user(tenant, update.telegram_user_id, %{
              "name" => update.user_name
            }),
-         :ok <- Policies.validate_tool_call(user, tool_name, arguments),
-         :ok <- enqueue_tool_call(tenant.id, user.id, update.chat_id, tool_name, arguments) do
+         {:ok, _job} <-
+           Oban.insert(
+             ConversationTurnWorker.new(%{
+               "tenant_id" => tenant.id,
+               "user_id" => user.id,
+               "chat_id" => update.chat_id,
+               "telegram_user_id" => update.telegram_user_id,
+               "message_text" => update.text,
+               "telegram_update_id" => extract_update_id(payload),
+               "raw_update" => payload
+             })
+           ) do
       :ok
     else
       {:error, :unsupported_update} ->
         :ignore
-
-      {:error, :unsupported_tool} ->
-        :ignore
-
-      {:error, :confirmation_required} ->
-        _ =
-          Telegram.send_message(
-            extract_chat_id(payload),
-            "This command changes data. Please send it with \"confirm\": true."
-          )
-
-        :ok
 
       {:error, reason} ->
         _ =
@@ -356,6 +353,18 @@ defmodule Cazu.Orchestrator do
   end
 
   defp read_only_tool?(_tool_name), do: false
+
+  defp extract_update_id(%{"update_id" => update_id}) when is_integer(update_id),
+    do: Integer.to_string(update_id)
+
+  defp extract_update_id(%{"update_id" => update_id}) when is_binary(update_id), do: update_id
+
+  defp extract_update_id(payload) do
+    payload
+    |> Jason.encode!()
+    |> then(&:crypto.hash(:sha256, &1))
+    |> Base.encode16(case: :lower)
+  end
 
   defp extract_chat_id(%{"message" => %{"chat" => %{"id" => chat_id}}}), do: to_string(chat_id)
   defp extract_chat_id(_), do: ""

@@ -10,6 +10,8 @@ defmodule Cazu.Application do
     children = [
       CazuWeb.Telemetry,
       Cazu.Repo,
+      Cazu.Jido,
+      Cazu.Agents.ConversationAgentLifecycle,
       {Oban, Application.fetch_env!(:cazu, Oban)},
       {DNSCluster, query: Application.get_env(:cazu, :dns_cluster_query) || :ignore},
       {Phoenix.PubSub, name: Cazu.PubSub},

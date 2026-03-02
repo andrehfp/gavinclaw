@@ -7,6 +7,29 @@ To start your Phoenix server:
 
 Now you can visit [`localhost:4000`](http://localhost:4000) from your browser.
 
+## Secrets workflow (Bitwarden)
+
+Use Bitwarden as the source of truth.
+
+Preferred (no `.env` file write):
+
+* First time only: `bw login`
+* Start Phoenix with secrets injected only in process env: `bin/dev-secure`
+
+Generic command runner:
+
+* Run any command with Bitwarden secrets in process env: `bin/secrets-exec cazu-dev-env -- mix test`
+
+Optional (writes local `.env`):
+
+* Pull secrets from your Bitwarden item notes into `.env`: `bin/secrets-pull cazu-dev-env`
+
+Notes:
+
+* Store dotenv content in the Bitwarden item's **Notes** field
+* `bin/secrets-exec` and `bin/dev-secure` do not write `.env`
+* `.env` is ignored by git; only commit `.env.example`
+
 ## Test workflows
 
 Run the full test suite:

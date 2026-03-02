@@ -1,0 +1,152 @@
+{
+  "generated_at": "2026-03-01T19:30:04.311788",
+  "latest_baseline": "/home/andreprado/.openclaw/workspace/moldaspace/skills/seo-agent-stack/reports/baseline_2026-02-23_0914.json",
+  "latest_queue": "/home/andreprado/.openclaw/workspace/moldaspace/skills/seo-agent-stack/reports/publish_queue_2026-02-27_0915.json",
+  "analytics": {
+    "timestamp": "2026-03-01T19:30:13.615509",
+    "days_analyzed": 7,
+    "posthog": {
+      "pageviews_24h": 69,
+      "pageviews_7d": 977,
+      "unique_visitors_7d": 165,
+      "top_pages": [
+        [
+          "https://www.moldaspace.com/dashboard",
+          115
+        ],
+        [
+          "https://www.moldaspace.com/",
+          64
+        ],
+        [
+          "https://www.moldaspace.com/sign-up",
+          54
+        ],
+        [
+          "https://www.moldaspace.com/pt-BR",
+          40
+        ],
+        [
+          "https://www.moldaspace.com/consent",
+          29
+        ],
+        [
+          "https://www.moldaspace.com/pt-BR/dashboard",
+          23
+        ],
+        [
+          "https://moldaspace-git-feat-and-29-make-3d-tinysaas.vercel.app/canvas/198cdc45-509b-4fce-af80-eae6764340e2",
+          23
+        ],
+        [
+          "https://www.moldaspace.com/sign-up/verify-email-address",
+          21
+        ],
+        [
+          "https://www.moldaspace.com/es/dashboard",
+          21
+        ],
+        [
+          "https://www.moldaspace.com/es/sign-up",
+          21
+        ]
+      ],
+      "signups_7d": 72
+    },
+    "google_search_console": {
+      "site_url": "sc-domain:moldaspace.com",
+      "total_clicks": 106,
+      "total_impressions": 180,
+      "avg_ctr": 58.89,
+      "top_queries": [
+        [
+          "moldaspace",
+          91,
+          116
+        ],
+        [
+          "molda space",
+          12,
+          16
+        ],
+        [
+          "moldaspace ai",
+          2,
+          3
+        ],
+        [
+          "sketchup ai render",
+          1,
+          3
+        ],
+        [
+          "\"3d rendering software for interior design\"",
+          0,
+          16
+        ],
+        [
+          "\"interior design rendering software\"",
+          0,
+          3
+        ],
+        [
+          "\"rendering software for interior design\"",
+          0,
+          20
+        ],
+        [
+          "3d kitchen visualizer",
+          0,
+          1
+        ],
+        [
+          "ai countertop visualizer",
+          0,
+          1
+        ],
+        [
+          "ai render for sketchup free",
+          0,
+          1
+        ]
+      ]
+    },
+    "database": {
+      "total_users": 943,
+      "new_users_24h": 6,
+      "total_purchases": 69,
+      "revenue_24h": 18.799999999999997,
+      "purchases_24h_credits": 40,
+      "mrr_estimate": 352.5,
+      "revenue_7d": 98.69999999999999,
+      "purchases_7d": 6,
+      "revenue_yesterday": 0.0,
+      "purchases_yesterday": 0,
+      "signups_yesterday": 8,
+      "active_users_7d": 88,
+      "signups_7d": 72,
+      "referrals_total": 4,
+      "referrals_24h": 0,
+      "referrals_7d": 1,
+      "referrals_yesterday": 0
+    },
+    "instagram": {
+      "followers": 7,
+      "media_count": 66,
+      "username": "studio.maia.arch",
+      "recent_posts": 10,
+      "total_likes_recent": 0,
+      "total_comments_recent": 13,
+      "avg_engagement": 1.3,
+      "last_post_date": "2026-03-01T22:04:25+0000",
+      "last_post_likes": 0,
+      "last_post_comments": 3,
+      "last_post_type": "IMAGE"
+    }
+  },
+  "next_actions": [
+    "Publicar 2 páginas BOFU com prova visual + CTA 5 free renders",
+    "Revisar títulos/meta das páginas com maior impressão",
+    "Checar canibalização antes de criar novas URLs"
+  ]
+}

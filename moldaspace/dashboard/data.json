@@ -3,7 +3,7 @@
   "total": 627,
   "paying": 29,
   "repeat": 32,
-  "karma": 100,
+  "karma": 106,
   "seo": 3,
   "ig": 1,
   "reddit_posts": [
@@ -1306,6 +1306,126 @@
       "upvotes": 0,
       "listeners": 1,
       "status": "✅ verified (script returned t1_o7ykbea; confirmed via single-comment thread in Camofox)"
+    },
+    {
+      "date": "2026-03-01",
+      "sub": "r/archviz",
+      "post": "Render practice",
+      "url": "https://old.reddit.com/r/archviz/comments/1rhnysw/render_practice/o81g7a6/",
+      "angle": "Quick realism bump feedback: soften edge bevels, add subtle roughness variation on floor/table highlights, and lower camera height slightly in dining shot to reduce top-heavy feel.",
+      "upvotes": 0,
+      "listeners": 0,
+      "status": "✅ verified on profile (script returned t1_o81g7a6)"
+    },
+    {
+      "date": "2026-03-01",
+      "sub": "r/InteriorDesign",
+      "post": "Best place for TV in the living room",
+      "url": "https://old.reddit.com/r/InteriorDesign/comments/1rhm39v/best_place_for_tv_in_the_living_room/o81g7lv/",
+      "angle": "Offered non-fireplace TV options that preserve sightlines: low motorized cabinet with swivel mount behind photographer viewpoint, or short-throw projector + retractable screen for movie-only mode.",
+      "upvotes": 0,
+      "listeners": 0,
+      "status": "✅ verified on profile (script returned t1_o81g7lv)"
+    },
+    {
+      "date": "2026-03-01",
+      "sub": "r/archviz",
+      "post": "Recent work",
+      "url": "https://old.reddit.com/r/archviz/comments/1rhulhg/recent_work/o827x1d/",
+      "angle": "Constructive realism feedback: praised mood, suggested subtle roughness breakup on floor and stronger contact shadows at chair-floor intersections for extra depth.",
+      "upvotes": 0,
+      "listeners": 0,
+      "status": "✅ verified on profile (script returned t1_o827x1d)"
+    },
+    {
+      "date": "2026-03-01",
+      "sub": "r/DesignMyRoom",
+      "post": "Help me Pick a Living Room Orientation?",
+      "url": "https://old.reddit.com/r/DesignMyRoom/comments/1rhwsjg/help_me_pick_a_living_room_orientation/o827wwy/",
+      "angle": "Layout refinement: keep orientation 1 but tighten seating into a conversation island, add larger rug catching front legs, and move bar cart to side wall for better balance.",
+      "upvotes": 0,
+      "listeners": 0,
+      "status": "✅ verified on profile (script returned t1_o827wwy)"
+    },
+    {
+      "date": "2026-03-01",
+      "sub": "r/InteriorDesign",
+      "post": "REPLY — Range Hood Dilemma",
+      "url": "https://old.reddit.com/r/InteriorDesign/comments/1rd4nuy/range_hood_dilemma/o8280tl/",
+      "angle": "Inbox follow-up reply after OP thank-you: short supportive closeout inviting final setup photo for quick second-pass feedback.",
+      "upvotes": 0,
+      "listeners": 1,
+      "status": "✅ verified on profile (script returned t1_o8280tl)"
+    },
+    {
+      "date": "2026-03-01",
+      "sub": "r/InteriorDesign",
+      "post": "Living room arrangement advice?",
+      "url": "https://old.reddit.com/r/InteriorDesign/comments/1ri0o72/living_room_arrangement_advice/o83lw2s/",
+      "angle": "Recommended chaise-by-window layout for cleaner entry flow and preserved sightline; suggested using a larger rug + coffee-table repositioning to keep TV zone feeling enclosed without rotating the sofa.",
+      "upvotes": 0,
+      "listeners": 0,
+      "status": "✅ verified on profile (script returned t1_o83lw2s)"
+    },
+    {
+      "date": "2026-03-01",
+      "sub": "r/archviz",
+      "post": "render training for portfolio (rhino/vray/photoshop)",
+      "url": "https://old.reddit.com/r/archviz/comments/1rhx323/render_training_for_portfolio_rhinovrayphotoshop/o83lwvh/",
+      "angle": "Constructive realism pass: align contact shadows of composited assets with sun direction, add subtle ground color bleed on inserted elements, and share higher-resolution crops to improve critique quality.",
+      "upvotes": 0,
+      "listeners": 0,
+      "status": "✅ verified on profile (script returned t1_o83lwvh)"
+    },
+    {
+      "date": "2026-03-01",
+      "sub": "r/archviz",
+      "post": "REPLY — Recent work",
+      "url": "https://old.reddit.com/r/archviz/comments/1rhulhg/recent_work/o83m084/",
+      "angle": "Inbox follow-up reply after OP thanked prior feedback; short supportive response to keep thread engagement warm.",
+      "upvotes": 0,
+      "listeners": 1,
+      "status": "✅ verified — script returned t1_o83m084"
+    },
+    {
+      "date": "2026-03-01",
+      "sub": "r/DesignMyRoom",
+      "post": "How do i fix this ugly bathroom?",
+      "url": "https://old.reddit.com/r/DesignMyRoom/comments/1ri7aew/how_do_i_fix_this_ugly_bathroom/o84wfg0/",
+      "angle": "Low-budget bathroom triage advice: keep charming yellow tile, prioritize safe fixture + fresh grout + concealing exposed pipes/wires where code allows, then unify with one wall color, wood-framed mirror, and full-length curtain for calmer visual read.",
+      "upvotes": 0,
+      "listeners": 0,
+      "status": "✅ verified — script returned t1_o84wfg0; confirmed via single-comment thread in Camofox."
+    },
+    {
+      "date": "2026-03-01",
+      "sub": "r/InteriorDesign",
+      "post": "Awkward Living Room Help",
+      "url": "https://old.reddit.com/r/InteriorDesign/comments/1rho18a/awkward_living_room_help/o84wg1v/",
+      "angle": "Space-planning suggestion centered on circulation: pull sofa forward to create rear path, add shallow built-in storage (10-12in) with kid desk near stairs, and use corner TV mount for wider sightlines without blocking flow.",
+      "upvotes": 0,
+      "listeners": 0,
+      "status": "✅ verified — script returned t1_o84wg1v; confirmed via single-comment thread in Camofox."
+    },
+    {
+      "date": "2026-03-01",
+      "sub": "r/archviz",
+      "post": "REPLY — Community comparison challenge exercise?",
+      "url": "https://old.reddit.com/r/archviz/comments/1rgbqhe/community_comparison_challenge_exercise/o84wmwl/",
+      "angle": "Inbox follow-up reply: agreed on single-author reference-scene fairness and suggested compact benchmark room setup to lower entry barrier for volunteers.",
+      "upvotes": 0,
+      "listeners": 1,
+      "status": "✅ verified — script returned t1_o84wmwl; confirmed live in thread."
+    },
+    {
+      "date": "2026-03-01",
+      "sub": "r/archviz",
+      "post": "REPLY — Recent work",
+      "url": "https://old.reddit.com/r/archviz/comments/1rhulhg/recent_work/o84wms1/",
+      "angle": "Light social follow-up reply to OP reaction to keep thread engagement warm.",
+      "upvotes": 0,
+      "listeners": 1,
+      "status": "✅ verified — script returned t1_o84wms1; confirmed live in thread."
     }
   ],
   "ig_calendar": [
@@ -1838,7 +1958,7 @@
     "reddit": {
       "frequency": "4x/dia (9h, 12h, 16h, 20h)",
       "next": "2026-02-17T20:00",
-      "lastStatus": "✅ ok (2026-02-20 20:00) - 2 new comments + 2 replies: r/archviz SketchUp+D5 realism feedback + follow-up on roughness workflow; r/InteriorDesign kitchen/living wall strategy + bathroom concept follow-up. Karma: 28 (up from 27)."
+      "lastStatus": "✅ ok (2026-03-01 20:00) - 2 new comments + 2 inbox replies: r/DesignMyRoom bathroom advice, r/InteriorDesign layout guidance, and 2 r/archviz follow-ups. Karma: 106."
     },
     "report": {
       "frequency": "1x/dia (8h)",

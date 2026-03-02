@@ -116,7 +116,9 @@ def cmd_revenue(args):
         # Today
         cur.execute("""
             SELECT COALESCE(SUM(amount),0), COUNT(*) FROM credit_transactions
-            WHERE type='purchase' AND created_at >= CURRENT_DATE
+            WHERE type='purchase'
+              AND ((created_at AT TIME ZONE 'UTC') AT TIME ZONE 'America/Sao_Paulo')::date =
+                  (NOW() AT TIME ZONE 'America/Sao_Paulo')::date
         """)
         today_credits, today_count = cur.fetchone()
 
@@ -124,8 +126,8 @@ def cmd_revenue(args):
         cur.execute("""
             SELECT COALESCE(SUM(amount),0), COUNT(*) FROM credit_transactions
             WHERE type='purchase'
-            AND created_at >= CURRENT_DATE - INTERVAL '1 day'
-            AND created_at < CURRENT_DATE
+              AND ((created_at AT TIME ZONE 'UTC') AT TIME ZONE 'America/Sao_Paulo')::date =
+                  ((NOW() AT TIME ZONE 'America/Sao_Paulo')::date - INTERVAL '1 day')::date
         """)
         yesterday_credits, yesterday_count = cur.fetchone()
 
@@ -146,7 +148,8 @@ def cmd_revenue(args):
         # Credit wall hits today
         cur.execute("""
             SELECT COUNT(*) FROM user_credits
-            WHERE last_credit_wall_at >= CURRENT_DATE
+            WHERE ((last_credit_wall_at AT TIME ZONE 'UTC') AT TIME ZONE 'America/Sao_Paulo')::date =
+                  (NOW() AT TIME ZONE 'America/Sao_Paulo')::date
         """)
         wall_today = cur.fetchone()[0]
 
@@ -200,10 +203,18 @@ def cmd_users(args):
         cur.execute("SELECT COUNT(*) FROM user_credits")
         total = cur.fetchone()[0]
 
-        cur.execute("SELECT COUNT(*) FROM user_credits WHERE signup_date >= CURRENT_DATE")
+        cur.execute("""
+            SELECT COUNT(*) FROM user_credits
+            WHERE ((signup_date AT TIME ZONE 'UTC') AT TIME ZONE 'America/Sao_Paulo')::date =
+                  (NOW() AT TIME ZONE 'America/Sao_Paulo')::date
+        """)
         today = cur.fetchone()[0]
 
-        cur.execute("SELECT COUNT(*) FROM user_credits WHERE signup_date >= CURRENT_DATE - INTERVAL '1 day' AND signup_date < CURRENT_DATE")
+        cur.execute("""
+            SELECT COUNT(*) FROM user_credits
+            WHERE ((signup_date AT TIME ZONE 'UTC') AT TIME ZONE 'America/Sao_Paulo')::date =
+                  ((NOW() AT TIME ZONE 'America/Sao_Paulo')::date - INTERVAL '1 day')::date
+        """)
         yesterday = cur.fetchone()[0]
 
         cur.execute(f"SELECT COUNT(*) FROM user_credits WHERE signup_date >= NOW() - INTERVAL '{days} days'")
