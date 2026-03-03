@@ -5,27 +5,27 @@
 
 ## 📊 KPIs (atualizar diariamente via `moldaspace_analytics.py`)
 
-| Métrica | Current (Mar 01) | Target (30d) | Target (90d) | $10k |
+| Métrica | Current (Mar 02) | Target (30d) | Target (90d) | $10k |
 |---------|---------|-------------|-------------|------|
-| MRR (30d revenue) | **$333.70** | $800 | $3,000 | $10,000 |
-| Total users | **939** | 900 | 1,500 | 5,000 |
-| Signups/semana | **72** | 80 | 200 | 600 |
-| Active users (7d) | **88** | 200 | 400 | 1,000 |
-| Purchases (7d) | **5** | 15 | 40 | 150 |
-| Trial→Paid % | **4.0%** | 10% | 12% | 15% |
+| MRR (30d revenue) | **$352.50** | $800 | $3,000 | $10,000 |
+| Total users | **949** | 900 | 1,500 | 5,000 |
+| Signups/semana | **74** | 80 | 200 | 600 |
+| Active users (7d) | **90** | 200 | 400 | 1,000 |
+| Purchases (7d) | **4** | 15 | 40 | 150 |
+| Trial→Paid % | **7.3% (proxy)** | 10% | 12% | 15% |
 | Non-brand SEO traffic | **~1%** | 15% | 40% | 60% |
 | Reddit karma (maia_archviz) | **106** | 200 | 1,000 | 5,000 |
 | Instagram followers (Maia) | **7** | 100 | 500 | 5,000 |
-| Instagram posts | **62** | 130 | 370 | 500 |
-| Instagram avg engagement | **0.6** | 10 | 50 | 200 |
+| Instagram posts | **66** | 130 | 370 | 500 |
+| Instagram avg engagement | **1.6** | 10 | 50 | 200 |
 
-## 📅 Yesterday's Snapshot (Feb 28)
+## 📅 Yesterday's Snapshot (Mar 01)
 | Métrica | Valor |
 |---------|-------|
 | Revenue | **$18.80** |
 | Purchases | **1** |
 | New signups | **9** |
-| Credit wall hits (24h) | **3** |
+| Credit wall hits (24h) | **5** |
 
 ---
 
@@ -74,4 +74,4 @@ Subir Trial -> Paid de **7.4%** para **8.5%** ainda nesta semana.
 
 ---
 
-**Last updated:** March 1, 2026, 8:00 PM (America/Sao_Paulo)
+**Last updated:** March 2, 2026, 6:00 AM (America/Sao_Paulo)

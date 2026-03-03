@@ -1,0 +1,152 @@
+{
+  "generated_at": "2026-03-02T08:15:33.940217",
+  "latest_baseline": "/home/andreprado/.openclaw/workspace/moldaspace/skills/seo-agent-stack/reports/baseline_2026-03-02_0815.json",
+  "latest_queue": "/home/andreprado/.openclaw/workspace/moldaspace/skills/seo-agent-stack/reports/publish_queue_2026-02-27_0915.json",
+  "analytics": {
+    "timestamp": "2026-03-02T08:15:47.439164",
+    "days_analyzed": 7,
+    "posthog": {
+      "pageviews_24h": 75,
+      "pageviews_7d": 942,
+      "unique_visitors_7d": 167,
+      "top_pages": [
+        [
+          "https://www.moldaspace.com/dashboard",
+          105
+        ],
+        [
+          "https://www.moldaspace.com/",
+          60
+        ],
+        [
+          "https://www.moldaspace.com/sign-up",
+          52
+        ],
+        [
+          "https://www.moldaspace.com/pt-BR",
+          42
+        ],
+        [
+          "https://www.moldaspace.com/consent",
+          29
+        ],
+        [
+          "https://www.moldaspace.com/pt-BR/dashboard",
+          26
+        ],
+        [
+          "https://moldaspace-git-feat-and-29-make-3d-tinysaas.vercel.app/canvas/198cdc45-509b-4fce-af80-eae6764340e2",
+          23
+        ],
+        [
+          "https://www.moldaspace.com/sign-up/verify-email-address",
+          21
+        ],
+        [
+          "https://www.moldaspace.com/es/sign-up",
+          20
+        ],
+        [
+          "https://www.moldaspace.com/pt-BR/visualization/sketchup-rendering?utm_source=chatgpt.com",
+          20
+        ]
+      ],
+      "signups_7d": 76
+    },
+    "google_search_console": {
+      "site_url": "sc-domain:moldaspace.com",
+      "total_clicks": 104,
+      "total_impressions": 181,
+      "avg_ctr": 57.46,
+      "top_queries": [
+        [
+          "moldaspace",
+          89,
+          112
+        ],
+        [
+          "molda space",
+          12,
+          14
+        ],
+        [
+          "moldaspace ai",
+          2,
+          3
+        ],
+        [
+          "sketchup ai render",
+          1,
+          3
+        ],
+        [
+          "\"3d rendering software for interior design\"",
+          0,
+          17
+        ],
+        [
+          "\"interior design rendering software\"",
+          0,
+          2
+        ],
+        [
+          "\"rendering software for interior design\"",
+          0,
+          21
+        ],
+        [
+          "3d kitchen visualizer",
+          0,
+          2
+        ],
+        [
+          "affordable software for architectural visualization 2026",
+          0,
+          6
+        ],
+        [
+          "ai countertop visualizer",
+          0,
+          1
+        ]
+      ]
+    },
+    "database": {
+      "total_users": 950,
+      "new_users_24h": 11,
+      "total_purchases": 69,
+      "revenue_24h": 18.799999999999997,
+      "purchases_24h_credits": 40,
+      "mrr_estimate": 352.5,
+      "revenue_7d": 61.099999999999994,
+      "purchases_7d": 4,
+      "revenue_yesterday": 18.799999999999997,
+      "purchases_yesterday": 1,
+      "signups_yesterday": 9,
+      "active_users_7d": 90,
+      "signups_7d": 74,
+      "referrals_total": 4,
+      "referrals_24h": 0,
+      "referrals_7d": 1,
+      "referrals_yesterday": 0
+    },
+    "instagram": {
+      "followers": 7,
+      "media_count": 66,
+      "username": "studio.maia.arch",
+      "recent_posts": 10,
+      "total_likes_recent": 0,
+      "total_comments_recent": 16,
+      "avg_engagement": 1.6,
+      "last_post_date": "2026-03-01T22:04:25+0000",
+      "last_post_likes": 0,
+      "last_post_comments": 6,
+      "last_post_type": "IMAGE"
+    }
+  },
+  "next_actions": [
+    "Publicar 2 páginas BOFU com prova visual + CTA 5 free renders",
+    "Revisar títulos/meta das páginas com maior impressão",
+    "Checar canibalização antes de criar novas URLs"
+  ]
+}
