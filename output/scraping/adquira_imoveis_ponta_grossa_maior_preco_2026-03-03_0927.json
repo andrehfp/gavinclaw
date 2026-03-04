@@ -1,0 +1,126 @@
+{
+  "source_url": "https://www.adquiraimoveis.net/imoveis/a-venda/ponta-grossa-pr?order=maior_preco",
+  "count": 10,
+  "items": [
+    {
+      "posicao": 1,
+      "titulo": "Terreno à venda, Boa Vista, Ponta Grossa, PR",
+      "cidade": null,
+      "bairro": null,
+      "quartos": null,
+      "banheiros": null,
+      "area_m2": null,
+      "preco": 55000000.0,
+      "moeda": "BRL",
+      "url": "www.adquiraimoveis.net/imovel/terreno-a-venda-boa-vista-ponta-grossa-pr/TE1548_IMBADQ"
+    },
+    {
+      "posicao": 2,
+      "titulo": "Terreno à venda, Uvaranas, Ponta Grossa, PR",
+      "cidade": null,
+      "bairro": null,
+      "quartos": null,
+      "banheiros": null,
+      "area_m2": null,
+      "preco": 52000000.0,
+      "moeda": "BRL",
+      "url": "www.adquiraimoveis.net/imovel/terreno-a-venda-uvaranas-ponta-grossa-pr/TE1541_IMBADQ"
+    },
+    {
+      "posicao": 3,
+      "titulo": "Terreno à venda 22047M², Jardim Colonial, Castro - PR",
+      "cidade": null,
+      "bairro": null,
+      "quartos": null,
+      "banheiros": null,
+      "area_m2": null,
+      "preco": 33000000.0,
+      "moeda": "BRL",
+      "url": "www.adquiraimoveis.net/imovel/terreno-a-venda-m2-jardim-colonial-castro-pr/TE0230_IMBADQ"
+    },
+    {
+      "posicao": 4,
+      "titulo": "Terreno à venda, Chapada, Ponta Grossa, PR",
+      "cidade": null,
+      "bairro": null,
+      "quartos": null,
+      "banheiros": null,
+      "area_m2": null,
+      "preco": 26000000.0,
+      "moeda": "BRL",
+      "url": "www.adquiraimoveis.net/imovel/terreno-a-venda-chapada-ponta-grossa-pr/TE1701_IMBADQ"
+    },
+    {
+      "posicao": 5,
+      "titulo": "Terreno à venda, Nova Rússia, Ponta Grossa, PR",
+      "cidade": null,
+      "bairro": null,
+      "quartos": null,
+      "banheiros": null,
+      "area_m2": null,
+      "preco": 21315000.0,
+      "moeda": "BRL",
+      "url": "www.adquiraimoveis.net/imovel/terreno-a-venda-nova-russia-ponta-grossa-pr/TE1620_IMBADQ"
+    },
+    {
+      "posicao": 6,
+      "titulo": "Terreno à venda 42.402M², Cará-cará, Ponta Grossa - PR",
+      "cidade": null,
+      "bairro": null,
+      "quartos": null,
+      "banheiros": null,
+      "area_m2": null,
+      "preco": 15000000.0,
+      "moeda": "BRL",
+      "url": "www.adquiraimoveis.net/imovel/terreno-a-venda-m2-cara-cara-ponta-grossa-pr/TE0812_IMBADQ"
+    },
+    {
+      "posicao": 7,
+      "titulo": "Apartamento à venda, Centro, Balneário Camboriú, SC",
+      "cidade": null,
+      "bairro": null,
+      "quartos": null,
+      "banheiros": null,
+      "area_m2": null,
+      "preco": 14850000.0,
+      "moeda": "BRL",
+      "url": "www.adquiraimoveis.net/imovel/apartamento-a-venda-centro-balneario-camboriu-sc/AP4714_IMBADQ"
+    },
+    {
+      "posicao": 8,
+      "titulo": "Terreno à venda 80171.69M², Contorno, Ponta Grossa - PR",
+      "cidade": null,
+      "bairro": null,
+      "quartos": null,
+      "banheiros": null,
+      "area_m2": null,
+      "preco": 14800000.0,
+      "moeda": "BRL",
+      "url": "www.adquiraimoveis.net/imovel/terreno-a-venda-m2-contorno-ponta-grossa-pr/TE0649_IMBADQ"
+    },
+    {
+      "posicao": 9,
+      "titulo": "Apartamento à venda, Centro, Balneário Camboriú, SC",
+      "cidade": null,
+      "bairro": null,
+      "quartos": null,
+      "banheiros": null,
+      "area_m2": null,
+      "preco": 14000000.0,
+      "moeda": "BRL",
+      "url": "www.adquiraimoveis.net/imovel/apartamento-a-venda-centro-balneario-camboriu-sc/AP4720_IMBADQ"
+    },
+    {
+      "posicao": 10,
+      "titulo": "Comercial à venda 46086M², Uvaranas, Ponta Grossa - PR",
+      "cidade": null,
+      "bairro": null,
+      "quartos": null,
+      "banheiros": null,
+      "area_m2": null,
+      "preco": 12000000.0,
+      "moeda": "BRL",
+      "url": "www.adquiraimoveis.net/imovel/comercial-a-venda-m2-uvaranas-ponta-grossa-pr/CONJ0406_IMBADQ"
+    }
+  ]
+}

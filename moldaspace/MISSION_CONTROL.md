@@ -50,11 +50,11 @@ Subir Trial -> Paid de **7.4%** para **8.5%** ainda nesta semana.
 ## 🔥 Reddit (u/maia_archviz)
 
 ### Current Stats
-- **Karma:** 106 comment karma, 1 post karma (total: 107)
-- **Age:** 16 days old (created ~Feb 13)
-- **Comments tracked:** 142 total
-- **Subreddit breakdown (sessão 20:00):** r/DesignMyRoom (1 new comment), r/InteriorDesign (1 new comment), r/archviz (2 replies)
-- **Any new replies:** sim — 2 replies posted (o84wms1, o84wmwl) after inbox check
+- **Karma:** 119 comment karma, 1 post karma (total: 120)
+- **Age:** 18 days old (created ~Feb 13)
+- **Comments tracked:** 154 total
+- **Subreddit breakdown (sessão 20:00):** r/InteriorDesign (1 new comment), r/DesignMyRoom (1 new comment), r/archviz (1 reply)
+- **Any new replies:** sim — 1 reply tratado (Corona Render Beginner Exercise)
 
 ---
 
@@ -74,4 +74,4 @@ Subir Trial -> Paid de **7.4%** para **8.5%** ainda nesta semana.
 
 ---
 
-**Last updated:** March 2, 2026, 6:00 AM (America/Sao_Paulo)
+**Last updated:** March 3, 2026, 8:00 PM (America/Sao_Paulo)

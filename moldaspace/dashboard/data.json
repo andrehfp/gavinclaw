@@ -3,7 +3,7 @@
   "total": 627,
   "paying": 29,
   "repeat": 32,
-  "karma": 106,
+  "karma": 119,
   "seo": 3,
   "ig": 1,
   "reddit_posts": [
@@ -1426,6 +1426,126 @@
       "upvotes": 0,
       "listeners": 1,
       "status": "✅ verified — script returned t1_o84wms1; confirmed live in thread."
+    },
+    {
+      "date": "2026-03-03",
+      "sub": "r/archviz",
+      "post": "Corona Render Beginner Exercise",
+      "url": "https://old.reddit.com/r/archviz/comments/1rjibvg/corona_render_beginner_exercise/o8eaqz4/",
+      "angle": "Beginner-friendly Corona critique focused on realism polish: roughness variation, subtle bevels, less dense grass near facade, lower camera height, and warmer sunlight for better depth.",
+      "upvotes": 0,
+      "listeners": 0,
+      "status": "✅ verified on profile (script returned t1_o8eaqz4)"
+    },
+    {
+      "date": "2026-03-03",
+      "sub": "r/DesignMyRoom",
+      "post": "Please help me pick a layout for this living room",
+      "url": "https://old.reddit.com/r/DesignMyRoom/comments/1rjj0zg/please_help_me_pick_a_layout_for_this_living_room/o8eardh/",
+      "angle": "Layout guidance with two-zone strategy: floating sofa + media wall, preserve both doorways with clear rear circulation, and use rug/console to define path without crowding the room.",
+      "upvotes": 0,
+      "listeners": 0,
+      "status": "✅ verified on profile (script returned t1_o8eardh)"
+    },
+    {
+      "date": "2026-03-03",
+      "sub": "r/InteriorDesign",
+      "post": "REPLY — Living room arrangement advice?",
+      "url": "https://old.reddit.com/r/InteriorDesign/comments/1ri0o72/living_room_arrangement_advice/o8eatmn/",
+      "angle": "Inbox reply with practical refinement: keep one lighter chair and, if needed, switch to compact swivel to preserve flexibility between conversation and TV use.",
+      "upvotes": 0,
+      "listeners": 1,
+      "status": "✅ verified on profile (script returned t1_o8eatmn)"
+    },
+    {
+      "date": "2026-03-03",
+      "sub": "r/InteriorDesign",
+      "post": "REPLY — Range Hood Dilemma",
+      "url": "https://old.reddit.com/r/InteriorDesign/comments/1rd4nuy/range_hood_dilemma/o8eatqh/",
+      "angle": "Inbox follow-up: advised structural header/bracing sign-off before cutting chimney opening to avoid costly movement issues later.",
+      "upvotes": 0,
+      "listeners": 1,
+      "status": "✅ verified on profile (script returned t1_o8eatqh)"
+    },
+    {
+      "date": "2026-03-03",
+      "sub": "r/InteriorDesign",
+      "post": "REPLY — Awkward Living Room Help",
+      "url": "https://old.reddit.com/r/InteriorDesign/comments/1rho18a/awkward_living_room_help/o8eattf/",
+      "angle": "Inbox follow-up reinforcing built-in strategy: short Billy units wall-to-wall with simple top to read custom while keeping storage practical.",
+      "upvotes": 0,
+      "listeners": 1,
+      "status": "✅ verified on profile (script returned t1_o8eattf)"
+    },
+    {
+      "date": "2026-03-03",
+      "sub": "r/InteriorDesign",
+      "post": "Which shape and size for our dining table?",
+      "url": "https://old.reddit.com/r/InteriorDesign/comments/1rj8c01/which_shape_and_size_for_our_dining_table/o8f53nm/",
+      "angle": "Recommended an extendable oval/rounded-rectangle table (~120x80 closed, ~160x80 open) to preserve circulation in a square layout while still supporting occasional guests and board-game use.",
+      "upvotes": 0,
+      "listeners": 0,
+      "status": "✅ verified on profile (script returned t1_o8f53nm)"
+    },
+    {
+      "date": "2026-03-03",
+      "sub": "r/DesignMyRoom",
+      "post": "Kitchen layout",
+      "url": "https://old.reddit.com/r/DesignMyRoom/comments/1rjr44t/kitchen_layout/o8f53s8/",
+      "angle": "Budget-first advice to keep functional fridge placement and reduce gray heaviness via warm peel-and-stick backsplash, wood accents, a colored runner, and warmer 2700K lighting.",
+      "upvotes": 0,
+      "listeners": 0,
+      "status": "✅ verified on profile (script returned t1_o8f53s8)"
+    },
+    {
+      "date": "2026-03-03",
+      "sub": "r/archviz",
+      "post": "I want to learn how to make interior renders that look like this (this one is a photograph, but I'm aspiring for this effect) Beginner course recommendations?",
+      "url": "https://old.reddit.com/r/archviz/comments/1rjnw27/i_want_to_learn_how_to_make_interior_renders_that/o8gjgdk/",
+      "angle": "Workflow-first learning advice for architect beginner: break progression into camera/composition, lighting, and materials; study breakdown-style courses/resources for the 'why' behind mood; then do one strict 1:1 reference recreation and match exposure/white balance before post.",
+      "upvotes": 0,
+      "listeners": 0,
+      "status": "✅ verified on profile (script returned t1_o8gjgdk)"
+    },
+    {
+      "date": "2026-03-03",
+      "sub": "r/DesignMyRoom",
+      "post": "Help me finish my half bath",
+      "url": "https://old.reddit.com/r/DesignMyRoom/comments/1rjtx8s/help_me_finish_my_half_bath/o8gjh43/",
+      "angle": "Practical finishing pass: skip over-toilet shelves, add one vertically-proportioned art piece on side wall, use a slim functional tray on tank, and prioritize lower/hanging sconce geometry to rebalance mirror-height composition.",
+      "upvotes": 0,
+      "listeners": 0,
+      "status": "✅ verified on profile (script returned t1_o8gjh43)"
+    },
+    {
+      "date": "2026-03-03",
+      "sub": "r/InteriorDesign",
+      "post": "Entrance - Corridor nieches",
+      "url": "https://old.reddit.com/r/InteriorDesign/comments/1rk25bd/entrance_corridor_nieches/o8hxfot/",
+      "angle": "Entry-hall organization advice: use first niche as daily drop zone (hooks + slim bench + boot tray), convert deeper niche into floor-to-ceiling closed storage, add vented pullout for wet boots, and use warm under-shelf lighting to keep utility area visually intentional.",
+      "upvotes": 0,
+      "listeners": 0,
+      "status": "✅ verified on profile (script returned t1_o8hxfot)"
+    },
+    {
+      "date": "2026-03-03",
+      "sub": "r/DesignMyRoom",
+      "post": "Apocalypsecore decor ideas?",
+      "url": "https://old.reddit.com/r/DesignMyRoom/comments/1rjutb0/apocalypsecore_decor_ideas/o8hxgdi/",
+      "angle": "Dorm-friendly apocalypsecore guidance focused on texture layering (drop cloth curtain, distressed crate, storage trunk), warm low lighting, and limiting prop count for a styled-but-not-costume look.",
+      "upvotes": 0,
+      "listeners": 0,
+      "status": "✅ verified on profile (script returned t1_o8hxgdi)"
+    },
+    {
+      "date": "2026-03-03",
+      "sub": "r/archviz",
+      "post": "REPLY — Corona Render Beginner Exercise",
+      "url": "https://old.reddit.com/r/archviz/comments/1rjibvg/corona_render_beginner_exercise/o8hxirt/",
+      "angle": "Inbox/profile follow-up reply with practical Flux workflow defaults: low-denoise img2img range and realistic VRAM expectations (16GB ideal, 8-12GB workable with constrained resolution).",
+      "upvotes": 0,
+      "listeners": 1,
+      "status": "✅ verified on profile (script returned t1_o8hxirt)"
     }
   ],
   "ig_calendar": [
@@ -1958,7 +2078,7 @@
     "reddit": {
       "frequency": "4x/dia (9h, 12h, 16h, 20h)",
       "next": "2026-02-17T20:00",
-      "lastStatus": "✅ ok (2026-03-01 20:00) - 2 new comments + 2 inbox replies: r/DesignMyRoom bathroom advice, r/InteriorDesign layout guidance, and 2 r/archviz follow-ups. Karma: 106."
+      "lastStatus": "✅ ok (2026-03-03 20:00) - 2 new seed comments + 1 reply posted and verified on profile. Karma: 119."
     },
     "report": {
       "frequency": "1x/dia (8h)",
