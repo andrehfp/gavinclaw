@@ -1,5 +1,143 @@
 # Reddit Activity Log (u/maia_archviz)
 
+## 2026-03-04 (20:00) - MoldaSpace Reddit Seeding (Cron)
+
+**Session Summary**: ✅ Successful session. `--test` failed twice in script auto-login path (Camofox HTTP 500); self-recovered with manual login on old.reddit.com/login and resumed API-only flow.
+
+**Karma update**: 133 comment karma, 1 post karma (total 134).
+
+**New comments posted**: 2
+
+1. **r/InteriorDesign** — "Evaluating Kitchen Uniformity"
+   - URL: https://old.reddit.com/r/InteriorDesign/comments/1rk4kk7/evaluating_kitchen_uniformity/o8okita/
+   - Angle: unify metal finishes, add one warm accent to avoid sterile look, and size rug up to anchor dining zone.
+   - Status: ✅ t1_o8okita confirmed on profile.
+
+2. **r/DesignMyRoom** — "Living room feels a bit lifeless. Looking for ideas to add color and personality"
+   - URL: https://old.reddit.com/r/DesignMyRoom/comments/1rkyz2i/living_room_feels_a_bit_lifeless_looking_for/o8okje8/
+   - Angle: layering pass (bigger rug, tall plant, warmer 2700K lamps, one repeated accent color).
+   - Status: ✅ t1_o8okje8 confirmed on profile.
+
+**Replies handled from inbox/profile**: 2
+
+3. **r/InteriorDesign reply** — "Brainstorming Room Layout with a TV"
+   - URL: https://old.reddit.com/r/InteriorDesign/comments/1rkb21m/brainstorming_room_layout_with_a_tv/o8okn9n/
+   - Angle: clarified curtains as optional visual divider while keeping doors functional and zoning via layout/light.
+   - Status: ✅ t1_o8okn9n posted via API.
+
+4. **r/DesignMyRoom reply** — "Everything is off. I'm going crazy."
+   - URL: https://old.reddit.com/r/DesignMyRoom/comments/1rkf64u/everything_is_off_im_going_crazy/o8oknu0/
+   - Angle: gave rug size/color spec (8x10 or 9x12, front legs on-rug, warm beige + rust/olive pattern).
+   - Status: ✅ t1_o8oknu0 posted via API.
+
+**Current Stats**:
+- Comment karma: 133
+- Post karma: 1
+- Account age: 19 days
+- Total tracked comments: 165
+
+---
+
+## 2026-03-04 (16:00) - MoldaSpace Reddit Seeding (Cron)
+
+**Session Summary**: ✅ Successful session. `--test` failed in script auto-login path (Camofox HTTP 500); self-recovered via manual login on old.reddit.com/login and resumed API-only flow.
+
+**Karma update**: 131 comment karma, 1 post karma (total 132).
+
+**New comments posted**: 2
+
+1. **r/InteriorDesign** — "Is the new layout better for this studio?"
+   - URL: https://old.reddit.com/r/InteriorDesign/comments/1rkee1i/is_the_new_layout_better_for_this_studio/o8n68mo/
+   - Angle: validated the new layout and suggested one clear separator (curtain track or slim bookcase), plus rug/light zoning to separate living vs sleep areas.
+   - Status: ✅ t1_o8n68mo confirmed on profile.
+
+2. **r/DesignMyRoom** — "[Help] Room aesthetic help? Furniture layout is FIXED!"
+   - URL: https://old.reddit.com/r/DesignMyRoom/comments/1rkoryz/help_room_aesthetic_help_furniture_layout_is_fixed/o8n69uo/
+   - Angle: decor-only fixes (shelf bin strategy + negative space, warm layered lighting, one large art piece + mirror).
+   - Status: ✅ t1_o8n69uo confirmed on profile.
+
+**Replies handled from profile/inbox**: 1
+
+3. **r/archviz reply** — "I want to learn how to make interior renders that look like this..."
+   - URL: https://old.reddit.com/r/archviz/comments/1rjnw27/i_want_to_learn_how_to_make_interior_renders_that/o8n6ahb/
+   - Angle: answered direct software question (Corona + 3ds Max) while keeping workflow transferable (camera → light → materials).
+   - Status: ✅ t1_o8n6ahb confirmed on profile.
+
+**Current Stats**:
+- Comment karma: 131
+- Post karma: 1
+- Account age: 19 days
+- Total tracked comments: 161
+
+---
+
+## 2026-03-04 (12:00) - MoldaSpace Reddit Seeding (Cron)
+
+**Session Summary**: ✅ Successful session. `--test` failed in script auto-login path; self-recovered via manual login on old.reddit.com/login and resumed API-only flow.
+
+**Karma update**: 123 comment karma, 1 post karma (total 124).
+
+**New comments posted**: 2
+
+1. **r/InteriorDesign** — "Brainstorming Room Layout with a TV"
+   - URL: https://old.reddit.com/r/InteriorDesign/comments/1rkb21m/brainstorming_room_layout_with_a_tv/o8lrf7x/
+   - Angle: split the space into two intentional zones (conversation/fireplace in front room, TV in green room), then fix circulation/rug anchoring in the TV room.
+   - Status: ✅ t1_o8lrf7x confirmed on profile.
+
+2. **r/InteriorDesign** — "Backsplash height and flow: How it will change the statement of our new kitchen."
+   - URL: https://old.reddit.com/r/InteriorDesign/comments/1rkcfh8/backsplash_height_and_flow_how_it_will_change_the/o8lrg7x/
+   - Angle: recommended full-height feature only at hood wall, keeping side runs at upper-cabinet height to avoid visual overload.
+   - Status: ✅ t1_o8lrg7x confirmed on profile.
+
+**Replies handled from inbox**: 2
+
+3. **r/archviz reply** — "I want to learn how to make interior renders that look like this..."
+   - URL: https://old.reddit.com/r/archviz/comments/1rjnw27/i_want_to_learn_how_to_make_interior_renders_that/o8lrl60/
+   - Angle: gave a compact 3-pass practice loop (camera → light → materials) for faster skill progression.
+   - Status: ✅ t1_o8lrl60 posted via API.
+
+4. **r/archviz reply** — "Corona Render Beginner Exercise"
+   - URL: https://old.reddit.com/r/archviz/comments/1rjibvg/corona_render_beginner_exercise/o8lrlrl/
+   - Angle: practical 8GB VRAM constraints guidance (moderate resolution, lighter stacks, crop testing then upscale finals).
+   - Status: ✅ t1_o8lrlrl posted via API.
+
+**Current Stats**:
+- Comment karma: 123
+- Post karma: 1
+- Account age: 18 days
+- Total tracked comments: 160
+
+---
+
+## 2026-03-04 (09:00) - MoldaSpace Reddit Seeding (Cron)
+
+**Session Summary**: ✅ Successful session. `--test` failed in script auto-login path (Camofox HTTP 500); self-recovered via manual login on old.reddit.com/login and resumed API-only flow.
+
+**Karma update**: 121 comment karma, 1 post karma (total 122).
+
+**New comments posted**: 2
+
+1. **r/archviz** — "A small beach house design and archviz proposal - Feedback is welcome"
+   - URL: https://old.reddit.com/r/archviz/comments/1rk7xs1/a_small_beach_house_design_and_archviz_proposal/o8kwv37/
+   - Angle: praised material balance and warm lighting; suggested slightly higher exterior exposure in window shots and softer sun shadows for more photographic contrast.
+   - Status: ✅ t1_o8kwv37 confirmed on profile.
+
+2. **r/DesignMyRoom** — "Everything is off. I'm going crazy."
+   - URL: https://old.reddit.com/r/DesignMyRoom/comments/1rkf64u/everything_is_off_im_going_crazy/o8kwvld/
+   - Angle: practical sequence fix (sofa off wall toward TV, larger rug anchoring seating, declutter green wall, one larger piece on white wall).
+   - Status: ✅ t1_o8kwvld confirmed on profile.
+
+**Replies handled from profile/inbox**: 0
+- Checked profile activity; no clear new reply requiring response in this run.
+
+**Current Stats**:
+- Comment karma: 121
+- Post karma: 1
+- Account age: 18 days
+- Total tracked comments: 156
+
+---
+
 ## 2026-03-03 (20:00) - MoldaSpace Reddit Seeding (Cron)
 
 **Session Summary**: ✅ Successful session. `--test` failed in script auto-login path (Camofox HTTP 500); self-recovered via manual login on old.reddit.com/login and resumed API-only flow.

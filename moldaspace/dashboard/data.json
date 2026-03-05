@@ -3,7 +3,7 @@
   "total": 627,
   "paying": 29,
   "repeat": 32,
-  "karma": 119,
+  "karma": 133,
   "seo": 3,
   "ig": 1,
   "reddit_posts": [
@@ -1546,6 +1546,116 @@
       "upvotes": 0,
       "listeners": 1,
       "status": "✅ verified on profile (script returned t1_o8hxirt)"
+    },
+    {
+      "date": "2026-03-04",
+      "sub": "r/archviz",
+      "post": "A small beach house design and archviz proposal - Feedback is welcome",
+      "url": "https://old.reddit.com/r/archviz/comments/1rk7xs1/a_small_beach_house_design_and_archviz_proposal/o8kwv37/",
+      "angle": "Praised material balance and warm lighting; suggested slightly higher exterior exposure in window shots and a small reduction in sun-shadow hardness for a more photographic feel.",
+      "upvotes": 0,
+      "listeners": 0,
+      "status": "✅ verified on profile (script returned t1_o8kwv37)"
+    },
+    {
+      "date": "2026-03-04",
+      "sub": "r/DesignMyRoom",
+      "post": "Everything is off. I'm going crazy.",
+      "url": "https://old.reddit.com/r/DesignMyRoom/comments/1rkf64u/everything_is_off_im_going_crazy/o8kwvld/",
+      "angle": "Step-by-step layout fix: pull sofa off wall toward TV, anchor seating with larger rug footprint, reduce clutter on green wall, and add one larger piece on white wall.",
+      "upvotes": 0,
+      "listeners": 0,
+      "status": "✅ verified on profile (script returned t1_o8kwvld)"
+    },
+    {
+      "date": "2026-03-04",
+      "sub": "r/InteriorDesign",
+      "post": "Brainstorming Room Layout with a TV",
+      "url": "https://old.reddit.com/r/InteriorDesign/comments/1rkb21m/brainstorming_room_layout_with_a_tv/o8lrf7x/",
+      "angle": "Suggested zoning both rooms by function: keep front as conversation/fireplace area and move TV setup to green room with low stand, sofa floated off doors for circulation, and one larger rug to anchor layout.",
+      "upvotes": 0,
+      "listeners": 0,
+      "status": "✅ verified on profile (script returned t1_o8lrf7x)"
+    },
+    {
+      "date": "2026-03-04",
+      "sub": "r/InteriorDesign",
+      "post": "Backsplash height and flow: How it will change the statement of our new kitchen.",
+      "url": "https://old.reddit.com/r/InteriorDesign/comments/1rkcfh8/backsplash_height_and_flow_how_it_will_change_the/o8lrg7x/",
+      "angle": "Recommended focal strategy: full-height treatment only on hood wall, keep side runs at upper-cabinet height to avoid visual noise with existing shelves/sconces, and center pattern from hood outward.",
+      "upvotes": 0,
+      "listeners": 0,
+      "status": "✅ verified on profile (script returned t1_o8lrg7x)"
+    },
+    {
+      "date": "2026-03-04",
+      "sub": "r/InteriorDesign",
+      "post": "Is the new layout better for this studio?",
+      "url": "https://old.reddit.com/r/InteriorDesign/comments/1rkee1i/is_the_new_layout_better_for_this_studio/o8n68mo/",
+      "angle": "Validated the new layout but added a practical zoning fix: use one clear separator (ceiling curtain track or slim open bookcase), then separate living/sleep zones with rug placement and warmer bedside lighting.",
+      "upvotes": 0,
+      "listeners": 0,
+      "status": "✅ verified on profile (script returned t1_o8n68mo)"
+    },
+    {
+      "date": "2026-03-04",
+      "sub": "r/DesignMyRoom",
+      "post": "[Help] Room aesthetic help? Furniture layout is FIXED!",
+      "url": "https://old.reddit.com/r/DesignMyRoom/comments/1rkoryz/help_room_aesthetic_help_furniture_layout_is_fixed/o8n69uo/",
+      "angle": "Decor-only optimization plan: shelf declutter with matching bins + negative space, warm layered lighting (2700K + small lamps), and one large art piece plus mirror to improve depth and coziness.",
+      "upvotes": 0,
+      "listeners": 0,
+      "status": "✅ verified on profile (script returned t1_o8n69uo)"
+    },
+    {
+      "date": "2026-03-04",
+      "sub": "r/archviz",
+      "post": "REPLY — I want to learn how to make interior renders that look like this...",
+      "url": "https://old.reddit.com/r/archviz/comments/1rjnw27/i_want_to_learn_how_to_make_interior_renders_that/o8n6ahb/",
+      "angle": "Inbox/profile reply to direct software question: confirmed Corona + 3ds Max stack while keeping advice transferable via camera-first, lighting-second, materials-third workflow.",
+      "upvotes": 0,
+      "listeners": 1,
+      "status": "✅ verified on profile (script returned t1_o8n6ahb)"
+    },
+    {
+      "date": "2026-03-04",
+      "sub": "r/InteriorDesign",
+      "post": "Evaluating Kitchen Uniformity",
+      "url": "https://old.reddit.com/r/InteriorDesign/comments/1rk4kk7/evaluating_kitchen_uniformity/o8okita/",
+      "angle": "Value-first kitchen feedback focused on consistency: unify metal finishes across fixtures/hardware, add one warm accent to avoid sterile feel, and size rug up to better anchor the dining zone.",
+      "upvotes": 0,
+      "listeners": 0,
+      "status": "✅ verified on profile (script returned t1_o8okita)"
+    },
+    {
+      "date": "2026-03-04",
+      "sub": "r/DesignMyRoom",
+      "post": "Living room feels a bit lifeless. Looking for ideas to add color and personality",
+      "url": "https://old.reddit.com/r/DesignMyRoom/comments/1rkyz2i/living_room_feels_a_bit_lifeless_looking_for/o8okje8/",
+      "angle": "Layering-first advice: bigger rug placement, one tall plant, warmer 2700K lamps, and a single repeated accent color across textiles/art for cohesion.",
+      "upvotes": 0,
+      "listeners": 0,
+      "status": "✅ verified on profile (script returned t1_o8okje8)"
+    },
+    {
+      "date": "2026-03-04",
+      "sub": "r/InteriorDesign",
+      "post": "REPLY — Brainstorming Room Layout with a TV",
+      "url": "https://old.reddit.com/r/InteriorDesign/comments/1rkb21m/brainstorming_room_layout_with_a_tv/o8okn9n/",
+      "angle": "Inbox reply clarification: keep French doors operable, use curtains as optional visual divider, and rely on rug/lighting/furniture orientation to zone without hard separation.",
+      "upvotes": 0,
+      "listeners": 1,
+      "status": "✅ verified on profile (script returned t1_o8okn9n)"
+    },
+    {
+      "date": "2026-03-04",
+      "sub": "r/DesignMyRoom",
+      "post": "REPLY — Everything is off. I'm going crazy.",
+      "url": "https://old.reddit.com/r/DesignMyRoom/comments/1rkf64u/everything_is_off_im_going_crazy/o8oknu0/",
+      "angle": "Inbox follow-up with concrete rug spec: recommended 8x10 (or 9x12 in larger room), front legs on-rug, and warm beige base with subtle rust/olive pattern for durability + cohesion.",
+      "upvotes": 0,
+      "listeners": 1,
+      "status": "✅ verified on profile (script returned t1_o8oknu0)"
     }
   ],
   "ig_calendar": [
@@ -2078,7 +2188,7 @@
     "reddit": {
       "frequency": "4x/dia (9h, 12h, 16h, 20h)",
       "next": "2026-02-17T20:00",
-      "lastStatus": "✅ ok (2026-03-03 20:00) - 2 new seed comments + 1 reply posted and verified on profile. Karma: 119."
+      "lastStatus": "✅ ok (2026-03-04 20:00) - 2 new seed comments + 2 inbox replies posted and verified on profile. Karma: 133."
     },
     "report": {
       "frequency": "1x/dia (8h)",
