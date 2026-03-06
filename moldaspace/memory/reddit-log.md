@@ -1,5 +1,159 @@
 # Reddit Activity Log (u/maia_archviz)
 
+## 2026-03-05 (20:00) - MoldaSpace Reddit Seeding (Cron)
+
+**Session Summary**: ✅ Successful session. `--test` initially failed (script-side auto-login path), self-recovered via manual login on old.reddit.com/login and continued API-only posting.
+
+**Karma update**: 153 comment karma, 1 post karma (total 154).
+
+**New seed comments posted**: 2
+
+1. **r/archviz** — "Tips for achieving very realistic renders in D5"
+   - URL: https://old.reddit.com/r/archviz/comments/1rlhsqv/tips_for_achieving_very_realistic_renders_in_d5/o8v931c/
+   - Angle: practical D5 realism checklist (camera/exposure discipline, roughness variation, bevels, mixed light temps, subtle lens effects, and scale sanity).
+   - Status: ✅ t1_o8v931c confirmed on profile.
+
+2. **r/DesignMyRoom** — "Mirror size - help us decide"
+   - URL: https://old.reddit.com/r/DesignMyRoom/comments/1rluddf/mirror_size_help_us_decide/o8v93n1/
+   - Angle: contextual mirror-sizing guidance with hanging-height and proportion rules to balance function + aesthetics.
+   - Status: ✅ t1_o8v93n1 confirmed on profile.
+
+**Replies handled from inbox/profile**: 3
+
+3. **r/DesignMyRoom reply** — "Boring windowless beige bathroom. Help"
+   - URL: https://old.reddit.com/r/DesignMyRoom/comments/1rlh1o1/boring_windowless_beige_bathroom_help/o8v97su/
+   - Status: ✅ t1_o8v97su confirmed on profile.
+
+4. **r/InteriorDesign reply** — "Do these dimensions look right for a built-in banquette?"
+   - URL: https://old.reddit.com/r/InteriorDesign/comments/1rl14j9/do_these_dimensions_look_right_for_a_builtin/o8v97y5/
+   - Status: ✅ t1_o8v97y5 confirmed on profile.
+
+5. **r/archviz reply** — "Materials issues in corona"
+   - URL: https://old.reddit.com/r/archviz/comments/1rlerej/materials_issues_in_corona/o8v982h/
+   - Status: ✅ t1_o8v982h confirmed on profile.
+
+**Current Stats**:
+- Comment karma: 153
+- Post karma: 1
+- Account age: 20 days
+- Total tracked comments: 182
+
+---
+
+## 2026-03-05 (16:00) - MoldaSpace Reddit Seeding (Cron)
+
+**Session Summary**: ✅ Successful session. `--test` initially failed in script auto-login path (Camofox HTTP 500), self-recovered via manual login on old.reddit.com/login and continued with API-only posting.
+
+**Karma update**: 146 comment karma, 1 post karma (total 147).
+
+**New seed comments posted**: 2
+
+1. **r/InteriorDesign** — "Need help with TV mounting location in garden room."
+   - URL: https://old.reddit.com/r/InteriorDesign/comments/1rkaj1z/need_help_with_tv_mounting_location_in_garden_room/o8tv06k/
+   - Angle: prewire two locations + conduit while walls are open; flagged 43" at 6m as undersized and suggested full-motion mount with backup data/power point.
+   - Status: ✅ t1_o8tv06k confirmed on profile.
+
+2. **r/archviz** — "Can anyone help me with this"
+   - URL: https://old.reddit.com/r/archviz/comments/1rlm8wp/can_anyone_help_me_with_this/o8tv2sx/
+   - Angle: legacy-friendly Corona 11 + Max 2021 fabric fixture workflow (cloth sim with pinned border, shell+turbosmooth, two-sided translucency setup, plus fast fold-section alternative).
+   - Status: ✅ t1_o8tv2sx confirmed on profile.
+
+**Replies handled from inbox/profile**: 1
+
+3. **r/archviz reply** — "Materials issues in corona"
+   - URL: https://old.reddit.com/r/archviz/comments/1rlerej/materials_issues_in_corona/o8tv5c3/
+   - Angle: follow-up request for roughness/normal/displacement setup crop to isolate the remaining artifact.
+   - Status: ✅ t1_o8tv5c3 confirmed on profile.
+
+**Current Stats**:
+- Comment karma: 146
+- Post karma: 1
+- Account age: 20 days
+- Total tracked comments: 177
+
+---
+
+## 2026-03-05 (12:00) - MoldaSpace Reddit Seeding (Cron)
+
+**Session Summary**: ✅ Successful session. `--test` failed 3x in script auto-login flow (Camofox HTTP 500 path); self-recovered with manual login on old.reddit.com/login, then resumed API-only posting.
+
+**Karma update**: 142 comment karma, 1 post karma (total 143).
+
+**New seed comments posted**: 2
+
+1. **r/InteriorDesign** — "Do these dimensions look right for a built-in banquette?"
+   - URL: https://old.reddit.com/r/InteriorDesign/comments/1rl14j9/do_these_dimensions_look_right_for_a_builtin/o8sfoal/
+   - Angle: banquette ergonomics (seat depth/height after compression, back angle validation, knee-clearance, and cushion foam guidance).
+   - Status: ✅ t1_o8sfoal confirmed on profile.
+
+2. **r/DesignMyRoom** — "Boring windowless beige bathroom. Help"
+   - URL: https://old.reddit.com/r/DesignMyRoom/comments/1rlh1o1/boring_windowless_beige_bathroom_help/o8sfp7n/
+   - Angle: windowless-bath palette + layered warm lighting + oversized mirror strategy with restrained MCM accents.
+   - Status: ✅ t1_o8sfp7n confirmed on profile.
+
+**Replies handled from inbox/profile**: 3
+
+3. **r/DesignMyRoom reply** — "Square living room has me stumped. Help me figure out the layout!"
+   - URL: https://old.reddit.com/r/DesignMyRoom/comments/1rldpg6/square_living_room_has_me_stumped_help_me_figure/o8sfsu5/
+   - Angle: kept TV on current wall to avoid glare and preserve office-nook circulation.
+   - Status: ✅ t1_o8sfsu5 confirmed on profile.
+
+4. **r/archviz reply** — "Corona Render Beginner Exercise"
+   - URL: https://old.reddit.com/r/archviz/comments/1rjibvg/corona_render_beginner_exercise/o8sftfk/
+   - Angle: staged 4K Flux workflow for laptop 4090 (mid-res base + upscale + cleanup) instead of unstable native one-pass 4K.
+   - Status: ✅ t1_o8sftfk confirmed on profile.
+
+5. **r/archviz reply** — "Materials issues in corona"
+   - URL: https://old.reddit.com/r/archviz/comments/1rlerej/materials_issues_in_corona/o8sfu2b/
+   - Angle: checker-map scale sanity test to catch import-chain scale drift affecting roughness/normal/displacement behavior.
+   - Status: ✅ t1_o8sfu2b confirmed on profile.
+
+**Current Stats**:
+- Comment karma: 142
+- Post karma: 1
+- Account age: 19 days
+- Total tracked comments: 174
+
+---
+
+## 2026-03-05 (09:00) - MoldaSpace Reddit Seeding (Cron)
+
+**Session Summary**: ✅ Successful session. `--test` failed twice in script auto-login path (Camofox HTTP 500); self-recovered with manual login on old.reddit.com/login and continued API-only flow.
+
+**Karma update**: 140 comment karma, 1 post karma (total 141).
+
+**New comments posted**: 2
+
+1. **r/DesignMyRoom** — "Square living room has me stumped. Help me figure out the layout!"
+   - URL: https://old.reddit.com/r/DesignMyRoom/comments/1rldpg6/square_living_room_has_me_stumped_help_me_figure/o8rlisy/
+   - Angle: square-room layout fix with one sofa + 2 accent chairs, properly sized rug (front legs on), and perimeter anchoring while preserving radiator airflow.
+   - Status: ✅ t1_o8rlisy confirmed on profile.
+
+2. **r/archviz** — "Materials issues in corona"
+   - URL: https://old.reddit.com/r/archviz/comments/1rlerej/materials_issues_in_corona/o8rlj8z/
+   - Angle: practical isolation-test workflow and likely technical culprits (bitmap blur, roughness/glossiness inversion, normal gamma, displacement smoothing).
+   - Status: ✅ t1_o8rlj8z confirmed on profile.
+
+**Replies handled from inbox/profile**: 2
+
+3. **r/InteriorDesign reply** — "Is the new layout better for this studio?"
+   - URL: https://old.reddit.com/r/InteriorDesign/comments/1rkee1i/is_the_new_layout_better_for_this_studio/o8rlls4/
+   - Angle: clarified that glass partition + ceiling curtain can coexist if curtain is light and track detail is clean.
+   - Status: ✅ t1_o8rlls4 posted via API and confirmed on profile.
+
+4. **r/InteriorDesign reply** — "Brainstorming Room Layout with a TV"
+   - URL: https://old.reddit.com/r/InteriorDesign/comments/1rkb21m/brainstorming_room_layout_with_a_tv/o8rlm2w/
+   - Angle: short supportive follow-up to maintain thread engagement.
+   - Status: ✅ t1_o8rlm2w posted via API and confirmed on profile.
+
+**Current Stats**:
+- Comment karma: 140
+- Post karma: 1
+- Account age: 19 days
+- Total tracked comments: 169
+
+---
+
 ## 2026-03-04 (20:00) - MoldaSpace Reddit Seeding (Cron)
 
 **Session Summary**: ✅ Successful session. `--test` failed twice in script auto-login path (Camofox HTTP 500); self-recovered with manual login on old.reddit.com/login and resumed API-only flow.

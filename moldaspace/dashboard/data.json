@@ -3,7 +3,7 @@
   "total": 627,
   "paying": 29,
   "repeat": 32,
-  "karma": 133,
+  "karma": 153,
   "seo": 3,
   "ig": 1,
   "reddit_posts": [
@@ -1656,6 +1656,176 @@
       "upvotes": 0,
       "listeners": 1,
       "status": "✅ verified on profile (script returned t1_o8oknu0)"
+    },
+    {
+      "date": "2026-03-05",
+      "sub": "r/DesignMyRoom",
+      "post": "Square living room has me stumped. Help me figure out the layout!",
+      "url": "https://old.reddit.com/r/DesignMyRoom/comments/1rldpg6/square_living_room_has_me_stumped_help_me_figure/o8rlisy/",
+      "angle": "Recommended flexible square-room layout: one sofa + two accent chairs over two-sofa setup, rug sized to catch front legs of all seating, and perimeter anchoring with slim console/bookcase while keeping radiator airflow clear.",
+      "upvotes": 0,
+      "listeners": 0,
+      "status": "✅ verified on profile (script returned t1_o8rlisy)"
+    },
+    {
+      "date": "2026-03-05",
+      "sub": "r/archviz",
+      "post": "Materials issues in corona",
+      "url": "https://old.reddit.com/r/archviz/comments/1rlerej/materials_issues_in_corona/o8rlj8z/",
+      "angle": "Shared practical Corona-vs-Cycles isolation test workflow and likely failure points: bitmap blur, roughness/glossiness inversion, normal-map gamma, and displacement smoothing settings before blaming material system changes.",
+      "upvotes": 0,
+      "listeners": 0,
+      "status": "✅ verified on profile (script returned t1_o8rlj8z)"
+    },
+    {
+      "date": "2026-03-05",
+      "sub": "r/InteriorDesign",
+      "post": "REPLY — Is the new layout better for this studio?",
+      "url": "https://old.reddit.com/r/InteriorDesign/comments/1rkee1i/is_the_new_layout_better_for_this_studio/o8rlls4/",
+      "angle": "Inbox follow-up: confirmed glass partition + ceiling curtain can coexist if curtain stays light and track detailing is minimal so structure and softness don't visually compete.",
+      "upvotes": 0,
+      "listeners": 1,
+      "status": "✅ verified on profile (script returned t1_o8rlls4)"
+    },
+    {
+      "date": "2026-03-05",
+      "sub": "r/InteriorDesign",
+      "post": "REPLY — Brainstorming Room Layout with a TV",
+      "url": "https://old.reddit.com/r/InteriorDesign/comments/1rkb21m/brainstorming_room_layout_with_a_tv/o8rlm2w/",
+      "angle": "Inbox engagement reply: short supportive closeout to keep thread warm after user thank-you.",
+      "upvotes": 0,
+      "listeners": 1,
+      "status": "✅ verified on profile (script returned t1_o8rlm2w)"
+    },
+    {
+      "date": "2026-03-05",
+      "sub": "r/InteriorDesign",
+      "post": "Do these dimensions look right for a built-in banquette?",
+      "url": "https://old.reddit.com/r/InteriorDesign/comments/1rl14j9/do_these_dimensions_look_right_for_a_builtin/o8sfoal/",
+      "angle": "Ergonomic banquette guidance: validated 10-12° back angle, gave target finished seat depth/height after cushion compression, and added knee-clearance + foam-density considerations for long-term comfort.",
+      "upvotes": 0,
+      "listeners": 0,
+      "status": "✅ verified on profile (script returned t1_o8sfoal)"
+    },
+    {
+      "date": "2026-03-05",
+      "sub": "r/DesignMyRoom",
+      "post": "Boring windowless beige bathroom. Help",
+      "url": "https://old.reddit.com/r/DesignMyRoom/comments/1rlh1o1/boring_windowless_beige_bathroom_help/o8sfp7n/",
+      "angle": "Windowless-bath refresh plan: high-contrast palette + layered warm lighting + oversized mirror strategy, with MCM-friendly walnut/black accents to modernize without overcomplicating.",
+      "upvotes": 0,
+      "listeners": 0,
+      "status": "✅ verified on profile (script returned t1_o8sfp7n)"
+    },
+    {
+      "date": "2026-03-05",
+      "sub": "r/DesignMyRoom",
+      "post": "REPLY — Square living room has me stumped. Help me figure out the layout!",
+      "url": "https://old.reddit.com/r/DesignMyRoom/comments/1rldpg6/square_living_room_has_me_stumped_help_me_figure/o8sfsu5/",
+      "angle": "Inbox follow-up: recommended keeping TV on current wall to avoid glare and preserve office nook flow, with minor media-unit/chair tweaks for circulation.",
+      "upvotes": 0,
+      "listeners": 1,
+      "status": "✅ verified on profile (script returned t1_o8sfsu5)"
+    },
+    {
+      "date": "2026-03-05",
+      "sub": "r/archviz",
+      "post": "REPLY — Corona Render Beginner Exercise",
+      "url": "https://old.reddit.com/r/archviz/comments/1rjibvg/corona_render_beginner_exercise/o8sftfk/",
+      "angle": "Inbox follow-up on Flux + 4090 laptop workflow: recommended staged 4K pipeline (mid-res base + 2x upscale + low-denoise cleanup) over unstable native 4K one-pass renders.",
+      "upvotes": 0,
+      "listeners": 1,
+      "status": "✅ verified on profile (script returned t1_o8sftfk)"
+    },
+    {
+      "date": "2026-03-05",
+      "sub": "r/archviz",
+      "post": "REPLY — Materials issues in corona",
+      "url": "https://old.reddit.com/r/archviz/comments/1rlerej/materials_issues_in_corona/o8sfu2b/",
+      "angle": "Inbox follow-up diagnostic: proposed 1m checker-map scale sanity test to catch imported-model scale drift that breaks roughness/normal/displacement realism.",
+      "upvotes": 0,
+      "listeners": 1,
+      "status": "✅ verified on profile (script returned t1_o8sfu2b)"
+    },
+    {
+      "date": "2026-03-05",
+      "sub": "r/InteriorDesign",
+      "post": "Need help with TV mounting location in garden room.",
+      "url": "https://old.reddit.com/r/InteriorDesign/comments/1rkaj1z/need_help_with_tv_mounting_location_in_garden_room/o8tv06k/",
+      "angle": "Practical prewire strategy while cables are still open: conduit + pull string with two TV-position options; highlighted 6m viewing distance mismatch for 43in screen and suggested full-motion mount plus backup data/power point for future layout flip.",
+      "upvotes": 0,
+      "listeners": 0,
+      "status": "✅ verified on profile (script returned t1_o8tv06k)"
+    },
+    {
+      "date": "2026-03-05",
+      "sub": "r/archviz",
+      "post": "Can anyone help me with this",
+      "url": "https://old.reddit.com/r/archviz/comments/1rlm8wp/can_anyone_help_me_with_this/o8tv2sx/",
+      "angle": "Gave legacy-compatible Corona 11 + Max 2021 workflow for fabric pendant modeling: cloth sim with pinned border, then shell+turbosmooth, plus two-sided/translucency shading and a faster reusable fold-section alternative.",
+      "upvotes": 0,
+      "listeners": 0,
+      "status": "✅ verified on profile (script returned t1_o8tv2sx)"
+    },
+    {
+      "date": "2026-03-05",
+      "sub": "r/archviz",
+      "post": "REPLY — Materials issues in corona",
+      "url": "https://old.reddit.com/r/archviz/comments/1rlerej/materials_issues_in_corona/o8tv5c3/",
+      "angle": "Follow-up reply to engaged OP: asked for roughness/normal/displacement setup crop to diagnose remaining artifacts quickly and keep thread momentum.",
+      "upvotes": 0,
+      "listeners": 1,
+      "status": "✅ verified on profile (script returned t1_o8tv5c3)"
+    },
+    {
+      "date": "2026-03-05",
+      "sub": "r/archviz",
+      "post": "Tips for achieving very realistic renders in D5",
+      "url": "https://old.reddit.com/r/archviz/comments/1rlhsqv/tips_for_achieving_very_realistic_renders_in_d5/o8v931c/",
+      "angle": "Shared practical realism checklist for D5 (exposure/WB lock, roughness variation, edge bevels, mixed light temperatures, subtle lens effects last, and strict scale sanity check).",
+      "upvotes": 0,
+      "listeners": 0,
+      "status": "✅ verified on profile (script returned t1_o8v931c)"
+    },
+    {
+      "date": "2026-03-05",
+      "sub": "r/DesignMyRoom",
+      "post": "Mirror size - help us decide",
+      "url": "https://old.reddit.com/r/DesignMyRoom/comments/1rluddf/mirror_size_help_us_decide/o8v93n1/",
+      "angle": "Context-aware mirror guidance: choose larger option with lower hanging height, keep proportional width rule and side breathing room, and prefer cleaner frame/less arch for longevity.",
+      "upvotes": 0,
+      "listeners": 0,
+      "status": "✅ verified on profile (script returned t1_o8v93n1)"
+    },
+    {
+      "date": "2026-03-05",
+      "sub": "r/DesignMyRoom",
+      "post": "REPLY — Boring windowless beige bathroom. Help",
+      "url": "https://old.reddit.com/r/DesignMyRoom/comments/1rlh1o1/boring_windowless_beige_bathroom_help/o8v97su/",
+      "angle": "Inbox follow-up after thank-you: short supportive refinement reinforcing small material and lighting tweaks.",
+      "upvotes": 0,
+      "listeners": 1,
+      "status": "✅ verified on profile (script returned t1_o8v97su)"
+    },
+    {
+      "date": "2026-03-05",
+      "sub": "r/InteriorDesign",
+      "post": "REPLY — Do these dimensions look right for a built-in banquette?",
+      "url": "https://old.reddit.com/r/InteriorDesign/comments/1rl14j9/do_these_dimensions_look_right_for_a_builtin/o8v97y5/",
+      "angle": "Inbox follow-up after positive reply: concise supportive confirmation on comfort-dimension logic.",
+      "upvotes": 0,
+      "listeners": 1,
+      "status": "✅ verified on profile (script returned t1_o8v97y5)"
+    },
+    {
+      "date": "2026-03-05",
+      "sub": "r/archviz",
+      "post": "REPLY — Materials issues in corona",
+      "url": "https://old.reddit.com/r/archviz/comments/1rlerej/materials_issues_in_corona/o8v982h/",
+      "angle": "Inbox follow-up: proposed quick next diagnostic branch after checker test to isolate scale vs lighting causes.",
+      "upvotes": 0,
+      "listeners": 1,
+      "status": "✅ verified on profile (script returned t1_o8v982h)"
     }
   ],
   "ig_calendar": [
@@ -2188,7 +2358,7 @@
     "reddit": {
       "frequency": "4x/dia (9h, 12h, 16h, 20h)",
       "next": "2026-02-17T20:00",
-      "lastStatus": "✅ ok (2026-03-04 20:00) - 2 new seed comments + 2 inbox replies posted and verified on profile. Karma: 133."
+      "lastStatus": "✅ ok (2026-03-05 20:00) - 2 new seed comments + 3 inbox replies posted via API and verified on profile. Karma: 153."
     },
     "report": {
       "frequency": "1x/dia (8h)",

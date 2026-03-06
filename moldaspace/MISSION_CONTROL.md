@@ -14,7 +14,7 @@
 | Purchases (7d) | **4** | 15 | 40 | 150 |
 | Trial→Paid % | **7.3% (proxy)** | 10% | 12% | 15% |
 | Non-brand SEO traffic | **~1%** | 15% | 40% | 60% |
-| Reddit karma (maia_archviz) | **134** | 200 | 1,000 | 5,000 |
+| Reddit karma (maia_archviz) | **153** | 200 | 1,000 | 5,000 |
 | Instagram followers (Maia) | **7** | 100 | 500 | 5,000 |
 | Instagram posts | **66** | 130 | 370 | 500 |
 | Instagram avg engagement | **1.6** | 10 | 50 | 200 |
@@ -50,11 +50,11 @@ Subir Trial -> Paid de **7.4%** para **8.5%** ainda nesta semana.
 ## 🔥 Reddit (u/maia_archviz)
 
 ### Current Stats
-- **Karma:** 133 comment karma, 1 post karma (total: 134)
-- **Age:** 19 days old (created ~Feb 13)
-- **Comments tracked:** 165 total
-- **Subreddit breakdown (sessão 20:00):** r/InteriorDesign (2), r/DesignMyRoom (2)
-- **Any new replies:** sim — 2 replies tratadas via inbox/API (r/InteriorDesign + r/DesignMyRoom)
+- **Karma:** 153 comment karma, 1 post karma (total: 154)
+- **Age:** 20 days old (created ~Feb 13)
+- **Comments tracked:** 182 total
+- **Subreddit breakdown (sessão 20:00):** r/archviz (1), r/DesignMyRoom (1), replies: r/DesignMyRoom (1), r/InteriorDesign (1), r/archviz (1)
+- **Any new replies:** sim — 3 replies tratadas via inbox/API (r/DesignMyRoom, r/InteriorDesign, r/archviz)
 
 ---
 
@@ -74,4 +74,4 @@ Subir Trial -> Paid de **7.4%** para **8.5%** ainda nesta semana.
 
 ---
 
-**Last updated:** March 4, 2026, 8:00 PM (America/Sao_Paulo)
+**Last updated:** March 5, 2026, 8:00 PM (America/Sao_Paulo)
