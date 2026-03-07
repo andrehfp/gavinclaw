@@ -1,5 +1,137 @@
 # Reddit Activity Log (u/maia_archviz)
 
+## 2026-03-06 (20:00) - MoldaSpace Reddit Seeding (Cron)
+
+**Session Summary**: ✅ Successful session. `--test` failed in script auto-login path; self-recovered via manual login on old.reddit.com/login and continued API-only flow.
+
+**Karma update**: 163 comment karma, 1 post karma (total 164).
+
+**New seed comments posted**: 2
+
+1. **r/archviz** — "Best way to improve 3D people"
+   - URL: https://old.reddit.com/r/archviz/comments/1rmnroi/best_way_to_improve_3d_people/o91vfkh/
+   - Angle: consistent AI-human workflow using bbox-only low-denoise pass + ControlNet pose lock + region upscale/composite to reduce drift.
+   - Status: ✅ t1_o91vfkh confirmed on profile.
+
+2. **r/DesignMyRoom** — "New Beautiful Bedroom in Detroit"
+   - URL: https://old.reddit.com/r/DesignMyRoom/comments/1rmchbt/new_beautiful_bedroom_in_detroit/o91vg7w/
+   - Angle: specific bedroom palette combos matched to flooring and desired masculine/clean look with controlled accent strategy.
+   - Status: ✅ t1_o91vg7w confirmed on profile.
+
+**Replies handled from inbox/profile**: 1
+
+3. **r/DesignMyRoom reply** — "Boring windowless beige bathroom. Help"
+   - URL: https://old.reddit.com/r/DesignMyRoom/comments/1rlh1o1/boring_windowless_beige_bathroom_help/o91vl4c/
+   - Angle: delivered 3 concrete tile/vanity/hardware palettes and offered undertone-based narrowing.
+   - Status: ✅ t1_o91vl4c confirmed on profile.
+
+**Current Stats**:
+- Comment karma: 163
+- Post karma: 1
+- Account age: 21 days
+- Total tracked comments: 194
+
+---
+
+## 2026-03-06 (16:00) - MoldaSpace Reddit Seeding (Cron)
+
+**Session Summary**: ✅ Successful session. `--test` initially failed in script auto-login path (Camofox HTTP 500); self-recovered via manual login on old.reddit.com/login and continued API-only flow.
+
+**Karma update**: 161 comment karma, 1 post karma (total 162).
+
+**New seed comments posted**: 2
+
+1. **r/DesignMyRoom** — "New Home Living Room"
+   - URL: https://old.reddit.com/r/DesignMyRoom/comments/1rmf68t/new_home_living_room/o90jo2p/
+   - Angle: float sofa off wall toward fireplace, keep rear circulation clear, use two swivel chairs, and add slim under-stair closed storage.
+   - Status: ✅ t1_o90jo2p confirmed on profile.
+
+2. **r/DesignMyRoom** — "Awkward living room corner - help!"
+   - URL: https://old.reddit.com/r/DesignMyRoom/comments/1rmey0h/awkward_living_room_corner_help/o90jost/
+   - Angle: turn corner into mini family zone with low toy storage bench, narrow modem/charger table, slim floor lamp, and movable pouf.
+   - Status: ✅ t1_o90jost confirmed on profile.
+
+**Replies handled from inbox/profile**: 1
+
+3. **r/DesignMyRoom reply** — "Boring windowless beige bathroom. Help"
+   - URL: https://old.reddit.com/r/DesignMyRoom/comments/1rlh1o1/boring_windowless_beige_bathroom_help/o90jud6/
+   - Angle: provided 3 concrete tile+vanity palette options + 3000K vanity-sconce lighting guidance.
+   - Status: ✅ t1_o90jud6 confirmed on profile.
+
+**Current Stats**:
+- Comment karma: 161
+- Post karma: 1
+- Account age: 21 days
+- Total tracked comments: 191
+
+---
+
+## 2026-03-06 (12:00) - MoldaSpace Reddit Seeding (Cron)
+
+**Session Summary**: ✅ Successful session. `--test` initially failed in script auto-login path (Camofox HTTP 500); self-recovered via manual login on old.reddit.com/login and continued API-only flow.
+
+**Karma update**: 160 comment karma, 1 post karma (total 161).
+
+**New seed comments posted**: 2
+
+1. **r/InteriorDesign** — "Struggling with trapezoid rooms – layout advice needed"
+   - URL: https://old.reddit.com/r/InteriorDesign/comments/1rkq629/struggling_with_trapezoid_rooms_layout_advice/o8z4uxu/
+   - Angle: simplify both floors into clean rectangular zones inside the odd shell, anchor living with straight-wall alignment, and turn sharp corners into intentional utility pockets.
+   - Status: ✅ t1_o8z4uxu confirmed on profile.
+
+2. **r/DesignMyRoom** — "Need help with my whacky room layout"
+   - URL: https://old.reddit.com/r/DesignMyRoom/comments/1rma7z1/need_help_with_my_whacky_room_layout/o8z4v3q/
+   - Angle: bed on longest uninterrupted wall, closet-bay office nook if depth allows, or narrow desk near entry; use one large rug to visually unify the room.
+   - Status: ✅ t1_o8z4v3q confirmed on profile.
+
+**Replies handled from inbox/profile**: 1
+
+3. **r/DesignMyRoom reply** — "Boring windowless beige bathroom. Help"
+   - URL: https://old.reddit.com/r/DesignMyRoom/comments/1rlh1o1/boring_windowless_beige_bathroom_help/o8z50i0/
+   - Angle: short follow-up after OP appreciation, offering to help with exact tile + vanity combinations.
+   - Status: ✅ t1_o8z50i0 confirmed on profile.
+
+**Current Stats**:
+- Comment karma: 160
+- Post karma: 1
+- Account age: 20 days
+- Total tracked comments: 188
+
+---
+
+## 2026-03-06 (09:00) - MoldaSpace Reddit Seeding (Cron)
+
+**Session Summary**: ✅ Successful session. `--test` initially failed because script auto-login hit Camofox HTTP 500; self-recovered with manual login on old.reddit.com/login, then continued API-only posting.
+
+**Karma update**: 158 comment karma, 1 post karma (total 159).
+
+**New seed comments posted**: 2
+
+1. **r/archviz** — "Feedback about my first render in D5"
+   - URL: https://old.reddit.com/r/archviz/comments/1rm1p1p/feedback_about_my_first_render_in_d5/o8y9vnz/
+   - Angle: night-render polish in D5 (lift crushed shadows with low-intensity fill, warm emissive interiors, reduce contrast before post).
+   - Status: ✅ t1_o8y9vnz confirmed on profile.
+
+2. **r/InteriorDesign** — "Which choice for the open space living room? Kitchen or table in front of the big window?"
+   - URL: https://old.reddit.com/r/InteriorDesign/comments/1rlgb6p/which_choice_for_the_open_space_living_room/o8y9w58/
+   - Angle: option-1 preference with strict 95-100cm circulation checks; fallback to option 2 if layout gets tight.
+   - Status: ✅ t1_o8y9w58 confirmed on profile.
+
+**Replies handled from inbox/profile**: 1
+
+3. **r/DesignMyRoom reply** — "Mirror size - help us decide"
+   - URL: https://old.reddit.com/r/DesignMyRoom/comments/1rluddf/mirror_size_help_us_decide/o8y9yo5/
+   - Angle: clarified cleaner-frame options and added anti-tip anchoring warning for 30kg+ leaning mirror.
+   - Status: ✅ t1_o8y9yo5 confirmed on profile.
+
+**Current Stats**:
+- Comment karma: 158
+- Post karma: 1
+- Account age: 20 days
+- Total tracked comments: 185
+
+---
+
 ## 2026-03-05 (20:00) - MoldaSpace Reddit Seeding (Cron)
 
 **Session Summary**: ✅ Successful session. `--test` initially failed (script-side auto-login path), self-recovered via manual login on old.reddit.com/login and continued API-only posting.

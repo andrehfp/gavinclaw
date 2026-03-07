@@ -10,7 +10,7 @@
 | Metric | Value | Status |
 |--------|-------|--------|
 | Last cycle | 1m ago | healthy |
-| Scheduler | 32s ago | healthy |
+| Scheduler | 15s ago | healthy |
 | Watchdog | unknown | WARNING |
 | Errors last cycle | 0 | healthy |
 ## Source Files

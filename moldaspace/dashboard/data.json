@@ -3,7 +3,7 @@
   "total": 627,
   "paying": 29,
   "repeat": 32,
-  "karma": 153,
+  "karma": 163,
   "seo": 3,
   "ig": 1,
   "reddit_posts": [
@@ -1826,6 +1826,126 @@
       "upvotes": 0,
       "listeners": 1,
       "status": "✅ verified on profile (script returned t1_o8v982h)"
+    },
+    {
+      "date": "2026-03-06",
+      "sub": "r/archviz",
+      "post": "Feedback about my first render in D5",
+      "url": "https://old.reddit.com/r/archviz/comments/1rm1p1p/feedback_about_my_first_render_in_d5/o8y9vnz/",
+      "angle": "Night-render improvement tips in D5: gently lift crushed shadows with low-intensity fill outside frame, fake interior life with warm emissive planes, and reduce tone-mapping contrast before post to preserve dark detail.",
+      "upvotes": 0,
+      "listeners": 0,
+      "status": "✅ verified on profile (script returned t1_o8y9vnz)"
+    },
+    {
+      "date": "2026-03-06",
+      "sub": "r/InteriorDesign",
+      "post": "Which choice for the open space living room? Kitchen or table in front of the big window?",
+      "url": "https://old.reddit.com/r/InteriorDesign/comments/1rlgb6p/which_choice_for_the_open_space_living_room/o8y9w58/",
+      "angle": "Space-planning guidance favoring option 1 only if circulation stays clean (95-100cm clearances at pinch points); otherwise option 2 for safer day-to-day flow.",
+      "upvotes": 0,
+      "listeners": 0,
+      "status": "✅ verified on profile (script returned t1_o8y9w58)"
+    },
+    {
+      "date": "2026-03-06",
+      "sub": "r/DesignMyRoom",
+      "post": "REPLY — Mirror size - help us decide",
+      "url": "https://old.reddit.com/r/DesignMyRoom/comments/1rluddf/mirror_size_help_us_decide/o8y9yo5/",
+      "angle": "Inbox reply with practical mirror-frame advice: prefer simple thin frame (matte black/brushed brass/white context-dependent) and use anti-tip anchoring for heavy leaning mirror.",
+      "upvotes": 0,
+      "listeners": 1,
+      "status": "✅ verified on profile (script returned t1_o8y9yo5)"
+    },
+    {
+      "date": "2026-03-06",
+      "sub": "r/InteriorDesign",
+      "post": "Struggling with trapezoid rooms – layout advice needed",
+      "url": "https://old.reddit.com/r/InteriorDesign/comments/1rkq629/struggling_with_trapezoid_rooms_layout_advice/o8z4uxu/",
+      "angle": "Layout simplification for trapezoid footprint: treat each floor as clean rectangular zones, anchor living area with rug/sofa parallel to a straight wall, and neutralize sharp corner with lamp/bookshelf so asymmetry feels intentional.",
+      "upvotes": 0,
+      "listeners": 0,
+      "status": "✅ verified on profile (script returned t1_o8z4uxu)"
+    },
+    {
+      "date": "2026-03-06",
+      "sub": "r/DesignMyRoom",
+      "post": "Need help with my whacky room layout",
+      "url": "https://old.reddit.com/r/DesignMyRoom/comments/1rma7z1/need_help_with_my_whacky_room_layout/o8z4v3q/",
+      "angle": "Practical bedroom layout fix: bed on longest uninterrupted wall, optional closet-bay office nook, fallback narrow desk near entry, and one large rug to visually unify irregular circulation.",
+      "upvotes": 0,
+      "listeners": 0,
+      "status": "✅ verified on profile (script returned t1_o8z4v3q)"
+    },
+    {
+      "date": "2026-03-06",
+      "sub": "r/DesignMyRoom",
+      "post": "REPLY — Boring windowless beige bathroom. Help",
+      "url": "https://old.reddit.com/r/DesignMyRoom/comments/1rlh1o1/boring_windowless_beige_bathroom_help/o8z50i0/",
+      "angle": "Inbox follow-up with optional next step: offer 2-3 specific tile + vanity combinations after OP appreciation to keep thread engagement active.",
+      "upvotes": 0,
+      "listeners": 1,
+      "status": "✅ verified on profile (script returned t1_o8z50i0)"
+    },
+    {
+      "date": "2026-03-06",
+      "sub": "r/DesignMyRoom",
+      "post": "New Home Living Room",
+      "url": "https://old.reddit.com/r/DesignMyRoom/comments/1rmf68t/new_home_living_room/o90jo2p/",
+      "angle": "Layout guidance for new living room: float sofa off wall facing fireplace to preserve circulation, use two swivel chairs by windows for flexibility, and add slim under-stair closed storage to reduce visual clutter.",
+      "upvotes": 0,
+      "listeners": 0,
+      "status": "✅ verified on profile (script returned t1_o90jo2p)"
+    },
+    {
+      "date": "2026-03-06",
+      "sub": "r/DesignMyRoom",
+      "post": "Awkward living room corner - help!",
+      "url": "https://old.reddit.com/r/DesignMyRoom/comments/1rmey0h/awkward_living_room_corner_help/o90jost/",
+      "angle": "Suggested turning awkward corner into mini family zone: low toy storage bench + slim side table for modem/charging + floor lamp, with a movable pouf for occasional seating.",
+      "upvotes": 0,
+      "listeners": 0,
+      "status": "✅ verified on profile (script returned t1_o90jost)"
+    },
+    {
+      "date": "2026-03-06",
+      "sub": "r/DesignMyRoom",
+      "post": "REPLY — Boring windowless beige bathroom. Help",
+      "url": "https://old.reddit.com/r/DesignMyRoom/comments/1rlh1o1/boring_windowless_beige_bathroom_help/o90jud6/",
+      "angle": "Inbox reply with 3 concrete tile+vanity palette options (warm spa, modern contrast, subtle sage) and 3000K vertical-sconce lighting guidance.",
+      "upvotes": 0,
+      "listeners": 1,
+      "status": "✅ verified on profile (script returned t1_o90jud6)"
+    },
+    {
+      "date": "2026-03-06",
+      "sub": "r/archviz",
+      "post": "Best way to improve 3D people",
+      "url": "https://old.reddit.com/r/archviz/comments/1rmnroi/best_way_to_improve_3d_people/o91vfkh/",
+      "angle": "Shared practical consistency workflow for AI-edited 3D humans: render base first, run low-denoise bbox-only pass with ControlNet depth/openpose to lock pose, then upscale/composite person region to reduce drift across angles.",
+      "upvotes": 0,
+      "listeners": 0,
+      "status": "✅ verified on profile (script returned t1_o91vfkh)"
+    },
+    {
+      "date": "2026-03-06",
+      "sub": "r/DesignMyRoom",
+      "post": "New Beautiful Bedroom in Detroit",
+      "url": "https://old.reddit.com/r/DesignMyRoom/comments/1rmchbt/new_beautiful_bedroom_in_detroit/o91vg7w/",
+      "angle": "Color-combo recommendation tailored to flooring + white bedding: warm walnut casegoods + charcoal rug + matte black lighting with one controlled accent color (olive/navy), plus greige/brushed-brass variant for a hotel-luxe feel.",
+      "upvotes": 0,
+      "listeners": 0,
+      "status": "✅ verified on profile (script returned t1_o91vg7w)"
+    },
+    {
+      "date": "2026-03-06",
+      "sub": "r/DesignMyRoom",
+      "post": "REPLY — Boring windowless beige bathroom. Help",
+      "url": "https://old.reddit.com/r/DesignMyRoom/comments/1rlh1o1/boring_windowless_beige_bathroom_help/o91vl4c/",
+      "angle": "Inbox follow-up with 3 concrete purchasable palette directions (warm walnut, olive/champagne, charcoal/black) and offer to choose by undertone, keeping engagement alive without promotion.",
+      "upvotes": 0,
+      "listeners": 1,
+      "status": "✅ verified on profile (script returned t1_o91vl4c)"
     }
   ],
   "ig_calendar": [
@@ -2358,7 +2478,7 @@
     "reddit": {
       "frequency": "4x/dia (9h, 12h, 16h, 20h)",
       "next": "2026-02-17T20:00",
-      "lastStatus": "✅ ok (2026-03-05 20:00) - 2 new seed comments + 3 inbox replies posted via API and verified on profile. Karma: 153."
+      "lastStatus": "✅ ok (2026-03-06 20:00) - 2 new seed comments + 1 inbox reply posted via API and verified on profile. Karma: 163."
     },
     "report": {
       "frequency": "1x/dia (8h)",
